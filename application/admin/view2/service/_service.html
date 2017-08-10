@@ -1,0 +1,141 @@
+<include file="public/layout" />
+<!--以下是在线编辑器 代码 -->
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.config.js"/>
+<load href="__ROOT__/public/plugins/Ueditor/ueditor.all.min.js"/>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/public/plugins/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<!--以上是在线编辑器 代码  end-->
+<body style="background-color: #FFF; overflow: auto;">
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
+      <div class="subject">
+        <h3>服务详情</h3>
+        <h5>服务添加与管理</h5>
+      </div>
+    </div>
+  </div>
+    <!--表单数据-->
+    <form method="post" id="addEditBrandForm" >
+    <div class="ncap-form-default">
+      <dl class="row">
+        <dt class="tit">
+          <label for="ac_name"><em>*</em>服务名称</label>
+        </dt>
+        <dd class="opt">
+          <input type="text" placeholder="名称" class="input-txt" name="name" value="{$brand.name}">
+		  <span class="err" id="err_name" style="color:#F00; display:none;"></span>
+            <p class="notic"></p>
+        </dd>
+      </dl>
+	  <dl class="row">
+        <dt class="tit">
+          <label for="ac_name">服务网址</label>
+        </dt>
+        <dd class="opt">
+          <input type="text" class="input-txt" name="url" value="{$brand.url}">
+		  <span  class="err" id="err_url" style="color:#F00; display:none;"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+
+      <dl class="row">
+        <dt class="tit">
+          <label>服务logo</label>
+        </dt>
+        <dd class="opt">
+          <div class="input-file-show">
+              <span class="show">
+                  <a id="img_a" target="_blank" class="nyroModal" rel="gal" href="{$brand.logo}">
+                    <i id="img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$brand.logo}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                  </a>
+              </span>
+              <span class="type-file-box">
+                  <input type="text" id="logo" name="logo" value="{$brand.logo}" class="type-file-text">
+                  <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                  <input class="type-file-file" onClick="GetUploadify(1,'','brand','img_call_back')" size="30" hidefocus="true" nc_type="change_site_logo"
+                         title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+              </span>
+          </div>
+          <span class="err"></span>
+          <p class="notic">请上传图片格式文件</p>
+        </dd>
+      </dl>
+
+ 	  <dl class="row">
+        <dt class="tit">
+          <label for="ac_sort">服务描述</label>
+        </dt>
+          <dd class="opt">
+              <textarea class="span12 ckeditor" id="goods_content" name="goods_content" title="">{$goodsInfo.goods_content}</textarea>
+              <span class="err" id="err_goods_content" style="color:#F00; display:none;"></span>
+          </dd>
+      </dl>
+
+      <div class="bot"><a href="JavaScript:void(0);" onClick="verifyForm();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a></div>
+    </div>
+        <input type="hidden" name="id" value="{$brand.id}">
+        <input type="hidden" name="p" value="{$_GET[p]}">
+  </form>
+</div>
+<script>
+// 判断输入框是否为空
+//function checkName(){
+//	var name = $("#addEditBrandForm").find("input[name='name']").val();
+//    if($.trim(name) == '')
+//	{
+//		$("#err_name").show();
+//		return false;
+//	}
+//	return true;
+//}
+
+function verifyForm(){
+    $('span.err').show();
+    $.ajax({
+        type: "POST",
+        url: "{:U('Admin/Service/addEditService')}",
+        data: $('#addEditBrandForm').serialize(),
+        dataType: "json",
+        error: function () {
+            layer.alert("服务器繁忙, 请联系管理员!");
+        },
+        success: function (data) {
+            if (data.status == 1) {
+                layer.msg(data.msg, {icon: 1});
+                location.href = "{:U('Admin/Service/index')}";
+            } else {
+                layer.msg(data.msg, {icon: 2});
+                $.each(data.result, function (index, item) {
+                    $('#err_' + index).text(item).show();
+                });
+            }
+        }
+    });
+}
+var url="{:url('Admin/Ueditor/index',array('savePath'=>'service'))}";
+var ue = UE.getEditor('goods_content',{
+    serverUrl :url,
+    zIndex: 999,
+    initialFrameWidth: "100%", //初化宽度
+    initialFrameHeight: 300, //初化高度
+    focus: false, //初始化时，是否让编辑器获得焦点true或false
+    maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign',//允许的最大字符数 'fullscreen',
+    pasteplain:false, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+    autoHeightEnabled: true
+});
+
+window.onload = function(){
+    var brand_cat_id = parseInt('{$brand.cat_id}');
+	if(brand_cat_id > 0 ){
+		get_category($("#parent_id_1").val(),'parent_id_2',brand_cat_id);
+	}
+}
+function img_call_back(fileurl_tmp)
+{
+  $("#logo").val(fileurl_tmp);
+  $("#img_a").attr('href', fileurl_tmp);
+  $("#img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+}
+</script>
+</body>
+</html>
