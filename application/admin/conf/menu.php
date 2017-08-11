@@ -33,13 +33,13 @@ return	array(
 						//array('name' => '公告管理', 'act'=>'notice_list', 'op'=>'Article'),
 //						array('name' => '专题列表', 'act'=>'topicList', 'op'=>'Topic'),
 				)),
-//				array('name' => '权限','child'=>array(
-//						array('name' => '管理员列表', 'act'=>'index', 'op'=>'Admin'),
-//						array('name' => '角色管理', 'act'=>'role', 'op'=>'Admin'),
-//						array('name'=>'权限资源列表','act'=>'right_list','op'=>'System'),
-//						array('name' => '管理员日志', 'act'=>'log', 'op'=>'Admin'),
-//						array('name' => '供应商列表', 'act'=>'supplier', 'op'=>'Admin'),
-//				)),
+				array('name' => '权限','child'=>array(
+						array('name' => '管理员列表', 'act'=>'index', 'op'=>'Admin'),
+						array('name' => '角色管理', 'act'=>'role', 'op'=>'Admin'),
+						array('name'=>'权限资源列表','act'=>'right_list','op'=>'System'),
+						array('name' => '管理员日志', 'act'=>'log', 'op'=>'Admin'),
+						array('name' => '供应商列表', 'act'=>'supplier', 'op'=>'Admin'),
+				)),
 			
 //				array('name' => '模板','child'=>array(
 //						array('name' => '模板设置', 'act'=>'templateList', 'op'=>'Template'),
@@ -58,9 +58,9 @@ return	array(
 					array('name' => '商品列表', 'act'=>'goodsList', 'op'=>'Goods'),
 //					array('name' => '库存日志', 'act'=>'stock_list', 'op'=>'Goods'),
 					array('name' => '商品模型', 'act'=>'goodsTypeList', 'op'=>'Goods'),
-					array('name' => '商品规格', 'act' =>'specList', 'op' => 'Goods'),
+//					array('name' => '商品规格', 'act' =>'specList', 'op' => 'Goods'),
 					array('name' => '品牌列表', 'act'=>'brandList', 'op'=>'Goods'),
-					array('name' => '商品属性', 'act'=>'goodsAttributeList', 'op'=>'Goods'),
+//					array('name' => '商品属性', 'act'=>'goodsAttributeList', 'op'=>'Goods'),
 					array('name' => '评论列表', 'act'=>'index', 'op'=>'Comment'),
 					array('name' => '商品咨询', 'act'=>'ask_list', 'op'=>'Comment'),
                                     
