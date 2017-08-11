@@ -48,16 +48,55 @@ class Service  extends Base
                 if($id){
                 	M("Service")->update($data);
                 }else{
-                	M("Service")->insert($data);
+                    $id = M("Service")->insert($data);
+                }
+
+                // 商品图片相册  图册
+                $goods_images = I('goods_images/a');
+                if(count($goods_images) > 1)
+                {
+                    array_pop($goods_images); // 弹出最后一个
+                    $goodsImagesArr = M('ServiceImages')->where("service_id = $id")->getField('img_id,image_url'); // 查出所有已经存在的图片
+
+                    // 删除图片
+                    foreach($goodsImagesArr as $key => $val)
+                    {
+                        if(!in_array($val, $goods_images))
+                            M('ServiceImages')->where("img_id = {$key}")->delete(); //
+                    }
+                    // 添加图片
+                    foreach($goods_images as $key => $val)
+                    {
+                        if($val == null)  continue;
+                        if(!in_array($val, $goodsImagesArr))
+                        {
+                               $data = array(
+                                   'service_id' => $id,
+                                   'image_url' => $val,
+                               );
+                               M("ServiceImages")->insert($data); // 实例化User对象
+                        }
+                    }
                 }
                 $this->ajaxReturn(['status'=>1,'msg'=>'操作成功','result'=>'']);
             }
            $cat_list = M('goods_category')->where("parent_id = 0")->select(); // 已经改成联动菜单
            $this->assign('cat_list',$cat_list);
+        $goodsImages = M("ServiceImages")->where('service_id =' . I('GET.id', 0))->select();
+        $this->assign('goodsImages', $goodsImages);  // 商品相册
            $brand = M("Service")->find($id);
            $this->assign('brand',$brand);
         $this->initEditor(); // 编辑器
            return $this->fetch('_service');
+    }
+
+    /**
+     * 删除商品相册图
+     */
+    public function del_goods_images()
+    {
+        $path = I('filename','');
+        M('service_images')->where("image_url = '$path'")->delete();
     }
     /**
        * 删除品牌
