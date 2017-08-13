@@ -3,8 +3,8 @@
     .te_le .dataTables_paginate{float: left;}
     .bot{float: right;padding: 15px 0}
 </style>
-<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
-<div class="page" style="padding: 0px 1% 0 1%;">
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;min-width: 0;">
+<div class="page" style="padding: 0px 1% 0 1%;width:auto;min-height: 0;min-width: 0;">
     <!-- 操作说明 -->
     <div class="flexigrid">
         <div class="mDiv">
@@ -23,15 +23,7 @@
                             </foreach>
                         </select>
                     </div>
-                    <div class="sDiv2" style="margin-right: 10px;border:none;">
-                        <select name="brand_id" id="brand_id">
-                            <option value="">所有品牌</option>
-                            <foreach name="brandList" item="v" key="k" >
-                                <option value="{$v['id']}" <if condition="$v[id] eq $brand_id">selected</if>>{$v['name']}</option>
-                            </foreach>
-                        </select>
-                    </div>
-                    <div class="sDiv2" style="margin-right: 10px;border:none;">
+                     <div class="sDiv2" style="margin-right: 10px;border:none;">
                         <select name="intro">
                             <option value="0">全部</option>
                             <option value="is_new">新品</option>
@@ -56,27 +48,18 @@
                         <th abbr="article_title" axis="col3" class="" align="left">
                             <div style="text-align: left; width: 50px;" class="">选择</div>
                         </th>
-                        <th abbr="article_time" axis="col6" class="" align="left">
-                            <div style="text-align: left; width: 600px;" class="">商品名称</div>
+                        <th abbr="article_time" axis="col3" class="" align="left">
+                            <div style="text-align: left; width:300px;" class="">商品名称</div>
                         </th>
                         <th abbr="ac_id" axis="col4" class="" align="left">
                             <div style="text-align: center; width: 80px;" class="">价格</div>
                         </th>
-                        <th abbr="article_show" axis="col5" class="" align="center">
-                            <div style="text-align: center; width: 80px;" class="">库存</div>
-                        </th>
-                        <th axis="col1" class=""  align="center">
-                            <div style="text-align: center; width: 80px;">操作</div>
-                        </th>
-                        <th style="width:100%" axis="col7">
-                            <div></div>
-                        </th>
-                    </tr>
+                     </tr>
                     </thead>
                 </table>
             </div>
         </div>
-        <div class="bDiv" style="height: auto;">
+        <div class="bDiv" style="height: auto;min-height: 0;">
             <div id="flexigrid" cellpadding="0" cellspacing="0" border="0">
                 <table>
                     <tbody>
@@ -88,23 +71,12 @@
                                 </div>
                             </td>
                             <td class="" align="left">
-                                <div style="text-align: left; width: 600px;">{$list.goods_name}</div>
+                                <div style="text-align: left; width: 300px;">{$list.goods_name}</div>
                             </td>
                             <td class="" align="left">
                                 <div style="text-align: center; width: 80px;">{$list.shop_price}</div>
                             </td>
-                            <td class="" align="left">
-                                <div style="text-align: center; width: 80px;">{$list.store_count}</div>
-                            </td>
-                            <td class="" align="center">
-                                <div style="text-align: center; width: 80px; ">
-                                    <a class="btn red" onclick="$(this).parent().parent().parent().remove();"><i class="fa fa-trash-o"></i>删除</a>
-                                </div>
-                            </td>
-                            <td class="" style="width: 100%;" align="">
-                                <div>&nbsp;</div>
-                            </td>
-                        </tr>
+                          </tr>
                     </volist>
                     </tbody>
                 </table>

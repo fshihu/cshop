@@ -339,9 +339,11 @@ class GoodsLogic extends Model
            $str .=" <td><b>{$spec[$v]}</b></td>";
        }    
         $str .="<td><b>价格</b></td>
+               <td style='display: none;'><b>库存</b></td>
+               <td style='display: none;'><b>SKU</b></td>
              </tr>";
-       // 显示第二行开始 
-       foreach ($spec_arr2 as $k => $v) 
+       // 显示第二行开始
+       foreach ($spec_arr2 as $k => $v)
        {
             $str .="<tr>";
             $item_key_name = array();
@@ -349,15 +351,17 @@ class GoodsLogic extends Model
             {
                 $str .="<td>{$specItem[$v2][item]}</td>";
                 $item_key_name[$v2] = $spec[$specItem[$v2]['spec_id']].':'.$specItem[$v2]['item'];
-            }   
-            ksort($item_key_name);            
+            }
+            ksort($item_key_name);
             $item_key = implode('_', array_keys($item_key_name));
             $item_name = implode(' ', $item_key_name);
-            
+
 			$keySpecGoodsPrice[$item_key][price] ? false : $keySpecGoodsPrice[$item_key][price] = 0; // 价格默认为0
-			$keySpecGoodsPrice[$item_key][store_count] ? false : $keySpecGoodsPrice[$item_key][store_count] = 0; //库存默认为0
+			$keySpecGoodsPrice[$item_key][store_count] ? false : $keySpecGoodsPrice[$item_key][store_count] = 11; //库存默认为0
             $str .="<td><input name='item[$item_key][price]' value='{$keySpecGoodsPrice[$item_key][price]}' onkeyup='this.value=this.value.replace(/[^\d.]/g,\"\")' onpaste='this.value=this.value.replace(/[^\d.]/g,\"\")' /></td>";
-            $str .="<td>  <input type='hidden' name='item[$item_key][key_name]' value='$item_name' /></td>";
+            $str .="<td style='display: none'><input name='item[$item_key][store_count]' value='{$keySpecGoodsPrice[$item_key][store_count]}' onkeyup='this.value=this.value.replace(/[^\d.]/g,\"\")' onpaste='this.value=this.value.replace(/[^\d.]/g,\"\")'/></td>";
+            $str .="<td style='display: none'><input name='item[$item_key][sku]' value='{$keySpecGoodsPrice[$item_key][sku]}' />
+                <input type='hidden' name='item[$item_key][key_name]' value='$item_name' /></td>";
             $str .="</tr>";           
        }
         $str .= "</table>";
