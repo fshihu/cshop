@@ -12,7 +12,7 @@
                     <li><a href="{:U('Admin/Goods/addEditGoods',array('id'=>$list['goods_id']))}">编辑商品</a></li>
                     <li><a href="javascript:void(0);" onclick="del_goods('{$list[goods_id]}',this)">删除商品</a></li>
                     <!-- <li><a href="javascript:void(0);" onclick="ClearGoodsHtml('{$list[goods_id]}')">清除静态缓存</a></li> -->
-                    <li><a href="javascript:void(0);" onclick="ClearGoodsThumb('{$list[goods_id]}')">清除缩略图缓存</a></li>                    
+                    <!--<li><a href="javascript:void(0);" onclick="ClearGoodsThumb('{$list[goods_id]}')">清除缩略图缓存</a></li>                    -->
                   </ul>
                   </span>
                 </div>
@@ -68,12 +68,7 @@
                     </if>
                   </div>
                 </td>    
-                <td align="center" axis="col0">                  
-                <div style="text-align: center; width: 50px; <if condition="$list.store_count elt tpCache('basic.warning_storage')">color:#D91222;</if> ">
-                  {$list.store_count}
-                </div>
-                </td>           
-                <td align="center" axis="col0">                  
+                 <td align="center" axis="col0">
                 <div style="text-align: center; width: 50px;">
                   <input type="text" onKeyUp="this.value=this.value.replace(/[^\d]/g,'')" onpaste="this.value=this.value.replace(/[^\d]/g,'')" onChange="changeTableVal('goods','goods_id','{$list.goods_id}','sort',this)" size="4" value="{$list.sort}" />
                 </div>                  

@@ -25,15 +25,7 @@
                         </if>
                     </div>
                 </td>
-                <td align="left" class="">
-                    <div style="text-align: center; width: 30px;">{$first_leader[$list[user_id]]['count']|default="0"}</div>
-                </td>
-                <td align="left" class="">
-                    <div style="text-align: center; width: 30px;">{$second_leader[$list[user_id]]['count']|default="0"}</div>
-                </td>
-                <td align="left" class="">
-                    <div style="text-align: center; width: 30px;">{$third_leader[$list[user_id]]['count']|default="0"}</div>
-                </td>
+
                 <td align="left" class="">
                     <div style="text-align: center; width: 80px;">{$list.mobile}
                         <if condition="($list['mobile_validated'] eq 0) AND ($list['mobile'])">

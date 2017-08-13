@@ -134,17 +134,17 @@
                     <span id="err_goods_remark" class="err" style="color:#F00; display:none;"></span>                    
                 </dd>
             </dl> 
-			<dl class="row">
+			<dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">商品货号</label>
                 </dt>
                 <dd class="opt">
                     <input type="text" value="{$goodsInfo.goods_sn}" name="goods_sn" class="input-txt"/>
-                    <span class="err" id="err_goods_sn" style="color:#F00; display:none;"></span>                
+                    <span class="err" id="err_goods_sn" style="color:#F00; display:none;"></span>
                     <p class="notic">如果不填会自动生成</p>
                 </dd>
-            </dl>    
-            <dl class="row">
+            </dl>
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">SPU</label>
                 </dt>
@@ -152,8 +152,8 @@
                     <input type="text" value="{$goodsInfo.SPU}" name="SPU" class="input-txt"/>
                     <span class="err" id="err_SPU" style="color:#F00; display:none;"></span>
                 </dd>
-            </dl>    
-            <dl class="row">
+            </dl>
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">SKU</label>
                 </dt>
@@ -161,7 +161,7 @@
                     <input type="text" value="{$goodsInfo.SKU}" name="SKU" class="input-txt"/>
                     <span class="err" id="err_SKU" style="color:#F00; display:none;"></span>
                 </dd>
-            </dl> 
+            </dl>
             <dl class="row">
                 <dt class="tit">
                     <label for="record_no">商品分类</label>
@@ -178,20 +178,20 @@
                       <select name="cat_id_2" id="cat_id_2" onChange="get_category(this.value,'cat_id_3','0');" class="small form-control">
                         <option value="0">请选择商品分类</option>
                       </select>
-                      <select name="cat_id_3" id="cat_id_3" class="small form-control">
+                      <select name="cat_id_3" id="cat_id_3" class="small form-control" style="display: none;">
                         <option value="0">请选择商品分类</option>
-                      </select>                      
+                      </select>
                     <span class="err" id="err_cat_id" style="color:#F00; display:none;"></span>
                 </dd>
             </dl>             
-            <dl class="row">
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">扩展分类</label>
                 </dt>
                 <dd class="opt">
                   <select name="extend_cat_id" id="extend_cat_id" onChange="get_category(this.value,'extend_cat_id_2','0');" class="small form-control">
-                    <option value="0">请选择商品分类</option>                                      
-                         <foreach name="cat_list" item="v" key="k" >                                                                                          
+                    <option value="0">请选择商品分类</option>
+                         <foreach name="cat_list" item="v" key="k" >
                            <option value="{$v['id']}" <if condition="$v['id'] eq $level_cat2['1']">selected="selected"</if> >
                                 {$v['name']}
                            </option>
@@ -202,11 +202,11 @@
                   </select>
                   <select name="extend_cat_id_3" id="extend_cat_id_3" class="small form-control">
                     <option value="0">请选择商品分类</option>
-                  </select>                   
+                  </select>
                     <span class="err" id="extend_cat_id" style="color:#F00; display:none;"></span>
                 </dd>
-            </dl>   
-            <dl class="row">
+            </dl>
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">商品品牌</label>
                 </dt>
@@ -218,10 +218,10 @@
                                 {$v['name']}
                            </option>
                          </foreach>
-                  </select> 
+                  </select>
                 </dd>
-            </dl>      
-			<dl class="row">
+            </dl>
+			<dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">供应商</label>
                 </dt>
@@ -235,17 +235,17 @@
                     </foreach>
                 </select>
                 </dd>
-            </dl>  
+            </dl>
             <dl class="row">
                 <dt class="tit">
-                    <label for="record_no">本店售价</label>
+                    <label for="record_no">售价</label>
                 </dt>
                 <dd class="opt">
                     <input type="text" value="{$goodsInfo.shop_price}" name="shop_price" class="t_mane" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" />
                     <span class="err" id="err_shop_price" style="color:#F00; display:none;"></span>
                 </dd>
             </dl>
-            <dl class="row">
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label>价格阶梯</label>
                 </dt>
@@ -300,7 +300,7 @@
                     <span class="err" id="err_market_price" style="color:#F00; display:none;"></span>
                 </dd>
             </dl>   
-            <dl class="row">
+            <dl class="row" style="display: none;"
                 <dt class="tit">
                     <label for="record_no">成本价</label>
                 </dt>
@@ -308,8 +308,8 @@
                     <input type="text" value="{$goodsInfo.cost_price}" name="cost_price" class="t_mane" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" />
                     <span class="err" id="err_cost_price" style="color:#F00; display:none;"></span>
                 </dd>
-            </dl>            
-            <dl class="row">
+            </dl>
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">佣金</label>
                 </dt>
@@ -341,7 +341,7 @@
                 </dd>
             </dl>
 
-            <dl class="row">
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">商品重量</label>
                 </dt>
@@ -350,8 +350,8 @@
                     <span class="err" id="err_weight" style="color:#F00; display:none;"></span>
                     <p class="notic"> 务必设置商品重量, 用于计算物流费.</p>
                 </dd>
-            </dl>  
-	  <dl class="row">
+            </dl>
+	  <dl class="row" style="display: none;">
         <dt class="tit">
           <label>是否包邮</label>
         </dt>
@@ -364,23 +364,23 @@
           </div>
           <p class="notic"></p>
         </dd>
-      </dl>            
-              
-            <dl class="row">
+      </dl>
+
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">总库存</label>
                 </dt>
-                <dd class="opt">                
+                <dd class="opt">
                     <if condition="$goodsInfo[goods_id] gt 0">
                         <input type="text" value="{$goodsInfo.store_count}" class="t_mane" name="store_count" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" />
                     <else />
-                        <input type="text" value="{$tpshop_config[basic_default_storage]}" class="t_mane" name="store_count" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" />                                         
+                        <input type="text" value="{$tpshop_config[basic_default_storage]}" class="t_mane" name="store_count" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" />
                     </if>
                     <span class="err" id="err_store_count" style="color:#F00; display:none;"></span>
                 </dd>
-            </dl>  
-            
-            <dl class="row">
+            </dl>
+
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">赠送积分</label>
                 </dt>
@@ -388,9 +388,9 @@
                     <input type="text" value="{$goodsInfo.give_integral}" name="give_integral" class="t_mane" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" />
                     <span class="err" id="err_give_integral" style="color:#F00; display:none;"></span>
                 </dd>
-            </dl>  
-            
-            <dl class="row">
+            </dl>
+
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">兑换积分</label>
                 </dt>
@@ -398,8 +398,8 @@
                     <input type="text" value="{$goodsInfo.exchange_integral}" name="exchange_integral" class="t_mane" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" />
                     <span class="err" id="err_exchange_integral" style="color:#F00; display:none;"></span>
                 </dd>
-            </dl>     
-            <dl class="row">
+            </dl>
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">商品关键词</label>
                 </dt>
@@ -407,7 +407,7 @@
                     <input type="text" value="{$goodsInfo.keywords}" name="keywords" class="input-txt"/>
                     <span class="err" id="err_keywords" style="color:#F00; display:none;"></span>
                 </dd>
-            </dl>       
+            </dl>
             <dl class="row">
                 <dt class="tit">
                     <label for="record_no">商品详情描述</label>
