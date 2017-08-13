@@ -20,19 +20,10 @@
         </td> 
         <td align="center" abbr="article_show" axis="col5" class="" style="white-space: normal;">
             <div style="text-align: left; width: 200px;white-space: normal;height:inherit;line-height: inherit;" class="">
-          		<a target="_blank" href="{:U('Home/Goods/goodsInfo',array('id'=>$list[goods_id]))}">{$goods_list[$list[goods_id]]}</a>
-          	</div>
+                {$goods_list[$list[goods_id]]}
+            </div>
         </td>
-        <td align="center" abbr="article_time" axis="col6" class="">
-          <div style="text-align: center; width: 50px;">
-                    <if condition='$list[is_show] eq 1'>
-                      <span class="yes" onClick="changeTableVal('Comment','comment_id','{$list.comment_id}','is_show',this)" ><i class="fa fa-check-circle"></i>是</span>
-                      <else />
-                      <span class="no" onClick="changeTableVal('Comment','comment_id','{$list.comment_id}','is_show',this)" ><i class="fa fa-ban"></i>否</span>
-                    </if>
-        </div>
-        </td>
-        <td align="center" abbr="article_time" axis="col6" class="">
+         <td align="center" abbr="article_time" axis="col6" class="">
           <div style="text-align: center; width: 120px;" class="">{$list.add_time|date='Y-m-d H:i:s',###}</div>
         </td>
         <td align="center" abbr="article_time" axis="col6" class="">
@@ -40,8 +31,7 @@
         </td>
         <td align="center" abbr="article_time" axis="col6" class="">
                <div style="text-align: center; width: 160px;" class="">
-       			<a class="btn green" style="display:"  href="{:U('Admin/comment/detail',array('id'=>$list[comment_id]))}"><i class="fa fa-list-alt"></i>查看</a>
-       			<a class="btn red"  href="javascript:void(0);" data-href="{:U('Admin/comment/del',array('id'=>$list[comment_id]))}" onclick="del('{$list[comment_id]}',this)" ><i class="fa fa-trash-o"></i>删除</a> 
+       			<a class="btn red"  href="javascript:void(0);" data-href="{:U('Admin/comment/del',array('id'=>$list[comment_id]))}" onclick="del('{$list[comment_id]}',this)" ><i class="fa fa-trash-o"></i>删除</a>
        		</div>
            </td>
          <td align="" class="" style="width: 100%;">
@@ -52,7 +42,7 @@
       </if>
     </tbody>
 </table>
-<div class="sDiv" style="float:left;margin-top:10px">
+<div class="sDiv" style="display: none;float:left;margin-top:10px">
         <if condition="empty($comment_list) neq true">
         <div class="sDiv2">
         		<select name="operate" id="operate" class="select"> 
