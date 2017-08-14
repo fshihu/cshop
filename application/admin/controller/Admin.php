@@ -152,7 +152,12 @@ class Admin extends Base {
                     session('last_login_time',$admin_info['last_login']);
                     session('last_login_ip',$admin_info['last_ip']);
                     adminLog('后台登录');
-                    $url = session('from_url') ? session('from_url') : U('Admin/Index/index');
+                    if($admin_info['role_id'] == 2){//
+                        setcookie('workspaceParam','goodsList|Goods',0,'/');
+                        $url = U('Admin/Index/index');
+                    }else{
+                        $url = session('from_url') ? session('from_url') : U('Admin/Index/index');
+                    }
                     exit(json_encode(array('status'=>1,'url'=>$url)));
                 }else{
                     exit(json_encode(array('status'=>0,'msg'=>'账号密码不正确')));

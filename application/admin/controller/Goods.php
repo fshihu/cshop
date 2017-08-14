@@ -207,16 +207,26 @@ class Goods extends Base {
         $categoryList = $GoodsLogic->getSortCategory();
         $this->assign('categoryList',$categoryList);
         $this->assign('brandList',$brandList);
+        $this->assign('is_admin',$this->isAdmin());
         return $this->fetch();
     }
-    
+
+    protected function isAdmin()
+    {
+        $admin_info = getAdminInfo(session('admin_id'));
+        return $admin_info['role_id'] != 2;
+    }
     /**
      *  商品列表
      */
     public function ajaxGoodsList(){            
         
-        $where = ' 1 = 1 '; // 搜索条件                
-        I('intro')    && $where = "$where and ".I('intro')." = 1" ;        
+        $where = ' 1 = 1 '; // 搜索条件
+        $is_admin = $this->isAdmin();
+        if(!$is_admin){
+            $where .= ' and admin_uid = '.session('admin_id');
+        }
+        I('intro')    && $where = "$where and ".I('intro')." = 1" ;
         I('brand_id') && $where = "$where and brand_id = ".I('brand_id') ;
         (I('is_on_sale') !== '') && $where = "$where and is_on_sale = ".I('is_on_sale') ;                
         $cat_id = I('cat_id');
@@ -248,6 +258,8 @@ class Goods extends Base {
         $catList = convert_arr_key($catList, 'id');
         $this->assign('catList',$catList);
         $this->assign('goodsList',$goodsList);
+        $this->assign('admin_list',convert_arr_key(M('admin')->select(),'admin_id'));
+        $this->assign('is_admin',$is_admin);
         $this->assign('page',$show);// 赋值分页输出
         return $this->fetch();
     }
@@ -310,6 +322,10 @@ class Goods extends Base {
                     'data' => $error,
                 );
                 $this->ajaxReturn($return_arr);
+            }
+            $data['admin_uid'] = session('admin_id');
+            if(!$this->isAdmin() && !$goods_id){
+                $data['is_on_sale'] = 0;
             }
             $Goods->data($data, true); // 收集数据
             $Goods->on_time = time(); // 上架时间

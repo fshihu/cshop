@@ -121,7 +121,58 @@ class User extends Base {
         $this->assign('user',$user);
         return $this->fetch();
     }
-    
+    /**
+     * 会员详细信息查看
+     */
+    public function merchant(){
+        $uid = I('get.id');
+        $user = D('users')->where(array('user_id'=>$uid))->find();
+        if(!$user)
+            exit($this->error('会员不存在'));
+        if(IS_POST){
+            //  会员信息编辑
+
+
+            $data = array(
+                'user_name' => $_POST['admin_account'],
+                'password' => $_POST['admin_password'],
+                'role_id' => 2,
+            );
+           	if(empty($data['password'])){
+           		unset($data['password']);
+           	}else{
+           		$data['password'] = encrypt($data['password']);
+           	}
+           	if(!$user['admin_uid']){
+           		unset($data['admin_id']);
+           		$data['add_time'] = time();
+           		if(D('admin')->where("user_name", $data['user_name'])->count()){
+           			$this->error("此用户名已被注册，请更换",U('Admin/User/merchant',array('id' => $uid)));
+           			exit;
+           		}else{
+           			$r = D('admin')->add($data);
+           			$_POST['admin_uid'] = $r;
+           		}
+           	}
+
+            unset($_POST['admin_account']);
+            unset($_POST['admin_password']);
+            $row = M('users')->where(array('user_id'=>$uid))->save($_POST);
+            if($row)
+                exit($this->success('修改成功'));
+            exit($this->error('未作内容修改或修改失败'));
+        }
+
+        $user['first_lower'] = M('users')->where("first_leader = {$user['user_id']}")->count();
+        $user['second_lower'] = M('users')->where("second_leader = {$user['user_id']}")->count();
+        $user['third_lower'] = M('users')->where("third_leader = {$user['user_id']}")->count();
+
+        $admin = D('admin')->where(array('admin_id'=>$user['admin_uid']))->find();
+        $this->assign('user',$user);
+        $this->assign('admin',$admin);
+        return $this->fetch();
+    }
+
     public function add_user(){
     	if(IS_POST){
     		$data = I('post.');

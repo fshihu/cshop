@@ -69,21 +69,23 @@
               <th align="center" abbr="article_time" axis="col6" class="">
                 <div style="text-align: center; width: 50px;" class="" onClick="sort('shop_price');">价格</div>
               </th>                  
+                <?php if($is_admin):?>
+              <th align="center" abbr="article_time" axis="col6" class="">
+                <div style="text-align: center; width: 50px;" class=""  >商家</div>
+              </th>                       
               <th align="center" abbr="article_time" axis="col6" class="">
                 <div style="text-align: center; width: 30px;" class="" onClick="sort('is_recommend');">推荐</div>
-              </th>                       
+              </th>
               <th align="center" abbr="article_time" axis="col6" class="">
                 <div style="text-align: center; width: 30px;" class="" onClick="sort('is_new');">新品</div>
               </th>                                     
               <th align="center" abbr="article_time" axis="col6" class="">
                 <div style="text-align: center; width: 30px;" class="" onClick="sort('is_hot');">热卖</div>
-              </th>  
+              </th>
               <th align="center" abbr="article_time" axis="col6" class="">
                 <div style="text-align: center; width: 50px;" class="" onClick="sort('is_on_sale');">上/下架</div>
               </th>
-               <th align="center" abbr="article_time" axis="col6" class="">
-                <div style="text-align: center; width: 50px;" class="" onClick="sort('sort');">排序</div>
-              </th>                      
+                <?php endif;?>
               <th style="width:100%" axis="col7">
                 <div></div>
               </th>

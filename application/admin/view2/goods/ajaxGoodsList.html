@@ -29,6 +29,10 @@
                 <td align="center" axis="col0">
                   <div style="text-align: center; width: 50px;">{$list.shop_price}</div>
                 </td>               
+                  <?php if($is_admin):?>
+                  <td align="center" axis="col0">
+                      <div style="text-align: center; width: 50px;">{$admin_list[$list[admin_uid]]['user_name']}</div>
+                  </td>
                 <td align="center" axis="col0">
                   <div style="text-align: center; width: 30px;">
                     <if condition='$list[is_recommend] eq 1'>
@@ -65,11 +69,9 @@
                     </if>
                   </div>
                 </td>    
+                  <?php endif;?>
                  <td align="center" axis="col0">
-                <div style="text-align: center; width: 50px;">
-                  <input type="text" onKeyUp="this.value=this.value.replace(/[^\d]/g,'')" onpaste="this.value=this.value.replace(/[^\d]/g,'')" onChange="changeTableVal('goods','goods_id','{$list.goods_id}','sort',this)" size="4" value="{$list.sort}" />
-                </div>                  
-                </td>                     
+                 </td>
                 <td align="" class="" style="width: 100%;">
                   <div>&nbsp;</div>
                 </td>
