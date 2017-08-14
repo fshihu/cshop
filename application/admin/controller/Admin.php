@@ -145,6 +145,12 @@ class Admin extends Base {
             if(!empty($condition['user_name']) && !empty($condition['password'])){
                 $condition['password'] = encrypt($condition['password']);
                	$admin_info = M('admin')->join(PREFIX.'admin_role', PREFIX.'admin.role_id='.PREFIX.'admin_role.role_id','INNER')->where($condition)->find();
+               	if($admin_info){
+               	    $user = M('users')->where(array('admin_uid' => $admin_info['admin_id']))->find();
+               	    if($user && !$user['is_merchant']){
+                        exit(json_encode(array('status'=>0,'msg'=>'无法登录，已被关闭商家权限')));
+                    }
+                }
                 if(is_array($admin_info)){
                     session('admin_id',$admin_info['admin_id']);
                     session('act_list',$admin_info['act_list']);

@@ -67,12 +67,14 @@
                     <label>开启商家</label>
                 </dt>
                 <dd class="opt">
-                    <input value="0" name="is_merchant" id="member_sex0" type="radio" <if condition="$user['is_merchant'] eq 0">checked</if>>
+                    <input value="0" class="is_merchant" name="is_merchant" id="member_sex0" type="radio" <if condition="$user['is_merchant'] eq 0">checked</if>>
                     <label for="member_sex0">关闭</label>
-                    <input value="1" name="is_merchant" id="member_sex1" type="radio" <if condition="$user['is_merchant'] eq 1">checked</if>>
+                    <input value="1" class="is_merchant" name="is_merchant" id="member_sex1" type="radio" <if condition="$user['is_merchant'] eq 1">checked</if>>
                     <label for="member_sex2">开启</label>
                     <span class="err"></span> </dd>
             </dl>
+
+            <div class="is_merchant_w">
 
             <dl class="row">
                 <dt class="tit">
@@ -106,6 +108,8 @@
                 </dd>
             </dl>
              <?php endif;?>
+            </div>
+
             <dl class="row">
                 <dt class="tit">
                     <label>注册时间</label>
@@ -117,6 +121,13 @@
     </form>
 </div>
 <script type="text/javascript">
+    $('.is_merchant').change(function () {
+        if ($('.is_merchant:checked').val() == '0'){
+            $('.is_merchant_w').hide();
+        } else {
+            $('.is_merchant_w').show();
+        }
+    }).change();
     function checkUserUpdate(){
         var email = $('input[name="email"]').val();
         var mobile = $('input[name="mobile"]').val();
