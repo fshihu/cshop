@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>首页-{$tpshop_config['shop_info_store_title']}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="__STATIC__/css/style.css">
     <link rel="stylesheet" type="text/css" href="__STATIC__/css/iconfont.css"/>
     <script src="__STATIC__/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -13,33 +14,17 @@
 <body>
     <!--顶部搜索栏-s-->
     <header>
-        <div class="content">
-            <div class="ds-in-bl logo">
-                <a href=""><img src="__STATIC__/images/logo.png" alt="LOGO"></a>
-            </div>
-            <div class="ds-in-bl search">
-                <div class="sea-box  ">
-                    <span ></span>
-                    <form action=""  method="post">
-                        <div class="sear-input">
-                            <a href="{:U('Goods/ajaxSearch')}">
-                                <input type="text" name="q" id="search_text" class="search_text"   value="" placeholder="请输入您所搜索的商品">
-                            </a>
-                        </div>
-                    </form>
+        <div class="classreturn loginsignup ">
+            <div class="content">
+                 <div class="ds-in-bl search center">
+                    <span>搜索</span>
+                </div>
+                <div class="ds-in-bl menu">
+                    <a href="javascript:void(0);"><img src="/template/mobile/new2/static/images/class1.png" alt="菜单"></a>
                 </div>
             </div>
-            <div class="ds-in-bl login">
-                <span>
-                <if condition="$user_id gt 0">
-                    <a href="{:U('Mobile/User/index')}"> <img class="after_login" src="__STATIC__/images/my.png"></a>
-                <else/>
-                    <a href="{:U('Mobile/User/login')}"> 登录</a>
-                </if>
-            </span>
-            </div>
         </div>
-    </header>
+     </header>
     <!--顶部搜索栏-e-->
 
     <!--顶部滚动广告栏-s-->
@@ -190,6 +175,32 @@
     <div class="floor newshop">
         <div class="banner">
             <img src="__STATIC__/images/ind_22.jpg" alt="新品上市"/>
+        </div>
+        <style type="text/css">
+            .home_item{padding: 20px;box-sizing: content-box;}
+            .home_item a{display: block; height:400px;position: relative;}
+            .home_item .img{width: 100%;border-radius: 10px; height:400px;}
+            .home_item .bg{background: rgba(0,0,0,.5); height:100%;    position: absolute;
+                top: 0;border-radius: 10px;
+                width: 100%;
+                right: 0;}
+            .home_item .txt{position: absolute; width:100%;top:50px;text-align: center;}
+            .home_item .text1{display: block; color: #ffffff;font-size: 40px;}
+            .home_item .text2{background: #171717; color: #fcf7f7;font-size: 30px;}
+        </style>
+        <div>
+            <div class="home_item"  >
+                <a href="">
+                    <img class="img"src="/public/upload/ad/2017/05-20/5b3261f64a247198d8c23a2d4bf3f8b7.jpg" alt="">
+                    <div class="bg">
+                        <span class="txt">
+                            <span class="text1">健康会</span>
+                                <span class="text2">见客户1</span>
+                        </span>
+
+                    </div>
+                </a>
+            </div>
         </div>
         <div class="advertisement">
             <div class="content">

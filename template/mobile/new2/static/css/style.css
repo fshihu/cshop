@@ -389,15 +389,9 @@ span,img {
 
 header {
     width: 16rem;
-    position: fixed;
     z-index: 999;
-    height: 1.87733rem;
-    background: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(255,255,255,0));
-    background: -o-linear-gradient(rgba(0,0,0,0.3), rgba(255,255,255,0));
-    background: -moz-linear-gradient(rgba(0,0,0,0.3), rgba(255,255,255,0));
-    background: linear-gradient(rgba(0,0,0,0.3),rgba(255,255,255,0));
-    -webkit-transition: -webkit-transform 3s,opacity 4s,background 10s;
-    opacity: 0
+
+
 }
 
 @media screen and (min-width: 1300px) {
@@ -562,7 +556,7 @@ header .login a {
 .footer ul li {
     float: left;
     text-align: center;
-    width: 25%
+    width: 20%
 }
 
 .footer ul li .yello {
@@ -1147,7 +1141,6 @@ footer .flool3 p {
 
 .classreturn {
     width: 16rem;
-    height: 1.87733rem;
     background-color: #f8f8f8;
     border-bottom: 1px solid #dedede;
     position: relative;
