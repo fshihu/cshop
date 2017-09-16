@@ -26,7 +26,7 @@ class Article extends MobileBase {
      */
     public function articleList(){        
         $list = M('Article')->where("cat_id IN(1,2,3,4,5,6,7)")->select();
-        $this->assign('list',$list);
+        $this->assign('articleList',$list);
         return $this->fetch();
     }    
     /**
