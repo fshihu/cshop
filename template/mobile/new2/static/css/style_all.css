@@ -181,6 +181,9 @@ background: url("../images/home/time_background.png") no-repeat;text-align: cent
 .goods_item a .txt{ color: #474747;}
 .goods_item a .price{ color: #5c9143;}
 
+.m_title_1{padding: 20px;background: #fff; color: #000;text-align: center;}
+.m_title_1 .line{display: inline-block; width:25px; height:1px;background: #000000;position: relative;top:-6px;}
+
 .h_item_1_s{position: relative;}
 .h_item_1{background: #fff; margin-bottom:10px;}
 .h_item_1 .name{ color: #474747; padding:10px;}
@@ -188,7 +191,7 @@ background: url("../images/home/time_background.png") no-repeat;text-align: cent
 .h_item_1 .ft_s1 .fl{float: left;}
 .h_item_1 .ft_s1 .price{ color: #2cc8c7;font-size: 18px;}
 .h_item_1 .ft_s1 .fr{float: right;}
-.h_item_1 .ft_s1 .btn_r{display: inline-block; padding:5px 10px; color: #fff;background: #e72b29;}
+.btn_r{display: inline-block; padding:5px 10px; color: #fff;background: #e72b29;}
 
 .list2{}
 .list2 .item_2{border-bottom: 1px solid #dbdbdb; padding:15px; overflow: hidden;}
