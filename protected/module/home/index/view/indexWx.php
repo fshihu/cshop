@@ -60,17 +60,17 @@
 
             <div class="m_title">
                 <span class="m_t_l">
-                    <img class="mt_icon" src="__STATIC__/images/home/shopping_icon.png" width="16" alt="">
+                    <img class="mt_icon" src="<?php echo $baseUrl; ?>/public/biz/common/images/shopping_icon.png" width="16" alt="">
                     <span class="mt_text">最新团购</span>
                 </span>
                 <span class="m_t_r">
                     <span class="mtr_text"> 更多 </span>
-                    <img class="mtr_icon" src="__STATIC__/images/home/more_left_icon.png" width="5" alt="">
+                    <img class="mtr_icon" src="<?php echo $baseUrl; ?>/public/biz/common/images/more_left_icon.png" width="5" alt="">
                 </span>
             </div>
             <div class="h_item_1_w">
                 <div class="h_item_1">
-                   <img class="img" src="__STATIC__/images/home/pic_Grouppurchasetwo.png"alt="">
+                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/common/images/pic_Grouppurchasetwo.png"alt="">
                    <div class="bg"></div>
                    <div class="times">
                        <span class="time h">
@@ -88,7 +88,7 @@
                    </div>
                </div>
                 <div class="h_item_1">
-                   <img class="img" src="__STATIC__/images/home/pic_Grouppurchasetwo.png"alt="">
+                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/common/images/pic_Grouppurchasetwo.png"alt="">
                    <div class="bg"></div>
                    <div class="times">
                        <span class="time h">
@@ -106,7 +106,7 @@
                    </div>
                </div>
                 <div class="h_item_1">
-                   <img class="img" src="__STATIC__/images/home/pic_Grouppurchasetwo.png"alt="">
+                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/common/images/pic_Grouppurchasetwo.png"alt="">
                    <div class="bg"></div>
                    <div class="times">
                        <span class="time h">
@@ -133,59 +133,4 @@
 
 </div>
 <?php include \biz\Util::getFooterNav(); ?>
-
-<!--底部导航-start-->
-<include file="public/footer_nav"/>
-<!--底部导航-end-->
-<script src="__STATIC__/js/style.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="__STATIC__/js/sourch_submit.js"></script>
-<script type="text/javascript">
-    /**
-     * 秒杀模块倒计时
-     * */
-    function GetRTime(end_time) {
-        var NowTime = new Date();
-        var t = (end_time * 1000) - NowTime.getTime();
-        var d = Math.floor(t / 1000 / 60 / 60 / 24);
-        var h = Math.floor(t / 1000 / 60 / 60 % 24);
-        var m = Math.floor(t / 1000 / 60 % 60);
-        var s = Math.floor(t / 1000 % 60);
-        if (s >= 0)
-            return (d * 24 + h) + '时' + m + '分' + s + '秒';
-    }
-    function GetRTime2() {
-        var text = GetRTime('{$end_time}');
-        if (text == 0) {
-            $(".hms").text('活动已结束');
-        } else {
-            $(".hms").text(text);
-        }
-    }
-    setInterval(GetRTime2, 1000);
-
-    /**
-     * 继续加载猜您喜欢
-     * */
-    var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
-    var page = 0;
-    function ajax_sourch_submit() {
-        if (before_request == 0)// 上一次请求没回来 不进行下一次请求
-            return false;
-        before_request = 0;
-        page++;
-        $.ajax({
-            type: "get",
-            url: "/index.php?m=Mobile&c=Index&a=ajaxGetMore&p=" + page,
-            success: function (data) {
-                if (data) {
-                    $("#J_ItemList>ul").append(data);
-                    before_request = 1;
-                } else {
-                    $('.get_more').hide();
-                }
-            }
-        });
-    }
-</script>
-</body>
-</html>
+ 

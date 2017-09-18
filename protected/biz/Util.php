@@ -9,6 +9,8 @@
 namespace biz;
 
 
+use CC;
+
 class Util
 {
     public static function getFooterNav()
