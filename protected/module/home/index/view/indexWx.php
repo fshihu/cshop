@@ -60,17 +60,17 @@
 
             <div class="m_title">
                 <span class="m_t_l">
-                    <img class="mt_icon" src="<?php echo $baseUrl; ?>/public/biz/common/images/shopping_icon.png" width="16" alt="">
+                    <img class="mt_icon" src="<?php echo $baseUrl; ?>/public/biz/common/wx/images/shopping_icon.png" width="16" alt="">
                     <span class="mt_text">最新团购</span>
                 </span>
                 <span class="m_t_r">
                     <span class="mtr_text"> 更多 </span>
-                    <img class="mtr_icon" src="<?php echo $baseUrl; ?>/public/biz/common/images/more_left_icon.png" width="5" alt="">
+                    <img class="mtr_icon" src="<?php echo $baseUrl; ?>/public/biz/common/wx/images/more_left_icon.png" width="5" alt="">
                 </span>
             </div>
             <div class="h_item_1_w">
                 <div class="h_item_1">
-                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/common/images/pic_Grouppurchasetwo.png"alt="">
+                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/common/wx/images/pic_Grouppurchasetwo.png"alt="">
                    <div class="bg"></div>
                    <div class="times">
                        <span class="time h">
@@ -88,7 +88,7 @@
                    </div>
                </div>
                 <div class="h_item_1">
-                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/common/images/pic_Grouppurchasetwo.png"alt="">
+                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/common/wx/images/pic_Grouppurchasetwo.png"alt="">
                    <div class="bg"></div>
                    <div class="times">
                        <span class="time h">
@@ -106,7 +106,7 @@
                    </div>
                </div>
                 <div class="h_item_1">
-                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/common/images/pic_Grouppurchasetwo.png"alt="">
+                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/common/wx/images/pic_Grouppurchasetwo.png"alt="">
                    <div class="bg"></div>
                    <div class="times">
                        <span class="time h">
