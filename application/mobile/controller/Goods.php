@@ -38,6 +38,10 @@ class Goods extends MobileBase {
         return $this->fetch();
     }
 
+    public function groupOne()
+    {
+        return $this->fetch();
+    }
     /**
      * 商品列表页
      */

@@ -1,5 +1,5 @@
 html,body{height: 100%;}
-body{background: #fff;color: #474747;}
+body{background: #fff;color: #474747;font-size: 14px;}
 a{ color: #474747;}
 .daily_list .time{text-align: center; line-height:1;}
 .daily_list .content{border-left: 1px solid #c4c2cb; margin-left:10px; padding-left:10px;min-height: 50px;}
@@ -157,7 +157,7 @@ background: url("../images/home/time_background.png") no-repeat;text-align: cent
 .goods_item{float: left; width:50%;box-sizing: border-box; padding:4px;
 }
 .goods_item a{display:block;padding: 10px;background: #fff;border:1px solid #ebebeb;text-align: center;}
-.goods_item a .txt{ color: #474747;}
+.goods_item a .txt{ color: #505050; padding:5px; padding-top:0;}
 .goods_item a .price{ color: #5c9143;}
 
 .m_title_1{padding: 20px;background: #fff; color: #000;text-align: center;}
@@ -176,7 +176,7 @@ background: url("../images/home/time_background.png") no-repeat;text-align: cent
 .list2 .item_2{border-bottom: 1px solid #dbdbdb; padding:15px; overflow: hidden;}
 .list2 .item_2 a{}
 .list2 .item_2 img{float: right; width:100px; height:70px;border-radius: 5px;}
-.list2 .item_2_s img{ float: none; width:100%; height:130px;}
+.list2 .item_2_s img{ float: none; width:100%; height:130px; margin-top:10px;}
 
 
 .good_info{ padding:15px;background: #fff; margin-bottom:15px;font-size: 14px;}
@@ -211,3 +211,24 @@ background: url("../images/home/time_background.png") no-repeat;text-align: cent
 .buy_btn .bt_a .t2{font-size: 15px;}
 .buy_btn .bt_a1{ background: #78C7C6; }
 .buy_btn .bt_a2{ background: #2CC7C5; }
+
+
+.list4 .weui-media-box{ padding:12px;}
+.list4 .weui-media-box__hd{ width:110px; height:110px;}
+.list4 .weui-media-box__bd .weui-media-box__desc{ height:80px;font-size: 14px;}
+.list4 .weui-media-box__bd .t1{ font-size: 11px; height:30px;}
+.list4 .weui-media-box__bd .t1_s{ color: #E72B29;}
+.list4 .weui-media-box_appmsg .weui-media-box__thumb{ height:100%;}
+
+.buy_user{ padding-top:40px; padding-bottom:40px;}
+.avatar_label{text-align: center;}
+.avatar_label_item{position: relative;display: inline-block;background: #ffffff; width:50px; height:50px;border-radius: 50%;border:1px solid #DBDBDB;
+text-align: center;vertical-align: middle; margin:0 20px; margin-bottom:20px;}
+.avatar_label_item .avatar{ width:50px; height:50px;border-radius: 50%;}
+.avatar_label_item .weui-badge{position: absolute; right:-10px;top:-5px;}
+.avatar_label_item .t1{ line-height:50px; color: #484848;}
+.buy_user .t2{text-align: center; padding:15px 0 ;}
+.buy_user .t3{text-align: center; padding-bottom:30px;}
+.buy_user .btn2{ width:184px; height:30px; line-height:30px;font-size: 14px;background: #2CC7C5;}
+
+
