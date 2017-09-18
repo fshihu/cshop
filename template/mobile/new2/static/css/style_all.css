@@ -181,6 +181,7 @@ background: url("../images/home/time_background.png") no-repeat;text-align: cent
 
 .good_info{ padding:15px;background: #fff; margin-bottom:15px;font-size: 14px;}
 .good_info .good_title{font-size: 18px;}
+.good_info .t1_k{text-decoration:line-through; font-size: 11px;}
 .good_info .t1_s_m{ color: #2cc7c3;}
 .buy_num_w{ overflow: hidden;}
 .buy_num_w .fl{float: left; line-height:30px;}
@@ -209,7 +210,8 @@ background: url("../images/home/time_background.png") no-repeat;text-align: cent
 .buy_btn .bt_a{ width:50%;float: left; height:49px; color: #ffffff;text-align: center; padding-top:6px;box-sizing: border-box;}
 .buy_btn .bt_a .t1{font-size: 12px;}
 .buy_btn .bt_a .t2{font-size: 15px;}
-.buy_btn .bt_a1{ background: #78C7C6; }
+.buy_btn .bt_a .t3{ line-height:43px;}
+.buy_btn .bt_a1{ background: #78C7C6;box-sizing: border-box;border-right: 1px solid #ffffff; }
 .buy_btn .bt_a2{ background: #2CC7C5; }
 
 
@@ -251,3 +253,21 @@ background-size: 16px;}
 .buy_price .buy_btn_w .price {  float:left; line-height:50px; padding-left:60px; font-size: 11px;}
 .buy_price .buy_btn_w .price_red { color: red;}
 .buy_price .buy_btn_w .buy_btn_red { width:100px;border-radius: 0px;float:right; height:50px; line-height:50px; font-size: 15px;}
+
+.buy_confirm{ position: fixed;bottom: 0; z-index:502; width:100%;background: #ffffff;}
+.buy_confirm .bc_hd{border-top: 1px solid #DBDBDB;border-bottom: 1px solid #DBDBDB;position: relative;min-height: 80px;}
+.buy_confirm .bc_hd .bc_img{ width:85px;height:85px;position: absolute;top:-20px; left:20px;}
+.buy_confirm .bc_hd .bc_info{ padding-left:120px; padding-right:30px; padding-top:10px;}
+.buy_confirm .bc_hd .bc_info .t1{font-size: 18px; color: #2CC7C5;}
+.buy_confirm .bc_hd .bc_info .t2{font-size: 11px; color: #999999;}
+.buy_confirm .bc_hd .bc_close{position: absolute; line-height:1; right:10px;top:8px; font-size: 14px; color: #999;}
+.buy_confirm .bc_bd{ padding:20px;}
+.buy_confirm .bc_bd .bcb_item .t1{ font-size: 11px; color: #999999;}
+.buy_confirm .bc_bd .bcb_item .weui-btn{border-radius: 2px;min-width: 70px; height:24px; line-height:24px;}
+.buy_confirm .bc_bd .bcb_item .weui-btn:after{border-radius: 2px; }
+.buy_confirm .bc_bd .bcb_item .weui-btn_warn{background: #2CC7C5;}
+.buy_confirm .bc_bd .bcb_item .weui-btn_warn:active{background: #28b6b4;}
+.buy_confirm .confirm_btn{border-radius: 0; height:42px; line-height:42px;font-size: 15px;}
+
+
+
