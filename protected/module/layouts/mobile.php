@@ -16,7 +16,7 @@
             'common_cssJs' => [
                 '/public/biz/wx/common/css/wx.css',
                 '/public/biz/wx/common/js/wx.js',
-                '/public/biz/wx/swipeSlide/js/swipeSlide.min.js',
+                '/public/biz/swipeSlide/js/swipeSlide.min.js',
                 '/public/biz/wx/common/css/style.css?5',
                 '/public/biz/wx/common/js/script.js?5',
 
