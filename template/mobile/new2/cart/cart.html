@@ -1,147 +1,106 @@
-<include file="public/header" title="购物车" body=""/>
-<include file="public/header_nav" title="购物车" href="javascript:history.back(-1);"/>
-<if condition="empty($user['user_id'])">
-<!--###用户未登录###-->
-    <div class="loginlater">
-        <img src="__STATIC__/images/small_car.png"/>
-        <span>登录后可同步电脑和手机购物车</span>
-        <a href="{:U('Mobile/User/loagin')}">登录</a>
-    </div>
-    <!--购物车有商品-s-->
-    <div class="cart_list">
-        <form id="cart_form" name="formCart" action="{:U('Mobile/Cart/ajaxCartList')}" method="post">
-            {:token()}
-        </form>
-    </div>
-    <!--购物车有商品-e-->
+<include file="public/header" title="商品列表"/>
+    <!--搜索栏-s-->
+<div class="page   weui-tab__panel  " style="padding-bottom:92px;height: 100%;background: #f3f7f8;">
+    <div class="page__bd"  style="min-height: 100%;">
+        <div class="weui-cells weui-title-title">
 
-    <!--看看热卖-start-->
-    <div class="hotshop seehotsho">
-        <div class="thirdlogin">
-            <h4>看看热卖</h4>
-        </div>
-    </div>
-    <div class="floor guesslike">
-        <div class="likeshop">
-            <ul>
-                <foreach name="hot_goods" item="good">
-                    <li>
-                        <a href="{:U('Mobile/goods/goodsInfo',array('id'=>$good[goods_id]))}">
-                            <div class="similer-product">
-                                <img src="{$good[goods_id]|goods_thum_images=200,200}"/>
-                                <span class="similar-product-text">{$good[goods_name]|getsubstr=0,20}</span>
-                                <span class="similar-product-price">
-                                    ¥<span class="big-price">{$good[shop_price]}</span>
-                                    <!--<span class="small-price">.00</span>-->
-                                </span>
+                     <div class="weui-cell weui-cell_access" href="javascript:;">
+                         <a href="javascript:history.back();">
+                             <div class="weui-cell__ft">
+                             </div>
+                         </a>
+                        <div class="weui-cell__bd">
+                            <p class="title">会议简介</p>
+                        </div>
+                    </div>
+
+                </div>
+         <div class="  weui-panel_access  "  >
+
+             <div class="addr_info">
+                 <div class="no_addr">
+                     请填写收货地址
+                 </div>
+             </div>
+             <div class="addr_info">
+                  <div class="weui-cell weui-cell_access" href="javascript:;">
+                                 <div class="weui-cell__hd"><img src="__STATIC__/images/home/coordinates_icon.png" alt="" style="width:18px;margin-right:30px;margin-left:15px;display:block"></div>
+                                 <div class="weui-cell__bd">
+                                     <div class="t1">
+                                                             <span class="t1_s">代代</span>
+                                                             <span class="t1_m">18789836748</span>
+                                                         </div>
+                                                         <div class="t2">
+                                                             四川 成都 金牛区 红旗大道46号
+                                                         </div>
+
+                                 </div>
+                      <div class="weui-cell__ft"></div>
+                             </div>
+             </div>
+            <div class="weui-panel__bd list4 list4_s"  >
+                <div class="list_4s_item">
+                    <div  class="weui-media-box weui-media-box_appmsg">
+                        <div class="weui-media-box__hd">
+                            <img style="" class="weui-media-box__thumb" src="" alt="">
+                        </div>
+                        <div class="weui-media-box__bd">
+                            <p class="weui-media-box__desc">一抹色彩足以为你带来一抹色彩足以为你带来一抹色彩足以为你带来，惊艳改变。新版韩国进口粉润唇膏，时尚都市女性必备唇膏</p>
+                            <p class="t1">价格：¥234.00</span></p>
+                        </div>
+
+                    </div>
+                    <div class="buy_num_w">
+                        <span class="fl">数量</span>
+                        <span class="fr">
+                            <span class="jian no_ac"></span>
+                            <input type="text" class="text" value="1"/>
+                            <span class="jia"></span>
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="list_4s_item">
+                            <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                                <div class="weui-media-box__hd">
+                                    <img class="weui-media-box__thumb" src="" alt="">
+                                </div>
+                                <div class="weui-media-box__bd">
+                                    <p class="weui-media-box__desc">一抹色彩足以为你带来一抹色彩足以为你带来一抹色彩足以为你带来，惊艳改变。新版韩国进口粉润唇膏，时尚都市女性必备唇膏</p>
+                                    <p class="t1">价格：¥234.00</span></p>
+                                </div>
                             </div>
-                        </a>
-                    </li>
-                </foreach>
-            </ul>
-        </div>
-        <div class="add">热卖商品实时更新，常回来看看哟~</div>
-    </div>
-    <!--看看热卖-end-->
+                        <div class="buy_num_w">
+                             <span class="fl">数量</span>
+                             <span class="fr">
+                                 <span class="jian no_ac"></span>
+                                 <input type="text" class="text" value="1"/>
+                                 <span class="jia"></span>
+                             </span>
+                         </div>
+                </div>
 
-<else/>
-<!--###用户已登录###-->
-    <!--购物车有商品-s-->
-    <div class="cart_list">
-        <form id="cart_form" name="formCart" action="{:U('Mobile/Cart/ajaxCartList')}" method="post">
-            {:token()}
-        </form>
-    </div>
-    <!--购物车有商品-e-->
-</if>
-<script type="text/javascript">
-    $(document).ready(function(){
-        ajax_cart_list(); // ajax 请求获取购物车列表
-    });
+             </div>
 
-    /**加载购物车商品列表*/
-    var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
-    function ajax_cart_list(){
-        if(before_request == 0) // 上一次请求没回来 不进行下一次请求
-            return false;
-        before_request = 0;
-        $.ajax({
-            type : "POST",
-            url:"{:U('Mobile/Cart/ajaxCartList')}",//+tab,
-            data : $('#cart_form').serialize(),// 你的formid
-            success: function(data){
-                $("#cart_form").html('');
-                $("#cart_form").append(data);
-                before_request = 1;
-            }
-        });
-    }
 
-    /**
-     * 购买商品数量加加减减
-     * 购买数量 , 购物车id , 库存数量
-     */
-    function switch_num(num,cart_id,store_count){
-        var num2 = parseInt($("input[name='goods_num["+cart_id+"]']").val());
-        //加减数量
-        num2 += num;
-        if(num2 < 1) num2 = 1;  // 保证购买数量不能少于 1
-        if(num2 > store_count) { //保证 不超过库存
-            layer.open({content:"库存只有 "+store_count+" 件, 你只能买 "+store_count+" 件",time:2})
-            num2 = store_count; // 保证购买数量不能多余库存数量
-        }
-        $("input[name='goods_num["+cart_id+"]']").val(num2);
-        ajax_cart_list();
-    }
+             <div class="buy_price">
+                 <div class="buy_jifen">
+                     使用1000积分,抵扣100元
+                 </div>
+                 <div class="buy_btn_w">
+                     <span class="price">应支付： <span class="price_red">￥65.9 （免运费）</span></span>
+                     <span class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red">立即支付</span>
+                 </div>
+             </div>
+                    </div>
 
-    //删除商品
-    function del_cart_goods(goods_id)
-    {
-        if(!confirm('确定要删除吗?'))
-            return false;
-        var chk_value = [];
-        chk_value.push(goods_id);
-        // ajax调用删除
-        if(chk_value.length > 0)
-            ajax_del_cart(chk_value.join(','));
-    }
 
-    // ajax 删除购物车的商品
-    function ajax_del_cart(ids)
-    {
-        $.ajax({
-            type : "POST",
-            url:"{:U('Mobile/Cart/ajaxDelCart')}",
-            data:{ids:ids},
-            dataType:'json',
-            success: function(data){
-                if(data.status == 1)
-                {
-                    ajax_cart_list(); //ajax 请求获取购物车列表
-                }
-            }
-        });
-    }
+     </div>
 
-    // 批量删除购物车的商品
-//    function del_cart_more()
-//    {
-//        if(!confirm('确定要删除吗?'))
-//            return false;
-//        // 循环获取复选框选中的值
-//        var chk_value = [];
-//        $('input[name^="cart_select"]:checked').each(function(){
-//            var s_name = $(this).attr('name');
-//            var id = s_name.replace('cart_select[','').replace(']','');
-//            chk_value.push(id);
-//        });
-//        // ajax调用删除
-//        if(chk_value.length > 0)
-//            ajax_del_cart(chk_value.join(','));
-//    }
-</script>
-</body>
+</div>
+
+<script src="__STATIC__/js/style.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
 </html>
-
-
-

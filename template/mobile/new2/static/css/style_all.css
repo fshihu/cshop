@@ -38,7 +38,7 @@ line-height: 1; width: 45px; height:45px;display: inline-block; color: #0950a0;}
 .member_list .weui-panel{ padding-top:10px;}
 
 
-.weui-cell_access .weui-cell__ft:after{border-color: #0950a0;}
+.weui-cell_access .weui-cell__ft:after{border-color: #484848;}
 
 
 
@@ -183,7 +183,7 @@ background: url("../images/home/time_background.png") no-repeat;text-align: cent
 .good_info .good_title{font-size: 18px;}
 .good_info .t1_s_m{ color: #2cc7c3;}
 .buy_num_w{ overflow: hidden;}
-.buy_num_w .fl{float: left;}
+.buy_num_w .fl{float: left; line-height:30px;}
 .buy_num_w .fr{float: right;}
 .buy_num_w .jian{float: left; width:30px; height:30px;background: #F5F5F5 url("../images/home/subtraction_icon.png") no-repeat center; background-size: 15px;}
 .buy_num_w .text{float: left;width:40px; height:30px;background: #F5F5F5;border: none;margin: 0px 2px;text-align: center;}
@@ -234,3 +234,20 @@ text-align: center;vertical-align: middle; margin:0 20px; margin-bottom:20px;}
 .buy_btn_now{ color: #484848;background: #F3F7F7; height:43px; line-height:43px;text-align: center;border-top: 1px solid #DBDBDB;
     position: fixed;bottom: 0px; width:100%;}
 
+.list4_s.list4 .weui-media-box__hd{ width:70px; height:70px;}
+.list4_s.list4 .weui-media-box__bd .weui-media-box__desc{ height:32px; margin-bottom:8px;}
+.list4_s .list_4s_item{ padding-bottom:20px;border-bottom: 1px solid #DBDBDB; margin-bottom:13px;background: #ffffff;
+   border-top: 1px solid #DBDBDB;}
+.list4_s .buy_num_w{ padding:0 12px;}
+.addr_info{background: #ffffff;border-top: 1px solid #DBDBDB;border-bottom: 1px solid #DBDBDB; margin-bottom:13px;}
+.addr_info .no_addr{padding: 35px 0; margin-left:30px;background: url("../images/home/add.png") no-repeat left; padding-left:20px;
+background-size: 16px;}
+.addr_info .t1{ font-size: 15px; color: #484848; padding-top:10px; margin-bottom:5px;}
+.addr_info .t2{ color: #666; padding-bottom:10px;}
+.buy_price{ position: fixed;bottom: 0px; width:100%;}
+.buy_price .buy_jifen{background: #ffffff; line-height:40px;text-align: right;border-top: 1px solid #DBDBDB;
+   padding-right:10px; font-size: 11px;}
+.buy_price .buy_btn_w { overflow: hidden;background: #ffffff;border-top: 1px solid #DBDBDB;}
+.buy_price .buy_btn_w .price {  float:left; line-height:50px; padding-left:60px; font-size: 11px;}
+.buy_price .buy_btn_w .price_red { color: red;}
+.buy_price .buy_btn_w .buy_btn_red { width:100px;border-radius: 0px;float:right; height:50px; line-height:50px; font-size: 15px;}
