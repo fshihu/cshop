@@ -14,5 +14,9 @@ class Service extends MobileBase
     {
         return $this->fetch();
     }
+    public function service()
+    {
+        return $this->fetch();
+    }
 
 }
