@@ -1,12 +1,13 @@
 html,body{height: 100%;}
 body{background: #fff;color: #474747;font-size: 14px;}
 a{ color: #474747;}
+body>.content{ height:100%;}
 .daily_list .time{text-align: center; line-height:1;}
 .daily_list .content{border-left: 1px solid #c4c2cb; margin-left:10px; padding-left:10px;min-height: 50px;}
 
 .weui-cells{ margin-top:10px;font-size: 14px;}
 
-.weui-title-title .weui-cell__ft:after{border-width:   0 0 2px 2px; width:10px; height:10px; border-color: #ffffff;
+.weui-title-title .weui-cell .weui-cell__ft:after{border-width:   0 0 2px 2px; width:10px; height:10px; border-color: #ffffff;
 font-weight: bold;}
 .weui-title-title .title{text-align: center; color: #000;font-size: 16px;}
 .weui-title-title { margin-top:0;background: #fff;border-bottom: 1px solid #ececec;}
@@ -38,7 +39,7 @@ line-height: 1; width: 45px; height:45px;display: inline-block; color: #0950a0;}
 .member_list .weui-panel{ padding-top:10px;}
 
 
-.weui-cell_access .weui-cell__ft:after{border-color: #484848;}
+.weui-cell_access .weui-cell__ft:after{border-color: #484848;border-width: 1px 1px 0 0;}
 
 
 
@@ -330,3 +331,30 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 .weui-msg__title{font-size: 18px;}
 .weui-msg__desc{font-size: 12px;}
 
+.my .info{position: relative;border-bottom: 1px solid #DBDBDB; padding-top:32px;background: #ffffff;}
+.my .info .code{position: absolute; width:30px; height:30px; right:12px;top:12px;}
+.my .info .avatar{ width:64px; height:64px;display: block; margin:auto;}
+.my .info .t1{ text-align: center; padding:5px 0 ;}
+.my .info .t2{ overflow: hidden; padding-top:15px;}
+.my .info .t2_s{float: left; width:33.333333%;text-align: center;}
+.my .info .t2_s_m_1{ color: #2CC7C5; padding-bottom:5px;}
+.my .info .t2_s_m_2{  padding-bottom:10px;}
+
+.my .order{border-bottom: 1px solid #DBDBDB;background: #ffffff; padding-bottom:20px;;}
+.my .t1{ padding:20px}
+.my .t2_w{ overflow: hidden;}
+.my .t2_w .t2{float: left; width:20%;text-align: center;font-size: 12px;}
+.my .t2_w .t2 .t2_s_w{ height:22px;vertical-align: bottom;}
+.my .t2_w .t2 .t2_s{ width:19px; margin-bottom:10px;}
+
+.my .menu_s .icon{width:16px;margin-right:15px; margin-left:10px;display:block}
+.my .menu_s .weui-cell:before{ left:0;}
+
+
+.addr_info_item .t1{ padding-left:12px;}
+.addr_info_item .t2{ padding-left:12px;}
+.addr_info_item .t3{ overflow: hidden;border-top: 1px solid #DBDBDB; padding:10px; padding-top:0;}
+.addr_info_item .fl{float: left; margin-top:20px;}
+.addr_info_item .fr{float: right;}
+.checkbox{background: #ffffff;border: 1px solid #DBDBDB; width:16px; height:16px;display: inline-block;border-radius: 50%;box-sizing: border-box;}
+.checkboxed{border: none;background: url("../images/select_icon.png"); background-size: 16px;}
