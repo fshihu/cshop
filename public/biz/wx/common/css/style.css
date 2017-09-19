@@ -157,8 +157,8 @@ background: url("../images/time_background.png") no-repeat;text-align: center;ba
 .goods_item{float: left; width:50%;box-sizing: border-box; padding:4px;
 }
 .goods_item a{display:block;padding: 10px;background: #fff;border:1px solid #ebebeb;text-align: center;}
-.goods_item a .txt{ color: #505050; padding:5px; padding-top:0;}
-.goods_item a .price{ color: #5c9143;}
+.goods_item a .txt{ color: #505050; padding:5px;}
+.goods_item a .price{ color: #2CC7C5;padding:5px; padding-top:0; text-align: center; padding-bottom:0; }
 
 .m_title_1{padding: 20px;background: #fff; color: #000;text-align: center;}
 .m_title_1 .line{display: inline-block; width:25px; height:1px;background: #000000;position: relative;top:-6px;}
@@ -269,5 +269,13 @@ background-size: 16px;}
 .buy_confirm .bc_bd .bcb_item .weui-btn_warn:active{background: #28b6b4;}
 .buy_confirm .confirm_btn{border-radius: 0; height:42px; line-height:42px;font-size: 15px;}
 
+.commont_list .comm_item{ padding:20px;border-bottom: 1px solid #DBDBDB;}
+.commont_list .t1 .img{ width:35px; height:35px;border-radius: 50%;vertical-align: middle;}
+.commont_list .t1 .t1_s{font-size: 12px; color: #999999; line-height:35px;vertical-align: middle;display: inline-block; margin-left:15px;}
+.commont_list .t2{ padding:10px 0;}
+.commont_list .t3{ color: #999999;font-size: 12px;}
 
-
+.server_itme_w .goods_item a{ padding:0;text-align: left;}
+.server_itme_w a .price{text-align: left;}
+.buwei_item_w .weui-btn{border-radius: 2px;min-width: 58px; height:24px; line-height:25px;}
+.buwei_item_w .weui-btn:after{border-radius: 2px; }

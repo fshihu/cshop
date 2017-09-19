@@ -36,7 +36,7 @@
             </div>
             <div class="home_item_w">
                 <div class="home_item">
-                    <a href="">
+                    <a href="<?php echo $this->genurl('goods/cate/list') ?>">
                         <img class="img" src="/public/upload/ad/2017/05-20/5b3261f64a247198d8c23a2d4bf3f8b7.jpg" alt="">
                         <div class="bg">
                                    <span class="txt">
@@ -72,24 +72,27 @@
                 </span>
             </div>
             <div class="h_item_1_w">
-                <div class="h_item_1">
-                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
-                   <div class="bg"></div>
-                   <div class="times">
-                       <span class="time h">
-                           <span class="t1">1</span>
-                           <span class="t2">时</span>
-                       </span>
-                       <span class="time m">
-                           <span class="t1">45</span>
-                           <span class="t2">分</span>
-                       </span>
-                       <span class="time s">
-                           <span class="t1">08</span>
-                           <span class="t2">秒</span>
-                       </span>
+                <a href="<?php echo $this->genurl('/groupon/index/index') ?>">
+                    <div class="h_item_1">
+                       <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
+                       <div class="bg"></div>
+                       <div class="times">
+                           <span class="time h">
+                               <span class="t1">1</span>
+                               <span class="t2">时</span>
+                           </span>
+                           <span class="time m">
+                               <span class="t1">45</span>
+                               <span class="t2">分</span>
+                           </span>
+                           <span class="time s">
+                               <span class="t1">08</span>
+                               <span class="t2">秒</span>
+                           </span>
+                       </div>
                    </div>
-               </div>
+
+                </a>
                 <div class="h_item_1">
                    <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
                    <div class="bg"></div>
