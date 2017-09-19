@@ -279,3 +279,31 @@ background-size: 16px;}
 .server_itme_w a .price{text-align: left;}
 .buwei_item_w .weui-btn{border-radius: 2px;min-width: 58px; height:24px; line-height:25px;}
 .buwei_item_w .weui-btn:after{border-radius: 2px; }
+
+
+
+/************  form 表单 *****************/
+
+select { display: inline-block; height: 32px; padding: 0 10px; line-height:32px;width: auto; background-color: #FFFFFF; border: 1px solid #e3e8ec; color: #aaa;}
+.search_form_vertical select{border-radius:2px;vertical-align: middle; }
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+    background-color: #FFFFFF; border: 1px solid #e3e8ec; color: #4d4d4d; font-size: 14px; padding: 5px 10px; width: 150px; line-height: 20px;box-sizing: border-box;}
+textarea{ width:400px; height:100px;}
+input:focus,textarea:focus{border-color: #4e95ca;}
+
+.horizontal_form{padding: 0 15px;}
+
+
+.row-group{ padding:5px 0; }
+.row-group-xq .data-label,.row-group .data-label,.input-group .input-group-label { padding-right: 10px; float: left;width: 130px; font-size: 14px; line-height: 30px; text-align: right; }
+.row-group .data-group,.input-group .input-group-data{ float: left; line-height: 28px;word-break: break-all;}
+.input-group-data .row-group{padding-top: 0;}
+.input-group-data .row-group .data-label{text-align: left;}
+.data-only-group{display: inline-block;}
+.row-group span.required { color: #FF0000; }
+.row-group .text-group{ padding-top: 6px; word-wrap:break-word; word-break:normal; float: left; }
+.row-group .data-error-message{ color: #ff210d; padding-left:10px;}
+.btn{font-weight: normal;  text-align: center; white-space: nowrap; color: #fff; cursor: pointer; display: inline-block; vertical-align: middle; background-color: #4e95ca;
+     background-image: none; margin: 0; position: relative; text-decoration: none; border-radius: 2px;border:none;
+    font-size: 13px; line-height: 1.39; padding: 5px 10px;}
+.sub_btn{ width:100%;}

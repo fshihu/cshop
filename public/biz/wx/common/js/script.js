@@ -23,4 +23,6 @@ $(function(){
 	$('.mslide .dot span:first').addClass('cur');
 	var wid = - ($('.mslide .dot').width() / 2);
 	$('.mslide .dot').css('position','absolute').css('left','50%').css('margin-left',wid);
+
+	$('.date-time').datetimePicker();
 });

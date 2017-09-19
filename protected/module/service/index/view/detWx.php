@@ -53,9 +53,9 @@
          </a>
       </div>
 
-     <div class="buy_btn_now">
+     <a class="buy_btn_now" href="<?php echo $this->genurl('reserve/index') ?>">
          立即预约
-     </div>
+     </a>
  </div>
                     </div>
 
