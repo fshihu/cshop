@@ -23,6 +23,7 @@ use CC\util\common\widget\form\TimeInput;
 use CC\util\db\SexEnum;
 use CRequest;
 use module\service\reserve\enum\MarriageEnum;
+use module\service\reserve\enum\ReserveReasonEnum;
 
 class ServiceReserveIndexWxAction extends \CAction implements IFormViewBuilder
 {
@@ -46,7 +47,7 @@ class ServiceReserveIndexWxAction extends \CAction implements IFormViewBuilder
             (new AddrInput('name','出生地')),
             new RadioButtonListInput('name','婚姻状况',MarriageEnum::getValues()),
             (new TextAreaInput('intro','性格爱好')),
-            new CheckBoxListInput('name','预约理由',MarriageEnum::getValues()),
+            new CheckBoxListInput('name','预约理由',ReserveReasonEnum::getValues()),
             (new TextInput('name','预约日期')),
             new SubmitInput(),
         ];

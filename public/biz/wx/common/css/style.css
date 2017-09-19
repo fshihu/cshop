@@ -284,26 +284,49 @@ background-size: 16px;}
 
 /************  form 表单 *****************/
 
-select { display: inline-block; height: 32px; padding: 0 10px; line-height:32px;width: auto; background-color: #FFFFFF; border: 1px solid #e3e8ec; color: #aaa;}
+select { display: inline-block; height: 32px; padding: 0 10px; line-height:32px;width: auto; background-color: #FFFFFF; border: 1px solid #dbdbdb; color: #aaa;}
 .search_form_vertical select{border-radius:2px;vertical-align: middle; }
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
-    background-color: #FFFFFF; border: 1px solid #e3e8ec; color: #4d4d4d; font-size: 14px; padding: 5px 10px; width: 150px; line-height: 20px;box-sizing: border-box;}
-textarea{ width:400px; height:100px;}
-input:focus,textarea:focus{border-color: #4e95ca;}
+    background-color: #FFFFFF; border: 1px solid #dbdbdb; color: #4d4d4d; font-size: 14px; padding: 4px 10px; width: 230px; line-height: 20px;box-sizing: border-box;}
+textarea{ width:300px; height:90px; margin-left:30px; margin-top:10px;}
+input:focus,textarea:focus{border-color: #2CC7C5;}
 
 .horizontal_form{padding: 0 15px;}
 
 
 .row-group{ padding:5px 0; }
-.row-group-xq .data-label,.row-group .data-label,.input-group .input-group-label { padding-right: 10px; float: left;width: 130px; font-size: 14px; line-height: 30px; text-align: right; }
+.row-group-xq .data-label,.row-group .data-label,.input-group .input-group-label { padding-right: 10px; float: left;width: 100px; font-size: 14px; line-height: 30px; text-align: right; }
 .row-group .data-group,.input-group .input-group-data{ float: left; line-height: 28px;word-break: break-all;}
 .input-group-data .row-group{padding-top: 0;}
 .input-group-data .row-group .data-label{text-align: left;}
 .data-only-group{display: inline-block;}
 .row-group span.required { color: #FF0000; }
+.row-group .form-radio-default-label{ margin-right:10px;display: inline-block;}
+.row-group .check_box_list_label_w { width:260px;}
+.row-group .check_box_list_label { margin-right:10px;display: inline-block;}
 .row-group .text-group{ padding-top: 6px; word-wrap:break-word; word-break:normal; float: left; }
 .row-group .data-error-message{ color: #ff210d; padding-left:10px;}
 .btn{font-weight: normal;  text-align: center; white-space: nowrap; color: #fff; cursor: pointer; display: inline-block; vertical-align: middle; background-color: #4e95ca;
      background-image: none; margin: 0; position: relative; text-decoration: none; border-radius: 2px;border:none;
     font-size: 13px; line-height: 1.39; padding: 5px 10px;}
-.sub_btn{ width:100%;}
+.row-group .captcha_input{ width:140px;}
+.row-group .get_code_btn { background: #ffffff;border: 1px solid #DBDBDB; color: #999999;font-size: 12px; line-height:1.5;}
+.row-group .input_year { width:66px;}
+.row-group .input_month { width:40px;}
+.row-group .input_day { width:40px;}
+.row-group .date_input_tip { display: inline-block; padding:0 5px;}
+
+.row-group .addr_input { width:260px;}
+.row-group .addr_input_province { width:66px; margin-right:20px;}
+.row-group .addr_input_city { width:66px;}
+.row-group .addr_input_district { width:160px; margin-top:10px;}
+
+.row-group-form_{ padding-bottom:0;}
+.row-group-form_ .data-label{ padding-right:0; width:0;}
+.row-group-form_ .data-group-form_{ width:100%;}
+.sub_btn{ width:100%;border-radius: 0px;background: #2CC7C5; height:44px; line-height:44px;}
+
+.weui-dialog__btn_primary{ color: #2CC7C5;}
+.weui-msg__title{font-size: 18px;}
+.weui-msg__desc{font-size: 12px;}
+

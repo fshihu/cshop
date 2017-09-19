@@ -16,7 +16,7 @@ class CaptchaInput extends BaseInput
 
     protected function onCreateInputInternal()
     {
-        $input =  sprintf('<input type="text" name="%s" id="%s" value="%s"   placeholder="验证码" %s />',
+        $input =  sprintf('<input type="text" class="captcha_input" name="%s" id="%s" value="%s"   placeholder="验证码" %s />',
                     $this->getName(),
                     $this->getId(),
                     $this->getValue(),

@@ -16,9 +16,9 @@ class AddrInput extends BaseInput
 
     protected function onCreateInputInternal()
     {
-        return '<select class="addr_input_province"><option>-省-</option>
+        return '<div class="addr_input"><select class="addr_input_province"><option>-省-</option>
 </select>
 <select class="addr_input_city"><option>-市-</option></select>
-<select class="addr_input_district"><option>-区-</option></select>';
+<select class="addr_input_district"><option>-区-</option></select></div>';
     }
 }
