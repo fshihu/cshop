@@ -132,7 +132,7 @@
             </div>
             <div class="weui-cells menu_s">
 
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('money/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/wealth_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>我的财富</p>
@@ -194,7 +194,7 @@
                         <p>银行卡管理</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access li_borde" href="javascript:;">
+                <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('recomm/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/recommend_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>推荐会员</p>

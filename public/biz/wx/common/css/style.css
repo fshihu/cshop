@@ -203,7 +203,7 @@ background: url("../images/time_background.png") no-repeat;text-align: center;ba
 
 .list3_item .t2{ color: #2cc7c3; line-height:60px;display: inline-block; }
 .list3_item .btn_r{ vertical-align: middle; }
-.navbar-sm{position: static;}
+.navbar-sm{position: relative;}
 .navbar-sm .weui-navbar__item{ font-size: 16px;    padding: 7px 0; color: #474747;}
 .navbar-sm .weui-navbar__item.weui-bar__item_on{background: #2CC7C5; color: #ffffff;}
 
@@ -390,3 +390,10 @@ border-left: 80px solid transparent; top:0; right:0;
 .news_det .coloct_btn{ text-align: center; margin-top:10px;}
 .news_det .coloct_btn .weui-btn{ color: #2CC7C5;}
 .news_det .coloct_btn .weui-btn:after{ border-color: #2CC7C5;}
+
+.mem_recomm .info{ padding-bottom:0;font-size: 12px;}
+.list4_w  .simg{width:50px; height:50px;border-radius: 50%; margin-right:15px;display:block}
+.list4_w .t2{ color: #999;font-size: 12px;}
+
+
+
