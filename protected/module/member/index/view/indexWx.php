@@ -123,7 +123,7 @@
                         <p>我的购物车</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access  li_borde" href="javascript:;">
+                <a class="weui-cell weui-cell_access  li_borde" href="<?php echo $this->genurl('news/collect/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/collect_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>收藏和足迹</p>

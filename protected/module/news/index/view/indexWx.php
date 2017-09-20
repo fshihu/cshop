@@ -45,33 +45,38 @@
 
              <div class="list2_w">
                 <div class="list2">
-                    <div class="item_2 =">
-                        <img src="" alt="">
-                        <a href="{:U('Article/articleList')}">负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅</a>
-                    </div>
-
+                    <a  href="<?php echo $this->genurl('det') ?>">
+                        <div class="item_2 =">
+                            <img src="" alt="">
+                            <div class="conts">负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅</div>
+                        </div>
+                    </a>
                 </div>
                 <div class="list2">
-                    <div class="item_2 =">
-                        <img src="" alt="">
-                        <a href="">负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅</a>
-                    </div>
-
+                    <a  href="<?php echo $this->genurl('det') ?>">
+                        <div class="item_2 =">
+                            <img src="" alt="">
+                            <div class="conts">负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅</div>
+                        </div>
+                    </a>
                 </div>
-                <div class="list2">
+                 <div class="list2">
+                    <a  href="<?php echo $this->genurl('det') ?>">
                     <div class="item_2 item_2_s">
-                        <a href="">负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅</a>
+                        <div class="conts">负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅</div>
                         <img src="" alt="">
                     </div>
+                    </a>
 
                 </div>
-                <div class="list2">
-                    <div class="item_2 =">
-                        <img src="" alt="">
-                        <a href="">负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅</a>
-                    </div>
-
-                </div>
+                 <div class="list2">
+                     <a  href="<?php echo $this->genurl('det') ?>">
+                         <div class="item_2 =">
+                             <img src="" alt="">
+                             <div class="conts">负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅负面山梨酸钾度覅</div>
+                         </div>
+                     </a>
+                 </div>
 
             </div>
 
