@@ -322,7 +322,9 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 .row-group .addr_input_city { width:66px;}
 .row-group .addr_input_district { width:160px; margin-top:10px;}
 
-.row-group-form_{ padding-bottom:0;}
+.row-group-form_{ padding-bottom:0;position: fixed;
+    width: 100%;
+    bottom: 0;}
 .row-group-form_ .data-label{ padding-right:0; width:0;}
 .row-group-form_ .data-group-form_{ width:100%;}
 .sub_btn{ width:100%;border-radius: 0px;background: #2CC7C5; height:44px; line-height:44px; font-size: 15px;}
