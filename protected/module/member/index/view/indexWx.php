@@ -39,14 +39,12 @@
                         </div>
                     </div>
                     <div class="t2_s t2_s2">
-                        <a href="<?php echo $this->genurl('level/index') ?>">
-                            <div class="t2_s_m_1">
-                                普通会员
-                            </div>
-                            <div class="t2_s_m_2">
-                                我的等级
-                            </div>
-                        </a>
+                        <div class="t2_s_m_1">
+                            普通会员
+                        </div>
+                        <div class="t2_s_m_2">
+                            我的等级
+                        </div>
                     </div>
                     <div class="t2_s t2_s3">
                         <div class="t2_s_m_1">
@@ -148,7 +146,7 @@
                     </div>
                     <div class="weui-cell__ft">￥341.00</div>
                 </a>
-                <a class="weui-cell weui-cell_access " href="javascript:;">
+                <a class="weui-cell weui-cell_access " href="<?php echo $this->genurl('level/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/members_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>会员等级</p>

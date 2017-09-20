@@ -335,7 +335,7 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 
 .my .info{position: relative;border-bottom: 1px solid #DBDBDB; padding-top:32px;background: #ffffff;}
 .my .info .code{position: absolute; width:30px; height:30px; right:12px;top:12px;}
-.my .info .avatar{ width:64px; height:64px;display: block; margin:auto;}
+.my .info .avatar{ width:64px; height:64px;display: block; margin:auto;border-radius: 50%;}
 .my .info .t1{ text-align: center; padding:5px 0 ;}
 .my .info .t2{ overflow: hidden; padding-top:15px;}
 .my .info .t2_s{float: left; width:33.333333%;text-align: center;}
@@ -364,4 +364,22 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 .addr_eidt_btn_w{text-align: center; margin-top: 40px;}
 .addr_eidt_btn{background: #2CC7C5; width:180px; height:34px; line-height:34px;border-radius: 2px; font-size: 15px;}
 .addr_eidt_btn_w .addr_eidt_btn:active{background: #28b6b4;}
+
+
+.mem_lvele_index .weui-cell:active{ background: none;}
+.mem_lvele_index .weui-cell:before{ left:0;}
+.mem_lvele_index .weui-cell__hd{ color: #2CC7C5;}
+.mem_lvele_index .shengji_desc .t1{}
+.mem_lvele_index .shengji_desc .t2{ color: #E72B29; font-size: 11px; padding:8px 0;}
+.mem_lvele_index .shengji_fs{background: #2CC7C5;min-height: 130px;border-radius: 8px; color: #ffffff;
+   padding:20px; padding-top: 30px;box-sizing: border-box;position: relative; overflow: hidden;
+   margin:20px 0;}
+.mem_lvele_index .shengji_fs .t1{ font-size: 20px;  }
+.mem_lvele_index .shengji_fs .t2{ font-size: 11px; line-height:2;}
+.mem_lvele_index .shengji_fs .sanjiao{ position: absolute; width:0;
+   border-top: 80px solid #E72B29;
+border-left: 80px solid transparent; top:0; right:0;
+}
+.mem_lvele_index .shengji_fs .t3{ position: absolute;  top:17px; right:5px;}
+
 
