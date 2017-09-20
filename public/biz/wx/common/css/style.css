@@ -4,7 +4,8 @@ a{ color: #474747;}
 body>.content{ height:100%;}
 .daily_list .time{text-align: center; line-height:1;}
 .daily_list .content{border-left: 1px solid #c4c2cb; margin-left:10px; padding-left:10px;min-height: 50px;}
-
+.weui-btn_mini{ line-height:2.1;}
+.weui-btn+.weui-btn{ margin-top:10px;}
 .weui-cells{ margin-top:10px;font-size: 14px;}
 
 .weui-title-title .weui-cell .weui-cell__ft:after{border-width:   0 0 2px 2px; width:10px; height:10px; border-color: #ffffff;
@@ -395,5 +396,22 @@ border-left: 80px solid transparent; top:0; right:0;
 .list4_w  .simg{width:50px; height:50px;border-radius: 50%; margin-right:15px;display:block}
 .list4_w .t2{ color: #999;font-size: 12px;}
 
+.list5 .list_item{background: #ffffff;border-top: 1px solid #DBDBDB;border-bottom: 1px solid #DBDBDB; margin-top:10px;}
+.list5 .t1{text-align: right; color: #E72B29; line-height:30px; padding-right:15px;}
+.list5 .t2{background: #F8F8F8; overflow: hidden; padding:15px;}
+.list5 .t2 .t2_img{float: left; width:50px; height:50px;}
+.list5 .t2 .ts_s{ margin-left:75px;}
+.list5 .t2 .ts_s .t2_s_1{  }
+.list5 .t2 .ts_s .t2_s_2{ font-size: 11px;text-align: right;  }
+.list5 .t3{ line-height:30px;text-align: right; padding-right:15px;font-size: 12px;}
+.list5 .t3_s{font-size: 16px; }
+.list5 .t4{text-align: right; padding-right:15px;border-top: 1px solid #DBDBDB; padding-bottom:5px;}
 
 
+.mem_info_card .avatar_w{padding: 36px;text-align: center;background: #ffffff; margin-bottom:10px;}
+.mem_info_card .avatar{ width:80px; height:80px;border-radius: 50%;}
+
+.mem_info_card .card_list_w {background: #ffffff; border-bottom:1px solid #DBDBDB;}
+.mem_info_card .card_list{ height:40px; line-height:40px;border-top: 1px solid #DBDBDB;}
+.mem_info_card .card_list .t1{display: inline-block; width:90px;text-align: right;}
+.mem_info_card .card_list .t2{display: inline-block;}

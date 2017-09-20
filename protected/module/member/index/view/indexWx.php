@@ -28,7 +28,9 @@
             <div class="info">
                 <img src="" alt="" class="avatar">
                 <div class="t1">王茹沁怡</div>
-                <img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Qrcode_icon.png" alt="" class="code">
+                <a href="<?php echo $this->genurl('info/qrcode') ?>">
+                    <img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Qrcode_icon.png" alt="" class="code">
+                </a>
                 <div class="t2">
                     <div class="t2_s t2_s1">
                         <div class="t2_s_m_1">
@@ -60,7 +62,7 @@
             <div class="order">
                 <div class="t1">我的订单</div>
                 <div class="t2_w">
-                    <a class="t2">
+                    <a class="t2" href="<?php echo $this->genurl('order/index') ?>">
                         <div class="t2_s_w">
                             <img style="width: 22px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/obligation_icon.png" alt="" class="t2_s">
                         </div>
@@ -170,7 +172,7 @@
                         <p>个人信息</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access li_borde" href="javascript:;">
+                <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('info/card') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Businesscard_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>电子名片</p>
