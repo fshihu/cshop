@@ -9,6 +9,7 @@
 namespace module\member\addr;
 
 
+
 use CRequest;
 
 class MemberAddrIndexWxAction extends \CAction
@@ -17,4 +18,6 @@ class MemberAddrIndexWxAction extends \CAction
     {
         return new \CRenderData();
     }
+
+
 }

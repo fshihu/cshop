@@ -325,7 +325,7 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 .row-group-form_{ padding-bottom:0;}
 .row-group-form_ .data-label{ padding-right:0; width:0;}
 .row-group-form_ .data-group-form_{ width:100%;}
-.sub_btn{ width:100%;border-radius: 0px;background: #2CC7C5; height:44px; line-height:44px;}
+.sub_btn{ width:100%;border-radius: 0px;background: #2CC7C5; height:44px; line-height:44px; font-size: 15px;}
 
 .weui-dialog__btn_primary{ color: #2CC7C5;}
 .weui-msg__title{font-size: 18px;}
@@ -358,3 +358,8 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 .addr_info_item .fr{float: right;}
 .checkbox{background: #ffffff;border: 1px solid #DBDBDB; width:16px; height:16px;display: inline-block;border-radius: 50%;box-sizing: border-box;}
 .checkboxed{border: none;background: url("../images/select_icon.png"); background-size: 16px;}
+
+.addr_eidt_btn_w{text-align: center; margin-top: 40px;}
+.addr_eidt_btn{background: #2CC7C5; width:180px; height:34px; line-height:34px;border-radius: 2px; font-size: 15px;}
+.addr_eidt_btn_w .addr_eidt_btn:active{background: #28b6b4;}
+

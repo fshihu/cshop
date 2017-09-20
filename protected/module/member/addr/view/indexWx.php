@@ -54,6 +54,11 @@
          </div>
 
 
+        <div class="addr_eidt_btn_w">
+            <a href="<?php echo $this->genurl('add') ?>" class="weui-btn weui-btn_primary addr_eidt_btn">添加</a>
+
+        </div>
+
 
 
  </div>
