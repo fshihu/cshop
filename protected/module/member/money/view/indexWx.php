@@ -15,44 +15,49 @@
                     </div>
 
                 </div>
-        <style type="text/css">
-            .mem_money_index .weui-cells { margin-top:-1px;}
-            .mem_money_index .weui-cell:before{ left:0;}
-            .mem_money_index .money_info .weui-cell__bd{ overflow: hidden;}
-            .mem_money_index .money_info .t1{font-size: 12px; margin-bottom:40px;}
-            .mem_money_index .money_info .t2 .t2_s{ font-size: 30px;float: left;}
-            .mem_money_index .money_info .t2 .btsa{float:right; color: #2CC7C5; margin-top:19px;}
-        </style>
-        <div class=" mem_money_index weui-panel_access  "  >
-            <div class="weui-cells ">
-                <div class="weui-cell">
-                                <div class="weui-cell__bd">
-                                   <div class="t1">可提现金额</div>
-                                </div>
-                    <div class="weui-cell__ft">￥1000.00</div>
 
-                            </div>
-              <div class="weui-cell weui-cell_access">
-                              <div class="weui-cell__bd">
-                                 <div class="t1">中国工商银行 尾号5656</div>
-                              </div>
-                              <div class="weui-cell__ft">
-                                  更换银行卡
-                              </div>
-                          </div>
-              <div class="weui-cell money_info">
-                              <div class="weui-cell__bd">
-                                 <div class="t1">请输入您提现的金额</div>
-                                 <div class="t2"><span class="t2_s">￥0.00 </span><a class="btsa" href="">全部提现</a></div>
-                              </div>
-                          </div>
-          </div>
+         <div class=" mem_money_index weui-panel_access  "  >
+<div class="info">
+    <div class="t1_s">￥1000.00</div>
+    <div class="t1_m">
+        <span class="t1_m_1">累积财富：￥2100.00</span>
+        <span class="t1_m_2">已提现财富：￥100.00</span>
+    </div>
+</div>
+             <style type="text/css">
+                 .mem_money_index .info{ padding:15px;}
+                 .mem_money_index .info .t1_s{ color: #2CC7C5; font-size: 30px; padding:10px 0;}
+                 .mem_money_index .info .t1_m{font-size: 12px;}
+                 .mem_money_index .info .t1_m_1{}
+                 .mem_money_index .info .t1_m_2{}
+                 .mem_money_index .money_list .weui-cell__ft{ color: #474747;}
+             </style>
+             <div class="weui-navbar navbar-sm">
+                 <a href="" class="weui-navbar__item weui-bar__item_on">
+                     待开会议
+                 </a>
+                 <a href="" class="weui-navbar__item  ">
+                     历史会议
+                 </a>
+               </div>
 
+             <div class="weui-cells money_list">
+                         <div class="weui-cell">
+                             <div class="weui-cell__bd">
+                                 <div class="t1">成团失败，退回支付款</div>
+                                 <div class="t2">06-21 12:20:16</div>
+                             </div>
+                             <div class="weui-cell__ft">+100</div>
+                         </div>
+                         <div class="weui-cell">
+                             <div class="weui-cell__bd">
+                                 <div class="t1">成团失败，退回支付款</div>
+                                 <div class="t2">06-21 12:20:16</div>
+                             </div>
+                             <div class="weui-cell__ft">+100</div>
+                         </div>
+                      </div>
                     </div>
-        <div class="addr_eidt_btn_w">
-            <a href="<?php echo $this->genurl('add') ?>" class="weui-btn weui-btn_primary addr_eidt_btn">申请提现</a>
-
-        </div>
 
 
      </div>

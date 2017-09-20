@@ -23,16 +23,6 @@
                 </div>
 
             </div>
-    <style type="text/css">
-        .mem_info_qrcode{ margin:0 22px; margin-top: 100px;background: #ffffff;border: 1px solid #DBDBDB;border-radius: 5px;}
-        .mem_info_qrcode .qrcode_w{ padding:15px;text-align: center;}
-        .mem_info_qrcode .qrcode{ width:268px; height:268px;}
-        .mem_info_qrcode .info:before{ left:0;}
-        .mem_info_qrcode .info .ims{ margin-right:15px;display:block; width:64px; height:64px;border-radius: 50%;}
-        .mem_info_qrcode .info .t1{ font-size: 18px;}
-        .mem_info_qrcode .info .t2{ font-size: 11px;}
-        .mem_info_qrcode .info .t3{ font-size: 11px;}
-    </style>
     <div class="  weui-panel_access  " >
          <div class="mem_info_qrcode">
             <div class="qrcode_w">
