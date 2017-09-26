@@ -22,8 +22,8 @@ class GoodsCateGoodsWxAction extends ListAction
 
     public function getPageTitle()
     {
-        $item  =  ItemModel::make('goods_category','tp_')->addId($this->cate_id)->execute();
-        $pitem  =  ItemModel::make('goods_category','tp_')->addId($item['parent_id'])->execute();
+        $item  =  ItemModel::make('goods_category')->addId($this->cate_id)->execute();
+        $pitem  =  ItemModel::make('goods_category')->addId($item['parent_id'])->execute();
 
         return $pitem['name'].'-'.$item['name'];
     }

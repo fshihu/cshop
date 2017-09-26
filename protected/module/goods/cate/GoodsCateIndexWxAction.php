@@ -16,7 +16,7 @@ class GoodsCateIndexWxAction extends \CAction
 {
     public function execute(CRequest $request)
     {
-        $list =  ListModel::make('goods_category','tp_')->execute();
+        $list =  ListModel::make('goods_category')->execute();
         return new \CRenderData(array(
             'list' => $list,
         ));

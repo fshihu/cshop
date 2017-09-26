@@ -125,7 +125,11 @@
 
     <script type="text/javascript">
         $('.buy_confirm').show().css({bottom:-$('.buy_confirm').height()-20});
-        $('.buy_btn .bt_a1').click(function () {
+        var click_type = 1;
+        $('.buy_btn .bt_a1,.buy_btn .bt_a2').click(function () {
+            if($(this).hasClass('bt_a2')){
+                click_type = 2;
+            }
             $('.buy_confirm').show().animate({bottom:0});
            return false;
         });
@@ -178,7 +182,12 @@
                     goods_id:'<?php echo $data['id'] ?>',
                     spec_key:attr.key
                 },function () {
-                    Tip('添加成功');
+                    $('.buy_confirm').show().animate({bottom:-$('.buy_confirm').height()-20});
+                    if(click_type == 2){
+                        location.href = '<?php echo $this->genurl('cart/index/index');?>';
+                    }else{
+                        Tip('添加成功');
+                    }
                 })
             }
             return false;

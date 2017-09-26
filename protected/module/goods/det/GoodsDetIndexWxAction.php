@@ -18,19 +18,19 @@ class GoodsDetIndexWxAction  extends \CAction
 {
     public function execute(CRequest $request)
     {
-        $data = ItemModel::make('goods','tp_')->addColumnsCondition(array(
+        $data = ItemModel::make('goods')->addColumnsCondition(array(
             'goods_id' => $request->getParams('id'),
         ))->execute();
-        $goods_images = ListModel::make('goods_images','tp_')->addColumnsCondition(array(
+        $goods_images = ListModel::make('goods_images')->addColumnsCondition(array(
             'goods_id' => $request->getParams('id'),
         ))->execute();
-        $spec_goods_prices = ListModel::make('spec_goods_price','tp_')->addColumnsCondition(array(
+        $spec_goods_prices = ListModel::make('spec_goods_price')->addColumnsCondition(array(
             'goods_id' => $request->getParams('id'),
         ))->execute();
-        $specs = ListModel::make('spec','tp_')->addColumnsCondition(array(
+        $specs = ListModel::make('spec')->addColumnsCondition(array(
             'type_id' => $data['goods_type'],
         ))->execute();
-        $spec_items = ListModel::make('spec_item','tp_')->addColumnsCondition(array(
+        $spec_items = ListModel::make('spec_item')->addColumnsCondition(array(
             'spec_id' => ['in',ArrayUtil::arrayColumn($specs)],
         ))->execute();
 

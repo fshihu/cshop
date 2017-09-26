@@ -14,7 +14,7 @@ class AdServer
 {
     public static function getList($position)
     {
-        return ListModel::make('ad','tp_')->addColumnsCondition(array(
+        return ListModel::make('ad')->addColumnsCondition(array(
             'pid' => $position,
         ))->execute();
     }
