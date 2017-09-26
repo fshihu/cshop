@@ -3,12 +3,8 @@
         <div class="weui-cells weui-title-title">
 
             <div class="weui-cell weui-cell_access" href="javascript:;">
-                <a href="javascript:history.back();">
-                    <div class="weui-cell__ft">
-                    </div>
-                </a>
-                <div class="weui-cell__bd">
-                    <p class="title">会议简介</p>
+                 <div class="weui-cell__bd">
+                    <p class="title">美丽服务商城</p>
                 </div>
                 <div class="weui-cell__ft weui-title-menu">
                 </div>

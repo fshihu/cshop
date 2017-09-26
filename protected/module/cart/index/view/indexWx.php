@@ -17,31 +17,38 @@
                 </div>
          <div class="  weui-panel_access  "  >
 
-             <div class="addr_info">
-                 <a href="<?php echo $this->genurl('member/addr/index'); ?>">
-                     <div class="no_addr">
-                         请填写收货地址
-                     </div>
+              <?php if($addr):?>
+                  <div class="addr_info">
+                       <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('member/addr/index'); ?>">
+                                      <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/coordinates_icon.png" alt="" style="width:18px;margin-right:30px;margin-left:15px;display:block"></div>
+                                      <div class="weui-cell__bd">
+                                          <div class="t1">
+                                                                  <span class="t1_s"><?php echo $addr['consignee'] ?></span>
+                                                                  <span class="t1_m"><?php echo $addr['mobile'] ?></span>
+                                                              </div>
+                                                              <div class="t2">
+                                                                  <?php echo $item['p_name'] ?>
+                                              <?php echo $item['c_name'] ?>
+                                              <?php echo $item['d_name'] ?>
+                                              <?php echo $item['address'] ?>
+                                                              </div>
 
-                 </a>
-             </div>
-             <div class="addr_info">
-                  <div class="weui-cell weui-cell_access" href="javascript:;">
-                                 <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/coordinates_icon.png" alt="" style="width:18px;margin-right:30px;margin-left:15px;display:block"></div>
-                                 <div class="weui-cell__bd">
-                                     <div class="t1">
-                                                             <span class="t1_s">代代</span>
-                                                             <span class="t1_m">18789836748</span>
-                                                         </div>
-                                                         <div class="t2">
-                                                             四川 成都 金牛区 红旗大道46号
-                                                         </div>
+                                      </div>
+                           <div class="weui-cell__ft"></div>
+                                  </a>
+                  </div>
+               <?php else:?>
+                  <div class="addr_info">
+                      <a href="<?php echo $this->genurl('member/addr/index'); ?>">
+                          <div class="no_addr">
+                              请填写收货地址
+                          </div>
 
-                                 </div>
-                      <div class="weui-cell__ft"></div>
-                             </div>
-             </div>
+                      </a>
+                  </div>
+              <?php endif;?>
             <div class="weui-panel__bd list4 list4_s"  >
+                <?php $total_price = 0; ?>
                 <?php foreach($list as $item):?>
                 <div class="list_4s_item">
                     <div  class="weui-media-box weui-media-box_appmsg">
@@ -66,6 +73,7 @@
                     </div>
 
                 </div>
+                    <?php $total_price += $item['shop_price']*$item['goods_num'] ?>
                 <?php endforeach?>
 
 
@@ -77,7 +85,7 @@
                      使用0积分,抵扣0元
                  </div>
                  <div class="buy_btn_w">
-                     <span class="price">应支付： <span class="price_red">￥65.9 （免运费）</span></span>
+                     <span class="price">应支付： <span class="price_red">￥ <?php echo $total_price ?> （免运费）</span></span>
                      <span class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red">立即支付</span>
                  </div>
              </div>

@@ -7,7 +7,8 @@
  */
 spl_autoload_register(function ($class){
     if(strpos($class,'app\\admin') === 0){
-        $class = strpos('app','application');
+        $class = str_replace('app','application',$class);
+        $class = __DIR__.'/../../'.str_replace('\\','/',$class).'.php';
         include $class;
     }
 });
@@ -41,7 +42,7 @@ return array_merge_recursive(include __DIR__ . '/../../conf.php', array(
     ),
     'env' => array(
         'api' => 'api,userapi',
-        'web' => 'admin,xbwqLink',
+        'web' => 'admin,wx',
         'cmd' => 'cmd',
         'sign' => array(
             'timesign' => 600,

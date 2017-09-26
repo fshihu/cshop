@@ -18,7 +18,7 @@
                          </div>
                      </a>
                     <div class="weui-cell__bd">
-                        <p class="title">会议简介</p>
+                        <p class="title">添加地址</p>
                     </div>
                 </div>
 
@@ -38,7 +38,7 @@
 <script type="text/javascript">
     $('.addr_eidt_btn').click(function () {
         ajax_request('',$('.form-panel form').serialize(),function () {
-           location.href='<?php echo $this->genurl('index');?>;'
+           location.href='<?php echo $this->genurl('index');?>';
         });
     });
 </script>

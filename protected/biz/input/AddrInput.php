@@ -21,4 +21,8 @@ class AddrInput extends BaseInput
 <select id="city" name="city" onChange="get_area(this)" class="addr_input_city"><option>-市-</option></select>
 <select id="district" name="district" class="addr_input_district"><option>-区-</option></select></div><script>get_province()</script>';
     }
+    public function getPostNames()
+    {
+        return ['province','city','district'];
+    }
 }
