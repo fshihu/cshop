@@ -159,9 +159,10 @@ background: url("../images/time_background.png") no-repeat;text-align: center;ba
 .goods_item{float: left; width:50%;box-sizing: border-box; padding:4px;
 }
 .goods_item a{display:block;padding: 10px;background: #fff;border:1px solid #ebebeb;text-align: center;}
-.goods_item a .txt{ color: #505050; padding:5px;}
+.goods_item a .txt{ color: #505050; padding:5px; height:20px; overflow: hidden;}
 .goods_item a .price{ color: #2CC7C5;padding:5px; padding-top:0; text-align: center; padding-bottom:0; }
-
+.gooods_content{background: #fff; padding:10px;}
+.gooods_content img{max-width: 100%;}
 .m_title_1{padding: 20px;background: #fff; color: #000;text-align: center;}
 .m_title_1 .line{display: inline-block; width:25px; height:1px;background: #000000;position: relative;top:-6px;}
 
@@ -258,7 +259,7 @@ background-size: 16px;}
 
 .buy_confirm{ position: fixed;bottom: 0; z-index:502; width:100%;background: #ffffff;}
 .buy_confirm .bc_hd{border-top: 1px solid #DBDBDB;border-bottom: 1px solid #DBDBDB;position: relative;min-height: 80px;}
-.buy_confirm .bc_hd .bc_img{ width:85px;height:85px;position: absolute;top:-20px; left:20px;}
+.buy_confirm .bc_hd .bc_img{ width:85px;height:85px;position: absolute;top:-20px; left:20px;border: 1px solid #dbdbdb;}
 .buy_confirm .bc_hd .bc_info{ padding-left:120px; padding-right:30px; padding-top:10px;}
 .buy_confirm .bc_hd .bc_info .t1{font-size: 18px; color: #2CC7C5;}
 .buy_confirm .bc_hd .bc_info .t2{font-size: 11px; color: #999999;}
@@ -271,7 +272,7 @@ background-size: 16px;}
 .buy_confirm .bc_bd .bcb_item .weui-btn_warn:active{background: #28b6b4;}
 .buy_confirm .confirm_btn{border-radius: 0; height:42px; line-height:42px;font-size: 15px;}
 
-.commont_list .comm_item{ padding:20px;border-bottom: 1px solid #DBDBDB;}
+.commont_list .comm_item{ padding:20px;border-bottom: 1px solid #DBDBDB;background: #fff;}
 .commont_list .t1 .img{ width:35px; height:35px;border-radius: 50%;vertical-align: middle;}
 .commont_list .t1 .t1_s{font-size: 12px; color: #999999; line-height:35px;vertical-align: middle;display: inline-block; margin-left:15px;}
 .commont_list .t2{ padding:10px 0;}

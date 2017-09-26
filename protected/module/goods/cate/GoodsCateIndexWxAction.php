@@ -9,12 +9,16 @@
 namespace module\goods\cate;
 
 
+use CC\db\base\select\ListModel;
 use CRequest;
 
 class GoodsCateIndexWxAction extends \CAction
 {
     public function execute(CRequest $request)
     {
-        return new \CRenderData();
+        $list =  ListModel::make('goods_category','tp_')->execute();
+        return new \CRenderData(array(
+            'list' => $list,
+        ));
     }
 }

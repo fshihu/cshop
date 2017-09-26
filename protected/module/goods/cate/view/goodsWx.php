@@ -10,7 +10,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">会议简介</p>
+                            <p class="title"><?php echo $this->getPageTitle() ?></p>
                         </div>
                     </div>
 
@@ -19,28 +19,16 @@
  <div class="goods_list">
 
      <div class="goods_item_w server_itme_w">
+         <?php foreach($list as $item):?>
          <div class="goods_item">
-             <a href="<?php echo $this->genurl('goods/det/index') ?>">
-                 <img src="" alt="" width="100%" height="155">
-                 <div class="txt">爱尔兰纯天然唇膏</div>
-                 <div class="price">￥189</div>
+             <a href="<?php echo $this->genurl('goods/det/index',array('id' => $item['goods_id'])) ?>">
+                 <img src="<?php echo $item['original_img'] ?>" alt="" width="100%" height="155">
+                 <div class="txt"><?php echo $item['goods_name'] ?></div>
+                 <div class="price">￥<?php echo $item['shop_price'] ?></div>
              </a>
          </div>
-         <div class="goods_item">
-             <a href="">
-                 <img src="" alt="" width="100%" height="155">
-                 <div class="txt">爱尔兰纯天然唇膏</div>
-                 <div class="price">￥189</div>
-             </a>
-         </div>
-         <div class="goods_item">
-             <a href="">
-                 <img src="" alt="" width="100%" height="155">
-                 <div class="txt">爱尔兰纯天然唇膏</div>
-                 <div class="price">￥189</div>
-             </a>
-         </div>
-     </div>
+         <?php endforeach?>
+      </div>
 
  </div>
                     </div>

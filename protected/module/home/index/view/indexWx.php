@@ -21,17 +21,14 @@
                 <div class="mslide" id="slideTpshop">
                     <ul>
                         <!--广告表-->
+                        <?php foreach($ad_list as $ad):?>
                             <li>
-                                <a href="{$v.ad_link}">
-                                    <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
+                                <a href="<?php echo $ad['ad_link'] ?>">
+                                    <img class="img" src="<?php echo $ad['ad_code'] ?>"alt="">
                                 </a>
                             </li>
-                            <li>
-                                <a href="{$v.ad_link}">
-                                    <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
-                                </a>
-                            </li>
-                    </ul>
+                        <?php endforeach?>
+                     </ul>
                 </div>
             </div>
             <div class="home_item_w">

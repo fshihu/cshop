@@ -9,7 +9,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">会议简介</p>
+                            <p class="title"><?php echo $data['goods_name'] ?></p>
                         </div>
                     </div>
 
@@ -19,27 +19,21 @@
       <div class="banner ban1">
          <div class="mslide" id="slideTpshop">
              <ul>
-                 <!--广告表-->
-                 <adv pid="2" limit="5" item="v">
+                <?php foreach($goods_images as $goods_image):?>
                      <li>
-                         <a href="{$v.ad_link}">
-                             <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}" alt="">
-                         </a>
+                             <img src="<?php echo $goods_image['image_url'] ?>" title="{$v[title]}" style="{$v[style]}" alt="">
                      </li>
-                 </adv>
+                     <?php endforeach?>
              </ul>
          </div>
      </div>
      <div class="good_info">
-         <div class="good_title">偶来也啊啊</div>
+         <div class="good_title"><?php echo $data['goods_name'] ?></div>
          <div class="t1">
-             <span class="t1_s">团购价： <span class="t1_s_m">￥246元</span></span>
-             <span class="t1_k">市场价：¥546.00元 </span>
+             <span class="t1_s">价格： <span class="t1_s_m">￥<?php echo $data['shop_price'] ?>元</span></span>
+             <span class="t1_k">市场价：¥<?php echo $data['market_price'] ?>元 </span>
          </div>
-         <div class="t2">
-             5人团，立省35元
-         </div>
-         <div class="buy_num_w">
+          <div class="buy_num_w">
              <span class="fl">数量</span>
              <span class="fr">
                  <span class="jian no_ac"></span>
@@ -49,38 +43,36 @@
          </div>
      </div>
 
-
-     <div class="weui-navbar navbar-sm">
-         <a href="" class="weui-navbar__item weui-bar__item_on">
-             待开会议
+      <div class="weui-navbar navbar-sm nav_click">
+         <a href="javascript:;" class="weui-navbar__item weui-bar__item_on">
+             商品详情
          </a>
-         <a href="" class="weui-navbar__item  ">
-             历史会议
+         <a href="javascript:;" class="weui-navbar__item  ">
+             用户评价
          </a>
       </div>
-        <div class="commont_list">
-            <div class="comm_item">
-                <div class="t1">
-                    <img class="img" src="" alt="">
-                    <span class="t1_s">安妮宝贝</span>
+     <div class="nav_click_cont">
+         <div class="nav_click_cont_item gooods_content">
+<?php echo html_entity_decode($data['goods_content']) ?>
+         </div>
+            <div class="nav_click_cont_item commont_list" style="display: none;">
+                <?php foreach($comment_list as $comment_item):?>
+                <div class="comm_item">
+                    <div class="t1">
+                        <img class="img" src="<?php echo $comment_item['avatar'] ?>" alt="">
+                        <span class="t1_s"><?php echo $comment_item['uname'] ?></span>
+                    </div>
+                    <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
+                    <div class="t3">
+                        <?php echo $comment_item['comment_time'] ?>
+                    </div>
                 </div>
-                <div class="t2">商品收到了，非常漂亮！商品收到了，非常漂亮！商品收到了，非常漂亮！商品收到了，非常漂亮！</div>
-                <div class="t3">
-                    09-07 14:23:33
-                </div>
-            </div>
-            <div class="comm_item">
-                <div class="t1">
-                    <img class="img" src="" alt="">
-                    <span class="t1_s">安妮宝贝</span>
-                </div>
-                <div class="t2">商品收到了，非常漂亮！商品收到了，非常漂亮！商品收到了，非常漂亮！商品收到了，非常漂亮！</div>
-                <div class="t3">
-                    09-07 14:23:33
-                </div>
-            </div>
-        </div>
-     <div class="buy_btn">
+                <?php endforeach?>
+
+             </div>
+     </div>
+
+      <div class="buy_btn">
          <a href="<?php echo $this->genurl('cart/index/index') ?>" class="bt_a bt_a1">
             <div class="t3">加入购物车</div>
          </a>
@@ -91,7 +83,7 @@
 
      <div class="buy_confirm" style="display: none;">
          <div class="bc_hd">
-             <img class="bc_img" src="" alt="">
+             <img class="bc_img" src="<?php echo $data['original_img'] ?>" alt="">
             <div class="bc_info">
                 <div class="t1">￥245.00</div>
                 <div class="t2">已选: <span class="t2_sm">杏色 中码</span></div>
@@ -126,4 +118,14 @@
      </div>
 
 </div>
+    <script type="text/javascript">
+        $('.buy_confirm').show().css({bottom:-$('.buy_confirm').height()-20});
+        $('.buy_btn .bt_a1').click(function () {
+            $('.buy_confirm').show().animate({bottom:0});
+           return false;
+        });
+        $('.buy_confirm .bc_hd .bc_close').click(function () {
+            $('.buy_confirm').show().animate({bottom:-$('.buy_confirm').height()-20});
+        });
+    </script>
     <?php include \biz\Util::getFooterNav()?>

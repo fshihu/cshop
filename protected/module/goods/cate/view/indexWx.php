@@ -8,7 +8,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">会议简介</p>
+                            <p class="title">商品分类</p>
                         </div>
                     </div>
 
@@ -17,56 +17,36 @@
 
 <div class="cate_list">
     <ul class="cate_list_ul">
-        <li class="ac">
-            <div class="txt">存稿</div>
-            <div class="c_s">
+        <?php foreach($list as $item):?>
+             <?php if($item['parent_id'] != 0){continue;}?>
+        <li  >
+            <div class="txt"><?php echo $item['name'] ?></div>
+            <div class="c_s" style="display: none;">
+                <?php foreach($list as $c_item):?>
+                    <?php if($item['id'] != $c_item['parent_id']){continue;}?>
                 <div class="cs_item">
-                    <a href="<?php echo $this->genurl('goods') ?>">
-                    <img src="" width="70" height="70" alt="">
-                        <div class="name">粉色系列</div>
+                    <a href="<?php echo $this->genurl('goods',array('cate_id' => $c_item['id'])) ?>">
+                    <img src="<?php echo $c_item['image'] ?>" width="70" height="70" alt="">
+                        <div class="name"><?php echo $c_item['name'] ?></div>
                     </a>
                 </div>
-                <div class="cs_item">
-                    <a href="">
-                    <img src="" width="70" height="70" alt="">
-                        <div class="name">粉色系列</div>
-                    </a>
-                </div>
-                <div class="cs_item">
-                    <a href="">
-                    <img src="" width="70" height="70" alt="">
-                        <div class="name">粉色系列</div>
-                    </a>
-                </div>
-                <div class="cs_item">
-                    <a href="">
-                    <img src="" width="70" height="70" alt="">
-                        <div class="name">粉色系列</div>
-                    </a>
-                </div>
-                <div class="cs_item">
-                    <a href="">
-                    <img src="" width="70" height="70" alt="">
-                        <div class="name">粉色系列</div>
-                    </a>
-                </div>
+                <?php endforeach?>
+
             </div>
         </li>
-        <li>
-            <div class="txt">存稿</div>
-            <div class="c_s">
-                <div class="cs_item">
-                    <a href="">
-                    <img src="" alt="">
-                        <div class="name"></div>
-                    </a>
-                </div>
-            </div>
-        </li>
-    </ul>
+        <?php endforeach?>
+     </ul>
 </div>
                     </div>
 
      </div>
 
 </div>
+<script type="text/javascript">
+    $('.cate_list_ul li').click(function () {
+        $('.cate_list_ul li').removeClass('ac');
+        $('.cate_list_ul .c_s').hide();
+        $(this).addClass('ac');
+        $(this).find('.c_s').show();
+    }).eq(0).click();
+</script>

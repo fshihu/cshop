@@ -24,4 +24,40 @@ $(function(){
 	var wid = - ($('.mslide .dot').width() / 2);
 	$('.mslide .dot').css('position','absolute').css('left','50%').css('margin-left',wid);
 
+
+    $(".buy_num_w").each(function () {
+   	    var $num_w = $(this);
+        $num_w.find('.jia').click(function () {
+               $num_w.find('.text').val($num_w.find('.text').val()*1+1);
+            $num_w.find('.jian').removeClass('no_ac');
+           });
+        $num_w.find('.text').keyup(function (e) {
+            if(isNaN($(this).val()) || $(this).val() <= 0 ){
+                $(this).val(1);
+            }
+        });
+        $num_w.find('.jian').click(function () {
+            var number = $num_w.find('.text').val()*1-1;
+            if($(this).hasClass('no_ac')){
+                return;
+            }
+            if(number==1){
+                $num_w.find('.jian').addClass('no_ac');
+            }
+            $num_w.find('.text').val(number);
+            $num_w.find('.jian').remove('no_ac');
+           });
+       });
+
+    $('.nav_click').each(function () {
+        var $nav_click = $(this);
+        $nav_click.find('.weui-navbar__item').click(function () {
+            $nav_click.find('.weui-navbar__item').removeClass('weui-bar__item_on');
+            $(this).addClass('weui-bar__item_on');
+            var index = $nav_click.find('.weui-navbar__item').index($(this));
+            $nav_click.next().find('.nav_click_cont_item').hide().eq(index).show();
+        });
+        return false;
+    });
+
 });
