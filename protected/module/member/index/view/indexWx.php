@@ -155,7 +155,7 @@
                     </div>
                     <div class="weui-cell__ft">1000</div>
                 </a>
-                <a class="weui-cell weui-cell_access li_borde" href="javascript:;">
+                <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('msg/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/news_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>我的消息</p>
@@ -178,7 +178,7 @@
                         <p>电子名片</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('info/pwd') ?>;">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Passwordchange_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>修改密码</p>
