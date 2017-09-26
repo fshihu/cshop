@@ -91,22 +91,19 @@
              <div class="bc_close">×</div>
          </div>
          <div class="bc_bd">
+             <?php foreach($specs as $spec):?>
              <div class="bcb_item">
-                 <div class="t1">颜色</div>
-                 <div class="t2">
-                     <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">按钮</a>
-                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">按钮</a>
-                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_warn">按钮</a>
+                 <div class="t1"><?php echo $spec['name'] ?></div>
+                 <div class="t2 btn_group_sel">
+                     <?php foreach($spec_items as $spec_item):?>
+                         <?php if($spec['id'] != $spec_item['spec_id']){continue;} ?>
+                     <a data-id="<?php echo $spec_item['id'] ?>" href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default "><?php echo $spec_item['item'] ?></a>
+                     <?php endforeach?>
+
                  </div>
              </div>
-             <div class="bcb_item">
-                 <div class="t1">颜色</div>
-                 <div class="t2">
-                     <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">按钮</a>
-                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">按钮</a>
-                                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_warn">按钮</a>
-                 </div>
-             </div>
+             <?php endforeach?>
+
 
          </div>
          <a href="javascript:;" class="weui-btn confirm_btn weui-btn_warn">确认</a>
@@ -118,14 +115,73 @@
      </div>
 
 </div>
+    <div id="toast" style="display: none;">
+            <div class="weui-mask_transparent"></div>
+            <div class="weui-toast">
+                <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+                <p class="weui-toast__content">已完成</p>
+            </div>
+        </div>
+
     <script type="text/javascript">
         $('.buy_confirm').show().css({bottom:-$('.buy_confirm').height()-20});
         $('.buy_btn .bt_a1').click(function () {
             $('.buy_confirm').show().animate({bottom:0});
            return false;
         });
+        var spec_goods_prices = <?php echo json_encode($spec_goods_prices) ?>;
         $('.buy_confirm .bc_hd .bc_close').click(function () {
             $('.buy_confirm').show().animate({bottom:-$('.buy_confirm').height()-20});
+        });
+        $('.btn_group_sel').each(function () {
+            var $btn_group_sel = $(this);
+            $btn_group_sel.find('.weui-btn').click(function () {
+                $btn_group_sel.find('.weui-btn').removeClass('weui-btn_warn').addClass('weui-btn_default');
+                $(this).removeClass('weui-btn_default').addClass('weui-btn_warn');
+            });
+        });
+        function getAttr() {
+            var has = true;
+            var attr_id = [];
+            var price = 0;
+            $('.btn_group_sel').each(function () {
+                var $btn_group_sel = $(this);
+                if(has && !$btn_group_sel.find('.weui-btn_warn').length){
+                    has = false;
+                }
+                if(has){
+                    attr_id.push($btn_group_sel.find('.weui-btn_warn').attr('data-id'));
+                }
+            });
+            var key = '';
+            if(has){
+                var specGoodsPrice = spec_goods_prices[attr_id.join('_')];
+                if(specGoodsPrice){
+                    price = specGoodsPrice.price;
+                    key = specGoodsPrice.key;
+                }
+            }
+            return {has:has,price:price,key:key};
+        }
+        $('.btn_group_sel .weui-btn').click(function () {
+            var attr = getAttr();
+            if(attr.has){
+                $('.buy_confirm .bc_hd .bc_info .t1').text(attr.price);
+            }
+        });
+        $('.buy_confirm .confirm_btn').click(function () {
+            var attr = getAttr();
+            if(!attr.has){
+                Tip('请选择商品规格','error');
+            }else{
+                ajax_request('<?php echo $this->genurl('cart/index/add');?>',{
+                    goods_id:'<?php echo $data['id'] ?>',
+                    spec_key:attr.key
+                },function () {
+                    Tip('添加成功');
+                })
+            }
+            return false;
         });
     </script>
     <?php include \biz\Util::getFooterNav()?>
