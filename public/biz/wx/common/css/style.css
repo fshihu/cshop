@@ -406,6 +406,9 @@ border-left: 80px solid transparent; top:0; right:0;
 .list5 .t3{ line-height:30px;text-align: right; padding-right:15px;font-size: 12px;}
 .list5 .t3_s{font-size: 16px; }
 .list5 .t4{text-align: right; padding-right:15px;border-top: 1px solid #DBDBDB; padding-top:10px; padding-bottom:5px;}
+.list5 .t5{ overflow: hidden; padding:10px 15px;border-top: 1px solid #DBDBDB;}
+.list5 .t5_1{ float: left;}
+.list5 .t5_2{ float: right;}
 
 
 .mem_info_card .avatar_w{padding: 36px;text-align: center;background: #ffffff; margin-bottom:10px;}
@@ -446,3 +449,5 @@ border-left: 80px solid transparent; top:0; right:0;
 .mem_level_give .binfo { padding:38px 0;}
 .mem_level_give .binfo .avatar{ width:64px; height:64px;display: block; margin:auto;border-radius: 50%;}
 .mem_level_give .binfo .t1{ text-align: center; padding:5px 0 ;}
+.mem_level_give .bs_i{padding: 10px; }
+.mem_level_give .bs_i .sb_i_1{ color: #2CC7C5; }

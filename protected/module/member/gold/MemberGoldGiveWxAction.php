@@ -29,6 +29,7 @@ class MemberGoldGiveWxAction extends \CAction implements IFormViewBuilder
     {
         return array(
             (new TextInput('name','转赠好友账号'))->setPlaceHolder('请输入转赠好友账号'),
+            (new TextInput('name','转赠积分数'))->setPlaceHolder('请输入转赠积分数'),
             new CaptchaInput('name','验证码'),
         );
     }

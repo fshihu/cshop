@@ -101,13 +101,13 @@
 
             <div class="weui-cells menu_s">
 
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('groupon/my/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/spelt_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>我的拼团</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="javascript:;">
+                <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('groupon/my/own') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Sincethegroup_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>我的自组团</p>

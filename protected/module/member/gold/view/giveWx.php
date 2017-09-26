@@ -25,6 +25,9 @@
             </div>
     <div class="  weui-panel_access  " >
          <div class="mem_level_give">
+             <div class="bs_i">
+                 您目前拥有积分： <span class="sb_i_1">1000</span>
+             </div>
             <div class="binfo">
                 <img class="avatar" src=""/>
                 <div class="t1">王茹沁怡</div>
