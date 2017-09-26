@@ -18,9 +18,12 @@
          <div class="  weui-panel_access  "  >
 
              <div class="addr_info">
-                 <div class="no_addr">
-                     请填写收货地址
-                 </div>
+                 <a href="<?php echo $this->genurl('member/addr/index'); ?>">
+                     <div class="no_addr">
+                         请填写收货地址
+                     </div>
+
+                 </a>
              </div>
              <div class="addr_info">
                   <div class="weui-cell weui-cell_access" href="javascript:;">
@@ -39,14 +42,17 @@
                              </div>
              </div>
             <div class="weui-panel__bd list4 list4_s"  >
+                <?php foreach($list as $item):?>
                 <div class="list_4s_item">
                     <div  class="weui-media-box weui-media-box_appmsg">
                         <div class="weui-media-box__hd">
-                            <img style="" class="weui-media-box__thumb" src="" alt="">
+                            <img style="" class="weui-media-box__thumb" src="<?php echo $item['original_img'] ?>" alt="">
                         </div>
                         <div class="weui-media-box__bd">
-                            <p class="weui-media-box__desc">一抹色彩足以为你带来一抹色彩足以为你带来一抹色彩足以为你带来，惊艳改变。新版韩国进口粉润唇膏，时尚都市女性必备唇膏</p>
-                            <p class="t1">价格：¥234.00</span></p>
+                            <p class="weui-media-box__desc">
+                                <?php echo $item['goods_name'] ?>
+                            </p>
+                            <p class="t1">价格：¥<?php echo $item['shop_price'] ?></span></p>
                         </div>
 
                     </div>
@@ -54,39 +60,21 @@
                         <span class="fl">数量</span>
                         <span class="fr">
                             <span class="jian no_ac"></span>
-                            <input type="text" class="text" value="1"/>
+                            <input type="text" class="text" value="<?php echo $item['goods_num'] ?>"/>
                             <span class="jia"></span>
                         </span>
                     </div>
 
                 </div>
+                <?php endforeach?>
 
-                <div class="list_4s_item">
-                            <div href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                                <div class="weui-media-box__hd">
-                                    <img class="weui-media-box__thumb" src="" alt="">
-                                </div>
-                                <div class="weui-media-box__bd">
-                                    <p class="weui-media-box__desc">一抹色彩足以为你带来一抹色彩足以为你带来一抹色彩足以为你带来，惊艳改变。新版韩国进口粉润唇膏，时尚都市女性必备唇膏</p>
-                                    <p class="t1">价格：¥234.00</span></p>
-                                </div>
-                            </div>
-                        <div class="buy_num_w">
-                             <span class="fl">数量</span>
-                             <span class="fr">
-                                 <span class="jian no_ac"></span>
-                                 <input type="text" class="text" value="1"/>
-                                 <span class="jia"></span>
-                             </span>
-                         </div>
-                </div>
 
              </div>
 
 
              <div class="buy_price">
                  <div class="buy_jifen">
-                     使用1000积分,抵扣100元
+                     使用0积分,抵扣0元
                  </div>
                  <div class="buy_btn_w">
                      <span class="price">应支付： <span class="price_red">￥65.9 （免运费）</span></span>

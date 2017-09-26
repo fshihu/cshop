@@ -357,8 +357,8 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 
 .addr_info_item .t1{ padding-left:12px;}
 .addr_info_item .t2{ padding-left:12px;}
-.addr_info_item .t3{ overflow: hidden;border-top: 1px solid #DBDBDB; padding:10px; padding-top:0;}
-.addr_info_item .fl{float: left; margin-top:20px;}
+.addr_info_item .t3{ overflow: hidden;border-top: 1px solid #DBDBDB; padding:10px; padding-top:10px;}
+.addr_info_item .fl{float: left; margin-top:10px;}
 .addr_info_item .fr{float: right;}
 .checkbox{background: #ffffff;border: 1px solid #DBDBDB; width:16px; height:16px;display: inline-block;border-radius: 50%;box-sizing: border-box;}
 .checkboxed{border: none;background: url("../images/select_icon.png"); background-size: 16px;}

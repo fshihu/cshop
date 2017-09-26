@@ -85,7 +85,7 @@
          <div class="bc_hd">
              <img class="bc_img" src="<?php echo $data['original_img'] ?>" alt="">
             <div class="bc_info">
-                <div class="t1">￥245.00</div>
+                <div class="t1">￥<?php echo $data['shop_price'] ?></div>
                 <div class="t2">已选: <span class="t2_sm">杏色 中码</span></div>
             </div>
              <div class="bc_close">×</div>
@@ -170,7 +170,7 @@
         $('.btn_group_sel .weui-btn').click(function () {
             var attr = getAttr();
             if(attr.has){
-                $('.buy_confirm .bc_hd .bc_info .t1').text(attr.price);
+                $('.buy_confirm .bc_hd .bc_info .t1').text('￥'+attr.price);
             }
         });
         $('.buy_confirm .confirm_btn').click(function () {
@@ -179,7 +179,8 @@
                 Tip('请选择商品规格','error');
             }else{
                 ajax_request('<?php echo $this->genurl('cart/index/add');?>',{
-                    goods_id:'<?php echo $data['id'] ?>',
+                    goods_id:'<?php echo $data['goods_id'] ?>',
+                    goods_num:$('.buy_num_w .text').val(),
                     spec_key:attr.key
                 },function () {
                     $('.buy_confirm').show().animate({bottom:-$('.buy_confirm').height()-20});

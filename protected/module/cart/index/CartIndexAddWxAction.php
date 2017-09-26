@@ -31,6 +31,7 @@ class CartIndexAddWxAction extends \CAction
             'user_id' => Session::getUserID(),
             'session_id' => session_id(),
             'goods_id' => $goods_id,
+            'goods_num' => $request->getParams('goods_num'),
             'spec_key' => $spec_key,
             'add_time' => time(),
         ))->execute();
