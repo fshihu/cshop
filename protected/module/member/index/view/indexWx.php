@@ -190,7 +190,7 @@
                         <p>地址管理</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access " href="javascript:;">
+                <a class="weui-cell weui-cell_access " href="<?php echo $this->genurl('bank/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Bankcard_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>银行卡管理</p>
