@@ -5,7 +5,7 @@ body>.content{ height:100%;}
 .daily_list .time{text-align: center; line-height:1;}
 .daily_list .content{border-left: 1px solid #c4c2cb; margin-left:10px; padding-left:10px;min-height: 50px;}
 .weui-btn_mini{ line-height:2.1;}
-.weui-btn+.weui-btn{ margin-top:10px;}
+.weui-btn+.weui-btn{ margin-top:0;}
 .weui-cells{ margin-top:10px;font-size: 14px;}
 
 .weui-title-title .weui-cell .weui-cell__ft:after{border-width:   0 0 2px 2px; width:10px; height:10px; border-color: #ffffff;
@@ -405,7 +405,7 @@ border-left: 80px solid transparent; top:0; right:0;
 .list5 .t2 .ts_s .t2_s_2{ font-size: 11px;text-align: right;  }
 .list5 .t3{ line-height:30px;text-align: right; padding-right:15px;font-size: 12px;}
 .list5 .t3_s{font-size: 16px; }
-.list5 .t4{text-align: right; padding-right:15px;border-top: 1px solid #DBDBDB; padding-bottom:5px;}
+.list5 .t4{text-align: right; padding-right:15px;border-top: 1px solid #DBDBDB; padding-top:10px; padding-bottom:5px;}
 
 
 .mem_info_card .avatar_w{padding: 36px;text-align: center;background: #ffffff; margin-bottom:10px;}
@@ -433,3 +433,16 @@ border-left: 80px solid transparent; top:0; right:0;
 .mem_info_qrcode .info .t1{ font-size: 18px;}
 .mem_info_qrcode .info .t2{ font-size: 11px;}
 .mem_info_qrcode .info .t3{ font-size: 11px;}
+
+.mem_money_index .info{ padding:15px;}
+.mem_money_index .info .t1_s{ color: #2CC7C5; font-size: 30px; padding:10px 0;}
+.mem_money_index .info .t1_m{font-size: 12px;}
+.mem_money_index .info .t1_m_1{display: inline-block; padding-right:30px;}
+.mem_money_index .info .t1_m_2{}
+.mem_money_index .money_list .weui-cell__ft{ color: #474747;font-weight: bold;}
+.mem_money_index .info .t2_s{ color: #2CC7C5;  text-align: center;font-size: 30px; padding-top:10px; line-height:1;}
+.mem_money_index .info .t2_m{ text-align: center; padding-bottom:10px; }
+
+.mem_level_give .binfo { padding:38px 0;}
+.mem_level_give .binfo .avatar{ width:64px; height:64px;display: block; margin:auto;border-radius: 50%;}
+.mem_level_give .binfo .t1{ text-align: center; padding:5px 0 ;}

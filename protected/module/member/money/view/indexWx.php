@@ -24,15 +24,7 @@
         <span class="t1_m_2">已提现财富：￥100.00</span>
     </div>
 </div>
-             <style type="text/css">
-                 .mem_money_index .info{ padding:15px;}
-                 .mem_money_index .info .t1_s{ color: #2CC7C5; font-size: 30px; padding:10px 0;}
-                 .mem_money_index .info .t1_m{font-size: 12px;}
-                 .mem_money_index .info .t1_m_1{}
-                 .mem_money_index .info .t1_m_2{}
-                 .mem_money_index .money_list .weui-cell__ft{ color: #474747;}
-             </style>
-             <div class="weui-navbar navbar-sm">
+              <div class="weui-navbar navbar-sm">
                  <a href="" class="weui-navbar__item weui-bar__item_on">
                      待开会议
                  </a>

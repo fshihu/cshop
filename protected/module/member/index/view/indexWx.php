@@ -113,7 +113,7 @@
                         <p>我的自组团</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access li_borde" href="javascript:;">
+                <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('service/my/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/service_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>我的服务</p>
@@ -141,7 +141,7 @@
                     </div>
                     <div class="weui-cell__ft">￥341.00</div>
                 </a>
-                <a class="weui-cell weui-cell_access li_borde" href="javascript:;">
+                <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('gold/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/integral_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>我的积分</p>
