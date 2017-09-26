@@ -24,6 +24,20 @@
         </dd>
       </dl>
        <dl class="row">
+        <dt class="tit" colspan="2">
+          <label>广告位置：</label>
+        </dt>
+        <dd class="opt">
+          <div>
+            <select name="pid" class="input-sm" class="form-control">
+              <volist name="position" id="item">
+                <option value="{$item.position_id}" <if condition="$info[pid] eq $item[position_id]">selected</if>>{$item.position_name}</option>
+              </volist>
+            </select>
+          </div>
+        </dd>
+      </dl>
+      <dl class="row">
         <dt class="tit">
           <label>开始日期：</label>
         </dt>

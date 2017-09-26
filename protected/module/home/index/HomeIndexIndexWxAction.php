@@ -1,6 +1,8 @@
 <?php
 namespace module\home\index;
+use app\admin\biz\AdPosition;
 use CRequest;
+use module\ad\index\AdServer;
 
 /**
  * Created by PhpStorm.
@@ -12,6 +14,8 @@ class HomeIndexIndexWxAction extends \CAction
 {
     public function execute(CRequest $request)
     {
-        return new \CRenderData();
+        return new \CRenderData(array(
+            'ad_list' => AdServer::getList(AdPosition::HOME),
+        ));
     }
 }

@@ -14,6 +14,7 @@
  */
 
 namespace app\admin\controller;
+use app\admin\biz\AdPosition;
 use think\Page;
 use think\Db;
 
@@ -29,7 +30,7 @@ class Ad extends Base{
         }
         if($act == 'add')          
            $ad_info['pid'] = $this->request->param('pid');
-        $position = D('ad_position')->select();
+        $position = AdPosition::getAll();
         $this->assign('info',$ad_info);
         $this->assign('act',$act);
         $this->assign('position',$position);
@@ -62,8 +63,11 @@ class Ad extends Base{
         	}
         }
                                      
-        $ad_position_list = M('AdPosition')->getField("position_id,position_name,is_open");                        
-        $this->assign('ad_position_list',$ad_position_list);//广告位 
+        $ad_position_list = AdPosition::getAll();
+        foreach ($ad_position_list as $item) {
+            $ad_position_list[$item['position_id']] = $item;
+        }
+        $this->assign('ad_position_list',$ad_position_list);//广告位
         $show = $Page->show();// 分页显示输出
         $this->assign('list',$list);// 赋值数据集
         $this->assign('page',$show);// 赋值分页输出
