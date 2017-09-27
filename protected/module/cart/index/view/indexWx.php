@@ -86,7 +86,7 @@
                  </div>
                  <div class="buy_btn_w">
                      <span class="price">应支付： <span class="price_red">￥ <?php echo $total_price ?> （免运费）</span></span>
-                     <span class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red">立即支付</span>
+                     <a href="<?php echo $this->genurl('pay/index/index'); ?>" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red">立即支付</a>
                  </div>
              </div>
                     </div>

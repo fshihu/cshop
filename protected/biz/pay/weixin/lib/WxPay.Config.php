@@ -26,22 +26,41 @@ class WxPayConfig
 	const MCHID = '1251428601';
 	const KEY = 'dsfhsdiofvnvuidvd243soe7a93hn8d9';
 	const APPSECRET = '4a7b43141f6150bcfdbab4e2460abba3';
-
+    private static $appid;
+    private static $mchid;
+    private static $key;
+    private static $appsecret;
     public static function getAPPID()
     {
-        return '';
+        return self::$appid;
+	}
+    public static function setAPPID($val)
+    {
+        return self::$appid = $val;
 	}
     public static function getMCHID()
     {
-        return '';
+        return self::$mchid;
+	}
+    public static function setMCHID($val)
+    {
+        return self::$mchid;
 	}
     public static function getKEY()
     {
-        return '';
+        return self::$key;
+	}
+    public static function setKEY($val)
+    {
+        return self::$key = $val;
 	}
     public static function getAPPSECRET()
     {
-        return '';
+        return self::$appsecret;
+	}
+    public static function setAPPSECRET($val)
+    {
+        return self::$appsecret = $val;
 	}
 	//=======【证书路径设置】=====================================
 	/**

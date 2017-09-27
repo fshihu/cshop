@@ -10,6 +10,7 @@ namespace biz\pay\weixin;
 
 require_once __DIR__ . "/lib/WxPay.Api.php";
 require_once __DIR__ . "/example/WxPay.JsApiPay.php";
+use biz\wx\WxConf;
 use JsApiPay;
 use WxPayApi;
 use WxPayConfig;
@@ -19,6 +20,10 @@ class WxPay
 {
     public static function instance()
     {
+        WxPayConfig::setAPPID(WxConf::getAppid());
+        WxPayConfig::setAPPSECRET(WxConf::getAppSecret());
+        WxPayConfig::setMCHID(WxConf::getMchid());
+        WxPayConfig::setKEY(WxConf::getKey());
         return new self();
     }
 
