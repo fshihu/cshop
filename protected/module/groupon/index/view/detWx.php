@@ -46,31 +46,10 @@
              </span>
          </div>
          <div class="t3">
-             剩余时间：<span id="timer"></span>     <script language="javascript" type="text/javascript">
-                  function leftTimer(year,month,day,hour,minute,second){
-                   var leftTime = (new Date(year,month-1,day,hour,minute,second)) - (new Date()); //计算剩余的毫秒数
-                      console.log(leftTime);
-                   var days = parseInt(leftTime / 1000 / 60 / 60 / 24 , 10); //计算剩余的天数
-                   var hours = parseInt(leftTime / 1000 / 60 / 60 % 24 , 10); //计算剩余的小时
-                   var minutes = parseInt(leftTime / 1000 / 60 % 60, 10);//计算剩余的分钟
-                   var seconds = parseInt(leftTime / 1000 % 60, 10);//计算剩余的秒数
-                   days = checkTime(days);
-                   hours = checkTime(hours);
-                   minutes = checkTime(minutes);
-                   seconds = checkTime(seconds);
-                      document.getElementById("timer").innerHTML = (days>0?(days+"天"):'') + hours+"小时" + minutes+"分"+seconds+"秒";
-                   setTimeout(function () {
-                       leftTimer(year,month,day,hour,minute,second);
-                   },1000);
-                  }
-                  function checkTime(i){ //将0-9的数字前面加上0，例1变为01
-                   if(i<10)
-                   {
-                    i = "0" + i;
-                   }
-                   return i;
-                  }
-                  leftTimer(<?php echo date('Y,n,j,h,i,s',$group_buy['end_time']) ?>);
+             剩余时间：<span id="timer"></span>
+             <script language="javascript" type="text/javascript">
+
+                  leftTimer(<?php echo date('Y,n,j,h,i,s',$group_buy['end_time']) ?>,'#timer');
                   </script>
 
          </div>
@@ -138,13 +117,13 @@
     </div>
 
      <div class="buy_btn">
-         <a href="<?php echo $this->genurl('pay/index') ?>" class="bt_a bt_a1">
-            <div class="t1">￥<?php echo $group_buy['price'] ?></div>
+         <a href="<?php echo $this->genurl('goods/det/index',['id'=>$data['goods_id']]) ?>" class="bt_a bt_a1">
+             <div class="t1">￥<?php echo $data['shop_price'] ?></div>
             <div class="t2">单独购买</div>
          </a>
-         <a href="" class="bt_a bt_a2">
-             <div class="t1">￥<?php echo $data['shop_price'] ?></div>
-             <div class="t2">单独购买</div>
+         <a href="<?php echo $this->genurl('pay/index'); ?>" class="bt_a bt_a2">
+             <div class="t1">￥<?php echo $group_buy['price'] ?></div>
+             <div class="t2">一键开团</div>
          </a>
      </div>
  </div>
@@ -153,4 +132,18 @@
      </div>
 
 </div>
+    <script type="text/javascript">
+        $('.buy_btn .bt_a .t2').click(function () {
+            ajax_request('<?php echo $this->genurl('cart/index/add');?>',{
+                goods_id:'<?php echo $data['goods_id'] ?>',
+                goods_num:$('.buy_num_w .text').val(),
+                prom_id:'<?php echo $group_buy['id'] ?>',
+                prom_type:1
+            },function () {
+                location.href = '<?php echo $this->genurl('cart/index/index',array('prom_type'=>1));?>';
+            });
+            return false;
+        });
+
+    </script>
 <?php include \biz\Util::getFooterNav()?>

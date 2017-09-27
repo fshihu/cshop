@@ -9,6 +9,7 @@
 namespace module\service\reserve;
 
 
+use biz\action\SaveAction;
 use biz\input\AddrInput;
 use biz\input\CaptchaInput;
 use biz\input\DateInput;
@@ -25,11 +26,11 @@ use CRequest;
 use module\service\reserve\enum\MarriageEnum;
 use module\service\reserve\enum\ReserveReasonEnum;
 
-class ServiceReserveIndexWxAction extends \CAction implements IFormViewBuilder
+class ServiceReserveIndexWxAction extends SaveAction implements IFormViewBuilder
 {
-    public function execute(CRequest $request)
+    protected function getTable()
     {
-        return new \CRenderData();
+        return 'service_reserve';
     }
 
     /**
@@ -38,18 +39,26 @@ class ServiceReserveIndexWxAction extends \CAction implements IFormViewBuilder
     public function createFormInputs()
     {
         return [
-            (new TextInput('name','预约人姓名'))->setPlaceHolder('请输入姓名'),
-            (new TextInput('name','预约手机号'))->setPlaceHolder('请输入手机号'),
-            new CaptchaInput('name','验证码'),
-            new RadioButtonListInput('name','性别',SexEnum::getValues()),
+            (new TextInput('consignee','预约人姓名'))->setPlaceHolder('请输入姓名'),
+            (new TextInput('mobile','预约手机号'))->setPlaceHolder('请输入手机号'),
+            new CaptchaInput('code','验证码'),
+            new RadioButtonListInput('sex','性别',SexEnum::getValues()),
             new DateInput('briday','出生日期'),
-            (new TextInput('name','职业'))->setPlaceHolder('请输入职业'),
+            (new TextInput('occupation','职业'))->setPlaceHolder('请输入职业'),
             (new AddrInput('name','出生地')),
-            new RadioButtonListInput('name','婚姻状况',MarriageEnum::getValues()),
-            (new TextAreaInput('intro','性格爱好')),
-            new CheckBoxListInput('name','预约理由',ReserveReasonEnum::getValues()),
-            (new TextInput('name','预约日期')),
+            new RadioButtonListInput('marriage','婚姻状况',MarriageEnum::getValues()),
+            (new TextAreaInput('hobby','性格爱好')),
+            new CheckBoxListInput('reserve_reason','预约理由',ReserveReasonEnum::getValues()),
+            (new TextInput('date','预约日期')),
             new SubmitInput(),
         ];
+    }
+
+    /**
+     * @return string "name,pass"
+     */
+    protected function getPostNames()
+    {
+        // TODO: Implement getPostNames() method.
     }
 }

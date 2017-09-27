@@ -55,25 +55,19 @@
                 </span>
             </div>
             <div class="h_item_1_w">
-                <?php foreach($group_buys as $group_buy):?>
+                <?php foreach($group_buys as $i => $group_buy):?>
                 <a href="<?php echo $this->genurl('/groupon/index/index',['id'=>$group_buy['id']]) ?>">
                     <div class="h_item_1">
                        <img class="img" src="<?php echo $group_buy['image'] ?>"alt="">
                        <div class="bg"></div>
-                       <div class="times">
-                           <span class="time h">
-                               <span class="t1">1</span>
-                               <span class="t2">时</span>
-                           </span>
-                           <span class="time m">
-                               <span class="t1">45</span>
-                               <span class="t2">分</span>
-                           </span>
-                           <span class="time s">
-                               <span class="t1">08</span>
-                               <span class="t2">秒</span>
-                           </span>
+                       <div class="times" id="times_ec<?php echo $i ?>">
+
+
                        </div>
+                        <script type="text/javascript">
+                            leftTimer(<?php echo date('Y,n,j,h,i,s',$group_buy['end_time']) ?>,'#times_ec<?php echo $i ?>',2);
+
+                        </script>
                    </div>
 
                 </a>

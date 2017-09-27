@@ -86,7 +86,7 @@
              <img class="bc_img" src="<?php echo $data['original_img'] ?>" alt="">
             <div class="bc_info">
                 <div class="t1">￥<?php echo $data['shop_price'] ?></div>
-                <div class="t2">已选: <span class="t2_sm">杏色 中码</span></div>
+                <div class="t2" style="display: none;">已选: <span class="t2_sm">杏色 中码</span></div>
             </div>
              <div class="bc_close">×</div>
          </div>
@@ -151,20 +151,26 @@
                 }
             });
             var key = '';
+            var key_name = '';
             if(has){
                 var specGoodsPrice = spec_goods_prices[attr_id.join('_')];
                 if(specGoodsPrice){
                     price = specGoodsPrice.price;
                     key = specGoodsPrice.key;
+                    key_name = specGoodsPrice.key_name;
                 }
             }
-            return {has:has,price:price,key:key};
+            return {has:has,price:price,key:key,key_name:key_name};
         }
         $('.btn_group_sel .weui-btn').click(function () {
-            var attr = getAttr();
-            if(attr.has){
-                $('.buy_confirm .bc_hd .bc_info .t1').text('￥'+attr.price);
-            }
+            setTimeout(function () {
+                var attr = getAttr();
+                           if(attr.has){
+                               $('.buy_confirm .bc_hd .bc_info .t1').text('￥'+attr.price);
+                               $('.buy_confirm .bc_hd .bc_info .t2').show().text(attr.key_name);
+                           }
+            },100);
+
         });
         $('.buy_confirm .confirm_btn').click(function () {
             var attr = getAttr();

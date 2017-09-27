@@ -10,7 +10,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">会议简介</p>
+                            <p class="title">一键开团</p>
                         </div>
                     </div>
 

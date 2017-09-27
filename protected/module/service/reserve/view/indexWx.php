@@ -44,6 +44,11 @@
                location.href='<?php echo $this->genurl('ok') ?>';
            });
         $('.sub_btn').click(function () {
-            alerts()
-        })
+            $('.sub_btn').click(function () {
+                ajax_request('',$('.form-panel form').serialize(),function () {
+                   location.href='<?php echo $this->genurl('index');?>';
+                });
+            });
+        });
+
     </script>
