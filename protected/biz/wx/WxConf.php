@@ -15,6 +15,10 @@ class WxConf
         return 'wxb31ff021c62891c0';
     }
 
+    public static function getPayAppid()
+    {
+        return '';
+    }
     public static function getAppSecret()
     {
         return '44891e7c6938d3c28fbd5da82dd9382a';

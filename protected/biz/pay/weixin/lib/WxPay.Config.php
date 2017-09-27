@@ -44,7 +44,7 @@ class WxPayConfig
 	}
     public static function setMCHID($val)
     {
-        return self::$mchid;
+        return self::$mchid = $val;
 	}
     public static function getKEY()
     {

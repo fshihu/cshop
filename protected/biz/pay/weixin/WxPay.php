@@ -20,7 +20,7 @@ class WxPay
 {
     public static function instance()
     {
-        WxPayConfig::setAPPID(WxConf::getAppid());
+        WxPayConfig::setAPPID(WxConf::getPayAppid());
         WxPayConfig::setAPPSECRET(WxConf::getAppSecret());
         WxPayConfig::setMCHID(WxConf::getMchid());
         WxPayConfig::setKEY(WxConf::getKey());
@@ -46,9 +46,8 @@ class WxPay
         $input->SetNotify_url("http://paysdk.weixin.qq.com/example/notify.php");
         $input->SetTrade_type("JSAPI");
         $input->SetOpenid($openId);
-
         $order = WxPayApi::unifiedOrder($input);
-
+var_dump($order);exit;
         return $tools->GetJsApiParameters($order);
     }
 }
