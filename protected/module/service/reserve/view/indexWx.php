@@ -10,7 +10,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">会议简介</p>
+                            <p class="title">补充预约人信息</p>
                         </div>
                     </div>
 
@@ -44,11 +44,10 @@
                location.href='<?php echo $this->genurl('ok') ?>';
            });
         $('.sub_btn').click(function () {
-            $('.sub_btn').click(function () {
+            alerts();return;
                 ajax_request('',$('.form-panel form').serialize(),function () {
                    location.href='<?php echo $this->genurl('index');?>';
                 });
-            });
         });
 
     </script>

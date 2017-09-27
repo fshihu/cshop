@@ -6,7 +6,7 @@
 
                  <div class="weui-cell weui-cell_access" href="javascript:;">
                      <div class="weui-cell__bd">
-                        <p class="title">会议简介</p>
+                        <p class="title">信息提交成功</p>
                     </div>
                 </div>
 
@@ -23,7 +23,7 @@
                 </div>
                 <div class="weui-msg__opr-area">
                     <p class="weui-btn-area">
-                        <a href="javascript:history.back();" class="weui-btn weui-btn_mini weui-btn_default">返回首页</a>
+                        <a href="<?php echo $this->genurl('home/index/index'); ?>" class="weui-btn weui-btn_mini weui-btn_default">返回首页</a>
                     </p>
                 </div>
             </div>
