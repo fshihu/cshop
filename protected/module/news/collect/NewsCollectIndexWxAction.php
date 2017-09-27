@@ -9,12 +9,21 @@
 namespace module\news\collect;
 
 
+use biz\action\ListAction;
+use biz\Session;
 use CRequest;
 
-class NewsCollectIndexWxAction extends \CAction
+class NewsCollectIndexWxAction extends ListAction
 {
-    public function execute(CRequest $request)
+    protected function getTable()
     {
-        return new \CRenderData();
+        return 'article_collect';
+    }
+    protected function getSearchCondition()
+    {
+        $this->dbCondition->addColumnsCondition(array(
+            't.uid' => Session::getUserID(),
+        ))->leftJoin('article','a','t.article_id = a.article_id')
+            ->select('a.*');
     }
 }

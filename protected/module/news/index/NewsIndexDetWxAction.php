@@ -9,12 +9,18 @@
 namespace module\news\index;
 
 
+use CC\db\base\select\ItemModel;
 use CRequest;
 
 class NewsIndexDetWxAction extends \CAction
 {
+    public $id;
     public function execute(CRequest $request)
     {
-        return new \CRenderData();
+        return new \CRenderData(array(
+            'data' => ItemModel::make('article')->addColumnsCondition(array(
+                'article_id' => $this->id,
+            ))->execute(),
+        ));
     }
 }

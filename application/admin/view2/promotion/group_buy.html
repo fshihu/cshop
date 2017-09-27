@@ -81,16 +81,38 @@
                     <p class="notic">此抢购活动成团人数</p>
                 </dd>
             </dl>
-            <dl class="row">
+            <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label><em>*</em>虚拟购买数</label>
                 </dt>
                 <dd class="opt">
-                    <input type="text" id="virtual_num" name="virtual_num" value="{$info.virtual_num}" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')"  class="input-txt">
+                    <input type="text" id="virtual_num" name="virtual_num" value="1" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')"  class="input-txt">
                     <span class="err" id="err_virtual_num"></span>
                     <p class="notic">虚拟已购买参团人数</p>
                 </dd>
             </dl>
+            <dl class="row">
+              <dt class="tit">
+                <label>图片</label>
+              </dt>
+              <dd class="opt">
+                <div class="input-file-show">
+                  <span class="show">
+                      <a id="img_a" target="_blank" class="nyroModal" rel="gal" href="{$brand.image}">
+                        <i id="img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$brand.image}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                      </a>
+                  </span>
+                  <span class="type-file-box">
+                      <input type="text" id="image" name="image" value="{$brand.image}" class="type-file-text">
+                      <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                      <input class="type-file-file" onClick="GetUploadify(1,'','category','img_call_backss')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                  </span>
+                </div>
+                <span class="err"></span>
+                <p class="notic">请上传图片格式文件</p>
+              </dd>
+            </dl>
+
             <dl class="row">
                 <dt class="tit">
                     <label>团购介绍</label>
@@ -155,6 +177,12 @@
         $('#group_num').val(store_count);
         $('#goods_price').val(price);
         layer.closeAll('iframe');
+    }
+    function img_call_backss(fileurl_tmp)
+    {
+      $("#image").val(fileurl_tmp);
+      $("#img_a").attr('href', fileurl_tmp);
+      $("#img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
     }
 </script>
 </body>

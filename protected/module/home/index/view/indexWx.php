@@ -55,9 +55,10 @@
                 </span>
             </div>
             <div class="h_item_1_w">
-                <a href="<?php echo $this->genurl('/groupon/index/index') ?>">
+                <?php foreach($group_buys as $group_buy):?>
+                <a href="<?php echo $this->genurl('/groupon/index/index',['id'=>$group_buy['id']]) ?>">
                     <div class="h_item_1">
-                       <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
+                       <img class="img" src="<?php echo $group_buy['image'] ?>"alt="">
                        <div class="bg"></div>
                        <div class="times">
                            <span class="time h">
@@ -76,42 +77,8 @@
                    </div>
 
                 </a>
-                <div class="h_item_1">
-                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
-                   <div class="bg"></div>
-                   <div class="times">
-                       <span class="time h">
-                           <span class="t1">1</span>
-                           <span class="t2">时</span>
-                       </span>
-                       <span class="time m">
-                           <span class="t1">45</span>
-                           <span class="t2">分</span>
-                       </span>
-                       <span class="time s">
-                           <span class="t1">08</span>
-                           <span class="t2">秒</span>
-                       </span>
-                   </div>
-               </div>
-                <div class="h_item_1">
-                   <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
-                   <div class="bg"></div>
-                   <div class="times">
-                       <span class="time h">
-                           <span class="t1">1</span>
-                           <span class="t2">时</span>
-                       </span>
-                       <span class="time m">
-                           <span class="t1">45</span>
-                           <span class="t2">分</span>
-                       </span>
-                       <span class="time s">
-                           <span class="t1">08</span>
-                           <span class="t2">秒</span>
-                       </span>
-                   </div>
-               </div>
+                <?php endforeach?>
+
 
 
             </div>

@@ -10,6 +10,7 @@ namespace app\admin\biz;
 class AdPosition
 {
     const HOME = 1;
+    const NEWS = 2;
     public static function getAll()
     {
 
@@ -17,6 +18,11 @@ class AdPosition
             array(
                 'position_id' => self::HOME,
                 'position_name' => '首页',
+                'is_open' => 1,
+            ),
+            array(
+                'position_id' => self::NEWS,
+                'position_name' => '资讯',
                 'is_open' => 1,
             ),
 

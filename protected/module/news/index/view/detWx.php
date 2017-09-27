@@ -10,7 +10,7 @@
                          </div>
                      </a>
                     <div class="weui-cell__bd">
-                        <p class="title">会议简介</p>
+                        <p class="title">资讯详情</p>
                     </div>
                 </div>
 
@@ -18,14 +18,15 @@
     <div class="  weui-panel_access  "  >
          <div class="news_det">
             <div class="new_tit">
-                <div class="t1">7条美容护肤化妆秘诀，你都知道吗？</div>
-                <div class="t2">admin 06-14 09:01</div>
+                <div class="t1"><?php echo $data['title'] ?></div>
+                <div class="t2">admin  <?php echo date('m-d H:i',$data['publish_time']) ?></div>
             </div>
-            <div class="new_cont">
-                皮肤的代谢周期约为28天，为使细胞彻底更新换代，必须清除面部残留的污物与过多的角质。每月使用一次清洁面膜能使皮肤呼吸畅通，拥有健康光泽。
+            <div class="new_cont gooods_content">
+           <?php echo html_entity_decode($data['content']) ?>
+
             </div>
             <div class="coloct_btn">
-                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">收藏</a>
+                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default collect_btn">收藏</a>
 
             </div>
         </div>
@@ -35,3 +36,11 @@
  </div>
 
 </div>
+<script type="text/javascript">
+    $('.collect_btn').click(function () {
+        ajax_request('<?php echo $this->genurl('collect/add');?>',{id:'<?php echo $data['article_id'] ?>'},function () {
+           Tip('收藏成功');
+        });
+        return false;
+    });
+</script>

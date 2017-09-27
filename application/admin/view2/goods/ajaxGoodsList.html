@@ -33,43 +33,7 @@
                   <td align="center" axis="col0">
                       <div style="text-align: center; width: 50px;">{$admin_list[$list[admin_uid]]['user_name']}</div>
                   </td>
-                <td align="center" axis="col0">
-                  <div style="text-align: center; width: 30px;">
-                    <if condition='$list[is_recommend] eq 1'>
-                      <span class="yes" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_recommend',this)" ><i class="fa fa-check-circle"></i>是</span>
-                      <else />
-                      <span class="no" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_recommend',this)" ><i class="fa fa-ban"></i>否</span>
-                    </if>
-                  </div>
-                </td>                
-                <td align="center" axis="col0">
-                  <div style="text-align: center; width: 30px;">
-                    <if condition='$list[is_new] eq 1'>
-                      <span class="yes" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_new',this)" ><i class="fa fa-check-circle"></i>是</span>
-                      <else />
-                      <span class="no" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_new',this)" ><i class="fa fa-ban"></i>否</span>
-                    </if>
-                  </div>
-                </td>       
-                <td align="center" axis="col0">
-                  <div style="text-align: center; width: 30px;">
-                    <if condition='$list[is_hot] eq 1'>
-                      <span class="yes" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_hot',this)" ><i class="fa fa-check-circle"></i>是</span>
-                      <else />
-                      <span class="no" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_hot',this)" ><i class="fa fa-ban"></i>否</span>
-                    </if>
-                  </div>
-                </td>       
-                <td align="center" axis="col0">
-                  <div style="text-align: center; width: 50px;">
-                    <if condition='$list[is_on_sale] eq 1'>
-                      <span class="yes" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_on_sale',this)" ><i class="fa fa-check-circle"></i>是</span>
-                      <else />
-                      <span class="no" onClick="changeTableVal('goods','goods_id','{$list.goods_id}','is_on_sale',this)" ><i class="fa fa-ban"></i>否</span>
-                    </if>
-                  </div>
-                </td>    
-                  <?php endif;?>
+                   <?php endif;?>
                  <td align="center" axis="col0">
                  </td>
                 <td align="" class="" style="width: 100%;">

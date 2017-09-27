@@ -49,7 +49,7 @@
 </div>
      <div class="h_item_1_w">
            <div class="h_item_1">
-             <a href="<?php echo $this->genurl('det') ?>">
+             <a href="<?php echo $this->genurl('det',['id'=>10]) ?>">
 
              <div class="h_item_1_s">
 
