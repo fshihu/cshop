@@ -137,13 +137,6 @@
         $('.buy_confirm .bc_hd .bc_close').click(function () {
             $('.buy_confirm').show().animate({bottom:-$('.buy_confirm').height()-20});
         });
-        $('.btn_group_sel').each(function () {
-            var $btn_group_sel = $(this);
-            $btn_group_sel.find('.weui-btn').click(function () {
-                $btn_group_sel.find('.weui-btn').removeClass('weui-btn_warn').addClass('weui-btn_default');
-                $(this).removeClass('weui-btn_default').addClass('weui-btn_warn');
-            });
-        });
         function getAttr() {
             var has = true;
             var attr_id = [];

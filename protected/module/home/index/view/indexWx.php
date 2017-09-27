@@ -28,31 +28,21 @@
                 </div>
             </div>
             <div class="home_item_w">
+                <?php foreach($cate_list as $cate):?>
                 <div class="home_item">
                     <a href="<?php echo $this->genurl('goods/cate/list') ?>">
-                        <img class="img" src="/public/upload/ad/2017/05-20/5b3261f64a247198d8c23a2d4bf3f8b7.jpg" alt="">
+                        <img class="img" src="<?php echo $cate['image'] ?>" alt="">
                         <div class="bg">
                                    <span class="txt">
-                                       <span class="text1">健康会</span>
-                                           <span class="text2">见客户1</span>
+                                       <span class="text1"><?php echo $cate['mobile_name'] ?></span>
+                                           <span class="text2"><?php echo $cate['name'] ?></span>
                                    </span>
 
                         </div>
                     </a>
                 </div>
-                <div class="home_item">
-                    <a href="">
-                        <img class="img" src="/public/upload/ad/2017/05-20/5b3261f64a247198d8c23a2d4bf3f8b7.jpg" alt="">
-                        <div class="bg">
-                                   <span class="txt">
-                                       <span class="text1">健康会</span>
-                                           <span class="text2">见客户1</span>
-                                   </span>
-
-                        </div>
-                    </a>
-                </div>
-            </div>
+                <?php endforeach?>
+             </div>
 
             <div class="m_title">
                 <span class="m_t_l">

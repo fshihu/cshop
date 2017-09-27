@@ -10,7 +10,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">会议简介</p>
+                            <p class="title">服务详情</p>
                         </div>
                     </div>
 
@@ -21,37 +21,56 @@
          <div class="mslide" id="slideTpshop">
              <ul>
                  <!--广告表-->
-                 <adv pid="2" limit="5" item="v">
+                     <?php foreach($service_images as $service_image):?>
                      <li>
-                         <a href="{$v.ad_link}">
-                             <img src="{$v[ad_code]}" title="{$v[title]}" style="{$v[style]}" alt="">
-                         </a>
+                             <img src="<?php echo $service_image['image_url'] ?>" title="{$v[title]}" style="{$v[style]}" alt="">
                      </li>
-                 </adv>
+                     <?php endforeach?>
+
              </ul>
          </div>
      </div>
      <div class="good_info">
-         <div class="good_title">偶来也啊啊</div>
-         <div class="buwei">
+         <div class="good_title"><?php echo $data['name'] ?></div>
+         <div class="buwei" style="padding:10px 0;">
              部位：
          </div>
-         <div class="buwei_item_w">
-             <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">按钮</a>
-             <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">按钮</a>
-             <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_warn">按钮</a>
+         <div class="buwei_item_w btn_group_sel">
+             <?php foreach(explode('|',$data['part']) as $part):?>
+             <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default"><?php echo $part ?></a>
+             <?php endforeach?>
          </div>
          </div>
 
 
-     <div class="weui-navbar navbar-sm">
+     <div class="weui-navbar navbar-sm nav_click">
          <a href="" class="weui-navbar__item weui-bar__item_on">
-             待开会议
+             商品详情
          </a>
          <a href="" class="weui-navbar__item  ">
-             历史会议
+             用户评价
          </a>
       </div>
+     <div class="nav_click_cont">
+         <div class="nav_click_cont_item gooods_content">
+    <?php echo html_entity_decode($data['desc']) ?>
+         </div>
+            <div class="nav_click_cont_item commont_list" style="display: none;">
+                <?php foreach($comment_list as $comment_item):?>
+                <div class="comm_item">
+                    <div class="t1">
+                        <img class="img" src="<?php echo $comment_item['avatar'] ?>" alt="">
+                        <span class="t1_s"><?php echo $comment_item['uname'] ?></span>
+                    </div>
+                    <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
+                    <div class="t3">
+                        <?php echo $comment_item['comment_time'] ?>
+                    </div>
+                </div>
+                <?php endforeach?>
+
+             </div>
+     </div>
 
      <a class="buy_btn_now" href="<?php echo $this->genurl('reserve/index') ?>">
          立即预约

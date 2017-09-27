@@ -10,7 +10,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">会议简介</p>
+                            <p class="title">服务预约</p>
                         </div>
                     </div>
 
@@ -18,24 +18,15 @@
         <div class="  weui-panel_access  " >
  <div class="goods_list">
      <div class="goods_item_w server_itme_w">
+         <?php foreach($list as $item):?>
          <div class="goods_item">
-             <a href="<?php echo $this->genurl('det') ?>">
-                 <img src="" alt="" width="100%" height="155">
-                 <div class="txt">爱尔兰纯天然唇膏</div>
+             <a href="<?php echo $this->genurl('det',['id'=>$item['id']]) ?>">
+                 <img src="<?php echo $item['image'] ?>" alt="" width="100%" height="155">
+                 <div class="txt"><?php echo $item['name'] ?></div>
              </a>
          </div>
-         <div class="goods_item">
-             <a href="{:U('Service/service')}">
-                 <img src="" alt="" width="100%" height="155">
-                 <div class="txt">爱尔兰纯天然唇膏</div>
-             </a>
-         </div>
-         <div class="goods_item">
-             <a href="">
-                 <img src="" alt="" width="100%" height="155">
-                 <div class="txt">爱尔兰纯天然唇膏</div>
-             </a>
-         </div>
+         <?php endforeach?>
+
      </div>
 
  </div>

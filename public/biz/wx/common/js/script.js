@@ -56,8 +56,15 @@ $(function(){
             $(this).addClass('weui-bar__item_on');
             var index = $nav_click.find('.weui-navbar__item').index($(this));
             $nav_click.next().find('.nav_click_cont_item').hide().eq(index).show();
+            return false;
         });
-        return false;
+    });
+    $('.btn_group_sel').each(function () {
+        var $btn_group_sel = $(this);
+        $btn_group_sel.find('.weui-btn').click(function () {
+            $btn_group_sel.find('.weui-btn').removeClass('weui-btn_warn').addClass('weui-btn_default');
+            $(this).removeClass('weui-btn_default').addClass('weui-btn_warn');
+        });
     });
 
 

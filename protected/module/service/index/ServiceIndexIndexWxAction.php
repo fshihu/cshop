@@ -9,12 +9,13 @@
 namespace module\service\index;
 
 
+use biz\action\ListAction;
 use CRequest;
 
-class ServiceIndexIndexWxAction extends \CAction
+class ServiceIndexIndexWxAction extends ListAction
 {
-    public function execute(CRequest $request)
+    protected function getTable()
     {
-        return new \CRenderData();
+        return 'service';
     }
 }

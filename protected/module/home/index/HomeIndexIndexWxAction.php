@@ -1,6 +1,7 @@
 <?php
 namespace module\home\index;
 use app\admin\biz\AdPosition;
+use CC\db\base\select\ListModel;
 use CRequest;
 use module\ad\index\AdServer;
 
@@ -14,8 +15,11 @@ class HomeIndexIndexWxAction extends \CAction
 {
     public function execute(CRequest $request)
     {
+        $cate_list =  ListModel::make('goods_category')->addColumnsCondition(array('parent_id' => 0))->execute();
+
         return new \CRenderData(array(
             'ad_list' => AdServer::getList(AdPosition::HOME),
+            'cate_list' => $cate_list,
         ));
     }
 }
