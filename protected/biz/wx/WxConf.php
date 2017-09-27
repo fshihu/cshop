@@ -19,4 +19,14 @@ class WxConf
     {
         return '44891e7c6938d3c28fbd5da82dd9382a';
     }
+
+    public static function getKey()
+    {
+        return '44891e7c6938d3c28fbd5da82dd9382a';
+    }
+
+    public function getMchid()
+    {
+        return '1471298102';
+    }
 }
