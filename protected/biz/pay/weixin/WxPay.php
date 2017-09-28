@@ -30,7 +30,7 @@ class WxPay
 {
     public static function instance()
     {
-        WxPayConfig::setAPPID(WxConf::getPayAppid());
+        WxPayConfig::setAPPID(WxConf::getAppid());
         WxPayConfig::setAPPSECRET(WxConf::getAppSecret());
         WxPayConfig::setMCHID(WxConf::getMchid());
         WxPayConfig::setKEY(WxConf::getKey());

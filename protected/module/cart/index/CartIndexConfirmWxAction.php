@@ -8,6 +8,7 @@
 namespace module\cart\index;
 
 
+use CC\util\arr\ArrayUtil;
 use CRequest;
 use module\cart\index\server\CartServer;
 use module\cart\index\server\OrderServer;
@@ -24,6 +25,7 @@ class CartIndexConfirmWxAction extends \CAction
         $prom_type = $request->getParams('prom_type', 0);
         $cart_ids = $request->getParams('cart_ids');
         $address_id = $request->getParams('address_id');
+        $cart_ids = ArrayUtil::explodeStr($cart_ids);
         if(empty($cart_ids)){
             return new \CRenderData();
         }

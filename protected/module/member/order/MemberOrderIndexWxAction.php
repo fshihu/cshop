@@ -9,12 +9,20 @@
 namespace module\member\order;
 
 
+use biz\action\ListAction;
+use biz\Session;
 use CRequest;
 
-class MemberOrderIndexWxAction  extends \CAction
+class MemberOrderIndexWxAction  extends ListAction
 {
-    public function execute(CRequest $request)
+    protected function getTable()
     {
-        return new \CRenderData();
+        return 'order';
+    }
+    protected function getSearchCondition()
+    {
+        $this->dbCondition->addColumnsCondition(array(
+            'user_id' => Session::getUserID(),
+        ));
     }
 }

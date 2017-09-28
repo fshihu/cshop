@@ -17,7 +17,9 @@ class PayIndexIndexWxAction  extends \CAction
 {
     public function execute(CRequest $request)
     {
-        $order_info = ItemModel::make('order')->addId($request->getParams('order_id'))->execute();
+        $order_info = ItemModel::make('order')->addColumnsCondition(array(
+            'order_id' => $request->getParams('order_id'),
+        ))->execute();
         $order_info['body'] = '微整形';
         $order_info['attach'] = 'wzx';
         $order_info['goods_tag'] = '微整形';
