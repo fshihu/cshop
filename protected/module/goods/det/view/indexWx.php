@@ -9,7 +9,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title"><?php echo $data['goods_name'] ?></p>
+                            <p class="title">商品详情</p>
                         </div>
                     </div>
 

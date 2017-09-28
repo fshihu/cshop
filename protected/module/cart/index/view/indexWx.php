@@ -54,7 +54,7 @@
                   </div>
               <?php endif;?>
             <div class="weui-panel__bd list4 list4_s"  >
-                <?php $total_price = 0; ?>
+                <?php $total_price = 0;$ids = ''; ?>
                 <?php foreach($list as $item):?>
                 <div class="list_4s_item">
                     <div  class="weui-media-box weui-media-box_appmsg">
@@ -79,7 +79,8 @@
                     </div>
 
                 </div>
-                    <?php $total_price += $item['shop_price']*$item['goods_num'] ?>
+                    <?php $total_price += $item['shop_price']*$item['goods_num'];
+                    $ids .= ','.$item['id'];?>
                 <?php endforeach?>
 
 
@@ -93,7 +94,7 @@
                  </div>
                  <div class="buy_btn_w">
                      <span class="price">应支付： <span class="price_red">￥ <?php echo $total_price ?> （免运费）</span></span>
-                     <a href="<?php echo $this->genurl('pay/index/index'); ?>" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red">立即支付</a>
+                     <a href="<?php echo $this->genurl('pay/index/index',array('prom_type'=>$prom_type,'cart_ids'=>$ids)); ?>" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red">立即支付</a>
                  </div>
              </div>
               <?php endif;?>

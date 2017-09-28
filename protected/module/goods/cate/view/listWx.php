@@ -18,7 +18,7 @@
      <div class="gl_nav">
          <a href="<?php echo $this->genurl(''); ?>" class="<?php echo $cate_id?'':'ac' ?>">全部</a>
          <?php foreach($cate_list as $item):?>
-         <a class="<?php echo $item['cat_id']== $cate_id?'ac':'' ?>" href="<?php echo $this->genurl('',['cate_id'=>$item['cat_id']]); ?>"><?php echo $item['cat_name'] ?></a>
+         <a class="<?php echo $item['id']== $cate_id?'ac':'' ?>" href="<?php echo $this->genurl('',['cate_id'=>$item['id']]); ?>"><?php echo $item['name'] ?></a>
          <?php endforeach?>
          <a href="" style="display: none;">
              <img style="position: relative;top:-3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pull-down_icon.png" width="10" alt=""></a>

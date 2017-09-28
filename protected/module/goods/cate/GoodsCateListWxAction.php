@@ -25,7 +25,7 @@ class GoodsCateListWxAction extends ListAction
     protected function onExecute()
     {
 
-        return new \CRenderData(array(
+        return  (array(
             'cate_item' => $this->cate_item,
             'cate_list' => $this->cate_list,
             'ad_list' => AdServer::getList(AdPosition::CATE_LIST),
