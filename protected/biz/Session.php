@@ -14,6 +14,6 @@ class Session extends SessionAbs
 {
     public static function getUserID()
     {
-        return 1;
+        return 2;
     }
 }

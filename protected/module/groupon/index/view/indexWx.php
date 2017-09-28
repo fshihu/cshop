@@ -8,7 +8,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">会议简介</p>
+                            <p class="title">限时团购</p>
                         </div>
                     </div>
 
@@ -16,29 +16,26 @@
         <div class="  weui-panel_access  " style="height: 100%;background: #f3f7f8">
  <div class="goods_list">
      <div class="gl_nav">
-         <a href="" class="ac">全部</a>
-         <a href="">化妆品</a>
-         <a href="">化妆品</a>
-         <a href="">化妆品</a>
-         <a href="">
+         <?php foreach($cate_list as $item):?>
+         <a href="" ><?php echo $item['name'] ?></a>
+         <?php endforeach?>
+
+         <a href="" style="display: none;">
              <img style="position: relative;top:-3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pull-down_icon.png" width="10" alt=""></a>
      </div>
      <div class="banner ban1">
          <div class="mslide" id="slideTpshop">
              <ul>
                  <!--广告表-->
+                 <?php foreach($ad_list as $ad):?>
                      <li>
-                         <a href="{$v.ad_link}">
-                             <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
+                         <a href="<?php echo $ad['ad_link'] ?>">
+                             <img class="img" src="<?php echo $ad['ad_code'] ?>"alt="">
                          </a>
                      </li>
-                     <li>
-                         <a href="{$v.ad_link}">
-                             <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
-                         </a>
-                     </li>
-             </ul>
-         </div>
+                 <?php endforeach?>
+              </ul>
+          </div>
      </div>
      <style type="text/css">
          .m_title_1{padding: 20px;background: #fff; color: #000;text-align: center;}
@@ -48,34 +45,31 @@
     <span class="line"></span> 正在进行的团购商品 <span class="line"></span>
 </div>
      <div class="h_item_1_w">
+          <?php foreach($group_buys as $i => $group_buy):?>
+
            <div class="h_item_1">
-             <a href="<?php echo $this->genurl('det',['id'=>10]) ?>">
+
+               <a href="<?php echo $this->genurl('/groupon/index/det',['id'=>$group_buy['id']]) ?>">
 
              <div class="h_item_1_s">
 
-                <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
-                <div class="bg"></div>
-                <div class="times">
-                    <span class="time h">
-                        <span class="t1">1</span>
-                        <span class="t2">时</span>
-                    </span>
-                    <span class="time m">
-                        <span class="t1">45</span>
-                        <span class="t2">分</span>
-                    </span>
-                    <span class="time s">
-                        <span class="t1">08</span>
-                        <span class="t2">秒</span>
-                    </span>
-                </div>
+                 <img class="img" src="<?php echo $group_buy['image'] ?>"alt="">
+                            <div class="bg"></div>
+                            <div class="times" id="times_ec<?php echo $i ?>">
+
+
+                            </div>
+                             <script type="text/javascript">
+                                 leftTimer(<?php echo date('Y,n,j,h,i,s',$group_buy['end_time']) ?>,'#times_ec<?php echo $i ?>',2);
+
+                             </script>
              </div>
-                 <div class="name">新版韩国进口存稿</div>
+                 <div class="name"><?php echo $group_buy['title'] ?></div>
                  <div class="ft_s1">
                      <span class="fl">
                          <img width="13" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/purchasing_icon.png" alt="">
-                         <span class="tuan_num">5人团</span>
-                         <span class="price">￥63.00</span>
+                         <span class="tuan_num"><?php echo $group_buy['goods_num'] ?>人团</span>
+                         <span class="price">￥<?php echo $group_buy['price'] ?></span>
                      </span>
                      <span class="fr">
                         <span class="btn_r">立即开团</span>
@@ -84,78 +78,7 @@
              </a>
 
         </div>
-           <div class="h_item_1">
-             <a href="">
-
-             <div class="h_item_1_s">
-
-                <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
-                <div class="bg"></div>
-                <div class="times">
-                    <span class="time h">
-                        <span class="t1">1</span>
-                        <span class="t2">时</span>
-                    </span>
-                    <span class="time m">
-                        <span class="t1">45</span>
-                        <span class="t2">分</span>
-                    </span>
-                    <span class="time s">
-                        <span class="t1">08</span>
-                        <span class="t2">秒</span>
-                    </span>
-                </div>
-             </div>
-                 <div class="name">新版韩国进口存稿</div>
-                 <div class="ft_s1">
-                     <span class="fl">
-                         <img width="13" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/purchasing_icon.png" alt="">
-                         <span class="tuan_num">5人团</span>
-                         <span class="price">￥63.00</span>
-                     </span>
-                     <span class="fr">
-                        <span class="btn_r">立即开团</span>
-                     </span>
-                 </div>
-             </a>
-
-        </div>
-           <div class="h_item_1">
-             <a href="">
-
-             <div class="h_item_1_s">
-
-                <img class="img" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pic_Grouppurchasetwo.png"alt="">
-                <div class="bg"></div>
-                <div class="times">
-                    <span class="time h">
-                        <span class="t1">1</span>
-                        <span class="t2">时</span>
-                    </span>
-                    <span class="time m">
-                        <span class="t1">45</span>
-                        <span class="t2">分</span>
-                    </span>
-                    <span class="time s">
-                        <span class="t1">08</span>
-                        <span class="t2">秒</span>
-                    </span>
-                </div>
-             </div>
-                 <div class="name">新版韩国进口存稿</div>
-                 <div class="ft_s1">
-                     <span class="fl">
-                         <img width="13" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/purchasing_icon.png" alt="">
-                         <span class="tuan_num">5人团</span>
-                         <span class="price">￥63.00</span>
-                     </span>
-                     <span class="fr">
-                        <span class="btn_r">立即开团</span>
-                     </span>
-                 </div>
-             </a>
-
-        </div>
+         <?php endforeach?>
 
 
      </div>

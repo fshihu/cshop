@@ -18,7 +18,7 @@
                          </div>
                      </a>
                     <div class="weui-cell__bd">
-                        <p class="title">会议简介</p>
+                        <p class="title">我的</p>
                     </div>
                 </div>
 
@@ -26,7 +26,7 @@
     <div class="  weui-panel_access  " >
         <div class="my">
             <div class="info">
-                <img src="" alt="" class="avatar">
+                <img src="<?php echo \module\member\index\UserServer::getAvatar() ?>" alt="" class="avatar">
                 <div class="t1">王茹沁怡</div>
                 <a href="<?php echo $this->genurl('info/qrcode') ?>">
                     <img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Qrcode_icon.png" alt="" class="code">
@@ -34,7 +34,7 @@
                 <div class="t2">
                     <div class="t2_s t2_s1">
                         <div class="t2_s_m_1">
-                            1000
+                            <?php echo $user['gold'] ?>
                         </div>
                         <div class="t2_s_m_2">
                             我的积分
@@ -42,7 +42,7 @@
                     </div>
                     <div class="t2_s t2_s2">
                         <div class="t2_s_m_1">
-                            普通会员
+                            <?php echo \module\member\index\UserServer::getLevelName() ?>
                         </div>
                         <div class="t2_s_m_2">
                             我的等级
@@ -50,7 +50,7 @@
                     </div>
                     <div class="t2_s t2_s3">
                         <div class="t2_s_m_1">
-                            胭脂泪花
+                            <?php echo \module\member\index\UserServer::getRecommUser() ?>
                         </div>
                         <div class="t2_s_m_2">
                             推荐人
@@ -119,7 +119,7 @@
                         <p>我的服务</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access  " href="javascript:;">
+                <a class="weui-cell weui-cell_access  " href="<?php echo $this->genurl('cart/index/index'); ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Shoppingcart_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>我的购物车</p>

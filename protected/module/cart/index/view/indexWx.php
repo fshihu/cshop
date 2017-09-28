@@ -39,12 +39,18 @@
                   </div>
                <?php else:?>
                   <div class="addr_info">
-                      <a href="<?php echo $this->genurl('member/addr/index'); ?>">
-                          <div class="no_addr">
-                              请填写收货地址
-                          </div>
+                       <?php if(empty($list)):?>
+                           <div style="padding: 40px;">
+                               暂无数据
+                           </div>
+                        <?php else:?>
+                           <a href="<?php echo $this->genurl('member/addr/index'); ?>">
+                               <div class="no_addr">
+                                   请填写收货地址
+                               </div>
 
-                      </a>
+                           </a>
+                       <?php endif;?>
                   </div>
               <?php endif;?>
             <div class="weui-panel__bd list4 list4_s"  >
@@ -80,6 +86,7 @@
              </div>
 
 
+              <?php if(!empty($list)):?>
              <div class="buy_price">
                  <div class="buy_jifen">
                      使用0积分,抵扣0元
@@ -89,6 +96,8 @@
                      <a href="<?php echo $this->genurl('pay/index/index'); ?>" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red">立即支付</a>
                  </div>
              </div>
+              <?php endif;?>
+
                     </div>
 
 

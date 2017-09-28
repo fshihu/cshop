@@ -30,7 +30,7 @@
             <div class="home_item_w">
                 <?php foreach($cate_list as $cate):?>
                 <div class="home_item">
-                    <a href="<?php echo $this->genurl('goods/cate/list') ?>">
+                    <a href="<?php echo $this->genurl('goods/cate/list',['id'=>$cate['id']]) ?>">
                         <img class="img" src="<?php echo $cate['image'] ?>" alt="">
                         <div class="bg">
                                    <span class="txt">
@@ -50,13 +50,13 @@
                     <span class="mt_text">最新团购</span>
                 </span>
                 <span class="m_t_r">
-                    <span class="mtr_text"> 更多 </span>
+                    <a href="<?php echo $this->genurl('groupon/index/index'); ?>" class="mtr_text"> 更多 </a>
                     <img class="mtr_icon" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/more_left_icon.png" width="5" alt="">
                 </span>
             </div>
             <div class="h_item_1_w">
                 <?php foreach($group_buys as $i => $group_buy):?>
-                <a href="<?php echo $this->genurl('/groupon/index/index',['id'=>$group_buy['id']]) ?>">
+                <a href="<?php echo $this->genurl('/groupon/index/det',['id'=>$group_buy['id']]) ?>">
                     <div class="h_item_1">
                        <img class="img" src="<?php echo $group_buy['image'] ?>"alt="">
                        <div class="bg"></div>
