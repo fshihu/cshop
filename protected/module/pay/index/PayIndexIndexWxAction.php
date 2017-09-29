@@ -25,7 +25,7 @@ class PayIndexIndexWxAction  extends \CAction
         $order_info['goods_tag'] = '微整形';
         $order_info['notify_url'] = $this->genurl('pay/index/notify',[],true);
         return new \CRenderData(array(
-            'jsApiParameters' => WxPay::instance()->getJsApiParameters($order_info),
+            'jsApiParameters' =>  WxPay::instance()->getJsApiParameters($order_info),
         ));
     }
 }

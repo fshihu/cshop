@@ -66,7 +66,7 @@ class WxPay
         $input->SetBody($order_info['body']);
         $input->SetAttach($order_info['attach']);
         $input->SetOut_trade_no($order_info['order_sn']);
-        $input->SetTotal_fee($order_info['payables']);
+        $input->SetTotal_fee(1);
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag($order_info['goods_tag']);
@@ -74,7 +74,6 @@ class WxPay
         $input->SetTrade_type("JSAPI");
         $input->SetOpenid($openId);
         $order = WxPayApi::unifiedOrder($input);
-var_dump($order);exit;
         return $tools->GetJsApiParameters($order);
     }
 }
