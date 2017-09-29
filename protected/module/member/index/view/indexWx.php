@@ -6,6 +6,7 @@
  * Time: 17:25
  */
 use module\cart\index\server\OrderStatusEnum;
+use module\cart\index\server\OrderWaitStatusEnum;
 
 ?>
 
@@ -64,32 +65,32 @@ use module\cart\index\server\OrderStatusEnum;
             <div class="order">
                 <div class="t1">我的订单</div>
                 <div class="t2_w">
-                    <a class="t2" href="<?php echo $this->genurl('order/index',['order_status'=> OrderStatusEnum::WAIT_PAY]) ?>">
+                    <a class="t2" href="<?php echo $this->genurl('order/index',['wait_status'=> OrderWaitStatusEnum::WAIT_PAY]) ?>">
                         <div class="t2_s_w">
                             <img style="width: 22px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/obligation_icon.png" alt="" class="t2_s">
                         </div>
                         <div class="t2_m">待付款</div>
                     </a>
-                    <a class="t2" href="<?php echo $this->genurl('order/index',['order_status'=> OrderStatusEnum::PAYED]) ?>">
+                    <a class="t2" href="<?php echo $this->genurl('order/index',['wait_status'=> OrderWaitStatusEnum::WAIT_SEND]) ?>">
                         <div class="t2_s_w">
                             <img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Tosendthegoods_icon.png" alt="" class="t2_s">
                         </div>
                         <div class="t2_m">待发货</div>
                     </a>
-                    <a class="t2" href="<?php echo $this->genurl('order/index',['order_status'=> OrderStatusEnum::PAYED]) ?>">
+                    <a class="t2" href="<?php echo $this->genurl('order/index',['wait_status'=> OrderWaitStatusEnum::WAIT_SEND]) ?>">
                         <div class="t2_s_w">
                             <img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Awaitingdelivery_icon.png" alt="" class="t2_s">
                         </div>
                         <div class="t2_m">待收货</div>
                     </a>
-                    <a class="t2">
+                    <a class="t2" href="<?php echo $this->genurl('order/index',['wait_status'=> OrderWaitStatusEnum::WAIT_COMMENT]) ?>">
                         <div class="t2_s_w">
                             <img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Toevaluate_icon.png" alt="" class="t2_s">
                         </div>
 
                         <div class="t2_m">待评价</div>
                     </a>
-                    <a class="t2">
+                    <a class="t2" href="<?php echo $this->genurl('order/index',['wait_status'=> OrderWaitStatusEnum::FINISH]) ?>">
                         <div class="t2_s_w">
                             <img style="width: 16px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/completed_icon.png" alt="" class="t2_s">
                         </div>

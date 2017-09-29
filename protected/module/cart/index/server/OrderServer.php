@@ -103,7 +103,7 @@ class OrderServer
             $data2['goods_sn']           = $val['goods_sn']; // 商品货号
             $data2['goods_num']          = $val['goods_num']; // 购买数量
             $data2['market_price']       = $val['market_price']; // 市场价
-            $data2['goods_price']        = $val['goods_price']; // 商品价               为照顾新手开发者们能看懂代码，此处每个字段加于详细注释
+            $data2['goods_price']        = $val['shop_price']; // 商品价               为照顾新手开发者们能看懂代码，此处每个字段加于详细注释
             $data2['spec_key']           = $val['spec_key']; // 商品规格
             $data2['spec_key_name']      = $val['spec_key_name']; // 商品规格名称
             $data2['member_goods_price'] = $val['member_goods_price']; // 会员折扣价

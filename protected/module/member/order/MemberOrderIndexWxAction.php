@@ -35,6 +35,6 @@ class MemberOrderIndexWxAction  extends ListAction
             'user_id' => Session::getUserID(),
             'wait_status' => $this->wait_status,
             'deleted' => YesNoEnum::NO,
-        ));
+        ))->order('order_id desc');
     }
 }

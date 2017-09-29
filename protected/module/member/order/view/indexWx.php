@@ -21,7 +21,7 @@
       <?php foreach($list as $item):?>
      <div class="list_item">
          <div class="t1"><?php echo $wait_status_val ?></div>
-         <?php $order_goods = ListModel::make('order_goods')->addColumnsCondition(array('order_id' => $item['id']))->execute(); ?>
+         <?php $order_goods = ListModel::make('order_goods')->addColumnsCondition(array('order_id' => $item['order_id']))->execute(); ?>
          <?php foreach($order_goods as $order_good):?>
          <div class="t2">
              <img class="t2_img" src="" alt="">
@@ -36,25 +36,20 @@
          </div>
           <div class="t4">
 
-             <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">取消订单</a>
-             <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_warn">去支付</a>
+             <a href="<?php echo $this->genurl('cancel',['order_id'=>$item['order_id']]); ?>"  class="deletopbtn weui-btn weui-btn_mini weui-btn_default">取消订单</a>
+             <a href="<?php echo $this->genurl('pay/index/index',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_warn">去支付</a>
          </div>
      </div>
       <?php endforeach?>
-     <div class="list_item">
-         <div class="t1">待发货</div>
-         <div class="t2">
-             <img class="t2_img" src="" alt="">
-             <div class="ts_s">
-                 <div class="t2_s_1">新版韩国进口粉润唇膏，时尚都市女性必备唇膏新版韩国进口粉润唇膏，时尚都市女性必备唇膏</div>
-                 <div class="t2_s_2">¥34.5 ×1</div>
-             </div>
-         </div>
-          <div class="t3">
-             实支付： <span class="t3_s">￥34.6</span>（免运费）
-         </div>
-     </div>
- </div>
+  </div>
      </div>
 
 </div>
+    <script type="text/javascript">
+        $('body').on('click','.deletopbtn',function () {
+            var $list_item = $(this).closest('.list_item');
+            ajax_request($(this).attr('href'),{},function () {
+                $list_item.remove();
+            });
+        })
+    </script>
