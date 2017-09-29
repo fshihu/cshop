@@ -42,8 +42,8 @@
          <?php foreach($list as $item):?>
          <div class="goods_item">
              <a href="<?php echo $this->genurl('goods/det/index',['id'=>$item['goods_id']]) ?>">
-                 <img src="" alt="" width="100%" height="155">
-                 <div class="txt"><?php echo $item['name'] ?></div>
+                 <img src="<?php echo $item['original_img'] ?>" alt="" width="100%" height="155">
+                 <div class="txt"><?php echo $item['goods_name'] ?></div>
                  <div class="price">￥<?php echo $item['shop_price'] ?></div>
              </a>
          </div>

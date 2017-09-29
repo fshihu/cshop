@@ -10,6 +10,7 @@ namespace module\pay\index;
 
 use biz\pay\weixin\WxPay;
 use CC\db\base\select\ItemModel;
+use CC\db\base\update\UpdateModel;
 use CRequest;
 use module\cart\index\server\OrderServer;
 
@@ -20,6 +21,11 @@ class PayIndexIndexWxAction  extends \CAction
         $order_info = ItemModel::make('order')->addColumnsCondition(array(
             'order_id' => $request->getParams('order_id'),
         ))->execute();
+        $orderSn = OrderServer::getOrderSn();
+        UpdateModel::make('order')->addData(array(
+            'order_sn' => $orderSn,
+        ))->addColumnsCondition(array('order_id' => $order_info['order_id']))->execute();
+        $order_info['order_sn'] = $orderSn;
         $order_info['body'] = '微整形';
         $order_info['attach'] = 'wzx';
         $order_info['goods_tag'] = '微整形';

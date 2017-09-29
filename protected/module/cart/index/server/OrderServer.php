@@ -52,7 +52,11 @@ class OrderServer
         }
         return $car_price;
     }
-    
+
+    public static function getOrderSn()
+    {
+        return date('YmdHis').rand(1000,9999);
+    }
     private  function addOrderInfo($car_price)
     {
         $user_id = Session::getUserID();
@@ -61,7 +65,7 @@ class OrderServer
         $user_note = '';
         $pay_name = '微信支付';
         $data = array(
-            'order_sn'         => date('YmdHis').rand(1000,9999), // 订单编号
+            'order_sn'         => self::getOrderSn(), // 订单编号
             'user_id'          =>$user_id, // 用户id
             'consignee'        =>$address['consignee'], // 收货人
             'province'         =>$address['province'],//'省份id',
@@ -111,6 +115,7 @@ class OrderServer
             $data2['give_integral']      = $val['give_integral']; // 购买商品赠送积分
             $data2['prom_type']          = $val['prom_type']; // 0 普通订单,1 限时抢购, 2 团购 , 3 促销优惠
             $data2['prom_id']            = $val['prom_id']; // 活动id
+            $data2['original_img']       = $val['original_img']; // 活动id
             InsertModel::make('order_goods')->addData($data2)->execute();
             // 扣除商品库存  扣除库存移到 付完款后扣除
             //M('Goods')->where("goods_id = ".$val['goods_id'])->setDec('store_count',$val['goods_num']); // 商品减少库存
