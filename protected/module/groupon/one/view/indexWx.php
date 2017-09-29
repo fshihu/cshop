@@ -10,7 +10,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">会议简介</p>
+                            <p class="title">一键参团</p>
                         </div>
                     </div>
 
@@ -22,20 +22,11 @@
                                     <img style="" class="weui-media-box__thumb" src="" alt="">
                                 </div>
                                 <div class="weui-media-box__bd">
-                                    <p class="weui-media-box__desc">一抹色彩足以为你带来一抹色彩足以为你带来一抹色彩足以为你带来，惊艳改变。新版韩国进口粉润唇膏，时尚都市女性必备唇膏</p>
-                                    <p class="t1">2人参团： <span class="t1_s">￥34.5/件</span></p>
+                                    <p class="weui-media-box__desc"><?php echo $data['goods_name'] ?></p>
+                                    <p class="t1"><?php echo $group_one['total_num'] ?>人参团： <span class="t1_s">￥<?php echo $group_buy['shop_price'] ?>/件</span></p>
                                 </div>
                             </a>
-                            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-                                <div class="weui-media-box__hd">
-                                    <img class="weui-media-box__thumb" src="" alt="">
-                                </div>
-                                <div class="weui-media-box__bd">
-                                    <h4 class="weui-media-box__title">标题二</h4>
-                                    <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
-                                </div>
-                            </a>
-                        </div>
+                         </div>
             <div class="buy_user">
                 <div class="avatar_label">
                     <span class="avatar_label_item">

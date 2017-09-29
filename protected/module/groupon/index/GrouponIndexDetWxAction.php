@@ -9,6 +9,7 @@
 namespace module\groupon\index;
 
 
+use biz\Session;
 use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
 use CRequest;
@@ -27,11 +28,16 @@ class GrouponIndexDetWxAction extends \CAction
             'goods_id' => $group_buy['goods_id'],
         ))->execute();
 
+        $other_group_buys = ListModel::make('group_one')->addColumnsCondition(array(
+            't.uid' => ['!=',Session::getUserID()],
+            'is_finish' => 0,
+        ))->select('t.*,u.nickname,u.head_pic')->leftJoin('users','u','t.uid = u.user_id')->execute();
         return new \CRenderData(array(
             'group_buy' => $group_buy,
             'data' => $data,
             'comment_list' => [],
             'goods_images' => $goods_images,
+            'other_group_buys' => $other_group_buys,
         ));
     }
 }

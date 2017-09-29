@@ -59,33 +59,22 @@
 </div>
 
     <div class="list3_w">
+        <?php foreach($other_group_buys as $other_group_buy):?>
         <div class="list3_item">
             <span class="fl">
-                <img class="avatar" src="" alt="">
+                <img class="avatar" src="<?php echo $other_group_buy['head_pic'] ?>" alt="">
                 <span class="t1">
-                    <span class="t1_s">还是已经走</span>
+                    <span class="t1_s"><?php echo $other_group_buy['nikname'] ?></span>
                     <span class="t1_m">正在开团中</span>
                 </span>
             </span>
             <span class="fr">
-                <span class="t2">还差1人成团</span>
-                <span class="btn_r">去参团</span>
+                <span class="t2">还差<?php echo $other_group_buy['total_num'] - $other_group_buy['finish_num'] ?>人成团</span>
+                <a href="<?php echo $this->genurl('groupon/one/index',['group_one_id'=>$other_group_buy['id']]); ?>" class="btn_r">去参团</a>
             </span>
         </div>
-        <div class="list3_item">
-            <span class="fl">
-                <img class="avatar" src="" alt="">
-                <span class="t1">
-                    <span class="t1_s">还是已经走</span>
-                    <span class="t1_m">正在开团中</span>
-                </span>
-            </span>
-            <span class="fr">
-                <span class="t2">还差1人成团</span>
-                <span class="btn_r">去参团</span>
-            </span>
-        </div>
-    </div>
+        <?php endforeach?>
+     </div>
 
      <div class="weui-navbar navbar-sm nav_click">
         <a href="javascript:;" class="weui-navbar__item weui-bar__item_on">
