@@ -121,7 +121,7 @@
              <div class="t1">￥<?php echo $data['shop_price'] ?></div>
             <div class="t2">单独购买</div>
          </a>
-         <a href="<?php echo $this->genurl('pay/index'); ?>" class="bt_a bt_a2">
+         <a href="javascript:;" class="bt_a bt_a2">
              <div class="t1">￥<?php echo $group_buy['price'] ?></div>
              <div class="t2">一键开团</div>
          </a>

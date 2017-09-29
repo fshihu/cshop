@@ -4,6 +4,8 @@
  * Date: 2017/9/27
  * Time: 22:45
  */
+use module\cart\index\server\OrderWaitStatusEnum;
+
 ?>
 <p>发起支付中...</p>
 
@@ -16,10 +18,18 @@
 			<?php echo $jsApiParameters; ?>,
 			function(res){
 				WeixinJSBridge.log(res.err_msg);
-				if(res.err_msg){
+				if(res.err_msg == 'get_brand_wcpay_request:ok'){
+                    alert('支付成功');
+                    location.href = '<?php echo $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_SEND]);?>';
+                }else{
+                    if(res.err_msg == 'get_brand_wcpay_request:cancel'){
+                        alert('支付取消');
+                    }else{
+                        alert('支付失败');
+                    }
+                    location.href = '<?php echo $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_PAY]);?>';
 
                 }
-				alert(res.err_code+res.err_desc+res.err_msg);
 			}
 		);
 	}

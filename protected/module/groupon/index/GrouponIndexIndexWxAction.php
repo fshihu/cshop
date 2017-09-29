@@ -19,7 +19,9 @@ class GrouponIndexIndexWxAction extends \CAction
     public function execute(CRequest $request)
     {
         $cate_list =  ListModel::make('goods_category')->addStrCondition('parent_id>0')->execute();
-        $group_buys =  ListModel::make('group_buy')->order('id desc')->limit(5)->execute();
+        $group_buys =  ListModel::make('group_buy')->addColumnsCondition(array(
+            'end_time' => ['>',time()]
+        ))->order('id desc')->limit(5)->execute();
 
         return new \CRenderData(array(
             'cate_list' => $cate_list,

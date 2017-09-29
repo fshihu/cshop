@@ -19,6 +19,7 @@ class OrderServer
     protected $prom_type;
     protected $cart_ids;
     protected $cart_list = [];
+    protected $prom_id = 0;
     public static function instance($address_id,$prom_type,$cart_ids)
     {
         $obj = new static();
@@ -30,12 +31,29 @@ class OrderServer
     public  function addOrder()
     {
         $this->cart_list = CartServer::getListByIds($this->prom_type,$this->cart_ids);
+        $this->genPromid();
         $car_price = $this->calculatePrice();
         $order_id = $this->addOrderInfo($car_price);
         $this->addOrderGoods($order_id);
         return $order_id;
     }
 
+    protected function genPromid()
+    {
+        $this->prom_id = $this->cart_list[0]['prom_id'];
+        if($this->prom_type == PromTypeEnum::GROUP_OPNE){
+            $group_buy = ItemModel::make('group_buy')->addId($this->cart_list[0]['prom_id'])->execute();
+            $id = InsertModel::make('group_one')->addData(array(
+                'group_buy_id' => $group_buy['id'],
+                'uid' => Session::getUserID(),
+                'total_num' => $group_buy['goods_num'],
+                'finish_num' => 0,
+                'crate_time' => time(),
+                'is_finish' => 0,
+            ))->execute();
+            $this->prom_id = $id;
+        }
+    }
     private function calculatePrice()
     {
         $car_price['goodsFee'] = 0;//'商品价格'
@@ -45,7 +63,8 @@ class OrderServer
         $car_price['integral'] = 0;//'使用积分
         $car_price['pointsFee'] =0;//'使用积分抵扣机内
         $car_price['payables'] = 0;//'应付款金额
-        $car_price['order_prom_id'] = 0;
+        $car_price['order_prom_id'] = (int)$this->cart_list[0]['prom_id'];
+        $car_price['order_prom_type'] = $this->prom_type;
         $car_price['order_prom_amount'] = 0;
         foreach ($this->cart_list as $cart) {
             $car_price['goodsFee'] += $cart['shop_price'];
@@ -88,6 +107,7 @@ class OrderServer
             'total_amount'     =>($car_price['goodsFee'] + $car_price['postFee']),// 订单总额
             'order_amount'     =>$car_price['payables'],//'应付款金额',
             'add_time'         =>time(), // 下单时间
+            'order_prom_type'    =>$car_price['order_prom_type'],//'订单优惠活动id',
             'order_prom_id'    =>$car_price['order_prom_id'],//'订单优惠活动id',
             'order_prom_amount'=>$car_price['order_prom_amount'],//'订单优惠活动优惠了多少钱',
             'user_note'        =>$user_note, // 用户下单备注
@@ -113,8 +133,8 @@ class OrderServer
             $data2['member_goods_price'] = $val['member_goods_price']; // 会员折扣价
             $data2['cost_price']         = $val['cost_price']; // 成本价
             $data2['give_integral']      = $val['give_integral']; // 购买商品赠送积分
-            $data2['prom_type']          = $val['prom_type']; // 0 普通订单,1 限时抢购, 2 团购 , 3 促销优惠
-            $data2['prom_id']            = $val['prom_id']; // 活动id
+            $data2['prom_type']          = $this->prom_type; // 0 普通订单,1 限时抢购, 2 团购 , 3 促销优惠
+            $data2['prom_id']            = $this->prom_id; // 活动id
             $data2['original_img']       = $val['original_img']; // 活动id
             InsertModel::make('order_goods')->addData($data2)->execute();
             // 扣除商品库存  扣除库存移到 付完款后扣除

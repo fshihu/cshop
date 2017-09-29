@@ -16,7 +16,9 @@ class HomeIndexIndexWxAction extends \CAction
     public function execute(CRequest $request)
     {
         $cate_list =  ListModel::make('goods_category')->addColumnsCondition(array('parent_id' => 0))->execute();
-        $group_buys =  ListModel::make('group_buy')->order('id desc')->limit(5)->execute();
+        $group_buys =  ListModel::make('group_buy')->addColumnsCondition(array(
+            'end_time' => ['>',time()]
+        ))->order('id desc')->limit(5)->execute();
 
         return new \CRenderData(array(
             'ad_list' => AdServer::getList(AdPosition::HOME),

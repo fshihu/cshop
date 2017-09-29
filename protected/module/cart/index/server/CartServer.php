@@ -26,7 +26,7 @@ class CartServer
             't.prom_type' => $prom_type,
         );
         if ($ids) {
-            $conditon['id'] = ['in', $ids];
+            $conditon['t.id'] = ['in', $ids];
         }
         $list_mode->addColumnsCondition($conditon)
             ->select('

@@ -16,7 +16,7 @@ use module\cart\index\server\OrderWaitStatusEnum;
     <div class="weui-cells weui-title-title">
 
                  <div class="weui-cell weui-cell_access" href="javascript:;">
-                     <a href="javascript:history.back();">
+                     <a href="<?php echo $this->genurl('home/index/index'); ?>">
                          <div class="weui-cell__ft">
                          </div>
                      </a>

@@ -113,7 +113,8 @@ class PayNotifyCallBack extends WxPayNotify
 			$msg = "订单查询失败";
 			return false;
 		}
-        return $this->fn($data);
+        $fn = $this->fn;
+        return $fn($data);
 	}
 
     /**
