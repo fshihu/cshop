@@ -10,6 +10,7 @@ namespace module\cart\index\server;
 
 use CC\db\base\select\ItemModel;
 use CC\db\base\update\UpdateModel;
+use module\groupon\server\GroupOneServer;
 
 class OrderHanderServer
 {
@@ -28,6 +29,9 @@ class OrderHanderServer
             return true;
         }
         OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_PAYED);
+        if($order['prom_type'] == PromTypeEnum::GROUP_OPNE || $order['prom_type'] == PromTypeEnum::GROUP_JOIN){
+            GroupOneServer::instance()->handler($order);
+        }
         return true;
     }
 }
