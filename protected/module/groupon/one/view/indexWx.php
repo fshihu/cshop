@@ -19,32 +19,43 @@
             <div class="weui-panel__bd list4" style="background: #ffffff;">
                             <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                                 <div class="weui-media-box__hd">
-                                    <img style="" class="weui-media-box__thumb" src="" alt="">
+                                    <img style="" class="weui-media-box__thumb" src="<?php use module\cart\index\server\PromTypeEnum;
+
+                                    echo $data['original_img'] ?>" alt="">
                                 </div>
                                 <div class="weui-media-box__bd">
                                     <p class="weui-media-box__desc"><?php echo $data['goods_name'] ?></p>
-                                    <p class="t1"><?php echo $group_one['total_num'] ?>人参团： <span class="t1_s">￥<?php echo $group_buy['shop_price'] ?>/件</span></p>
+                                    <p class="t1"><?php echo $group_one['total_num'] ?>人参团： <span class="t1_s">￥<?php echo $group_buy['price'] ?>/件</span></p>
                                 </div>
                             </a>
                          </div>
             <div class="buy_user">
                 <div class="avatar_label">
+                    <?php foreach($group_one_members as $group_one_member):?>
                     <span class="avatar_label_item">
-                        <img src="" alt="" class="avatar">
+                        <img src="<?php echo $group_one_member['head_pic'] ?>" alt="" class="avatar">
+                         <?php if($group_one_member['is_leader']):?>
                         <span class="weui-badge" style="margin-left: 5px;">团长</span>
+                         <?php endif;?>
                     </span>
-                    <span class="avatar_label_item">
+                    <?php endforeach?>
+                   <span class="avatar_label_item">
                         <span class="t1">?</span>
                     </span>
 
                 </div>
                 <div class="t2">
-                    剩余1个名额
+                    剩余<?php echo $group_one['total_num'] - $group_one['finish_num'] ?>个名额
                 </div>
                 <div class="t3">
-                    剩余时间 12:23:31
+                    剩余时间 <span id="timer"></span>
                 </div>
-                <a class="weui-btn   btn2">立即参团</a>
+                <script language="javascript" type="text/javascript">
+
+                     leftTimer(<?php echo date('Y,n,j,h,i,s',$group_buy['end_time']) ?>,'#timer');
+                     </script>
+
+                <a href="ecg" class="weui-btn  lijcantbtn btn2">立即参团</a>
             </div>
                     </div>
 
@@ -53,7 +64,18 @@
 
 </div>
 
-<script src="__STATIC__/js/style.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $('.lijcantbtn').click(function () {
+            ajax_request('<?php echo $this->genurl('cart/index/add');?>',{
+                goods_id:'<?php echo $data['goods_id'] ?>',
+                goods_num:<?php echo $group_one['buy_num'] ?>,
+                prom_id:'<?php echo $group_one['id'] ?>',
+                prom_type:<?php echo PromTypeEnum::GROUP_JOIN ?>
+            },function () {
+                location.href = '<?php echo $this->genurl('cart/index/index',array('prom_type'=> PromTypeEnum::GROUP_JOIN));?>';
+            });
+            return false;
+        });
 
-	</body>
-</html>
+    </script>
+

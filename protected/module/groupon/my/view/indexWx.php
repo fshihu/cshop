@@ -10,17 +10,17 @@
                          </div>
                      </a>
                     <div class="weui-cell__bd">
-                        <p class="title">会议简介</p>
+                        <p class="title">我的拼团</p>
                     </div>
                 </div>
 
             </div>
     <div class="weui-navbar navbar-sm">
        <a href="" class="weui-navbar__item weui-bar__item_on">
-           待开会议
+           待成团
        </a>
        <a href="<?php echo $this->genurl('give') ?>" class="weui-navbar__item  ">
-           历史会议
+           已过期
        </a>
      </div>
 

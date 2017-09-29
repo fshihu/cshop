@@ -23,13 +23,15 @@
          <div class="t1"><?php echo $wait_status_val ?></div>
          <?php $order_goods = ListModel::make('order_goods')->addColumnsCondition(array('order_id' => $item['order_id']))->execute(); ?>
          <?php foreach($order_goods as $order_good):?>
-         <div class="t2">
-             <img class="t2_img" src="<?php echo $order_good['original_img'] ?>" alt="">
-             <div class="ts_s">
-                 <div class="t2_s_1"><?php echo $order_good['goods_name'] ?></div>
-                 <div class="t2_s_2">¥<?php echo $order_good['goods_price'] ?>×<?php echo $order_good['goods_num'] ?></div>
-             </div>
-         </div>
+             <a href="<?php echo $this->genurl('goods/det/index',['id' => $order_good['goods_id']]); ?>">
+                 <div class="t2">
+                              <img class="t2_img" src="<?php echo $order_good['original_img'] ?>" alt="">
+                              <div class="ts_s">
+                                  <div class="t2_s_1"><?php echo $order_good['goods_name'] ?></div>
+                                  <div class="t2_s_2">¥<?php echo $order_good['goods_price'] ?>×<?php echo $order_good['goods_num'] ?></div>
+                              </div>
+                          </div>
+             </a>
          <?php endforeach?>
          <div class="t3">
              实支付： <span class="t3_s">￥ <?php echo $item['goods_price'] ?></span>（免运费）
