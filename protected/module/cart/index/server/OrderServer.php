@@ -9,6 +9,7 @@ namespace module\cart\index\server;
 
 
 use biz\Session;
+use CC\db\base\delete\DeleteModel;
 use CC\db\base\insert\InsertModel;
 use CC\db\base\select\ItemModel;
 
@@ -114,6 +115,8 @@ class OrderServer
             // 扣除商品库存  扣除库存移到 付完款后扣除
             //M('Goods')->where("goods_id = ".$val['goods_id'])->setDec('store_count',$val['goods_num']); // 商品减少库存
         }
-
+        DeleteModel::make('cart')->addColumnsCondition(array(
+            'id' => ['in',$this->cart_ids],
+        ))->execute();
     }
 }

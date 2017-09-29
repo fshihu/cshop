@@ -16,4 +16,9 @@ class Session extends SessionAbs
     {
         return 2;
     }
+
+    public static function getName()
+    {
+        return '张三';
+    }
 }

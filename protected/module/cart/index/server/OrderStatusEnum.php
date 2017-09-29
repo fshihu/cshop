@@ -12,8 +12,8 @@ use CC\util\db\Enum;
 
 class OrderStatusEnum extends Enum
 {
-    const WAIT_PAY = 0; //待支付
-    const PAYED = 1; //已支付，待收货
+    const WAIT_CONFIRM = 0; //待确认
+    const CONFRIMED = 1; //已确认
     const RECIVED = 2; //已收货，待评价
     const CANCELED = 3;//已取消
     const FINISH = 4;//已完成

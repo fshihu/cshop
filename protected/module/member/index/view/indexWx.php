@@ -5,6 +5,8 @@
  * Date: 2017/9/19
  * Time: 17:25
  */
+use module\cart\index\server\OrderStatusEnum;
+
 ?>
 
 <!--搜索栏-s-->
@@ -27,7 +29,7 @@
         <div class="my">
             <div class="info">
                 <img src="<?php echo \module\member\index\UserServer::getAvatar() ?>" alt="" class="avatar">
-                <div class="t1">王茹沁怡</div>
+                <div class="t1"><?php echo \biz\Session::getName() ?></div>
                 <a href="<?php echo $this->genurl('info/qrcode') ?>">
                     <img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Qrcode_icon.png" alt="" class="code">
                 </a>
@@ -62,19 +64,19 @@
             <div class="order">
                 <div class="t1">我的订单</div>
                 <div class="t2_w">
-                    <a class="t2" href="<?php echo $this->genurl('order/index') ?>">
+                    <a class="t2" href="<?php echo $this->genurl('order/index',['order_status'=> OrderStatusEnum::WAIT_PAY]) ?>">
                         <div class="t2_s_w">
                             <img style="width: 22px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/obligation_icon.png" alt="" class="t2_s">
                         </div>
                         <div class="t2_m">待付款</div>
                     </a>
-                    <a class="t2">
+                    <a class="t2" href="<?php echo $this->genurl('order/index',['order_status'=> OrderStatusEnum::PAYED]) ?>">
                         <div class="t2_s_w">
                             <img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Tosendthegoods_icon.png" alt="" class="t2_s">
                         </div>
                         <div class="t2_m">待发货</div>
                     </a>
-                    <a class="t2">
+                    <a class="t2" href="<?php echo $this->genurl('order/index',['order_status'=> OrderStatusEnum::PAYED]) ?>">
                         <div class="t2_s_w">
                             <img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Awaitingdelivery_icon.png" alt="" class="t2_s">
                         </div>
