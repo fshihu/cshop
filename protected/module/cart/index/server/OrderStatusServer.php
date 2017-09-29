@@ -14,6 +14,7 @@ use CC\util\db\YesNoEnum;
 class OrderStatusServer
 {
     const TO_CANCEL = 1;
+    const TO_PAYED = 2;
     protected $order_id;
     public static function instance($order_id)
     {
@@ -30,6 +31,14 @@ class OrderStatusServer
                 'deleted' => YesNoEnum::YES,
                 'order_status' => OrderStatusEnum::CANCELED,
             ))->execute();
+        }elseif ($to_status == self::TO_PAYED){
+            UpdateModel::make('order')->addData(array(
+                'pay_status' => OrderPayStatusEnum::PAYED,
+                'wait_status' => OrderWaitStatusEnum::WAIT_SEND,
+            ))->addColumnsCondition(array(
+                'order_id' => $this->order_id,
+            ))->execute();
+
         }
 
     }

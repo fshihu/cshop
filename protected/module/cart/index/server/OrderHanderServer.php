@@ -24,14 +24,10 @@ class OrderHanderServer
     public function handle()
     {
         $order = ItemModel::make('order')->addColumnsCondition(['order_sn' => $this->data['out_trade_no']])->execute();
-        if($order['order_status']  != OrderStatusEnum::WAIT_PAY){
+        if($order['pay_status']  == OrderPayStatusEnum::PAYED){
             return true;
         }
-        UpdateModel::make('order')->addData(array(
-            'order_status' => OrderStatusEnum::PAYED,
-        ))->addColumnsCondition(array(
-            'order_id' => $order['order_id']
-        ))->execute();
+        OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_PAYED);
         return true;
     }
 }

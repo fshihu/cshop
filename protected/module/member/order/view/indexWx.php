@@ -51,5 +51,6 @@
             ajax_request($(this).attr('href'),{},function () {
                 $list_item.remove();
             });
+            return false;
         })
     </script>
