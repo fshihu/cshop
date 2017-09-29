@@ -45,8 +45,8 @@ class WxPay
     {
         \CC::env()->debug = true;
         $notify = new PayNotifyCallBack();
-        $notify->setFn(function () use($callback){
-            return $callback();
+        $notify->setFn(function ($data) use($callback){
+            return $callback($data);
         });
         $notify->Handle(false);
     }
