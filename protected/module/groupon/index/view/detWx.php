@@ -69,7 +69,7 @@
                 </span>
             </span>
             <span class="fr">
-                <span class="t2">还差<?php echo $other_group_buy['total_num'] - $other_group_buy['finish_num'] ?>人成团</span>
+                <span class="t2">还差<?php echo $other_group_buy['remain_num'] ?>人成团</span>
                 <a href="<?php echo $this->genurl('groupon/one/index',['group_one_id'=>$other_group_buy['id']]); ?>" class="btn_r">去参团</a>
             </span>
         </div>

@@ -5,7 +5,9 @@
         <div class="weui-cells weui-title-title">
 
                      <div class="weui-cell weui-cell_access" href="javascript:;">
-                         <a href="<?php echo $this->genurl('member/index/index'); ?>">
+                         <a href="<?php use module\goods\server\GoodsServer;
+
+                         echo $this->genurl('member/index/index'); ?>">
                              <div class="weui-cell__ft">
                              </div>
                          </a>
@@ -59,7 +61,7 @@
                 <div class="list_4s_item">
                     <div  class="weui-media-box weui-media-box_appmsg">
                         <div class="weui-media-box__hd">
-                            <img style="" class="weui-media-box__thumb" src="<?php echo $item['original_img'] ?>" alt="">
+                            <img style="" class="weui-media-box__thumb" src="<?php echo GoodsServer::getImg($item['original_img']) ?>" alt="">
                         </div>
                         <div class="weui-media-box__bd">
                             <p class="weui-media-box__desc">

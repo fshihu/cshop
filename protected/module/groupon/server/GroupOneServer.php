@@ -22,40 +22,25 @@ class GroupOneServer
 
     public function handler($order)
     {
-        if($order['prom_type'] == PromTypeEnum::GROUP_OPNE){
-            $group_buy = ItemModel::make('group_buy')->addId($order['prom_id'])->execute();
-            $id = InsertModel::make('group_one')->addData(array(
-                'group_buy_id' => $group_buy['id'],
-                'uid' => $order['user_id'],
-                'total_num' => $group_buy['goods_num'],
-                'finish_num' => 0,
-                'crate_time' => time(),
-                'is_finish' => 0,
-            ))->execute();
-            InsertModel::make('group_one_member')->addData(array(
-                'group_one_id' => $id,
-                'uid' => $order['user_id'],
-                'is_leader' => 1,
-                'time' => time(),
+        if($order['prom_type'] == PromTypeEnum::GROUP_OPNE || $order['prom_type'] == PromTypeEnum::GROUP_JOIN){
+            $group_one = ItemModel::make('group_one')->addId($order['prom_id'])->execute();
+            $finish_num = $group_one['finish_num'] + 1;
+            UpdateModel::make('group_one')->addColumnsCondition(array(
+                'id' => $order['prom_id']
+            ))->addData(array(
+                'pay_status' => 1,
+                'finish_num' => $finish_num,
+                'remain_num' => $group_one['total_num'] - $finish_num,
+                'is_finish' => $group_one['total_num'] == $finish_num?1:0,
             ))->execute();
         }
         if($order['prom_type'] == PromTypeEnum::GROUP_JOIN){
-            $group_one = ItemModel::make('group_one')->addId($order['prom_id'])->execute();
-//            UpdateModel::make('group_one')->
-//            $id = InsertModel::make('group_one')->addData(array(
-//                'group_buy_id' => $group_buy['id'],
-//                'uid' => $order['user_id'],
-//                'total_num' => $group_buy['goods_num'],
-//                'finish_num' => 0,
-//                'crate_time' => time(),
-//                'is_finish' => 0,
-//            ))->execute();
-//            InsertModel::make('group_one_member')->addData(array(
-//                'group_one_id' => $id,
-//                'uid' => $order['user_id'],
-//                'is_leader' => 1,
-//                'time' => time(),
-//            ))->execute();
+            InsertModel::make('group_one_member')->addData(array(
+                'group_one_id' => $order['prom_id'],
+                'uid' => $order['user_id'],
+                'is_leader' => 0,
+                'time' => time(),
+            ))->execute();
         }
     }
 }

@@ -40,7 +40,29 @@ class OrderServer
 
     protected function genPromid()
     {
-        $this->prom_id = $this->cart_list[0]['prom_id'];
+        if($this->prom_type == PromTypeEnum::GROUP_OPNE){
+            $group_buy = ItemModel::make('group_buy')->addId($this->cart_list[0]['prom_id'])->execute();
+            $id = InsertModel::make('group_one')->addData(array(
+                'group_buy_id' => $group_buy['id'],
+                'uid' => Session::getUserID(),
+                'total_num' => $group_buy['goods_num'],
+                'finish_num' => 0,
+                'remain_num' => 0,
+                'crate_time' => time(),
+                'is_finish' => 0,
+                'pay_status' => 0,
+            ))->execute();
+            $this->prom_id = $id;
+            InsertModel::make('group_one_member')->addData(array(
+                'group_one_id' => $id,
+                'uid' => Session::getUserID(),
+                'is_leader' => 1,
+                'time' => time(),
+            ))->execute();
+
+        }else if($this->prom_type == PromTypeEnum::GROUP_JOIN){
+
+        }
     }
     private function calculatePrice()
     {

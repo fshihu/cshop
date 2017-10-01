@@ -19,7 +19,9 @@
       <div class="banner ban1">
          <div class="mslide" id="slideTpshop">
              <ul>
-                <?php foreach($goods_images as $goods_image):?>
+                <?php use module\goods\server\GoodsServer;
+
+                foreach($goods_images as $goods_image):?>
                      <li>
                              <img src="<?php echo $goods_image['image_url'] ?>" title="{$v[title]}" style="{$v[style]}" alt="">
                      </li>
@@ -83,7 +85,7 @@
 
      <div class="buy_confirm" style="display: none;">
          <div class="bc_hd">
-             <img class="bc_img" src="<?php echo $data['original_img'] ?>" alt="">
+             <img class="bc_img" src="<?php echo GoodsServer::getImg($data['original_img']) ?>" alt="">
             <div class="bc_info">
                 <div class="t1">￥<?php echo $data['shop_price'] ?></div>
                 <div class="t2" style="display: none;">已选: <span class="t2_sm">杏色 中码</span></div>

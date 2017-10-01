@@ -31,6 +31,7 @@ class GrouponIndexDetWxAction extends \CAction
         $other_group_buys = ListModel::make('group_one')->addColumnsCondition(array(
             't.uid' => ['!=',Session::getUserID()],
             'is_finish' => 0,
+            'pay_status' => 1,
         ))->select('t.*,u.nickname,u.head_pic')->leftJoin('users','u','t.uid = u.user_id')->execute();
         return new \CRenderData(array(
             'group_buy' => $group_buy,

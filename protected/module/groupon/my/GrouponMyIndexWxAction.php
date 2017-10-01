@@ -9,12 +9,37 @@
 namespace module\groupon\my;
 
 
-use CRequest;
+use biz\action\ListAction;
+use biz\Session;
+use CC\util\db\YesNoEnum;
+use module\cart\index\server\OrderPayStatusEnum;
+use module\cart\index\server\PromTypeEnum;
 
-class GrouponMyIndexWxAction extends \CAction
+class GrouponMyIndexWxAction extends ListAction
 {
-    public function execute(CRequest $request)
+    public $is_end;
+    protected function getSearchCondition()
     {
-        return new \CRenderData();
+        $this->dbCondition->addColumnsCondition(array(
+            'user_id' => Session::getUserID(),
+            't.pay_status' => OrderPayStatusEnum::PAYED,
+            'deleted' => YesNoEnum::NO,
+            'order_prom_type' => PromTypeEnum::GROUP_OPNE,
+            'gb.end_time' => [$this->is_end?'<':'>',time()],
+        ))->leftJoin('group_one','go','t.order_prom_id = go.id')
+            ->leftJoin('group_buy','gb','go.group_buy_id = gb.id')
+            ->select('t.*,go.remain_num,gb.end_time ')
+            ->order('order_id desc');
+    }
+    protected function getTable()
+    {
+        return 'order';
+    }
+
+    protected function onExecute()
+    {
+        return [
+            'end_desc' => $this->is_end?'成团失败':'已过期',
+        ];
     }
 }

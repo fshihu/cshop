@@ -8,7 +8,9 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title"><?php echo $cate_item['name'] ?></p>
+                            <p class="title"><?php use module\goods\server\GoodsServer;
+
+                                echo $cate_item['name'] ?></p>
                         </div>
                     </div>
 
@@ -42,7 +44,7 @@
          <?php foreach($list as $item):?>
          <div class="goods_item">
              <a href="<?php echo $this->genurl('goods/det/index',['id'=>$item['goods_id']]) ?>">
-                 <img src="<?php echo $item['original_img'] ?>" alt="" width="100%" height="155">
+                 <img src="<?php echo GoodsServer::getImg($item['original_img']) ?>" alt="" width="100%" height="155">
                  <div class="txt"><?php echo $item['goods_name'] ?></div>
                  <div class="price">￥<?php echo $item['shop_price'] ?></div>
              </a>

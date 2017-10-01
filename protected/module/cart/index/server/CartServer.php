@@ -35,9 +35,7 @@ class CartServer
             sgp.key_name')
             ->leftJoin('goods', 'g', 't.goods_id = g.goods_id')
             ->leftJoin('spec_goods_price', 'sgp', 't.goods_id = sgp.goods_id and t.spec_key = sgp.key');
-        if ($prom_type == PromTypeEnum::GROUP_OPNE) {
-            $list_mode->leftJoin('group_buy', 'gb', 't.prom_id = gb.id')->addSelect('gb.price group_price');
-        }else if($prom_type == PromTypeEnum::GROUP_JOIN){
+        if($prom_type == PromTypeEnum::GROUP_OPNE || $prom_type == PromTypeEnum::GROUP_JOIN){
             $list_mode->leftJoin('group_one','go','t.prom_id = go.id')->leftJoin('group_buy', 'gb', 'go.group_buy_id = gb.id')->addSelect('gb.price group_price');
         }
         $list = $list_mode->execute();

@@ -20,8 +20,9 @@
                             <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
                                 <div class="weui-media-box__hd">
                                     <img style="" class="weui-media-box__thumb" src="<?php use module\cart\index\server\PromTypeEnum;
+                                    use module\goods\server\GoodsServer;
 
-                                    echo $data['original_img'] ?>" alt="">
+                                    echo GoodsServer::getImg($data['original_img']) ?>" alt="">
                                 </div>
                                 <div class="weui-media-box__bd">
                                     <p class="weui-media-box__desc"><?php echo $data['goods_name'] ?></p>
@@ -45,7 +46,7 @@
 
                 </div>
                 <div class="t2">
-                    剩余<?php echo $group_one['total_num'] - $group_one['finish_num'] ?>个名额
+                    剩余<?php echo $group_one['remain_num'] ?>个名额
                 </div>
                 <div class="t3">
                     剩余时间 <span id="timer"></span>

@@ -8,6 +8,9 @@
 namespace module\member\index;
 
 
+use biz\Session;
+use CC\db\base\select\ItemModel;
+
 class UserServer
 {
     public static function getLevelName()
@@ -15,13 +18,21 @@ class UserServer
         return '普通会员';
     }
 
+    public static function getUser($uid = null)
+    {
+        return ItemModel::make('users')->addColumnsCondition(array(
+            'user_id' => $uid?$uid:Session::getUserID(),
+        ))->execute();
+
+    }
     public static function getRecommUser()
     {
-        return '无';
+        $first_leader = self::getUser()['first_leader'];
+        return $first_leader?self::getUser($first_leader)['nickname']:'无';
     }
 
     public static function getAvatar()
     {
-        return  '';
+        return self::getUser()['head_pic'];
     }
 }

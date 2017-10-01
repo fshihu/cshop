@@ -18,7 +18,7 @@
                          </div>
                      </a>
                     <div class="weui-cell__bd">
-                        <p class="title">会议简介</p>
+                        <p class="title"><?php echo $user['nickname'] ?></p>
                     </div>
                 </div>
 
@@ -26,14 +26,14 @@
     <div class="  weui-panel_access  " >
          <div class="mem_info_qrcode">
             <div class="qrcode_w">
-                <img src="" alt="" class="qrcode">
+                <img src="<?php echo $user['qr_code_url'] ?>" alt="" class="qrcode">
             </div>
              <div class="weui-cell info">
-                             <div class="weui-cell__hd"><img class="ims" src="" alt=""  ></div>
+                             <div class="weui-cell__hd"><img class="ims" src="<?php echo \module\member\index\UserServer::getAvatar() ?>" alt=""  ></div>
                              <div class="weui-cell__bd">
-                                 <div class="t1">王茹沁怡</div>
+                                 <div class="t1"><?php echo $user['nickname'] ?></div>
                                  <div class="t2">推广链接</div>
-                                 <div class="t2">http：muse.huaban.com/services</div>
+                                 <div class="t2"><?php echo $user['recomm_url'] ?></div>
                                  <div class="t3">请扫描二维码或长按链接复制给用户</div>
                              </div>
                          </div>
