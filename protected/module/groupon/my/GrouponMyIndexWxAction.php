@@ -24,7 +24,7 @@ class GrouponMyIndexWxAction extends ListAction
             'user_id' => Session::getUserID(),
             't.pay_status' => OrderPayStatusEnum::PAYED,
             'deleted' => YesNoEnum::NO,
-            'order_prom_type' => PromTypeEnum::GROUP_OPNE,
+            'order_prom_type' => PromTypeEnum::GROUP_JOIN,
             'gb.end_time' => [$this->is_end?'<':'>',time()],
         ))->leftJoin('group_one','go','t.order_prom_id = go.id')
             ->leftJoin('group_buy','gb','go.group_buy_id = gb.id')
@@ -40,6 +40,7 @@ class GrouponMyIndexWxAction extends ListAction
     {
         return [
             'end_desc' => $this->is_end?'成团失败':'已过期',
+            'is_end' => $this->is_end,
         ];
     }
 }

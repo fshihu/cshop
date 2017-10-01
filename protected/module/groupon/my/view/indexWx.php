@@ -19,10 +19,10 @@
        <a href="<?php use CC\db\base\select\ListModel;
        use module\goods\server\GoodsServer;
 
-       echo $this->genurl(''); ?>" class="weui-navbar__item weui-bar__item_on">
+       echo $this->genurl(''); ?>" class="weui-navbar__item <?php echo $is_end?'':'weui-bar__item_on' ?>">
            待成团
        </a>
-       <a href="<?php echo $this->genurl('',['is_end' =>1]) ?>" class="weui-navbar__item  ">
+       <a href="<?php echo $this->genurl('',['is_end' =>1]) ?>" class="weui-navbar__item  <?php echo !$is_end?'':'weui-bar__item_on' ?> ">
            已过期
        </a>
      </div>
@@ -48,8 +48,13 @@
          实支付： <span class="t3_s">￥ <?php echo $item['goods_price'] ?></span>（免运费）
      </div>
      <div class="t5">
-        <span class="t5_1">剩余 21:23:26 结束拼团</span>
-        <span class="t5_2">还差3人</span>
+        <span class="t5_1">剩余 <span id="timer"></span> 结束拼团</span>
+         <script language="javascript" type="text/javascript">
+
+              leftTimer(<?php echo date('Y,n,j,h,i,s',$item['end_time']) ?>,'#timer');
+              </script>
+
+        <span class="t5_2">还差<?php echo $item['remain_num'] ?>人</span>
      </div>
  </div>
     <?php endforeach?>

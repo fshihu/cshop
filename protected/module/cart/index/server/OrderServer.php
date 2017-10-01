@@ -48,7 +48,7 @@ class OrderServer
                 'uid' => Session::getUserID(),
                 'total_num' => $group_buy['goods_num'],
                 'finish_num' => 0,
-                'remain_num' => 0,
+                'remain_num' => $group_buy['goods_num'],
                 'crate_time' => time(),
                 'is_finish' => 0,
                 'pay_status' => 0,
@@ -74,7 +74,7 @@ class OrderServer
         $car_price['integral'] = 0;//'使用积分
         $car_price['pointsFee'] =0;//'使用积分抵扣机内
         $car_price['payables'] = 0;//'应付款金额
-        $car_price['order_prom_id'] = (int)$this->cart_list[0]['prom_id'];
+        $car_price['order_prom_id'] = $this->prom_id;
         $car_price['order_prom_type'] = $this->prom_type;
         $car_price['order_prom_amount'] = 0;
         foreach ($this->cart_list as $cart) {

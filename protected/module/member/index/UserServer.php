@@ -13,7 +13,7 @@ use CC\db\base\select\ItemModel;
 
 class UserServer
 {
-    public static function getLevelName()
+    public static function getLevelName($user)
     {
         return '普通会员';
     }
@@ -35,4 +35,5 @@ class UserServer
     {
         return self::getUser()['head_pic'];
     }
+
 }

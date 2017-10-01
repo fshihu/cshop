@@ -45,7 +45,7 @@ use module\cart\index\server\OrderWaitStatusEnum;
                     </div>
                     <div class="t2_s t2_s2">
                         <div class="t2_s_m_1">
-                            <?php echo \module\member\index\UserServer::getLevelName() ?>
+                            <?php echo \module\member\index\UserServer::getLevelName($user) ?>
                         </div>
                         <div class="t2_s_m_2">
                             我的等级
@@ -181,7 +181,7 @@ use module\cart\index\server\OrderWaitStatusEnum;
                         <p>电子名片</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('info/pwd') ?>;">
+                <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('info/pwd') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Passwordchange_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>修改密码</p>
