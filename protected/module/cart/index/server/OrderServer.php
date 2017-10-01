@@ -44,6 +44,7 @@ class OrderServer
             $group_buy = ItemModel::make('group_buy')->addId($this->cart_list[0]['prom_id'])->execute();
             $id = InsertModel::make('group_one')->addData(array(
                 'group_buy_id' => $group_buy['id'],
+                'goods_id' => $group_buy['goods_id'],
                 'uid' => Session::getUserID(),
                 'total_num' => $group_buy['goods_num'],
                 'finish_num' => 0,
