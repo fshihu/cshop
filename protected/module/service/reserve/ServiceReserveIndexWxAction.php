@@ -77,6 +77,7 @@ class ServiceReserveIndexWxAction extends SaveAction implements IFormViewBuilder
             throw new CErrorException('出生日期不能为空');
         }
         $data['service_id'] = $this->request->getParams('service_id');
+        $data['part'] = $this->request->getParams('part');
         $birthday = $data['briday_year'].'-'.$data['briday_month'].'-'.$data['briday_day'];
         $data['birthday'] = strtotime($birthday);
         unset($data['briday_year']);

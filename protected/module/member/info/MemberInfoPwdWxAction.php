@@ -9,10 +9,10 @@
 namespace module\member\info;
 
 
+use biz\input\SimplePasswordInput;
 use CC\util\common\widget\form\IFormViewBuilder;
 use CC\util\common\widget\form\IInput;
 use CC\util\common\widget\form\PasswordInput;
-use CC\util\common\widget\form\SimplePasswordInput;
 use CC\util\encrypt\Password;
 use CRequest;
 

@@ -3,7 +3,7 @@
         <div class="weui-cells weui-title-title">
 
                      <div class="weui-cell weui-cell_access" href="javascript:;">
-                         <a href="javascript:history.back();">
+                         <a href="<?php echo $this->genurl('home/index/index'); ?>">
                              <div class="weui-cell__ft">
                              </div>
                          </a>
@@ -18,9 +18,9 @@
         <div class="  weui-panel_access  " style="height: 100%;background: #f3f7f8">
  <div class="goods_list">
      <div class="gl_nav">
-         <a href="<?php echo $this->genurl(''); ?>" class="<?php echo $cate_id?'':'ac' ?>">全部</a>
+         <a href="<?php echo $this->genurl('',['id' =>$id]); ?>" class="<?php echo $cate_id?'':'ac' ?>">全部</a>
          <?php foreach($cate_list as $item):?>
-         <a class="<?php echo $item['id']== $cate_id?'ac':'' ?>" href="<?php echo $this->genurl('',['cate_id'=>$item['id']]); ?>"><?php echo $item['name'] ?></a>
+         <a class="<?php echo $item['id']== $cate_id?'ac':'' ?>" href="<?php echo $this->genurl('',['id' => $id,'cate_id'=>$item['id']]); ?>"><?php echo $item['name'] ?></a>
          <?php endforeach?>
          <a href="" style="display: none;">
              <img style="position: relative;top:-3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pull-down_icon.png" width="10" alt=""></a>

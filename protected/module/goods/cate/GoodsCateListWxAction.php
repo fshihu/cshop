@@ -22,12 +22,15 @@ class GoodsCateListWxAction extends ListAction
     public $id;
     public $cate_item;
     public $cate_list;
+    public $cate_id;
     protected function onExecute()
     {
 
         return  (array(
             'cate_item' => $this->cate_item,
             'cate_list' => $this->cate_list,
+            'id' => $this->id,
+            'cate_id' => $this->cate_id,
             'ad_list' => AdServer::getList(AdPosition::CATE_LIST),
 
         ));
@@ -41,6 +44,11 @@ class GoodsCateListWxAction extends ListAction
         $this->dbCondition->addColumnsCondition(array(
             'cat_id' => array('in', ArrayUtil::arrayColumn(array_merge($this->cate_list, [$this->cate_item]), 'id'))
         ));
+        if($this->cate_id){
+            $this->dbCondition->addColumnsCondition(array(
+                'cat_id' => $this->cate_id,
+            ));
+        }
     }
 
     protected function getTable()

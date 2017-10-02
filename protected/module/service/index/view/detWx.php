@@ -36,7 +36,7 @@
              部位：
          </div>
          <div class="buwei_item_w btn_group_sel">
-             <?php foreach(explode('|',$data['part']) as $part):?>
+             <?php foreach(explode('|',$data['part']) as $i => $part):?>
              <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default"><?php echo $part ?></a>
              <?php endforeach?>
          </div>
@@ -81,3 +81,12 @@
      </div>
 
 </div>
+    <script type="text/javascript">
+        $(function () {
+            $('.btn_group_sel .weui-btn').click(function () {
+                var link = '<?php echo $this->genurl('reserve/index',['service_id'=>$data['id']]) ?>';
+                $('.buy_btn_now').attr('href',link+'&part='+$(this).text());
+            }).eq(0).click();
+
+        });
+    </script>
