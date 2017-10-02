@@ -17,7 +17,12 @@ class BankEnum extends Enum
     protected function initAddDatas()
     {
         $this->addForArray(array(
-            '工行',
+            '中国银行',
         ));
+    }
+
+    public static function getIconByIndex($bank_name)
+    {
+        return '';
     }
 }

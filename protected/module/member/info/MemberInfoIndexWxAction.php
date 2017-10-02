@@ -40,7 +40,7 @@ class MemberInfoIndexWxAction extends SaveAction implements IFormViewBuilder
             new RadioButtonListInput('sex','性别',SexEnum::getValues()),
             (new TextInput('id_card','身份证号',['must']))->setPlaceHolder('请输入身份证号'),
             (new TextInput('email','邮箱',['must']))->setPlaceHolder('请输入邮箱'),
-            new DateInput('briday','出生日期',['must']),
+            new DateInput('briday','出生日期'),
             (new TextInput('occupation','职业',['must']))->setPlaceHolder('请输入职业'),
             (new AddrInput('addr','地址')),
             (new TextInput('addr_info','详细地址',['must']))->setPlaceHolder('请输入详细地址'),
@@ -53,7 +53,6 @@ class MemberInfoIndexWxAction extends SaveAction implements IFormViewBuilder
         if(!$data['briday_year'] || !$data['briday_month'] || !$data['briday_day']){
             throw new CErrorException('出生日期不能为空');
         }
-        $data['service_id'] = $this->request->getParams('service_id');
         $birthday = $data['briday_year'].'-'.$data['briday_month'].'-'.$data['briday_day'];
         $data['birthday'] = strtotime($birthday);
         unset($data['briday_year']);
@@ -68,6 +67,11 @@ class MemberInfoIndexWxAction extends SaveAction implements IFormViewBuilder
         unset($data['code']);
 
     }
+    protected function getTable()
+    {
+        return 'users';
+    }
+
 
     /**
      * @return string "name,pass"

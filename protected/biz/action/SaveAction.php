@@ -25,6 +25,15 @@ abstract class SaveAction extends \CC\action\SaveAction
         return 'id';
     }
 
+    protected function getDetData()
+    {
+        $id = $this->getId();
+        if ($id) {
+            return ItemModel::make($this->getTable())->addId($id,$this->getIdField())->execute();
+        }
+        return null;
+    }
+
     protected function saveData()
     {
         $post_data = $this->getPostData();

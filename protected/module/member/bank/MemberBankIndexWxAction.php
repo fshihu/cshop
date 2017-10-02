@@ -10,14 +10,21 @@ namespace module\member\bank;
 
 
 
+use biz\action\ListAction;
+use biz\Session;
 use CRequest;
 
-class MemberBankIndexWxAction extends \CAction
+class MemberBankIndexWxAction extends ListAction
 {
-    public function execute(CRequest $request)
+    protected function getTable()
     {
-        return new \CRenderData();
+        return 'users_bank';
     }
-
+    protected function getSearchCondition()
+    {
+        $this->dbCondition->addColumnsCondition(array(
+            'user_id' => Session::getUserID(),
+        ));
+    }
 
 }

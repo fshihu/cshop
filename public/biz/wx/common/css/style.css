@@ -452,3 +452,14 @@ border-left: 80px solid transparent; top:0; right:0;
 .mem_level_give .binfo .t1{ text-align: center; padding:5px 0 ;}
 .mem_level_give .bs_i{padding: 10px; }
 .mem_level_give .bs_i .sb_i_1{ color: #2CC7C5; }
+
+
+.list7 .list_item{ overflow: hidden;background: #ffffff; margin: 12px;
+             padding:10px;position: relative;}
+.list7 .list_item .img{ float: left; width:30px; height:30px;}
+.list7 .list_item .icont{ margin-left:50px;}
+.list7 .list_item .checkbox{position: absolute;top:25px;right: 25px;}
+.list7 .list_item .icont .t1{ font-size: 15px;}
+.list7 .list_item .icont .t2{ font-size: 9px;}
+.list7 .list_item .icont .t3{ font-size: 9px;}
+.list7 .list_item .icont .t4{ text-align: right; padding-top:10px;}

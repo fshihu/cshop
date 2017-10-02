@@ -31,15 +31,17 @@
  </div>
 
 </div>
-<div class="js_dialog" id="iosDialog2" style="display: none;">
-            <div class="weui-mask"></div>
-            <div class="weui-dialog">
-                <div class="weui-dialog__bd">
-                    您填写的预约资料必须与服务是使用人资料需要一致才能上传资料进入返还流程
-                </div>
-                <div class="weui-dialog__ft">
-                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
-                </div>
-            </div>
-        </div>
+<script type="text/javascript">
+    $('.sub_btn').click(function () {
+        ajax_request('',$('form').serialize(),function () {
+            ajax_request('',$('.form-panel form').serialize(),function () {
+                Tip('提交成功');
+                setTimeout(function () {
+                    location.href = '<?php echo $this->genurl('member/index/index');?>';
+                },200);
+            });
+        });
+        return false;
+    });
 
+</script>
