@@ -72,7 +72,7 @@
              </div>
      </div>
 
-     <a class="buy_btn_now" href="<?php echo $this->genurl('reserve/index',['id'=>$data['id']]) ?>">
+     <a class="buy_btn_now" href="<?php echo $this->genurl('reserve/index',['service_id'=>$data['id']]) ?>">
          立即预约
      </a>
  </div>

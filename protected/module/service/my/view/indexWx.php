@@ -5,59 +5,62 @@
     <div class="weui-cells weui-title-title">
 
                  <div class="weui-cell weui-cell_access" href="javascript:;">
-                     <a href="javascript:history.back();">
+                     <a href="<?php echo $this->genurl('member/index/index'); ?>">
                          <div class="weui-cell__ft">
                          </div>
                      </a>
                     <div class="weui-cell__bd">
-                        <p class="title">会议简介</p>
+                        <p class="title">预约服务</p>
                     </div>
                 </div>
 
             </div>
-    <div class="gl_nav">
-        <a href="" class="ac">全部</a>
-        <a href="">化妆品</a>
-        <a href="">化妆品</a>
-        <a href="">化妆品</a>
-        <a href="">
-            <img style="position: relative;top:-3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pull-down_icon.png" width="10" alt=""></a>
+    <div class="gl_nav swiper-container" style="height: 20px;">
+        <div class="swiper-wrapper">
+            <a href="<?php use module\service\index\enum\ServiceStatusEnum;
+
+                echo $this->genurl(''); ?>" class="swiper-slide <?php echo $status == 0 ?'ac':'' ?>">待审核</a>
+                <a class="swiper-slide <?php echo $status == 1 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_SERVICE]); ?>">待服务</a>
+                <a class="swiper-slide <?php echo $status == 2 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_NO_PASS]); ?>">未通过</a>
+                <a class="swiper-slide <?php echo $status == 3 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_COMMONT]); ?>">待评价</a>
+                <a class="swiper-slide <?php echo $status == 4 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_SUBSIDY]); ?>">待补贴</a>
+                <a class="swiper-slide <?php echo $status == 5 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_SUBSIDY_NO_PADD]); ?>">补贴申请未通过</a>
+        </div>
+
     </div>
 
 <div class="list5">
+    <?php foreach($list as $item):?>
  <div class="list_item">
-     <div class="t1">待审核</div>
+     <div class="t1"><?php echo $status_desc ?></div>
+
+     <a href="<?php echo $this->genurl('service/index/det',['id'=>$item['service_id']]); ?>">
+
      <div class="t2">
-         <img class="t2_img" src="" alt="">
+         <img class="t2_img" src="<?php echo $item['image'] ?>" alt="">
          <div class="ts_s">
-             <div class="t2_s_1">新版韩国进口粉润唇膏，时尚都市女性必备唇膏新版韩国进口粉润唇膏，时尚都市女性必备唇膏</div>
+             <div class="t2_s_1"><?php echo $item['name'] ?></div>
          </div>
      </div>
-     <style type="text/css">
+     </a>
 
-     </style>
      <div class="t4">
 
-         <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">点击查看我的预约信息</a>
+         <a href="<?php echo $this->genurl('info',['id'=>$item['id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default">点击查看我的预约信息</a>
      </div>
  </div>
-    <div class="list_item">
-     <div class="t1">待审核</div>
-     <div class="t2">
-         <img class="t2_img" src="" alt="">
-         <div class="ts_s">
-             <div class="t2_s_1">新版韩国进口粉润唇膏，时尚都市女性必备唇膏新版韩国进口粉润唇膏，时尚都市女性必备唇膏</div>
-         </div>
-     </div>
-     <style type="text/css">
+    <?php endforeach?>
 
-     </style>
-     <div class="t4">
-
-         <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">点击查看我的预约信息</a>
-     </div>
  </div>
-</div>
  </div>
 
 </div>
+<script type="text/javascript">
+    var swiper = new Swiper('.swiper-container', {
+         pagination: '.swiper-pagination',
+         slidesPerView: 'auto',
+         paginationClickable: true,
+ //        spaceBetween: 30
+     });
+
+</script>

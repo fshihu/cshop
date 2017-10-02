@@ -18,7 +18,7 @@
                          </div>
                      </a>
                     <div class="weui-cell__bd">
-                        <p class="title">会议简介</p>
+                        <p class="title">个人信息修改</p>
                     </div>
                 </div>
 

@@ -49,4 +49,8 @@ class DateInput extends BaseInput
         $str .= '<span class="date_input_tip date_input_tip_day">日</span>';
         return $str;
     }
+    public function getPostNames()
+    {
+        return ['briday_year','briday_month','briday_day'];
+    }
 }

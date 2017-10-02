@@ -1,4 +1,9 @@
-
+<?php echo \CC\util\common\server\AssetManager::instance()->getCssJs(array(
+        '/public/biz/datepicker/css/mobiscroll.css',
+        '/public/biz/datepicker/css/mobiscroll_date.css',
+     '/public/biz/datepicker/js/mobiscroll_date.js',
+        '/public/biz/datepicker/js/mobiscroll.js',
+)) ?>
     <!--搜索栏-s-->
 <div class="page  weui-tab__panel  " style="height: 100%; ">
     <div class="page__bd"  style="min-height: 100%;">
@@ -44,10 +49,30 @@
                location.href='<?php echo $this->genurl('ok') ?>';
            });
         $('.sub_btn').click(function () {
-            alerts();return;
+            ajax_request('',$('form').serialize(),function () {
                 ajax_request('',$('.form-panel form').serialize(),function () {
-                   location.href='<?php echo $this->genurl('index');?>';
+                    alerts();
                 });
+            });
+            return false;
         });
+        var currYear = (new Date()).getFullYear();
+        	var opt={};
+        	opt.date = {preset : 'date'};
+        	opt.datetime = {preset : 'datetime'};
+        	opt.time = {preset : 'time'};
+        	opt.default = {
+        		theme: 'android-ics light', //皮肤样式
+        		display: 'modal', //显示方式
+        		mode: 'scroller', //日期选择模式
+        		dateFormat: 'yyyy-mm-dd',
+        		lang: 'zh',
+        		showNow: true,
+        		nowText: "今天",
+        		startYear: currYear , //开始年份
+        		endYear: currYear + 10 //结束年份
+        	};
 
-    </script>
+        	$("#form_date").mobiscroll($.extend(opt['date'], opt['default']));
+
+     </script>

@@ -9,12 +9,32 @@
 namespace module\service\my;
 
 
+use biz\Session;
+use CC\action\ListAction;
 use CRequest;
+use module\service\index\enum\ServiceStatusEnum;
 
-class ServiceMyIndexWxAction extends \CAction
+class ServiceMyIndexWxAction extends ListAction
 {
-    public function execute(CRequest $request)
+    public $status;
+    protected function getTable()
     {
-        return new \CRenderData();
+        return 'service_reserve';
+    }
+    protected function onExecute()
+    {
+        return array(
+            'status' => $this->status,
+            'status_desc' => ServiceStatusEnum::getValueByIndex($this->status),
+        );
+    }
+
+    protected function getSearchCondition()
+    {
+        $this->dbCondition->addColumnsCondition(array(
+            'user_id' => Session::getUserID(),
+            'status' => $this->request->getParams('status',0),
+
+        ))->select('t.*,s.name,s.image')->leftJoin('service','s','t.service_id = s.id');
     }
 }

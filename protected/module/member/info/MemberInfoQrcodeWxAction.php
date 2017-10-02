@@ -23,12 +23,12 @@ class MemberInfoQrcodeWxAction extends \CAction
             mkdir($dir);
         }
         $qr_code_path = $dir .$user['user_id'].'.png';
+        $user['recomm_url'] = $request->url->genurl('member/recomm/reg',['pid'=>$user['user_id']],true);
         if(!is_file($qr_code_path)){
-            QrCodeMaster::png('xx',$qr_code_path,QR_ECLEVEL_L,16,0);
+            QrCodeMaster::png($user['recomm_url'],$qr_code_path,QR_ECLEVEL_L,16,0);
         }
         $qr_code_url = \CC::app()->baseUrl.'/files/qr_code/'.$user['user_id'].'.png';
         $user['qr_code_url'] = $qr_code_url;
-        $user['recomm_url'] = $request->url->genurl('member/recomm/reg',['pid'=>$user['user_id']]);
         return new \CRenderData(array(
             'user' => $user,
         ));

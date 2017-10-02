@@ -8,24 +8,25 @@
 
 namespace module\member\info;
 
+use biz\action\SaveAction;
 use biz\input\AddrInput;
 use biz\input\CaptchaInput;
 use biz\input\DateInput;
+use biz\Session;
+use CC\util\common\widget\form\creator\CheckCreator;
+use CC\util\common\widget\form\creator\PostNamesCreator;
 use CC\util\common\widget\form\IFormViewBuilder;
 use CC\util\common\widget\form\IInput;
 use CC\util\common\widget\form\RadioButtonListInput;
 use CC\util\common\widget\form\SubmitInput;
 use CC\util\common\widget\form\TextInput;
 use CC\util\db\SexEnum;
+use CErrorException;
 use CRequest;
 
 
-class MemberInfoIndexWxAction extends \CAction implements IFormViewBuilder
+class MemberInfoIndexWxAction extends SaveAction implements IFormViewBuilder
 {
-    public function execute(CRequest $request)
-    {
-        return new \CRenderData();
-    }
 
     /**
      * @return  IInput[]
@@ -33,17 +34,59 @@ class MemberInfoIndexWxAction extends \CAction implements IFormViewBuilder
     public function createFormInputs()
     {
         return array(
-            (new TextInput('name','姓名'))->setPlaceHolder('请输入姓名'),
-            (new TextInput('name','手机号'))->setPlaceHolder('请输入手机号'),
-            new CaptchaInput('name','验证码'),
-            new RadioButtonListInput('name','性别',SexEnum::getValues()),
-            (new TextInput('name','身份证号'))->setPlaceHolder('请输入身份证号'),
-            (new TextInput('name','邮箱'))->setPlaceHolder('请输入邮箱'),
-            new DateInput('briday','出生日期'),
-            (new TextInput('name','职业'))->setPlaceHolder('请输入职业'),
-            (new AddrInput('name','地址')),
-            (new TextInput('name','详细地址'))->setPlaceHolder('请输入详细地址'),
+            (new TextInput('name','姓名',['must']))->setPlaceHolder('请输入姓名'),
+            (new TextInput('mobile','手机号',['must']))->setPlaceHolder('请输入手机号'),
+            new CaptchaInput('code','验证码',['must']),
+            new RadioButtonListInput('sex','性别',SexEnum::getValues()),
+            (new TextInput('id_card','身份证号',['must']))->setPlaceHolder('请输入身份证号'),
+            (new TextInput('email','邮箱',['must']))->setPlaceHolder('请输入邮箱'),
+            new DateInput('briday','出生日期',['must']),
+            (new TextInput('occupation','职业',['must']))->setPlaceHolder('请输入职业'),
+            (new AddrInput('addr','地址')),
+            (new TextInput('addr_info','详细地址',['must']))->setPlaceHolder('请输入详细地址'),
             new SubmitInput(),
         );
+    }
+
+    protected function onBeforeSave(&$data)
+    {
+        if(!$data['briday_year'] || !$data['briday_month'] || !$data['briday_day']){
+            throw new CErrorException('出生日期不能为空');
+        }
+        $data['service_id'] = $this->request->getParams('service_id');
+        $birthday = $data['briday_year'].'-'.$data['briday_month'].'-'.$data['briday_day'];
+        $data['birthday'] = strtotime($birthday);
+        unset($data['briday_year']);
+        unset($data['briday_month']);
+        unset($data['briday_day']);
+        if(!$data['birthday']){
+            throw new CErrorException('出生日期格式不正确');
+        }
+        if(!$data['province'] || !$data['city'] || !$data['district']){
+            throw new CErrorException('出生地不能为空');
+        }
+        unset($data['code']);
+
+    }
+
+    /**
+     * @return string "name,pass"
+     */
+    protected function getPostNames()
+    {
+        return PostNamesCreator::create($this);
+    }
+    protected function getCheckers()
+    {
+        return CheckCreator::create($this);
+    }
+    protected function getId()
+    {
+        return Session::getUserID();
+    }
+
+    protected function getIdField()
+    {
+        return 'user_id';
     }
 }
