@@ -26,6 +26,7 @@ class MemberOrderIndexWxAction  extends ListAction
     {
         return array(
             'wait_status_val' => OrderWaitStatusEnum::getValueByIndex($this->wait_status),
+            'wait_status' => $this->wait_status,
         );
     }
 

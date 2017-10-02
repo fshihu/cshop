@@ -11,6 +11,7 @@
                          </a>
                         <div class="weui-cell__bd">
                             <p class="title"><?php use CC\db\base\select\ListModel;
+                                use module\cart\index\server\OrderWaitStatusEnum;
                                 use module\goods\server\GoodsServer;
 
                                 echo $wait_status_val ?>订单</p>
@@ -37,11 +38,21 @@
          <div class="t3">
              实支付： <span class="t3_s">￥ <?php echo $item['goods_price'] ?></span>（免运费）
          </div>
+          <?php if($wait_status == OrderWaitStatusEnum::WAIT_PAY):?>
           <div class="t4">
 
              <a href="<?php echo $this->genurl('cancel',['order_id'=>$item['order_id']]); ?>"  class="deletopbtn weui-btn weui-btn_mini weui-btn_default">取消订单</a>
              <a href="<?php echo $this->genurl('pay/index/index',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_warn">去支付</a>
          </div>
+          <?php endif;?>
+          <?php if($wait_status == OrderWaitStatusEnum::WAIT_RECIVE):?>
+          <div class="t4">
+
+             <a href="https://www.kuaidi100.com/chaxun?com=<?php echo $item['shipping_name'] ?>&nu=<?php echo $item['invoice_no'] ?>"  class="deletopbtn weui-btn weui-btn_mini weui-btn_default">查看物流</a>
+             <a href="<?php echo $this->genurl('confirm',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_warn confrim_shouhuo">确认收货</a>
+         </div>
+          <?php endif;?>
+
      </div>
       <?php endforeach?>
   </div>
@@ -55,5 +66,11 @@
                 $list_item.remove();
             });
             return false;
-        })
+        });
+        $('.confrim_shouhuo').click(function () {
+            var $list_item = $(this).closest('.list_item');
+            ajax_request($(this).attr('href'),{},function () {
+                $list_item.remove();
+            });
+        });
     </script>

@@ -80,6 +80,7 @@ class OrderServer
         foreach ($this->cart_list as $cart) {
             $car_price['goodsFee'] += $cart['shop_price'];
         }
+        $car_price['payables'] = $car_price['goodsFee'];
         return $car_price;
     }
 

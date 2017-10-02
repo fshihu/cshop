@@ -77,7 +77,7 @@ use module\cart\index\server\OrderWaitStatusEnum;
                         </div>
                         <div class="t2_m">待发货</div>
                     </a>
-                    <a class="t2" href="<?php echo $this->genurl('order/index',['wait_status'=> OrderWaitStatusEnum::WAIT_SEND]) ?>">
+                    <a class="t2" href="<?php echo $this->genurl('order/index',['wait_status'=> OrderWaitStatusEnum::WAIT_RECIVE]) ?>">
                         <div class="t2_s_w">
                             <img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Awaitingdelivery_icon.png" alt="" class="t2_s">
                         </div>

@@ -596,9 +596,9 @@ class Order extends Base {
 		$data = I('post.');
 		$res = $orderLogic->deliveryHandle($data);
 		if($res){
-			$this->success('操作成功',U('Admin/Order/delivery_info',array('order_id'=>$data['order_id'])));
+			$this->success('操作成功',U('Admin/Order/detail',array('order_id'=>$data['order_id'])));
 		}else{
-			$this->success('操作失败',U('Admin/Order/delivery_info',array('order_id'=>$data['order_id'])));
+			$this->success('操作失败',U('Admin/Order/detail',array('order_id'=>$data['order_id'])));
 		}
     }
 

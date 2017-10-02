@@ -15,6 +15,7 @@ class OrderStatusServer
 {
     const TO_CANCEL = 1;
     const TO_PAYED = 2;
+    const TO_CONFIRM = 3;
     protected $order_id;
     public static function instance($order_id)
     {
@@ -35,10 +36,18 @@ class OrderStatusServer
             UpdateModel::make('order')->addData(array(
                 'pay_status' => OrderPayStatusEnum::PAYED,
                 'wait_status' => OrderWaitStatusEnum::WAIT_SEND,
+                'pay_time' => time(),
             ))->addColumnsCondition(array(
                 'order_id' => $this->order_id,
             ))->execute();
 
+        }elseif ($to_status == self::TO_CONFIRM){
+            UpdateModel::make('order')->addData(array(
+                'wait_status' => OrderWaitStatusEnum::WAIT_COMMENT,
+                'order_status' => OrderStatusEnum::RECIVED,
+            ))->addColumnsCondition(array(
+                'order_id' => $this->order_id,
+            ))->execute();
         }
 
     }

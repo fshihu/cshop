@@ -32,7 +32,7 @@ class CartServer
             ->select('
             t.id,t.goods_id,t.goods_num,t.spec_key,t.prom_type,t.prom_id,
             g.goods_name,g.shop_price,g.original_img,
-            sgp.key_name')
+            sgp.key_name spec_key_name')
             ->leftJoin('goods', 'g', 't.goods_id = g.goods_id')
             ->leftJoin('spec_goods_price', 'sgp', 't.goods_id = sgp.goods_id and t.spec_key = sgp.key');
         if ($prom_type == PromTypeEnum::GROUP_OPNE) {

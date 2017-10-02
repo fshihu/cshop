@@ -45,9 +45,6 @@
         			<if condition="($list['order_status'] eq 3  and $list['pay_status'] eq 0) or ($list['order_status'] eq 5)">
         				<a class="btn red" href="javascript:void(0);" data-href="{:U('Admin/order/delete_order',array('order_id'=>$list['order_id']))}" onclick="del(this)"><i class="fa fa-trash-o"></i>删除</a>
         			</if>
-        			<if condition="($list['order_status'] eq 3  and $list['pay_status'] eq 1)">
-        				<a class="btn green" href="{:U('Admin/order/detail',array('order_id'=>$list['order_id']))}"><i class="fa fa-list-alt"></i>查看</a>
-        			</if>
         		</div>
          </td>
       </tr>
@@ -67,9 +64,9 @@
     
  // 删除操作
     function del(obj) {
-		confirm('确定要删除吗?', function(){
-			location.href = $(obj).data('href');  
-		});
+		if (confirm('确定要删除吗?')){
+            location.href = $(obj).data('href');
+        }
 	}
     
     $('.ftitle>h5').empty().html("(共{$pager->totalRows}条记录)");

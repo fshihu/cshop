@@ -293,6 +293,9 @@ class OrderLogic extends Model
 		}else{
 			$updata['shipping_status'] = 2;
 		}
+		$updata['shipping_name'] = $_POST['shipping_name'];
+		$updata['invoice_no'] = $_POST['invoice_no'];
+		$updata['wait_status'] = 2;//待收货
 		M('order')->where("order_id=".$data['order_id'])->save($updata);//改变订单状态
 		$s = $this->orderActionLog($order['order_id'],'delivery',$data['note']);//操作日志
 		
