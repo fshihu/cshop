@@ -36,10 +36,10 @@ use module\member\bank\enum\BankEnum;
                         <?php echo $item['name'] ?> &nbsp; &nbsp; <?php echo BankEnum::getValueByIndex($item['bank_name']) ?>
                     </div>
                     <div class="t2"><?php echo substr_replace($item['contact'],'****',3,4) ?></div>
-                    <div class="t3">**** &nbsp; &nbsp; **** &nbsp; &nbsp; <?php echo substr($item['bank_card'],0,-4) ?></div>
+                    <div class="t3">**** &nbsp; &nbsp; **** &nbsp; &nbsp; <?php echo substr($item['bank_card'],-4) ?></div>
                     <div class="t4">
                         <a href="<?php echo $this->genurl('add',['id'=>$item['id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default">修改</a>
-                          <a href="<?php echo $this->genurl('delete',['id'=>$item['id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default">删除</a>
+                          <a href="<?php echo $this->genurl('delete',['id'=>$item['id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default delete_link">删除</a>
                     </div>
                 </div>
             </div>
@@ -55,3 +55,13 @@ use module\member\bank\enum\BankEnum;
  </div>
 
 </div>
+<script type="text/javascript">
+    $('body').on('click','.delete_link',function () {
+
+        var $this = $(this);
+        ajax_request($this.attr('href'),{},function () {
+            $this.closest('.list_item').remove();
+        });
+        return false;
+    });
+</script>

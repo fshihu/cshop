@@ -20,6 +20,10 @@ class MemberIndexIndexWxAction extends \CAction
         $user = ItemModel::make('users')->addColumnsCondition(array(
             'user_id' => Session::getUserID(),
         ))->execute();
+        $total = ItemModel::make('users')->addColumnsCondition(array(
+            'first_leader' => Session::getUserID(),
+        ))->select('count(*) count_num')->execute();
+        $user['recomm_count'] = (int)$total['count_num'];
         return new \CRenderData(array(
             'user' => $user,
         ));

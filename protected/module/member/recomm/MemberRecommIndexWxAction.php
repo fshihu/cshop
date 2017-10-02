@@ -9,12 +9,33 @@
 namespace module\member\recomm;
 
 
+use biz\action\ListAction;
+use biz\Session;
+use CC\db\base\select\ItemModel;
 use CRequest;
+use module\member\index\UserServer;
+use module\member\level\enum\UserLevelEnum;
 
-class MemberRecommIndexWxAction  extends \CAction
+class MemberRecommIndexWxAction  extends ListAction
 {
-    public function execute(CRequest $request)
+    public $level = 1;
+    protected function onExecute()
     {
-        return new \CRenderData();
+        return [
+            'level' => $this->level,
+            'user' => UserServer::getUser(),
+        ];
+    }
+    protected function getTable()
+    {
+        return 'users';
+    }
+
+    protected function getSearchCondition()
+    {
+        $this->dbCondition->addColumnsCondition(array(
+            'level' => $this->request->getParams('level',1),
+            'first_leader' => Session::getUserID(),
+        ));
     }
 }

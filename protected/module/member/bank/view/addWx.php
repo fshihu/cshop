@@ -26,7 +26,7 @@
     <div class="  weui-panel_access  " >
         <?php echo \CC\util\common\widget\widget\WidgetBuilder::build(new \CC\util\common\widget\widget\FormWidget($this,$data), \CC\util\common\widget\panel\FormPanel::instance()) ?>
         <div class="addr_eidt_btn_w">
-            <a href="<?php echo $this->genurl('add') ?>" class="weui-btn weui-btn_primary addr_eidt_btn">添加</a>
+            <a href="<?php echo $this->genurl('add') ?>" class="weui-btn weui-btn_primary addr_eidt_btn"><?php echo $this->id?'修改':'添加' ?></a>
 
         </div>
 

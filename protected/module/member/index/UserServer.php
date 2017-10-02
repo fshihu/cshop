@@ -31,8 +31,11 @@ class UserServer
         return $first_leader?self::getUser($first_leader)['nickname']:'无';
     }
 
-    public static function getAvatar()
+    public static function getAvatar($item)
     {
+        if($item){
+            return $item['head_pic'];
+        }
         return self::getUser()['head_pic'];
     }
 

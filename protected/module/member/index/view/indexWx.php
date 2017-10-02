@@ -204,7 +204,7 @@ use module\cart\index\server\OrderWaitStatusEnum;
                     <div class="weui-cell__bd">
                         <p>推荐会员</p>
                     </div>
-                    <div class="weui-cell__ft">20</div>
+                    <div class="weui-cell__ft"><?php echo $user['count_num'] ?></div>
                 </a>
 
 
