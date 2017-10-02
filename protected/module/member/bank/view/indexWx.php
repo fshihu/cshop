@@ -33,7 +33,7 @@ use module\member\bank\enum\BankEnum;
                 <div class="icont">
                     <span class="checkbox checkboxed"></span>
                     <div class="t1">
-                        <?php echo $item['name'] ?> &nbsp; &nbsp; <?php echo $item['bank_name'] ?>
+                        <?php echo $item['name'] ?> &nbsp; &nbsp; <?php echo BankEnum::getValueByIndex($item['bank_name']) ?>
                     </div>
                     <div class="t2"><?php echo substr_replace($item['contact'],'****',3,4) ?></div>
                     <div class="t3">**** &nbsp; &nbsp; **** &nbsp; &nbsp; <?php echo substr($item['bank_card'],0,-4) ?></div>

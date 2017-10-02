@@ -23,17 +23,22 @@ use module\member\bank\enum\BankEnum;
 class MemberBankAddWxAction extends SaveAction implements IFormViewBuilder
 {
 
+    protected function getTable()
+    {
+        return 'users_bank';
+    }
+
     /**
      * @return  IInput[]
      */
     public function createFormInputs()
     {
         return array(
-            (new TextInput('name','身份证号',['must']))->setPlaceHolder('请输入身份证号'),
-            (new TextInput('开户名','开户名',['must']))->setPlaceHolder('请输入开户名'),
-            (new SelectInput('开户行','开户行',BankEnum::getValues(),['must'])),
-            (new TextInput('银行卡号','银行卡号',['must']))->setPlaceHolder('请输入银行卡号'),
-            (new TextInput('name','联系方式',['must']))->setPlaceHolder('请输入联系方式'),
+            (new TextInput('id_card','身份证号',['must']))->setPlaceHolder('请输入身份证号'),
+            (new TextInput('name','开户名',['must']))->setPlaceHolder('请输入开户名'),
+            (new SelectInput('bank_name','开户行',BankEnum::getValues(),['must'])),
+            (new TextInput('bank_card','银行卡号',['must']))->setPlaceHolder('请输入银行卡号'),
+            (new TextInput('contact','联系方式',['must']))->setPlaceHolder('请输入联系方式'),
         );
     }
 
