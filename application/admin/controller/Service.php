@@ -84,9 +84,19 @@ class Service  extends Base
                     3 => '年轻化',
                     4 => '其他理由',
                 );
+        $s = array(
+                    '待审核',
+                    '待服务',
+                    '未通过',
+                    '待评价',
+                    '待补贴',
+                    '补贴申请未通过',
+                    '已完成',
+                );
         $service['reserve_reason'] = $r[$service['reserve_reason']].$service['reserve_reason_other'];
         $service['marriage'] = $m[$service['marriage']];
         $service['date'] = date('Y-m-d',$service['date']);
+        $service['status_desc'] = $s[$service['status']];
                 $this->assign('service',$service);
                 return $this->fetch();
     }
@@ -101,9 +111,13 @@ class Service  extends Base
             $data['status'] = 2;
         }else if($_GET['p'] == 3){
             $data['status'] = 3;
+        }else if($_GET['p'] == 4){
+            $data['status'] = 6;
+        }else if($_GET['p'] == 5){
+            $data['status'] = 5;
         }
         $User->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
-        $this->success('操作成功!');
+        $this->success('操作成功!',U('index'));
 
     }
     /**

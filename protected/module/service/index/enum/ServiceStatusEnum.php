@@ -22,6 +22,14 @@ class ServiceStatusEnum extends Enum
 
     protected function initAddDatas()
     {
-        // TODO: Implement initAddDatas() method.
+        $this->addForArray(array(
+            '待审核',
+            '待服务',
+            '未通过',
+            '待评价',
+            '待补贴',
+            '补贴申请未通过',
+            '已完成',
+        ));
     }
 }

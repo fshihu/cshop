@@ -50,9 +50,7 @@
            });
         $('.sub_btn').click(function () {
             ajax_request('',$('form').serialize(),function () {
-                ajax_request('',$('.form-panel form').serialize(),function () {
-                    alerts();
-                });
+                alerts();
             });
             return false;
         });

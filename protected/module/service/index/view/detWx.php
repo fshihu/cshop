@@ -59,7 +59,7 @@
                 <?php foreach($comment_list as $comment_item):?>
                 <div class="comm_item">
                     <div class="t1">
-                        <img class="img" src="<?php echo $comment_item['avatar'] ?>" alt="">
+                        <img class="img" src="<?php echo \module\member\index\UserServer::getAvatar($comment_item) ?>" alt="">
                         <span class="t1_s"><?php echo $comment_item['uname'] ?></span>
                     </div>
                     <div class="t2"><?php echo $comment_item['comment_content'] ?></div>

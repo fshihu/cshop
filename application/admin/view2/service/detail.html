@@ -117,6 +117,10 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                     <dt>预约日期：</dt>
                     <dd>{$service.date}</dd>
                 </dl>
+                <dl>
+                    <dt>状态：</dt>
+                    <dd>{$service.status_desc}</dd>
+                </dl>
              </div>
 
 
@@ -139,6 +143,13 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                 <a class="ncap-btn-big ncap-btn-green" href="{:U('Admin/Service/confirm',array('id'=>$service['id'],'p'=>3))}">
                                		服务完成</a>
                 <?php endif;?>
+                <?php if($service['status'] == 4):?>
+                <a class="ncap-btn-big ncap-btn-green" href="{:U('Admin/Service/confirm',array('id'=>$service['id'],'p'=>4))}" >
+                               		补贴通过</a>
+                <a class="ncap-btn-big ncap-btn-green" href="{:U('Admin/Service/confirm',array('id'=>$service['id'],'p'=>5))}">
+                    补贴不通过</a>
+                <?php endif;?>
+
 	        </dd>
 	      </dl>
         </div>

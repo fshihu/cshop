@@ -25,6 +25,7 @@
                 <a class="swiper-slide <?php echo $status == 3 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_COMMONT]); ?>">待评价</a>
                 <a class="swiper-slide <?php echo $status == 4 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_SUBSIDY]); ?>">待补贴</a>
                 <a class="swiper-slide <?php echo $status == 5 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_SUBSIDY_NO_PADD]); ?>">补贴申请未通过</a>
+                <a class="swiper-slide <?php echo $status == 6 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_FINISH]); ?>">已完成</a>
         </div>
 
     </div>
@@ -76,9 +77,25 @@
      <?php endif;?>
      <?php if($item['status'] == ServiceStatusEnum::STATUS_WAIT_SUBSIDY):?>
      <div class="t4" style="padding-bottom: 10px;">
-         <a href="<?php echo $this->genurl('subsidy',['id'=>$item['id']]); ?>" style="font-size: 11px;">
-             请点击并上传消费单据，审核成功后将补贴返还到您的系统钱包
-         </a>
+          <?php if($item['bills']):?>
+              已上传，等待审核
+           <?php else:?>
+              <a href="<?php echo $this->genurl('subsidy',['id'=>$item['id']]); ?>" style="font-size: 11px;">
+                  请点击并上传消费单据，审核成功后将补贴返还到您的系统钱包
+              </a>
+          <?php endif;?>
+
+     </div>
+     <?php endif;?>
+     <?php if($item['status'] == ServiceStatusEnum::STATUS_SUBSIDY_NO_PADD):?>
+     <div class="t4" style="padding-bottom: 10px;">
+          <?php if($item['bills']):?>
+              已上传，等待审核
+           <?php else:?>
+              <a href="<?php echo $this->genurl('subsidy',['id'=>$item['id']]); ?>" style="font-size: 11px;">
+                  您上传的消费单据有误，申请审核未通过，请重新上传
+              </a>
+          <?php endif;?>
 
      </div>
      <?php endif;?>
