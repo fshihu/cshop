@@ -20,6 +20,7 @@
          <div class="mslide" id="slideTpshop">
              <ul>
                 <?php use module\goods\server\GoodsServer;
+                use module\member\index\UserServer;
 
                 foreach($goods_images as $goods_image):?>
                      <li>
@@ -61,12 +62,12 @@
                 <?php foreach($comment_list as $comment_item):?>
                 <div class="comm_item">
                     <div class="t1">
-                        <img class="img" src="<?php echo $comment_item['avatar'] ?>" alt="">
+                        <img class="img" src="<?php echo UserServer::getAvatar($comment_item) ?>" alt="">
                         <span class="t1_s"><?php echo $comment_item['uname'] ?></span>
                     </div>
                     <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
                     <div class="t3">
-                        <?php echo $comment_item['comment_time'] ?>
+                        <?php echo date('Y-m-d h:i:s',$comment_item['comment_time']) ?>
                     </div>
                 </div>
                 <?php endforeach?>
