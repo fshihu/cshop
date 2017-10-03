@@ -16,6 +16,7 @@ class OrderStatusServer
     const TO_CANCEL = 1;
     const TO_PAYED = 2;
     const TO_CONFIRM = 3;
+    const TO_FINISH = 4;
     protected $order_id;
     public static function instance($order_id)
     {
@@ -49,6 +50,13 @@ class OrderStatusServer
                 'order_id' => $this->order_id,
             ))->execute();
         }
-
+        elseif ($to_status == self::TO_FINISH){
+            UpdateModel::make('order')->addData(array(
+                'wait_status' => OrderWaitStatusEnum::FINISH,
+                'order_status' => OrderStatusEnum::FINISH,
+            ))->addColumnsCondition(array(
+                'order_id' => $this->order_id,
+            ))->execute();
+        }
     }
 }

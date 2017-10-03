@@ -52,6 +52,12 @@
              <a href="<?php echo $this->genurl('confirm',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_warn confrim_shouhuo">确认收货</a>
          </div>
           <?php endif;?>
+          <?php if($wait_status == OrderWaitStatusEnum::WAIT_COMMENT):?>
+          <div class="t4">
+
+             <a href="<?php echo $this->genurl('comment',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default  ">去评价</a>
+         </div>
+          <?php endif;?>
 
      </div>
       <?php endforeach?>
@@ -72,5 +78,6 @@
             ajax_request($(this).attr('href'),{},function () {
                 $list_item.remove();
             });
+            return false;
         });
     </script>
