@@ -33,6 +33,13 @@ return	array(
 						//array('name' => '公告管理', 'act'=>'notice_list', 'op'=>'Article'),
 //						array('name' => '专题列表', 'act'=>'topicList', 'op'=>'Topic'),
 				)),
+        array('name' => '系统消息','child' => array(
+            array('name' => '消息列表', 'act'=>'index', 'op'=>'Sysmsg'),
+
+//                array('name' => '微信菜单管理', 'act'=>'menu', 'op'=>'Wechat'),
+//                array('name' => '文本回复', 'act'=>'text', 'op'=>'Wechat'),
+            //array('name' => '图文回复', 'act'=>'img', 'op'=>'Wechat'),
+        )),
 //				array('name' => '权限','child'=>array(
 //						array('name' => '管理员列表', 'act'=>'index', 'op'=>'Admin'),
 //						array('name' => '角色管理', 'act'=>'role', 'op'=>'Admin'),
@@ -98,13 +105,7 @@ return	array(
 //                array('name' => '文本回复', 'act'=>'text', 'op'=>'Wechat'),
                 //array('name' => '图文回复', 'act'=>'img', 'op'=>'Wechat'),
             )),
-            array('name' => '系统消息','child' => array(
-                array('name' => '消息列表', 'act'=>'index', 'op'=>'Sysmsg'),
 
-//                array('name' => '微信菜单管理', 'act'=>'menu', 'op'=>'Wechat'),
-//                array('name' => '文本回复', 'act'=>'text', 'op'=>'Wechat'),
-                //array('name' => '图文回复', 'act'=>'img', 'op'=>'Wechat'),
-            )),
 
 //    	    array('name' => '微信','child' => array(
 //    	        array('name' => '公众号配置', 'act'=>'index', 'op'=>'Wechat'),

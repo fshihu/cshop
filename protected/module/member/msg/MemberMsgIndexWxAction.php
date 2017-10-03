@@ -9,12 +9,13 @@
 namespace module\member\msg;
 
 
+use biz\action\ListAction;
 use CRequest;
 
-class MemberMsgIndexWxAction extends \CAction
+class MemberMsgIndexWxAction extends ListAction
 {
-    public function execute(CRequest $request)
+    protected function getTable()
     {
-        return new \CRenderData();
+        return 'sys_msg';
     }
 }

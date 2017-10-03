@@ -9,12 +9,29 @@
 namespace module\member\money;
 
 
+use biz\action\ListAction;
+use biz\Session;
 use CRequest;
+use module\member\index\UserServer;
 
-class MemberMoneyIndexWxAction   extends \CAction
+class MemberMoneyIndexWxAction   extends ListAction
 {
-    public function execute(CRequest $request)
+    protected function getTable()
     {
-        return new \CRenderData();
+        return 'user_money_record';
+    }
+    protected function getSearchCondition()
+    {
+        $this->dbCondition->addColumnsCondition(array(
+            'uid' => Session::getUserID(),
+        ))->order('id desc');
+    }
+
+    public function onExecute()
+    {
+        $user = UserServer::getUser();
+        return array(
+            'user' => $user,
+        );
     }
 }

@@ -15,13 +15,13 @@ class Sysmsg  extends Base
 {
     public function index()
     {
-        $model = M("Service");
+        $model = M("SysMsg");
                 $where = "";
                 $keyword = I('keyword');
                 $where = $keyword ? " name like '%$keyword%' " : "";
                 $count = $model->where($where)->count();
                 $Page = $pager = new Page($count,10);
-                $brandList = $model->where($where)->order("`sort` asc")->limit($Page->firstRow.','.$Page->listRows)->select();
+                $brandList = $model->where($where)->order("`id` desc")->limit($Page->firstRow.','.$Page->listRows)->select();
                 $show  = $Page->show();
                 $cat_list = M('goods_category')->where("parent_id = 0")->getField('id,name'); // 已经改成联动菜单
                 $this->assign('cat_list',$cat_list);
@@ -31,32 +31,7 @@ class Sysmsg  extends Base
                 return $this->fetch();
     }
 
-    public function reserve()
-    {
-        $model = M("ServiceReserve");
-                $where = "";
-                $keyword = I('keyword');
-                $where = $keyword ? " name like '%$keyword%' " : "";
-                $count = $model->where($where)->count();
-                $Page = $pager = new Page($count,10);
-//        $model->join('left join t_service s on t.');
-        $model->alias('t')->join('t_service s','s.id = t.service_id','left ');
-        $model->field('t.*,s.name service_name');
-                $brandList = $model->where($where)->order("t.`id` asc")->limit($Page->firstRow.','.$Page->listRows)->select();
-                $show  = $Page->show();
-        foreach ($brandList as $i => $item) {
-            $brandList[$i]['sex'] = $item['sex'] == 1?'男':'女';
-            $brandList[$i]['birthday'] = date('Y年m月d日',$item['birthday']);
-                }
-
-        $cat_list = M('goods_category')->where("parent_id = 0")->getField('id,name'); // 已经改成联动菜单
-                $this->assign('cat_list',$cat_list);
-                $this->assign('pager',$pager);
-                $this->assign('show',$show);
-                $this->assign('brandList',$brandList);
-                return $this->fetch();
-    }
-    public function detail()
+     public function detail()
     {
         $model = M("ServiceReserve");
                 $where = "";
@@ -128,45 +103,16 @@ class Sysmsg  extends Base
             if(IS_POST)
             {
                	$data = I('post.');
-                $brandVilidate = Loader::validate('Service');
-                if(!$brandVilidate->batch()->check($data)){
-                    $return = ['status'=>0,'msg'=>'操作失败','result'=>$brandVilidate->getError()];
-                    $this->ajaxReturn($return);
-                }
+
                 if($id){
-                	M("Service")->update($data);
+                	M("SysMsg")->update($data);
                 }else{
-                    $id = M("Service")->insert($data);
+                    $data['time'] = time();
+                    $id = M("SysMsg")->insert($data);
                 }
 
-                // 商品图片相册  图册
-                $goods_images = I('goods_images/a');
-                if(count($goods_images) > 1)
-                {
-                    array_pop($goods_images); // 弹出最后一个
-                    $goodsImagesArr = M('ServiceImages')->where("service_id = $id")->getField('img_id,image_url'); // 查出所有已经存在的图片
 
-                    // 删除图片
-                    foreach($goodsImagesArr as $key => $val)
-                    {
-                        if(!in_array($val, $goods_images))
-                            M('ServiceImages')->where("img_id = {$key}")->delete(); //
-                    }
-                    // 添加图片
-                    foreach($goods_images as $key => $val)
-                    {
-                        if($val == null)  continue;
-                        if(!in_array($val, $goodsImagesArr))
-                        {
-                               $data = array(
-                                   'service_id' => $id,
-                                   'image_url' => $val,
-                               );
-                               M("ServiceImages")->insert($data); // 实例化User对象
-                        }
-                    }
-                }
-                $this->ajaxReturn(['status'=>1,'msg'=>'操作成功','result'=>'']);
+                 $this->ajaxReturn(['status'=>1,'msg'=>'操作成功','result'=>'']);
             }
            $cat_list = M('goods_category')->where("parent_id = 0")->select(); // 已经改成联动菜单
            $this->assign('cat_list',$cat_list);

@@ -18,7 +18,7 @@
                          </div>
                      </a>
                     <div class="weui-cell__bd">
-                        <p class="title">会议简介</p>
+                        <p class="title">系统消息</p>
                     </div>
                 </div>
 
@@ -32,25 +32,18 @@
     </style>
     <div class="  weui-panel_access  " >
         <div class="list6">
+            <?php foreach($list as $item):?>
             <div class="list_item">
                 <div class="t1">
                     <span class="t1_m">系统管理员</span>
-                    <span class="t1_s">2017-06-23 21:23:04</span>
+                    <span class="t1_s"><?php echo date('Y-m-d H:i:s',$item['time']) ?></span>
                 </div>
                 <div class="t2">
-                    玻尿酸被称为“上帝的黏土”，也是美容界的圣品，不仅可以对脸部凹陷的部位进行填充、起到塑形的效果。还能保湿，补充肌肤所需水分。虽然玻尿酸用处很多，但是如果将它当做化妆品外用的话其实被夸大了作用。
+                    <?php echo $item['content'] ?>
                 </div>
             </div>
-            <div class="list_item">
-                <div class="t1">
-                    <span class="t1_m">系统管理员</span>
-                    <span class="t1_s">2017-06-23 21:23:04</span>
-                </div>
-                <div class="t2">
-                    玻尿酸被称为“上帝的黏土”，也是美容界的圣品，不仅可以对脸部凹陷的部位进行填充、起到塑形的效果。还能保湿，补充肌肤所需水分。虽然玻尿酸用处很多，但是如果将它当做化妆品外用的话其实被夸大了作用。
-                </div>
-            </div>
-        </div>
+            <?php endforeach?>
+         </div>
                  </div>
 
  </div>

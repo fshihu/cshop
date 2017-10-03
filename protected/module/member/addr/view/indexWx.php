@@ -33,8 +33,8 @@
 
 
                  <span class="fr">
-                     <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">修改</a>
-                     <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">删除</a>
+                     <a href="<?php echo $this->genurl('add',['id' => $item['address_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default">修改</a>
+                     <a href="<?php echo $this->genurl('delete',['id'=>$item['address_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default delete_link">删除</a>
                  </span>
              </div>
          </div>
@@ -51,3 +51,13 @@
  </div>
 
 </div>
+<script type="text/javascript">
+    $('body').on('click','.delete_link',function () {
+
+        var $this = $(this);
+        ajax_request($this.attr('href'),{},function () {
+            $this.closest('.list_item').remove();
+        });
+        return false;
+    });
+</script>

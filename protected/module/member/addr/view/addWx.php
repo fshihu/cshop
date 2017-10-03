@@ -40,6 +40,7 @@
         ajax_request('',$('.form-panel form').serialize(),function () {
            location.href='<?php echo $this->genurl('index');?>';
         });
+        return false;
     });
 </script>
 
