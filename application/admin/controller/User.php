@@ -590,7 +590,7 @@ class User extends Base {
      */
     public function withdrawals()
     {
-        $model = M("withdrawals");
+        $model = M("extract_apply");
         $_GET = array_merge($_GET,$_POST);
         unset($_GET['create_time']);
 
@@ -603,17 +603,25 @@ class User extends Base {
         $create_time2 = explode('-',$create_time);
         $this->assign('start_time', $create_time2[0]);
         $this->assign('end_time', $create_time2[1]);
-        $where = " create_time >= '".strtotime($create_time2[0])."' and create_time <= '".strtotime($create_time2[1])."' ";
-
-        if($status === '0' || $status > 0)
-            $where .= " and status = $status ";
+//        $where = " create_time >= '".strtotime($create_time2[0])."' and create_time <= '".strtotime($create_time2[1])."' ";
+        $where = '';
+//        if($status === '0' || $status > 0)
+//            $where .= " and status = $status ";
         $user_id && $where .= " and user_id = $user_id ";
         $account_bank && $where .= " and account_bank like '%$account_bank%' ";
         $account_name && $where .= " and account_name like '%$account_name%' ";
 
         $count = $model->where($where)->count();
         $Page  = new Page($count,16);
-        $list = $model->where($where)->order("`id` desc")->limit($Page->firstRow.','.$Page->listRows)->select();
+        $model->field('t.*,ub.bank_name bank_name,ub.bank_card,ub.id_card bank_id_card,ub.name bank_user_name');
+        $model->alias('t')->join('users_bank ub','t.bank_id = ub.id','left');
+        $list = $model->where($where)->order("t.`id` desc")->limit($Page->firstRow.','.$Page->listRows)->select();
+        $names = array(
+                    '中国银行',
+                );
+        foreach ($list as $i => $item) {
+            $list[$i]['bank_name'] = $names[$item['bank_name']];
+        }
 
         $this->assign('create_time',$create_time);
         $show  = $Page->show();
@@ -640,45 +648,37 @@ class User extends Base {
     public function editWithdrawals()
     {
         $id = I('id');
-        $withdrawals = DB::name('withdrawals')->where('id',$id)->find();
-        $user = M('users')->where("user_id = {$withdrawals[user_id]}")->find();
-        if (IS_POST) {
+        $withdrawals = DB::name('extract_apply')->where('id',$id)->find();
+        $user = M('users')->where("user_id = {$withdrawals[uid]}")->find();
             $data = I('post.');
             // 如果是已经给用户转账 则生成转账流水记录
-            if ($data['status'] == 1 && $withdrawals['status'] != 1) {
-                if ($user['user_money'] < $withdrawals['money']) {
-                    $this->error("用户余额不足{$withdrawals['money']}，不够提现");
-                    exit;
-                }
-                accountLog($withdrawals['user_id'], ($withdrawals['money'] * -1), 0, "平台提现");
-                $remittance = array(
-                    'user_id' => $withdrawals['user_id'],
-                    'bank_name' => $withdrawals['bank_name'],
-                    'account_bank' => $withdrawals['account_bank'],
-                    'account_name' => $withdrawals['account_name'],
-                    'money' => $withdrawals['money'],
-                    'status' => 1,
-                    'create_time' => time(),
-                    'admin_id' => session('admin_id'),
-                    'withdrawals_id' => $withdrawals['id'],
-                    'remark' => $data['remark'],
-                );
-                M('remittance')->add($remittance);
+            if ($user['user_money'] < $withdrawals['money']) {
+                $this->error("用户余额不足{$withdrawals['money']}，不够提现");
+                exit;
             }
-            DB::name('withdrawals')->update($data);
-            $this->success("操作成功!", U('Admin/User/remittance'), 3);
+            if($_GET['p'] == 1){
+                $data = ['status' => 1];
+            }else{
+                $data = ['status' => 2];
+            }
+        $money = $user['user_money'] - $withdrawals['money'];
+        M('users')->where('user_id','in', $user['user_id'])->save(array(
+            'user_money' => $money,
+            'extract_money' => $user['extract_money'] + $withdrawals['money'],
+        ));
+        M('user_money_record')->add(array(
+            'uid' => $user['user_id'],
+            'money' => -$withdrawals['money'],
+            'cur_money' => $money,
+            'content' => '提现成功',
+            'data_id' => $id,
+            'type' => 1,
+            'crate_time' => time(),
+        ));
+        M('extract_apply')->where('id','in', $id)->save($data);
+            $this->success("操作成功!");
             exit;
-        }
 
-        if ($user['nickname'])
-            $withdrawals['user_name'] = $user['nickname'];
-        elseif ($user['email'])
-            $withdrawals['user_name'] = $user['email'];
-        elseif ($user['mobile'])
-            $withdrawals['user_name'] = $user['mobile'];
-        $this->assign('user', $user);
-        $this->assign('data', $withdrawals);
-        return $this->fetch();
     }
 
     public function withdrawals_update(){

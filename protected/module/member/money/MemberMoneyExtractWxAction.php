@@ -43,6 +43,7 @@ class MemberMoneyExtractWxAction  extends \CAction
                 'status' => 0,
                 'c_time' => time(),
             ))->execute();
+            return new \CJsonData();
         }
         $bank_list = ListModel::make('users_bank')->addColumnsCondition(array(
             'user_id' => $user['user_id']
