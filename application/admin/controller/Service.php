@@ -97,8 +97,10 @@ class Service  extends Base
         // 要修改的数据对象属性赋值
         if($_GET['p'] == 1){
             $data['status'] = 1;
-        }else{
+        }else if($_GET['p'] == 2){
             $data['status'] = 2;
+        }else if($_GET['p'] == 3){
+            $data['status'] = 3;
         }
         $User->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
         $this->success('操作成功!');

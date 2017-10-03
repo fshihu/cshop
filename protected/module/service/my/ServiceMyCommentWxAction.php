@@ -11,8 +11,10 @@ use biz\Session;
 use CC\db\base\insert\InsertModel;
 use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
+use CC\db\base\update\UpdateModel;
 use CRequest;
 use module\cart\index\server\OrderStatusServer;
+use module\service\index\enum\ServiceStatusEnum;
 
 class ServiceMyCommentWxAction extends \CAction
 {
@@ -24,22 +26,21 @@ class ServiceMyCommentWxAction extends \CAction
     public function execute(CRequest $request)
     {
         if($this->request->hasPost()){
-            $order = ItemModel::make('order')->addColumnsCondition(array(
-                'order_id' => $request->getParams('order_id'),
+            $id = $request->getParams('id');
+            $service_reserve = ItemModel::make('service_reserve')->addColumnsCondition(array(
+                'id' => $id,
             ))->execute();
-            $list = ListModel::make('order_goods')->addColumnsCondition(array(
-                'order_id' => $order['order_id'],
+
+            InsertModel::make('service_comment')->addData(array(
+                'service_id' =>  $service_reserve['service_id'],
+                'content' => $request->getParams('content'),
+                'user_id' => Session::getUserID(),
+                'username' => Session::getName(),
+                'add_time' => time(),
             ))->execute();
-            foreach ($list as $item) {
-                InsertModel::make('comment')->addData(array(
-                    'goods_id' => $item['goods_id'],
-                    'content' => $request->getParams('content'),
-                    'user_id' => Session::getUserID(),
-                    'username' => Session::getName(),
-                    'add_time' => time(),
-                ))->execute();
-            }
-            OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_FINISH);
+            UpdateModel::make('service_reserve')->addData(array(
+                'status' => ServiceStatusEnum::STATUS_WAIT_SUBSIDY
+            ))->addId($id)->execute();
             return new \CJsonData();
         }
         return new \CRenderData(
