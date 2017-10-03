@@ -12,8 +12,10 @@ namespace module\groupon\my;
 use biz\action\ListAction;
 use biz\Session;
 use CC\util\db\YesNoEnum;
+use module\cart\index\server\OrderHanderServer;
 use module\cart\index\server\OrderPayStatusEnum;
 use module\cart\index\server\PromTypeEnum;
+use module\groupon\server\enum\GroupOneStatusEnum;
 
 class GrouponMyOwnWxAction extends ListAction
 {
@@ -54,14 +56,7 @@ class GrouponMyOwnWxAction extends ListAction
 
     protected function onExecute()
     {
-        $end_desc = '待成团';
-        if($this->is_end == 1){
-            $end_desc = '待抽取';
-        }else if($this->is_end == 2){
-            $end_desc = '已完成';
-        }else if($this->is_end == 3){
-            $end_desc = '已失效';
-        }
+        $end_desc = GroupOneStatusEnum::getValueByIndex($this->is_end);
         return [
             'end_desc' => $end_desc,
             'is_end' => $this->is_end,

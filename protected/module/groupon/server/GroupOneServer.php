@@ -22,11 +22,11 @@ class GroupOneServer
 
     public function handler($order)
     {
-        if($order['prom_type'] == PromTypeEnum::GROUP_OPNE || $order['prom_type'] == PromTypeEnum::GROUP_JOIN){
-            $group_one = ItemModel::make('group_one')->addId($order['prom_id'])->execute();
+        if($order['order_prom_type'] == PromTypeEnum::GROUP_OPNE || $order['order_prom_type'] == PromTypeEnum::GROUP_JOIN){
+            $group_one = ItemModel::make('group_one')->addId($order['order_prom_id'])->execute();
             $finish_num = $group_one['finish_num'] + 1;
             UpdateModel::make('group_one')->addColumnsCondition(array(
-                'id' => $order['prom_id']
+                'id' => $order['order_prom_id']
             ))->addData(array(
                 'pay_status' => 1,
                 'finish_num' => $finish_num,
@@ -34,9 +34,9 @@ class GroupOneServer
                 'is_finish' => $group_one['total_num'] == $finish_num?1:0,
             ))->execute();
         }
-        if($order['prom_type'] == PromTypeEnum::GROUP_JOIN){
+        if($order['order_prom_type'] == PromTypeEnum::GROUP_JOIN){
             InsertModel::make('group_one_member')->addData(array(
-                'group_one_id' => $order['prom_id'],
+                'group_one_id' => $order['order_prom_id'],
                 'uid' => $order['user_id'],
                 'is_leader' => 0,
                 'time' => time(),

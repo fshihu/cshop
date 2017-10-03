@@ -31,7 +31,79 @@ class Service  extends Base
                 return $this->fetch();
     }
 
+    public function reserve()
+    {
+        $model = M("ServiceReserve");
+                $where = "";
+                $keyword = I('keyword');
+                $where = $keyword ? " name like '%$keyword%' " : "";
+                $count = $model->where($where)->count();
+                $Page = $pager = new Page($count,10);
+//        $model->join('left join t_service s on t.');
+        $model->alias('t')->join('t_service s','s.id = t.service_id','left ');
+        $model->field('t.*,s.name service_name');
+                $brandList = $model->where($where)->order("t.`id` asc")->limit($Page->firstRow.','.$Page->listRows)->select();
+                $show  = $Page->show();
+        foreach ($brandList as $i => $item) {
+            $brandList[$i]['sex'] = $item['sex'] == 1?'男':'女';
+            $brandList[$i]['birthday'] = date('Y年m月d日',$item['birthday']);
+                }
 
+        $cat_list = M('goods_category')->where("parent_id = 0")->getField('id,name'); // 已经改成联动菜单
+                $this->assign('cat_list',$cat_list);
+                $this->assign('pager',$pager);
+                $this->assign('show',$show);
+                $this->assign('brandList',$brandList);
+                return $this->fetch();
+    }
+    public function detail()
+    {
+        $model = M("ServiceReserve");
+                $where = "";
+
+                $count = $model->where(array('id' => $_GET['id']))->count();
+                $Page = $pager = new Page($count,10);
+//        $model->join('left join t_service s on t.');
+        $model->alias('t')->join('t_service s','s.id = t.service_id','left ');
+        $model   ->join('t_region p','t.province = p.id','left');
+        $model ->join('t_region c','t.city = c.id','left');
+        $model ->join('t_region d','t.district = d.id','left');
+        $model->field('t.*,s.name service_name,p.name p_name,c.name c_name,d.name d_name');
+                $service = $model->where($where)->order("t.`id` asc")->limit($Page->firstRow.','.$Page->listRows)->find();
+        $service['birthday'] =date('Y年m月d日',$service['birthday']);
+        $service['sex'] =  $service['sex'] == 1?'男':'女';
+        $service['addrs'] =  $service['p_name']. $service['c_name']. $service['d_name'];
+        $m = array(
+                    1 => '未婚',
+                    2 => '已婚',
+                    3 => '离异',
+                );
+        $r = array(
+                    1 => '美颜',
+                    2 => '嫩肤',
+                    3 => '年轻化',
+                    4 => '其他理由',
+                );
+        $service['reserve_reason'] = $r[$service['reserve_reason']].$service['reserve_reason_other'];
+        $service['marriage'] = $m[$service['marriage']];
+        $service['date'] = date('Y-m-d',$service['date']);
+                $this->assign('service',$service);
+                return $this->fetch();
+    }
+
+    public function confirm()
+    {
+        $User = M("ServiceReserve"); // 实例化User对象
+        // 要修改的数据对象属性赋值
+        if($_GET['p'] == 1){
+            $data['status'] = 1;
+        }else{
+            $data['status'] = 2;
+        }
+        $User->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
+        $this->success('操作成功!');
+
+    }
     /**
      * 添加修改编辑  商品品牌
      */

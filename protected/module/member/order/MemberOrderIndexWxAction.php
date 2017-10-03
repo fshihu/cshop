@@ -14,6 +14,7 @@ use biz\Session;
 use CC\util\db\YesNoEnum;
 use CRequest;
 use module\cart\index\server\OrderWaitStatusEnum;
+use module\cart\index\server\PromTypeEnum;
 
 class MemberOrderIndexWxAction  extends ListAction
 {
@@ -36,6 +37,7 @@ class MemberOrderIndexWxAction  extends ListAction
             'user_id' => Session::getUserID(),
             'wait_status' => $this->wait_status,
             'deleted' => YesNoEnum::NO,
+            'order_prom_type' => PromTypeEnum::NORMAL,
         ))->order('order_id desc');
     }
 }

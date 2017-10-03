@@ -64,6 +64,14 @@
 
             <span class="t5_2">还差<?php echo $item['remain_num'] ?>人</span>
               <?php endif;?>
+              <?php if($is_end == 1):?>
+
+
+
+            <span class="t5_2">
+                <a href="<?php echo $this->genurl('raffle',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default  ">去抽奖</a>
+            </span>
+              <?php endif;?>
 
          </div>
      </div>

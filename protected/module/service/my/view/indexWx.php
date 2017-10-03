@@ -44,10 +44,37 @@
      </div>
      </a>
 
+      <?php if($item['status'] == ServiceStatusEnum::STATUS_WAIT_CHECK):?>
      <div class="t4">
 
          <a href="<?php echo $this->genurl('info',['id'=>$item['id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default">点击查看我的预约信息</a>
      </div>
+      <?php endif;?>
+     <?php if($item['status'] == ServiceStatusEnum::STATUS_WAIT_SERVICE):?>
+     <div class="t4" style="padding-bottom: 10px;">
+         <span style="font-size: 11px;">
+             您的服务预约已经通过，请与预约时间到医院进行服务
+         </span>
+
+     </div>
+     <?php endif;?>
+     <?php if($item['status'] == ServiceStatusEnum::STATUS_NO_PASS):?>
+     <div class="t4" style="padding-bottom: 10px;">
+         <span style="font-size: 11px;">
+             您的服务预约申请未能通过审核，请重新预约
+         </span>
+
+     </div>
+     <?php endif;?>
+     <?php if($item['status'] == ServiceStatusEnum::STATUS_WAIT_COMMONT):?>
+     <div class="t4" style="padding-bottom: 10px;">
+         <a href="<?php echo $this->genurl('comment',['id'=>$item['id']]); ?>" style="font-size: 11px;">
+             请消费完成后评价服务，并进入补贴返还流程
+         </a>
+
+     </div>
+     <?php endif;?>
+
  </div>
     <?php endforeach?>
 

@@ -18,6 +18,7 @@ class ServiceStatusEnum extends Enum
     const STATUS_WAIT_COMMONT = 3;
     const STATUS_WAIT_SUBSIDY = 4;
     const STATUS_SUBSIDY_NO_PADD = 5;
+    const STATUS_FINISH = 6;
 
     protected function initAddDatas()
     {

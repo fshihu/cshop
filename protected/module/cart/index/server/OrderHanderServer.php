@@ -26,10 +26,12 @@ class OrderHanderServer
     {
         $order = ItemModel::make('order')->addColumnsCondition(['order_sn' => $this->data['out_trade_no']])->execute();
         if($order['pay_status']  == OrderPayStatusEnum::PAYED){
-            return true;
+//            return true;
         }
-        OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_PAYED);
-        if($order['prom_type'] == PromTypeEnum::GROUP_OPNE || $order['prom_type'] == PromTypeEnum::GROUP_JOIN){
+
+        var_export($order['prom_type']);
+//        OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_PAYED);
+        if($order['order_prom_type'] == PromTypeEnum::GROUP_OPNE || $order['order_prom_type'] == PromTypeEnum::GROUP_JOIN){
             GroupOneServer::instance()->handler($order);
         }
         return true;
