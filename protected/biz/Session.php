@@ -26,4 +26,9 @@ class Session extends SessionAbs
     {
         self::set('wx_user',$user_info);
     }
+
+    public static function getWxUser()
+    {
+        return self::get('wx_user');
+    }
 }

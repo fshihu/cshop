@@ -2,6 +2,8 @@
 namespace biz\http\wx;
 use biz\Session;
 use biz\wx\Wx;
+use CC\db\base\insert\InsertModel;
+use CC\db\base\select\ItemModel;
 use CInterceptors;
 use CNext;
 use CRequest;
@@ -24,14 +26,28 @@ class WxRegInterceptors implements CInterceptors
         if($request->getParams('from_admin') == 'xixk'){
         }else{
         }
-        if(!Session::isLogin()){
+       if(!Session::isLogin()){
             list($ok,$openid) = Wx::instance()->getOpenid($request);
             if($ok){
                 Session::login();
-                Session::setWxUser(Wx::instance()->getUserInfo($openid));
+                $user_info = Wx::instance()->getUserInfo($openid);
+                Session::setWxUser($user_info);
+                $user = ItemModel::make('users')->addColumnsCondition(array(
+                    'oauth' => 'wx',
+                    'openid' => $openid
+                ))->execute();
+                if(!$user){
+                    InsertModel::make('users')->addData(array(
+                        'oauth' => 'wx',
+                        'openid' => $openid,
+                        'reg_time' => time(),
+                        'nickname' => $user_info['nickname'],
+                        'sex' => $user_info['sex'],
+                        'head_pic' => $user_info['headimgurl'],
+                    ))->execute();
+                }
             }
         }
-
         return $next;
     }
 
