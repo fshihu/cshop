@@ -31,6 +31,9 @@ class MemberGoldGiveWxAction extends \CAction implements IFormViewBuilder
             $item = ItemModel::make('users')->addColumnsCondition(array(
                 'user_id' => $account,
             ))->execute();
+            if($item['user_id'] == $user['user_id']){
+                throw new CErrorException('不能转给自己');
+            }
             if(!$item){
                 throw new CErrorException('转增账号不存在');
             }
@@ -40,13 +43,18 @@ class MemberGoldGiveWxAction extends \CAction implements IFormViewBuilder
             if($gold > $user['gold']){
                 throw new CErrorException('积分太大');
             }
-            UserGoldRecordServer::addGold($user['id'],UserGoldRecordServer::TYPE_GIVE,-$gold,'转增积分',$item['user_id']);;
-            UserGoldRecordServer::addGold($item['user_id'],UserGoldRecordServer::TYPE_REVICE_GIVE,$gold,'收到转增积分',$user['id']);;
+
+            UserGoldRecordServer::addGold($user['user_id'],UserGoldRecordServer::TYPE_GIVE,-$gold,'转增积分',$item['user_id']);;
+            UserGoldRecordServer::addGold($item['user_id'],UserGoldRecordServer::TYPE_REVICE_GIVE,$gold,'收到转增积分',$user['user_id']);;
             return new \CJsonData();
         }
         return new \CRenderData(array(
             'user' => $user,
         ));
+    }
+    protected function getIsOpenTransaction()
+    {
+        return true;
     }
 
     /**

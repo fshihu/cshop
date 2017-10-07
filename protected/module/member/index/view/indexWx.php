@@ -149,21 +149,21 @@ use module\cart\index\server\OrderWaitStatusEnum;
                     <div class="weui-cell__bd">
                         <p>我的积分</p>
                     </div>
-                    <div class="weui-cell__ft">￥341.00</div>
+                    <div class="weui-cell__ft"><?php echo $user['gold'] ?></div>
                 </a>
                 <a class="weui-cell weui-cell_access " href="<?php echo $this->genurl('level/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/members_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>会员等级</p>
                     </div>
-                    <div class="weui-cell__ft">1000</div>
+                    <div class="weui-cell__ft"><?php echo \module\member\index\UserServer::getLevelName($user) ?></div>
                 </a>
                 <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('msg/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/news_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>我的消息</p>
                     </div>
-                    <div class="weui-cell__ft">4</div>
+                    <div class="weui-cell__ft"><?php echo $user['msg_count'] ?></div>
                 </a>
 
             </div>

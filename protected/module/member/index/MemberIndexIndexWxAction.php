@@ -24,6 +24,10 @@ class MemberIndexIndexWxAction extends \CAction
             'first_leader' => Session::getUserID(),
         ))->select('count(*) count_num')->execute();
         $user['recomm_count'] = (int)$total['count_num'];
+        $total = ItemModel::make('sys_msg')->addColumnsCondition(array(
+            'id' => ['>',$user['max_msg_id']],
+        ))->select('count(*) count_num')->execute();
+        $user['msg_count'] = (int)$total['count_num'];
         return new \CRenderData(array(
             'user' => $user,
         ));

@@ -10,6 +10,7 @@ namespace module\member\gold\server;
 
 use CC\db\base\insert\InsertModel;
 use CC\db\base\select\ItemModel;
+use CC\db\base\update\UpdateModel;
 use module\member\index\UserServer;
 
 class UserGoldRecordServer
@@ -25,12 +26,16 @@ class UserGoldRecordServer
         InsertModel::make('user_gold_record')->addData(array(
             'uid' => $uid,
             'money' => $gold,
-            'cur_money' => $user['gold'] - $gold,
+            'cur_money' => $user['gold'] + $gold,
             'content' => '转增积分',
             'data_id' => $data_id,
             'type' => $type,//转增
             'crate_time' => time(),
         ))->execute();
-
+        UpdateModel::make('users')->addData(array(
+            'gold' => $user['gold'] + $gold
+        ))->addColumnsCondition(array(
+            'user_id' => $uid
+        ))->execute();
     }
 }

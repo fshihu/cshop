@@ -10,11 +10,15 @@ namespace module\member\level;
 
 
 use CRequest;
+use module\member\index\UserServer;
 
 class MemberLevelIndexWxAction extends \CAction
 {
     public function execute(CRequest $request)
     {
-        return new \CRenderData();
+        $user = UserServer::getUser();
+        return new \CRenderData(array(
+            'user' => $user,
+        ));
     }
 }

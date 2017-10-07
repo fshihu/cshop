@@ -38,7 +38,7 @@
                          <div class="weui-cell">
                              <div class="weui-cell__bd">
                                  <div class="t1"><?php echo $item['content'] ?></div>
-                                 <div class="t2"><?php echo date('Y-m-d H:i:s',$item['create_time']) ?></div>
+                                 <div class="t2"><?php echo date('Y-m-d H:i:s',$item['crate_time']) ?></div>
                              </div>
                              <div class="weui-cell__ft"><?php echo $item['money']>0?'+':'' ?><?php echo $item['money'] ?></div>
                          </div>
