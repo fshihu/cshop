@@ -279,9 +279,9 @@ class User extends Base {
         //获取类型
         $type = I('get.type');
         //获取记录总数
-        $count = M('account_log')->where(array('user_id'=>$user_id))->count();
+        $count = M('user_money_record')->where(array('uid'=>$user_id))->count();
         $page = new Page($count);
-        $lists  = M('account_log')->where(array('user_id'=>$user_id))->order('change_time desc')->limit($page->firstRow.','.$page->listRows)->select();
+        $lists  = M('user_money_record')->where(array('uid'=>$user_id))->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
 
         $this->assign('user_id',$user_id);
         $this->assign('page',$page->show());
