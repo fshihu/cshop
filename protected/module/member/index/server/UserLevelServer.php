@@ -41,6 +41,10 @@ class UserLevelServer
     {
         return $user['level'] == self::LEVEL_BLACK_CARD;
     }
+    public static function isBlackAttachCrad($user)
+    {
+        return $user['level'] == self::LEVEL_BLACK_ATTACH_CARD;
+    }
 
     public static function getBlackList()
     {

@@ -16,7 +16,7 @@ use module\member\index\UserServer;
     <div class="weui-cells weui-title-title">
 
                  <div class="weui-cell weui-cell_access" href="javascript:;">
-                     <a href="javascript:history.back();">
+                     <a href="<?php echo $this->genurl('member/index/index'); ?>">
                          <div class="weui-cell__ft">
                          </div>
                      </a>
@@ -233,7 +233,33 @@ use module\member\index\UserServer;
 
                      </div>
                  <?php endif;?>
+                <?php if(UserLevelServer::isBlackAttachCrad($user)):?>
+                                <div class="weui-cell__bd">
+                                    <div class="shengji_desc">
+                                        <p class="t1">
+                                            升级成为主卡
+                                        </p>
+                                        <p class="t2">
+                                            *请选择以下几种方式进行升级
+                                        </p>
+                                    </div>
 
+                                     <?php if($user['total_amount'] >= 500000):?>
+                                         <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_FULL_MONEY]); ?>">
+                                             <div class="shengji_fs">
+                                                 <div class="t1">消费满￥500,000，点击这里升级</div>
+                                                 <div class="t2">您黑卡附属卡会员期限内目前消费金额为￥<?php echo $user['total_amount'] ?>，暂时不能升级</div>
+                                             </div>
+                                         </a>
+                                     <?php else: ?>
+                                         <div class="shengji_fs">
+                                             <div class="t1">消费满￥500,000，点击这里升级</div>
+                                             <div class="t2">您当前的消费金额为<?php echo $user['total_amount'] ?>，暂时不能升级</div>
+                                         </div>
+                                     <?php endif;?>
+
+                                 </div>
+                                 <?php endif;?>
             </div>
         </div>
 

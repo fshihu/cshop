@@ -47,7 +47,7 @@ use module\member\index\UserServer;
 <script type="text/javascript">
     $('.addr_eidt_btn').click(function () {
         ajax_request('',$('form').serialize(),function () {
-            Tip('申请成功');
+            Tip('赠送成功');
            location.href='<?php echo $this->genurl('index');?>';
         });
         return false;

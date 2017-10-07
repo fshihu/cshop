@@ -27,7 +27,7 @@ class MemberLevelGiveWxAction extends \CAction implements IFormViewBuilder
     {
         $id = $request->getParams('id');
         $black_card_give = ItemModel::make('black_card_give')->addId($id)->addColumnsCondition(array(
-            'user_id' => Session::getUserID(),
+            'uid' => Session::getUserID(),
         ))->execute();
         if(!$black_card_give){
             throw new CErrorException('卡错误');
