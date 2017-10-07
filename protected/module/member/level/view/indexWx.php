@@ -6,6 +6,7 @@
  * Time: 15:32
  */
 use module\member\index\server\UserLevelServer;
+use module\member\index\UserServer;
 
 ?>
 
@@ -32,7 +33,7 @@ use module\member\index\server\UserLevelServer;
                 <div class="weui-cell__bd">
                     <p>您目前的等级</p>
                 </div>
-                <div class="weui-cell__hd"><?php echo \module\member\index\UserServer::getLevelName($user) ?></div>
+                <div class="weui-cell__hd"><?php echo UserServer::getLevelName($user) ?></div>
             </div>
               <?php if(!UserLevelServer::isNormal($user)):?>
             <div class="weui-cell weui-cell_access" href="javascript:;">
@@ -103,7 +104,7 @@ use module\member\index\server\UserLevelServer;
                     <a href="<?php echo $this->genurl('renew',['renew_type' => UserLevelServer::LEVEL_RENEW_TRUN_MONEY]); ?>">
                         <div class="shengji_fs">
                             <div class="t1">缴交￥440，续费金卡会员</div>
-                            <div class="t2">请点击这里，续交会费，审核后金卡会员有效期至 <?php echo date('Y-m-d',strtotime('+1 year',$user['level_end_time'])) ?></div>
+                            <div class="t2">请点击这里，续交会费，审核后金卡会员有效期至<?php echo date('Y-m-d',strtotime('+1 year',$user['level_end_time'])) ?></div>
                         </div>
                     </a>
                     <?php if($user['recomm_golden_num'] >= 5):?>
@@ -119,50 +120,119 @@ use module\member\index\server\UserLevelServer;
                             <div class="t2">您的会员有效期内，有<?php echo $user['recomm_golden_num'] ?>名推荐好友成为金牌会员暂时不能满足自动续费要求</div>
                         </div>
                     <?php endif;?>
-                    <a href="<?php echo $this->genurl('give') ?>">
-                        <div class="shengji_fs">
-                            <div class="sanjiao">
+
+                    <div class="shengji_desc">
+                        <p class="t1">
+                            升级黑卡会员
+                        </p>
+                        <p class="t2">
+                           *请选择以下几种方式升级成为黑卡会员
+                        </p>
+                    </div>
+                    <?php if($user['total_amount'] >= 500000):?>
+                        <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_FULL_MONEY]); ?>">
+                            <div class="shengji_fs">
+                                <div class="t1">消费满￥500,000，点击这里升级</div>
+                                <div class="t2">您金卡会员期限内消费金额为￥<?php echo $user['total_amount'] ?>，可以升级</div>
                             </div>
-                            <div class="t3">已赠送</div>
+                        </a>
+                    <?php else: ?>
+                        <div class="shengji_fs">
                             <div class="t1">消费满￥500,000，点击这里升级</div>
-                            <div class="t2">您黑卡附属卡会员期限内目前消费金额为￥35,000，暂时不能升级</div>
+                            <div class="t2">您金卡会员期限内消费金额为￥<?php echo $user['total_amount'] ?>，暂时不能升级</div>
                         </div>
-                    </a>
+                    <?php endif;?>
+                    <div class="shengji_desc">
+                        <p class="t1">
+                            升级黑卡附属卡会员
+                        </p>
+                        <p class="t2">
+                            *请选择以下几种方式升级成为黑卡附属卡会员
+                        </p>
+                    </div>
+                    <div class="shengji_fs">
+                        <div class="t1">您的好友沁怡赠送您黑卡附属卡</div>
+                        <div class="t2">点击获取黑卡附属卡，成为黑卡附属卡会员</div>
+                    </div>
+
                 </div>
                  <?php endif;?>
-                <div class="shengji_desc">
-                    <p class="t1">
-                        升级黑卡会员
-                    </p>
-                    <p class="t2">
-                       *请选择以下几种方式升级成为黑卡会员
-                    </p>
-                </div>
-                <?php if($user['total_amount'] >= 500000):?>
-                    <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_FULL_MONEY]); ?>">
-                        <div class="shengji_fs">
-                            <div class="t1">消费满￥500,000，点击这里升级</div>
-                            <div class="t2">您金卡会员期限内消费金额为￥<?php echo $user['total_amount'] ?>，可以升级</div>
-                        </div>
-                    </a>
-                <?php else: ?>
-                    <div class="shengji_fs">
-                        <div class="t1">消费满￥500,000，点击这里升级</div>
-                        <div class="t2">您金卡会员期限内消费金额为￥<?php echo $user['total_amount'] ?>，暂时不能升级</div>
-                    </div>
-                <?php endif;?>
-                <div class="shengji_desc">
-                    <p class="t1">
-                        升级黑卡附属卡会员
-                    </p>
-                    <p class="t2">
-                        *请选择以下几种方式升级成为黑卡附属卡会员
-                    </p>
-                </div>
-                <div class="shengji_fs">
-                    <div class="t1">您的好友沁怡赠送您黑卡附属卡</div>
-                    <div class="t2">点击获取黑卡附属卡，成为黑卡附属卡会员</div>
-                </div>
+                 <?php if(UserLevelServer::isBlackCrad($user)):?>
+                     <div class="weui-cell__bd"  >
+                         <div class="shengji_desc">
+                             <p class="t1">
+                                 续费黑卡会员
+                             </p>
+                             <p class="t2">
+                                *请选择以下几种方式进行续费
+                             </p>
+                         </div>
+
+                         <a href="<?php echo $this->genurl('renew',['renew_type' => UserLevelServer::LEVEL_RENEW_TRUN_MONEY]); ?>">
+                             <div class="shengji_fs">
+                                 <div class="t1">缴交￥880，续费黑卡会员</div>
+                                 <div class="t2">请点击这里，续交会费，审核后黑卡会员有效期至<?php echo date('Y-m-d',strtotime('+1 year',$user['level_end_time'])) ?></div>
+                             </div>
+                         </a>
+                         <?php if($user['recomm_golden_num'] >= 5):?>
+                             <a href="<?php echo $this->genurl('renew',['renew_type' =>UserLevelServer::LEVEL_UPGRADE_RECOMM_GOLDEN]); ?>">
+                                 <div class="shengji_fs">
+                                     <div class="t1">有效期内推荐5人成为黑卡会员</div>
+                                     <div class="t2">您的会员有效期内，有<?php echo $user['recomm_golden_num'] ?>名推荐好友成为金牌会员满足自动续费要求</div>
+                                 </div>
+                             </a>
+                          <?php else:?>
+
+                             <div class="shengji_fs">
+                                 <div class="t1">有效期内推荐5人成为黑卡会员</div>
+                                 <div class="t2">您的会员有效期内，有<?php echo $user['recomm_golden_num'] ?>名推荐好友成为金牌会员暂时不能满足自动续费要求</div>
+                             </div>
+                         <?php endif;?>
+
+                         <div class="shengji_desc">
+                             <p class="t1">
+                                 赠送黑卡附属卡
+                             </p>
+                             <p class="t2">
+                                 *请选择以下几种方式升级成为黑卡会员
+                             </p>
+                         </div>
+
+                         <?php foreach(UserLevelServer::getBlackList() as $item):?>
+                              <?php if($item['status'] == UserLevelServer::BLACK_STATSU_NO_GIVE):?>
+                             <a href="<?php echo $this->genurl('give') ?>">
+                                 <div class="shengji_fs">
+                                     <div class="sanjiao">
+                                     </div>
+                                     <div class="t3"><?php echo UserLevelServer::getBlackStatusDesc($item['status']) ?></div>
+                                     <div class="t1"><?php echo $item['name'] ?></div>
+                                     <div class="t2">未赠送好友，点击选择好友赠送</div>
+                                 </div>
+                             </a>
+                             <?php endif;?>
+                         <?php if($item['status'] == UserLevelServer::BLACK_STATSU_GIVEED):?>
+                                 <div class="shengji_fs">
+                                     <div class="sanjiao">
+                                     </div>
+                                     <div class="t3"><?php echo UserLevelServer::getBlackStatusDesc($item['status']) ?></div>
+                                     <div class="t1"><?php echo $item['name'] ?></div>
+                                     <div class="t2">已赠送好友沁怡（账号：<?php substr_replace(UserServer::getUser($item['give_uid'])['mobile'],'****',3,4) ?>） <br> 好友已接受，并成为黑卡附属卡会员</div>
+                                 </div>
+                         <?php endif;?>
+                             <?php if($item['status'] == UserLevelServer::BLACK_STATSU_WAIT_GIVE):?>
+                                 <div class="shengji_fs">
+                                     <div class="sanjiao">
+                                     </div>
+                                     <div class="t3"><?php echo UserLevelServer::getBlackStatusDesc($item['status']) ?></div>
+                                     <div class="t1"><?php echo $item['name'] ?></div>
+                                     <div class="t2">已赠送好友沁怡（账号：<?php substr_replace(UserServer::getUser($item['give_uid'])['mobile'],'****',3,4) ?>） <br>好友暂未接受成为黑卡附属卡会员</div>
+                                 </div>
+                             <?php endif;?>
+                         <?php endforeach?>
+
+
+                     </div>
+                 <?php endif;?>
 
             </div>
         </div>
