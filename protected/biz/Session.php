@@ -21,4 +21,9 @@ class Session extends SessionAbs
     {
         return '张三';
     }
+
+    public static function setWxUser($user_info)
+    {
+        self::set('wx_user',$user_info);
+    }
 }

@@ -20,7 +20,7 @@ class MemberMsgIndexWxAction extends ListAction
     protected function onExecute()
     {
         $item = ItemModel::make('sys_msg')->order('id desc')->execute();
-        UpdateModel::make('user')->addData(array(
+        UpdateModel::make('users')->addData(array(
             'max_msg_id' => $item['id']
         ))->addColumnsCondition(array(
             'user_id' => Session::getUserID(),

@@ -25,13 +25,11 @@ class WxRegInterceptors implements CInterceptors
         }else{
         }
         if(!Session::isLogin()){
-//            list($ok,$openid) = Wx::instance()->getOpenid($request);
-//            if($ok){
-//                Session::login();
-//                Session::setWxUser(Wx::instance()->getUserInfo($openid));
-//            }else{
-//                Session::login();
-//            }
+            list($ok,$openid) = Wx::instance()->getOpenid($request);
+            if($ok){
+                Session::login();
+                Session::setWxUser(Wx::instance()->getUserInfo($openid));
+            }
         }
 
         return $next;
