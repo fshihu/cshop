@@ -10,7 +10,7 @@ body>.content{ height:100%;}
 
 .weui-title-title .weui-cell .weui-cell__ft:after{border-width:   0 0 2px 2px; width:10px; height:10px; border-color: #ffffff;
 font-weight: bold;}
-.weui-title-title .title{text-align: center; color: #000;font-size: 16px;}
+.weui-title-title .title{text-align: center; color: #000;font-size: 18px;}
 .weui-title-title { margin-top:0;background: #fff;border-bottom: 1px solid #ececec;}
 .weui-title-title:before{border: none;}
 .weui-title-title:after{border: none;}
@@ -116,17 +116,17 @@ line-height: 1; width: 45px; height:45px;display: inline-block; color: #0950a0;}
   top: 0;border-radius: 5px;
   width: 100%;
   right: 0;}
-.home_item .txt{position: absolute; width:100%;top:50px;text-align: center;}
-.home_item .text1{display: block; color: #ffffff;font-size: 24px;}
-.home_item .text2{background: #171717; color: #fcf7f7;font-size: 16px; padding:7px 16px; margin-top:5px;
+.home_item .txt{position: absolute; width:100%;top:65px;text-align: center;}
+.home_item .text1{display: block; color: #ffffff;font-size: 20px;}
+.home_item .text2{background: #171717; color: #fcf7f7;font-size: 16px; padding:2px 9px; margin-top:5px;
 display: inline-block;}
 
 .weui-tabbar{ position: fixed;background: #fff;}
-.weui-tabbar__label{ color: #474747;}
+.weui-tabbar__label{ color: #474747;font-size: 12px;}
 
 .m_title{ overflow: hidden; margin-bottom:20px; padding:0 10px;}
 .m_title .m_t_l{float: left; border-bottom: 1px solid #2bc7c4;}
-.m_title .m_t_l .mt_icon{display: inline-block;float: left;margin-top:5px;}
+.m_title .m_t_l .mt_icon{display: inline-block;float: left;margin-top:3px;}
 .m_title .m_t_l .mt_text{display: inline-block;float: left; color: #2bc7c4; line-height:1; margin-top:5px;}
 .m_title .m_t_r{float: right;}
 .m_title .m_t_r .mtr_text{display: inline-block;vertical-align: middle;}
