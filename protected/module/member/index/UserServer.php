@@ -10,11 +10,21 @@ namespace module\member\index;
 
 use biz\Session;
 use CC\db\base\select\ItemModel;
+use module\member\index\server\UserLevelServer;
 
 class UserServer
 {
     public static function getLevelName($user)
     {
+        if($user['level'] == UserLevelServer::LEVEL_GOLDED_CARD){
+            return '金卡会员';
+        }
+        if($user['level'] == UserLevelServer::LEVEL_BLACK_CARD){
+            return '黑卡会员';
+        }
+        if($user['level'] == UserLevelServer::LEVEL_BLACK_ATTACH_CARD){
+            return '黑卡附属卡会员';
+        }
         return '普通会员';
     }
 

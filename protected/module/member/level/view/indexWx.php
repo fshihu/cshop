@@ -200,7 +200,7 @@ use module\member\index\UserServer;
 
                          <?php foreach(UserLevelServer::getBlackList() as $item):?>
                               <?php if($item['status'] == UserLevelServer::BLACK_STATSU_NO_GIVE):?>
-                             <a href="<?php echo $this->genurl('give') ?>">
+                             <a href="<?php echo $this->genurl('give',['id'=>$item['id']]) ?>">
                                  <div class="shengji_fs">
                                      <div class="sanjiao">
                                      </div>

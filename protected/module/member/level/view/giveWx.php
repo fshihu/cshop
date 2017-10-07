@@ -5,6 +5,8 @@
  * Date: 2017/9/20
  * Time: 15:32
  */
+use module\member\index\UserServer;
+
 ?>
 
 <!--搜索栏-s-->
@@ -18,7 +20,7 @@
                          </div>
                      </a>
                     <div class="weui-cell__bd">
-                        <p class="title">会议简介</p>
+                        <p class="title"><?php echo $black_card_give['name'] ?></p>
                     </div>
                 </div>
 
@@ -26,8 +28,8 @@
     <div class="  weui-panel_access  " >
          <div class="mem_level_give">
             <div class="binfo">
-                <img class="avatar" src=""/>
-                <div class="t1">王茹沁怡</div>
+                <img class="avatar" src="<?php echo UserServer::getAvatar($user) ?>"/>
+                <div class="t1"><?php echo $user['nickname'] ?></div>
             </div>
 
         </div>
@@ -42,3 +44,13 @@
  </div>
 
 </div>
+<script type="text/javascript">
+    $('.addr_eidt_btn').click(function () {
+        ajax_request('',$('form').serialize(),function () {
+            Tip('申请成功');
+           location.href='<?php echo $this->genurl('index');?>';
+        });
+        return false;
+    });
+
+</script>

@@ -16,6 +16,7 @@ class UserLevelServer
     const LEVEL_NORMAL = 1;
     const LEVEL_GOLDED_CARD = 2;//金卡
     const LEVEL_BLACK_CARD = 3;//黑卡
+    const LEVEL_BLACK_ATTACH_CARD = 4;//黑卡
 
     const LEVEL_UPGRADE_FULL_MONEY = 1;//满钱升级
     const LEVEL_UPGRADE_TRUN_MONEY = 2;//交钱升级
