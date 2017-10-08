@@ -21,6 +21,7 @@ class UserLevelServer
     const LEVEL_UPGRADE_FULL_MONEY = 1;//满钱升级
     const LEVEL_UPGRADE_TRUN_MONEY = 2;//交钱升级
     const LEVEL_UPGRADE_RECOMM_GOLDEN = 3;//推荐升级
+    const LEVEL_UPGRADE_FRIEND_GIVE = 4;//推荐升级
 
     const LEVEL_RENEW_TRUN_MONEY = 1;//交钱续费
     const LEVEL_RENEW_RECOMM_GOLDEN = 2;//推荐续费

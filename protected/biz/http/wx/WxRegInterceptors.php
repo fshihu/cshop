@@ -28,16 +28,16 @@ class WxRegInterceptors implements CInterceptors
             Session::setUserID(2);
         }else{
         }
-       if(!Session::isLogin()){
+       if(!Session::isLogin() or true){
             list($ok,$openid) = Wx::instance()->getOpenid($request);
             if($ok){
-                Session::login();
-                $user_info = Wx::instance()->getUserInfo($openid);
+                list($ok,$user_info) = Wx::instance()->getUserInfo($openid);
                 Session::setWxUser($user_info);
                 $user = ItemModel::make('users')->addColumnsCondition(array(
                     'oauth' => 'wx',
                     'openid' => $openid
                 ))->execute();
+                var_dump($user_info);exit;
                 if(!$user){
                     InsertModel::make('users')->addData(array(
                         'oauth' => 'wx',
@@ -48,6 +48,8 @@ class WxRegInterceptors implements CInterceptors
                         'head_pic' => $user_info['headimgurl'],
                     ))->execute();
                 }
+                Session::login();
+
             }
         }
         return $next;

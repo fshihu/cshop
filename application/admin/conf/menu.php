@@ -33,8 +33,9 @@ return	array(
 						//array('name' => '公告管理', 'act'=>'notice_list', 'op'=>'Article'),
 //						array('name' => '专题列表', 'act'=>'topicList', 'op'=>'Topic'),
 				)),
-        array('name' => '系统消息','child' => array(
-            array('name' => '消息列表', 'act'=>'index', 'op'=>'Sysmsg'),
+        array('name' => '系统管理','child' => array(
+            array('name' => '系统消息', 'act'=>'index', 'op'=>'Sysmsg'),
+            array('name' => '银行管理', 'act'=>'index', 'op'=>'Bank'),
 
 //                array('name' => '微信菜单管理', 'act'=>'menu', 'op'=>'Wechat'),
 //                array('name' => '文本回复', 'act'=>'text', 'op'=>'Wechat'),

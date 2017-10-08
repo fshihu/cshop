@@ -44,7 +44,8 @@ use module\member\index\UserServer;
                 <div class="weui-cell__hd"><?php echo date('Y-m-d',$user['level_start_time']) ?>至<?php echo date('Y-m-d',$user['level_end_time']) ?></div>
             </div>
               <?php endif;?>
-            <div class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cesll " style="    padding: 15px;
+                border-top: 1px solid #d9d9d9;"  href="javascript:;">
                  <?php if(UserLevelServer::isNormal($user)):?>
                 <div class="weui-cell__bd">
                     <div class="shengji_desc">
@@ -260,6 +261,27 @@ use module\member\index\UserServer;
 
                                  </div>
                                  <?php endif;?>
+                 <?php if($black_card_give):?>
+                     <div class="weui-cell__bd">
+                         <div class="shengji_desc">
+                             <p class="t1">
+                                 升级黑卡附属卡会员
+                             </p>
+                             <p class="t2">
+                                 *请选择以下几种方式升级成为黑卡附属卡会员
+                             </p>
+                         </div>
+                         <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_ATTACH_CARD,'give_id' => $black_card_give['id'],'update_type' => UserLevelServer::LEVEL_UPGRADE_FRIEND_GIVE]); ?>">
+                             <div class="shengji_fs">
+                                 <div class="t1">您的好友探索者赠送您黑卡附属卡</div>
+                                 <div class="t2">点击获取黑卡附属卡，成为黑卡附属卡会员</div>
+                             </div>
+                         </a>
+
+
+                      </div>
+
+                 <?php endif;?>
             </div>
         </div>
 
