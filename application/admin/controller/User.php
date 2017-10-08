@@ -616,9 +616,7 @@ class User extends Base {
         $model->field('t.*,ub.bank_name bank_name,ub.bank_card,ub.id_card bank_id_card,ub.name bank_user_name');
         $model->alias('t')->join('users_bank ub','t.bank_id = ub.id','left');
         $list = $model->where($where)->order("t.`id` desc")->limit($Page->firstRow.','.$Page->listRows)->select();
-        $names = array(
-                    '中国银行',
-                );
+        $names = array_column(M('bank')->select(),'name','id');
         foreach ($list as $i => $item) {
             $list[$i]['bank_name'] = $names[$item['bank_name']];
         }

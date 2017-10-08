@@ -83,4 +83,35 @@
 
 </div>
 <?php include \biz\Util::getFooterNav(); ?>
- 
+<script type="text/javascript">
+    $('.weui-title-menu').click(function () {
+        weui.actionSheet([
+
+            {
+                label: '最新产品',
+                onClick: function () {
+                    location.href='<?php echo $this->genurl('goods/cate/goods',['list_type' => 'new']); ?>';
+                }
+            }, {
+                label: '热销产品',
+                onClick: function () {
+                    location.href='<?php echo $this->genurl('goods/cate/goods',['list_type' => 'hot']); ?>';
+                }
+            }, {
+                label: '限时团购',
+                onClick: function () {
+                    location.href='<?php echo $this->genurl('groupon/index/index'); ?>';
+                }
+            },
+            {
+                label: '自建团购',
+                onClick: function () {
+                    location.href='<?php echo $this->genurl('/groupon/my/own'); ?>';
+                }
+            }
+        ], [
+        ], {
+            className: 'custom-classname'
+        });
+    });
+</script>

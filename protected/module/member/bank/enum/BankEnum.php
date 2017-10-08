@@ -9,6 +9,7 @@
 namespace module\member\bank\enum;
 
 
+use CC\db\base\select\ListModel;
 use CC\util\db\Enum;
 
 class BankEnum extends Enum
@@ -16,13 +17,14 @@ class BankEnum extends Enum
 
     protected function initAddDatas()
     {
-        $this->addForArray(array(
-            '中国银行',
-        ));
+        $list = ListModel::make('bank')->execute();
+        $this->addForList($list,'id','name');
     }
 
     public static function getIconByIndex($bank_name)
     {
-        return '';
+        $list = ListModel::make('bank')->execute();
+        $list = array_column($list,'image','id');
+        return $list[$bank_name] ;
     }
 }
