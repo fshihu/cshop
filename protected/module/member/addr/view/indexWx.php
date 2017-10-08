@@ -4,8 +4,8 @@
 <div class="page__bd"  style="min-height: 100%;">
     <div class="weui-cells weui-title-title">
 
-                 <div class="weui-cell weui-cell_access" href="javascript:;">
-                     <a href="javascript:history.back();">
+                 <div class="weui-cell weui-cell_access">
+                     <a  href="<?php echo $this->genurl($is_sel?'cart/index/index':'member/index/index') ?>">
                          <div class="weui-cell__ft">
                          </div>
                      </a>
@@ -29,7 +29,7 @@
                                  <?php echo $item['address'] ?>
                              </div>
              <div class="t3">
-                 <a href="javascript:;" class="checkbox <?php echo $item['is_default']?'checkboxed':'' ?>  fl"></a>
+                 <a href="<?php echo $this->genurl('default',['id'=>$item['address_id']]); ?>" class="addr_sel checkbox <?php echo $item['is_default']?'checkboxed':'' ?>  fl"></a>
 
 
                  <span class="fr">
@@ -57,6 +57,14 @@
         var $this = $(this);
         ajax_request($this.attr('href'),{},function () {
             $this.closest('.list_item').remove();
+        });
+        return false;
+    });
+    $('body').on('click','.addr_sel',function () {
+
+        var $this = $(this);
+        ajax_request($this.attr('href'),{},function () {
+            location.href = '<?php echo $this->genurl($is_sel?'cart/index/index':'index') ?>';
         });
         return false;
     });

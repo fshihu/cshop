@@ -34,7 +34,6 @@ class CartIndexIndexWxAction extends \CAction
             ->leftJoin('region','d','t.district = d.id')
             ->addColumnsCondition($addr_condition)->execute();
 
-
         $prom_type = $request->getParams('prom_type', 0);
         return new \CRenderData(array(
             'list' => CartServer::getMyList($prom_type),

@@ -16,6 +16,7 @@ use CRequest;
 
 class MemberAddrIndexWxAction extends \CAction
 {
+    public $is_sel;
     public function execute(CRequest $request)
     {
         $list = ListModel::make('user_address')
@@ -28,6 +29,7 @@ class MemberAddrIndexWxAction extends \CAction
         ))->execute();
         return new \CRenderData(array(
             'list' => $list,
+            'is_sel' => $this->is_sel,
         ));
     }
 

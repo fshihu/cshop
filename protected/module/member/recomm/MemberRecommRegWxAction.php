@@ -8,12 +8,23 @@
 namespace module\member\recomm;
 
 
+use CC\db\base\update\UpdateModel;
 use CRequest;
+use module\member\index\UserServer;
 
 class MemberRecommRegWxAction extends \CAction
 {
     public function execute(CRequest $request)
     {
-        return parent::execute($request);
+        $pid = $request->getParams('pid');
+        $user = UserServer::getUser();
+        if(!$user['first_leader']){
+            UpdateModel::make('users')->addColumnsCondition(array(
+                'first_leader' => $pid,
+            ))->addColumnsCondition(array(
+                'user_id' => $user['user_id'],
+            ))->execute();
+        }
+        return new \CRedirectData('home/index/index');
     }
 }

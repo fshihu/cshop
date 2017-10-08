@@ -5,7 +5,8 @@
         <div class="weui-cells weui-title-title">
 
                      <div class="weui-cell weui-cell_access" href="javascript:;">
-                         <a href="<?php use module\member\index\UserServer;
+                         <a href="<?php use module\member\index\server\UserLevelServer;
+                         use module\member\index\UserServer;
 
                          echo $this->genurl('member/index/index'); ?>">
                              <div class="weui-cell__ft">
@@ -19,13 +20,13 @@
                 </div>
         <div class="  weui-panel_access  "  >
       <div class="weui-navbar navbar-sm">
-          <a href="<?php echo $this->genurl('',['level'=>1]); ?>" class="weui-navbar__item <?php echo $level==1?'weui-bar__item_on':'' ?>">
+          <a href="<?php echo $this->genurl('',['level'=> UserLevelServer::LEVEL_NORMAL]); ?>" class="weui-navbar__item <?php echo $level==UserLevelServer::LEVEL_NORMAL?'weui-bar__item_on':'' ?>">
               普通会员
           </a>
-          <a href="<?php echo $this->genurl('',['level'=>2]); ?>" class="weui-navbar__item <?php echo $level==2?'weui-bar__item_on':'' ?>  ">
+          <a href="<?php echo $this->genurl('',['level'=>UserLevelServer::LEVEL_GOLDED_CARD]); ?>" class="weui-navbar__item <?php echo $level==UserLevelServer::LEVEL_GOLDED_CARD?'weui-bar__item_on':'' ?>  ">
               金卡会员
           </a>
-          <a href="<?php echo $this->genurl('',['level'=>3]); ?>" class="weui-navbar__item <?php echo $level==3?'weui-bar__item_on':'' ?>  ">
+          <a href="<?php echo $this->genurl('',['level'=>UserLevelServer::LEVEL_BLACK_CARD]); ?>" class="weui-navbar__item <?php echo $level==UserLevelServer::LEVEL_BLACK_CARD?'weui-bar__item_on':'' ?>  ">
               黑卡会员
           </a>
        </div>

@@ -21,7 +21,7 @@
 
               <?php if($addr):?>
                   <div class="addr_info">
-                       <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('member/addr/index'); ?>">
+                       <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('member/addr/index',['is_sel'=>1]); ?>">
                                       <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/coordinates_icon.png" alt="" style="width:18px;margin-right:30px;margin-left:15px;display:block"></div>
                                       <div class="weui-cell__bd">
                                           <div class="t1">
@@ -29,10 +29,10 @@
                                                                   <span class="t1_m"><?php echo $addr['mobile'] ?></span>
                                                               </div>
                                                               <div class="t2">
-                                                                  <?php echo $item['p_name'] ?>
-                                              <?php echo $item['c_name'] ?>
-                                              <?php echo $item['d_name'] ?>
-                                              <?php echo $item['address'] ?>
+                                                                  <?php echo $addr['p_name'] ?>
+                                              <?php echo $addr['c_name'] ?>
+                                              <?php echo $addr['d_name'] ?>
+                                              <?php echo $addr['address'] ?>
                                                               </div>
 
                                       </div>
