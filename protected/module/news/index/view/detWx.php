@@ -43,4 +43,7 @@
         });
         return false;
     });
+    ajax_request('<?php echo $this->genurl('collect/add');?>',{type:1,id:'<?php echo $data['article_id'] ?>'},function () {
+    });
+
 </script>

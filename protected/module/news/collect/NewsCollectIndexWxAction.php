@@ -15,10 +15,18 @@ use CRequest;
 
 class NewsCollectIndexWxAction extends ListAction
 {
+    public $type = 0;
     protected function getTable()
     {
         return 'article_collect';
     }
+    protected function onExecute()
+    {
+        return [
+            'type' => $this->type,
+        ];
+    }
+
     protected function getSearchCondition()
     {
         $this->dbCondition->addColumnsCondition(array(

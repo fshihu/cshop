@@ -2,8 +2,8 @@
     <div class="page__bd"  style="min-height: 100%;">
         <div class="weui-cells weui-title-title">
 
-                     <div class="weui-cell weui-cell_access" href="javascript:;">
-                         <a href="javascript:history.back();">
+                     <div class="weui-cell weui-cell_access">
+                         <a  href="<?php echo $this->genurl('home/index/index'); ?>">
                              <div class="weui-cell__ft">
                              </div>
                          </a>
@@ -16,8 +16,9 @@
         <div class="  weui-panel_access  " style="height: 100%;background: #f3f7f8">
  <div class="goods_list">
      <div class="gl_nav">
+         <a href="<?php echo $this->genurl(''); ?>" class="<?php echo $cate_id ==0?'ac':'' ?>">全部</a>
          <?php foreach($cate_list as $item):?>
-         <a href="" ><?php echo $item['name'] ?></a>
+         <a class="<?php echo $cate_id ==$item['id']?'ac':'' ?>" href="<?php echo $this->genurl('',['cate_id' =>$item['id']]); ?>" ><?php echo $item['name'] ?></a>
          <?php endforeach?>
 
          <a href="" style="display: none;">
@@ -45,7 +46,7 @@
     <span class="line"></span> 正在进行的团购商品 <span class="line"></span>
 </div>
      <div class="h_item_1_w">
-          <?php foreach($group_buys as $i => $group_buy):?>
+              <?php foreach($group_buys as $i => $group_buy):?>
 
            <div class="h_item_1">
 

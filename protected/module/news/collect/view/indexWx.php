@@ -18,10 +18,10 @@
         <div class="  weui-panel_access  "  >
   <div class="goods_list">
       <div class="weui-navbar navbar-sm">
-          <a href="" class="weui-navbar__item weui-bar__item_on">
+          <a href="<?php echo $this->genurl(''); ?>" class="weui-navbar__item <?php echo $type ==0?'weui-bar__item_on':'' ?>">
                我的收藏
           </a>
-          <a href="" class="weui-navbar__item  ">
+          <a href="<?php echo $this->genurl('',['type'=>1]); ?>" class="weui-navbar__item <?php echo $type ==1?'weui-bar__item_on':'' ?>  ">
               浏览记录
           </a>
        </div>
