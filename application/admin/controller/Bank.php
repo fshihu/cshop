@@ -6,7 +6,8 @@
  */
 
 namespace app\admin\controller;
-
+use think\Loader;
+use think\Page;
 
 class Bank  extends Base
 {
@@ -102,10 +103,9 @@ class Bank  extends Base
                	$data = I('post.');
 
                 if($id){
-                	M("SysMsg")->update($data);
+                	M("Bank")->update($data);
                 }else{
-                    $data['time'] = time();
-                    $id = M("SysMsg")->insert($data);
+                     $id = M("Bank")->insert($data);
                 }
 
 
@@ -115,10 +115,19 @@ class Bank  extends Base
            $this->assign('cat_list',$cat_list);
         $goodsImages = M("ServiceImages")->where('service_id =' . I('GET.id', 0))->select();
         $this->assign('goodsImages', $goodsImages);  // 商品相册
-           $brand = M("Service")->find($id);
-           $this->assign('brand',$brand);
+           $brand = M("Bank")->find($id);
+           $this->assign('info',$brand);
         $this->initEditor(); // 编辑器
            return $this->fetch('_service');
+    }
+    public function delBrand()
+    {
+
+
+        $model = M("Bank");
+        $model->where('id ='.$_GET['id'])->delete();
+        $return_arr = array('status' => 1,'msg' => '操作成功','data'  =>'',);   //$return_arr = array('status' => -1,'msg' => '删除失败','data'  =>'',);
+        $this->ajaxReturn($return_arr);
     }
 
     /**

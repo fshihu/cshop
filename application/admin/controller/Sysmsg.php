@@ -118,10 +118,19 @@ class Sysmsg  extends Base
            $this->assign('cat_list',$cat_list);
         $goodsImages = M("ServiceImages")->where('service_id =' . I('GET.id', 0))->select();
         $this->assign('goodsImages', $goodsImages);  // 商品相册
-           $brand = M("Service")->find($id);
+           $brand = M("SysMsg")->find($id);
            $this->assign('brand',$brand);
         $this->initEditor(); // 编辑器
            return $this->fetch('_service');
+    }
+    public function delBrand()
+    {
+
+
+        $model = M("SysMsg");
+        $model->where('id ='.$_GET['id'])->delete();
+        $return_arr = array('status' => 1,'msg' => '操作成功','data'  =>'',);   //$return_arr = array('status' => -1,'msg' => '删除失败','data'  =>'',);
+        $this->ajaxReturn($return_arr);
     }
 
     /**

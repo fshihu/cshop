@@ -28,7 +28,7 @@ class WxRegInterceptors implements CInterceptors
             Session::setUserID(2);
         }else{
         }
-       if(!Session::isLogin() or true){
+       if(!Session::isLogin() ){
             list($ok,$openid) = Wx::instance()->getOpenid($request);
             if($ok){
                 list($ok,$user_info) = Wx::instance()->getUserInfo($openid);

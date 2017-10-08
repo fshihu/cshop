@@ -9,8 +9,8 @@
   <div class="fixed-bar">
     <div class="item-title"><a class="back" href="javascript:history.back();" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
       <div class="subject">
-        <h3>消息详情</h3>
-        <h5>消息添加与管理</h5>
+        <h3>银行详情</h3>
+        <h5>银行添加与管理</h5>
       </div>
     </div>
   </div>
@@ -20,15 +20,37 @@
 
 
 
- 	  <dl class="row">
-        <dt class="tit">
-          <label for="ac_sort">消息描述</label>
-        </dt>
+        <dl class="row">
+          <dt class="tit">
+            <label><em>*</em>银行名称：</label>
+          </dt>
           <dd class="opt">
-              <textarea class="span12  " id="goodss_content" style="width: 400px;height: 80px;" name="content" title="">{$brand.desc}</textarea>
-              <span class="err" id="err_goods_csontent" style="color:#F00; display:none;"></span>
+            <input type="text" placeholder="名称" class="input-txt" name="name" value="{$info.name}">
+            <span class="err" id="err_ad_name" style="color:#F00; display:none;">银行名称不能为空</span>
+            <p class="notic"></p>
           </dd>
-      </dl>
+        </dl>
+        <dl class="row">
+          <dt class="tit">
+            <label>银行logo</label>
+          </dt>
+          <dd class="opt">
+            <div class="input-file-show">
+                          <span class="show">
+                              <a id="img_a" target="_blank" class="nyroModal" rel="gal" href="{$info.image}">
+                                <i id="img_i" class="fa fa-picture-o" onmouseover="layer.tips('<img src={$info.image}>',this,{tips: [1, '#fff']});" onmouseout="layer.closeAll();"></i>
+                              </a>
+                          </span>
+             	            <span class="type-file-box">
+                              <input type="text" id="ad_code" name="image" value="{$info.image}" class="type-file-text">
+                              <input type="button" name="button" id="button1" value="选择上传..." class="type-file-button">
+                              <input class="type-file-file" onClick="GetUploadify(1,'','ad','img_call_back')" size="30" hidefocus="true" nc_type="change_site_logo" title="点击前方预览图可查看大图，点击按钮选择文件并提交表单后上传生效">
+                          </span>
+            </div>
+            <span class="err"></span>
+            <p class="notic">请上传图片格式文件</p>
+          </dd>
+        </dl>
 
       <div class="bot"><a href="JavaScript:void(0);" onClick="verifyForm();" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a></div>
     </div>
@@ -52,7 +74,7 @@ function verifyForm(){
     $('span.err').show();
     $.ajax({
         type: "POST",
-        url: "{:U('Admin/Sysmsg/addEditService')}",
+        url: "{:U('Admin/Bank/addEditService')}",
         data: $('#addEditBrandForm').serialize(),
         dataType: "json",
         error: function () {
@@ -116,7 +138,7 @@ function ClearPicArr2(obj,path)
                 url:"{:U('Admin/Uploadify/delupload')}",
                 data:{action:"del", filename:path},
                 success:function(){
-                       $(obj).parent().remove(); // 删除完消息器的, 再删除 html上的图片
+                       $(obj).parent().remove(); // 删除完银行器的, 再删除 html上的图片
                 }
 });
 // 删除数据库记录
@@ -132,10 +154,11 @@ function ClearPicArr2(obj,path)
 
 function img_call_back(fileurl_tmp)
 {
-  $("#logo").val(fileurl_tmp);
+  $("#ad_code").val(fileurl_tmp);
   $("#img_a").attr('href', fileurl_tmp);
   $("#img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
 }
+
 function img_call_backss(fileurl_tmp)
 {
   $("#image").val(fileurl_tmp);
