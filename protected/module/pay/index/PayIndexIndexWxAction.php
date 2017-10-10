@@ -13,6 +13,8 @@ use CC\db\base\select\ItemModel;
 use CC\db\base\update\UpdateModel;
 use CRequest;
 use module\cart\index\server\OrderServer;
+use module\cart\index\server\OrderWaitStatusEnum;
+use module\cart\index\server\PromTypeEnum;
 
 class PayIndexIndexWxAction  extends \CAction
 {
@@ -31,8 +33,15 @@ class PayIndexIndexWxAction  extends \CAction
         $order_info['goods_tag'] = '微整形';
         $order_info['notify_url'] = $this->genurl('pay/index/notify',[],true);
         $order_info['order_amount'] = 1;//$order_info['order_amount'];
+        $ok_url = $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_SEND]);
+        $err_url = $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_PAY]);
+        if($order_info['prom_type'] == PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY){
+            $ok_url = $this->genurl('member/level/index');
+        }
         return new \CRenderData(array(
             'jsApiParameters' =>  WxPay::instance()->getJsApiParameters($order_info),
+            'ok_url' => $ok_url,
+            'err_url' => $err_url,
         ));
     }
 }

@@ -29,15 +29,14 @@ class WxRegInterceptors implements CInterceptors
         }else{
         }
        if(!Session::isLogin() ){
-            list($ok,$openid) = Wx::instance()->getOpenid($request);
+            list($ok,$openid,$data) = Wx::instance()->getOpenid($request);
             if($ok){
-                list($ok,$user_info) = Wx::instance()->getUserInfo($openid);
+                list($ok,$user_info) = Wx::instance()->getSnsUserInfo($data['access_token'],$openid);
                 Session::setWxUser($user_info);
                 $user = ItemModel::make('users')->addColumnsCondition(array(
                     'oauth' => 'wx',
                     'openid' => $openid
                 ))->execute();
-                var_dump($user_info);exit;
                 if(!$user){
                     InsertModel::make('users')->addData(array(
                         'oauth' => 'wx',

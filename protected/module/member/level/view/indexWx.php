@@ -70,7 +70,7 @@ use module\member\index\UserServer;
                              <div class="t2">您当前的消费金额为<?php echo $user['total_amount'] ?>，暂时不能升级</div>
                          </div>
                      <?php endif;?>
-                    <a class="update_link" href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_GOLDED_CARD,'money' => '880','update_type' => UserLevelServer::LEVEL_UPGRADE_TRUN_MONEY]); ?>">
+                    <a  href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_GOLDED_CARD,'money' => '880','update_type' => UserLevelServer::LEVEL_UPGRADE_TRUN_MONEY]); ?>">
                         <div class="shengji_fs">
                             <div class="t1">缴纳￥880，立即申请升级金卡会员</div>
                             <div class="t2">点击这里，缴交会费，审核后成为金牌会员</div>

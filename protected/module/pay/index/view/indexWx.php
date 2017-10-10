@@ -20,14 +20,14 @@ use module\cart\index\server\OrderWaitStatusEnum;
 				WeixinJSBridge.log(res.err_msg);
 				if(res.err_msg == 'get_brand_wcpay_request:ok'){
                     alert('支付成功');
-                    location.href = '<?php echo $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_SEND]);?>';
+                    location.href = '<?php echo $ok_url;?>';
                 }else{
                     if(res.err_msg == 'get_brand_wcpay_request:cancel'){
                         alert('支付取消');
                     }else{
                         alert('支付失败');
                     }
-                    location.href = '<?php echo $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_PAY]);?>';
+                    location.href = '<?php echo $err_url;?>';
 
                 }
 			}

@@ -12,6 +12,7 @@ require_once __DIR__ . "/lib/WxPay.Api.php";
 require_once __DIR__ . "/example/WxPay.JsApiPay.php";
 require_once __DIR__.'/lib/WxPay.Notify.php';
 
+use biz\Session;
 use biz\wx\WxConf;
 use JsApiPay;
 use WxPayApi;
@@ -61,12 +62,12 @@ class WxPay
         $tools = new JsApiPay();
         $openId = $tools->GetOpenid();
 
-//②、统一下单
+        //②、统一下单
         $input = new WxPayUnifiedOrder();
         $input->SetBody($order_info['body']);
         $input->SetAttach($order_info['attach']);
         $input->SetOut_trade_no($order_info['order_sn']);
-        $input->SetTotal_fee(1);
+        $input->SetTotal_fee($order_info['order_amount']);
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag($order_info['goods_tag']);
