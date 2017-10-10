@@ -58,7 +58,7 @@ use module\member\index\UserServer;
                     </div>
 
                      <?php if($user['total_amount'] >= 50000):?>
-                         <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_GOLDED_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_FULL_MONEY]); ?>">
+                         <a class="update_link" href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_GOLDED_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_FULL_MONEY]); ?>">
                              <div class="shengji_fs">
                                  <div class="t1">消费满￥50,000，点击这里升级</div>
                                  <div class="t2">您当前的消费金额为<?php echo $user['total_amount'] ?>，可以升级</div>
@@ -70,14 +70,14 @@ use module\member\index\UserServer;
                              <div class="t2">您当前的消费金额为<?php echo $user['total_amount'] ?>，暂时不能升级</div>
                          </div>
                      <?php endif;?>
-                    <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_GOLDED_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_TRUN_MONEY]); ?>">
+                    <a class="update_link" href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_GOLDED_CARD,'money' => '880','update_type' => UserLevelServer::LEVEL_UPGRADE_TRUN_MONEY]); ?>">
                         <div class="shengji_fs">
                             <div class="t1">缴纳￥880，立即申请升级金卡会员</div>
                             <div class="t2">点击这里，缴交会费，审核后成为金牌会员</div>
                         </div>
                     </a>
                      <?php if($user['recomm_golden_num'] >= 5):?>
-                         <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_GOLDED_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_RECOMM_GOLDEN]); ?>">
+                         <a class="update_link" href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_GOLDED_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_RECOMM_GOLDEN]); ?>">
                              <div class="shengji_fs">
                                  <div class="t1">推送5人成为金卡会员</div>
                                  <div class="t2">您推荐的好友中有<?php echo $user['recomm_golden_num'] ?>名金牌会员，可以升级</div>
@@ -109,7 +109,7 @@ use module\member\index\UserServer;
                         </div>
                     </a>
                     <?php if($user['recomm_golden_num'] >= 5):?>
-                        <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_CARD,'update_type' => UserLevelServer::LEVEL_RENEW_RECOMM_GOLDEN]); ?>">
+                        <a class="update_link" href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_CARD,'update_type' => UserLevelServer::LEVEL_RENEW_RECOMM_GOLDEN]); ?>">
                             <div class="shengji_fs">
                                 <div class="t1">有效期内推荐3人成为金卡会员</div>
                                 <div class="t2">您的会员有效期内，有<?php echo $user['recomm_golden_num'] ?>名推荐好友成为金牌会员满足自动续费要求</div>
@@ -131,7 +131,7 @@ use module\member\index\UserServer;
                         </p>
                     </div>
                     <?php if($user['total_amount'] >= 500000):?>
-                        <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_FULL_MONEY]); ?>">
+                        <a class="update_link" href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_FULL_MONEY]); ?>">
                             <div class="shengji_fs">
                                 <div class="t1">消费满￥500,000，点击这里升级</div>
                                 <div class="t2">您金卡会员期限内消费金额为￥<?php echo $user['total_amount'] ?>，可以升级</div>
@@ -246,7 +246,7 @@ use module\member\index\UserServer;
                                     </div>
 
                                      <?php if($user['total_amount'] >= 500000):?>
-                                         <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_FULL_MONEY]); ?>">
+                                         <a class="update_link" href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_CARD,'update_type' => UserLevelServer::LEVEL_UPGRADE_FULL_MONEY]); ?>">
                                              <div class="shengji_fs">
                                                  <div class="t1">消费满￥500,000，点击这里升级</div>
                                                  <div class="t2">您黑卡附属卡会员期限内目前消费金额为￥<?php echo $user['total_amount'] ?>，暂时不能升级</div>
@@ -271,7 +271,7 @@ use module\member\index\UserServer;
                                  *请选择以下几种方式升级成为黑卡附属卡会员
                              </p>
                          </div>
-                         <a href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_ATTACH_CARD,'give_id' => $black_card_give['id'],'update_type' => UserLevelServer::LEVEL_UPGRADE_FRIEND_GIVE]); ?>">
+                         <a class="update_link" href="<?php echo $this->genurl('upgrade',['level' =>UserLevelServer::LEVEL_BLACK_ATTACH_CARD,'give_id' => $black_card_give['id'],'update_type' => UserLevelServer::LEVEL_UPGRADE_FRIEND_GIVE]); ?>">
                              <div class="shengji_fs">
                                  <div class="t1">您的好友探索者赠送您黑卡附属卡</div>
                                  <div class="t2">点击获取黑卡附属卡，成为黑卡附属卡会员</div>
@@ -290,3 +290,12 @@ use module\member\index\UserServer;
  </div>
 
 </div>
+<script type="text/javascript">
+    $('.update_link').click(function () {
+        ajax_request($(this).attr('href'),{},function () {
+           Tip('成功');
+           location.href = '';
+        });
+        return false;
+    });
+</script>

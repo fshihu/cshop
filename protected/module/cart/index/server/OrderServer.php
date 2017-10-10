@@ -88,6 +88,20 @@ class OrderServer
     {
         return date('YmdHis').rand(1000,9999);
     }
+
+    public static function addOrderBaseInfo($user_id,$order_amount,$order_prom_type,$order_prom_id)
+    {
+        $data =  array(
+            'order_sn'         => self::getOrderSn(), // 订单编号
+            'user_id'          =>$user_id, // 用户id
+            'order_amount'          =>$order_amount, // 用户id
+            'order_prom_type'    =>$order_prom_type,//'订单优惠活动id',
+            'order_prom_id'    =>$order_prom_id,//'订单优惠活动id',
+            'pay_name'         =>'微信支付',//支付方式，可能是余额支付或积分兑换，后面其他支付方式会替换
+            'add_time'         =>time(), // 下单时间
+        );
+        return InsertModel::make('order')->addData($data)->execute();
+    }
     private  function addOrderInfo($car_price)
     {
         $user_id = Session::getUserID();

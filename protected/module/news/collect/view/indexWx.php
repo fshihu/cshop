@@ -4,8 +4,8 @@
     <div class="page__bd"  style="min-height: 100%;">
         <div class="weui-cells weui-title-title">
 
-                     <div class="weui-cell weui-cell_access" href="javascript:;">
-                         <a href="javascript:history.back();">
+                     <div class="weui-cell weui-cell_access"  >
+                         <a href="<?php echo $this->genurl('member/index/index'); ?>">
                              <div class="weui-cell__ft">
                              </div>
                          </a>
@@ -34,9 +34,11 @@
                                  <img src="<?php echo $item['thumb'] ?>" alt="">
                                  <div class="conts"><?php echo $item['title']  ?></div>
                              </a>
+                              <?php if($type == 0):?>
                              <div style="margin-top:10px;">
                                  <a style="color: #2CC7C5;" href="<?php echo $this->genurl('add',['id'=>$item['article_id'],'cancel'=>1]); ?>" class="collcet_cancel weui-btn weui-btn_mini weui-btn_default">取消收藏</a>
                              </div>
+                              <?php endif;?>
 
                          </div>
                  </div>

@@ -15,6 +15,7 @@ class PromTypeEnum extends Enum
     const NORMAL = 0;
     const GROUP_OPNE = 1;
     const GROUP_JOIN = 2;
+    const USER_LEVEL_UPGRADE_TRUN_MONEY = 3;
     protected function initAddDatas()
     {
 
