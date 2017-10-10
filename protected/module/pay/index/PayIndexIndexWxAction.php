@@ -35,8 +35,9 @@ class PayIndexIndexWxAction  extends \CAction
         $order_info['order_amount'] = 1;//$order_info['order_amount'];
         $ok_url = $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_SEND]);
         $err_url = $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_PAY]);
-        if($order_info['prom_type'] == PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY){
+        if($order_info['order_prom_type'] == PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY){
             $ok_url = $this->genurl('member/level/index');
+            $err_url = $ok_url;
         }
         return new \CRenderData(array(
             'jsApiParameters' =>  WxPay::instance()->getJsApiParameters($order_info),

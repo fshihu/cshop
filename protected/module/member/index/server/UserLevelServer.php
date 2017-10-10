@@ -10,6 +10,7 @@ namespace module\member\index\server;
 
 use biz\Session;
 use CC\db\base\select\ListModel;
+use CC\db\base\update\UpdateModel;
 
 class UserLevelServer
 {
@@ -63,5 +64,17 @@ class UserLevelServer
             return '待接受';
         }
         return '待赠送';
+    }
+
+    public static function updateLevel($uid,$level)
+    {
+        UpdateModel::make('users')->addColumnsCondition(array(
+            'user_id' => $uid,
+        ))->addData(array(
+            'level' => $level,
+            'level_start_time' => time(),
+            'level_end_time' => strtotime('+1 year'),
+        ))->execute();
+
     }
 }

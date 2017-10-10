@@ -40,13 +40,8 @@ class MemberLevelUpgradeWxAction extends \CAction
             UpdateModel::make('black_card_give')->addData(array(
                 'status' => UserLevelServer::BLACK_STATSU_GIVEED
             ))->addId($this->give_id)->execute();
-            UpdateModel::make('users')->addColumnsCondition(array(
-                'user_id' => Session::getUserID(),
-            ))->addData(array(
-                'level' => $this->level,
-                'level_start_time' => time(),
-                'level_end_time' => strtotime('+1 year'),
-            ))->execute();
+
+            UserLevelServer::updateLevel(Session::getUserID(),$this->level);
         }
         return new \CJsonData();
     }
