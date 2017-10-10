@@ -30,6 +30,12 @@ class MemberLevelUpgradeWxAction extends \CAction
             $id = OrderServer::addOrderBaseInfo(Session::getUserID(),$this->money,PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY,Session::getUserID());
             return new \CRedirectData('pay/index/index',['order_id' => $id]);
         }
+        if($this->update_type == UserLevelServer::LEVEL_UPGRADE_FULL_MONEY){
+            UserLevelServer::updateLevel(Session::getUserID(),$this->level);
+        }
+        if($this->update_type == UserLevelServer::LEVEL_UPGRADE_RECOMM_GOLDEN){
+            UserLevelServer::updateLevel(Session::getUserID(),$this->level);
+        }
         if($this->update_type == UserLevelServer::LEVEL_UPGRADE_FRIEND_GIVE){
             $item = ItemModel::make('black_card_give')->addId($this->give_id)->addColumnsCondition(array(
                 'give_uid' => Session::getUserID(),

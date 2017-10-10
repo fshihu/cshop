@@ -206,6 +206,12 @@ use module\cart\index\server\OrderWaitStatusEnum;
                     </div>
                     <div class="weui-cell__ft"><?php echo $user['recomm_count'] ?></div>
                 </a>
+                <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('/member/merchant/enter') ?>">
+                    <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/recommend_icon.png" alt="" class="icon"></div>
+                    <div class="weui-cell__bd">
+                        <p>商家申请入驻</p>
+                    </div>
+                </a>
 
 
             </div>

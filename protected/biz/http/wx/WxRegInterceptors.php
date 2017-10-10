@@ -38,7 +38,7 @@ class WxRegInterceptors implements CInterceptors
                     'openid' => $openid
                 ))->execute();
                 if(!$user){
-                    InsertModel::make('users')->addData(array(
+                    $user['user_id'] = InsertModel::make('users')->addData(array(
                         'oauth' => 'wx',
                         'openid' => $openid,
                         'reg_time' => time(),
@@ -46,7 +46,10 @@ class WxRegInterceptors implements CInterceptors
                         'sex' => $user_info['sex'],
                         'head_pic' => $user_info['headimgurl'],
                     ))->execute();
+                    $user['user_id'] = $user_info['nickname'];
                 }
+                Session::setUserID($user['user_id']);
+                Session::setName($user['nickname']);
                 Session::login();
 
             }

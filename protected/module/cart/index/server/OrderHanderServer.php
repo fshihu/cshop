@@ -30,7 +30,7 @@ class OrderHanderServer
             return true;
         }
 
-        if($order['order_prom_type'] == PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY){
+        if($order['order_prom_type'] == PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY || $order['order_prom_type'] == PromTypeEnum::USER_LEVEL_RENEW_TRUN_MONEY){
             UserLevelOrderServer::handle($order);
         }else{
             OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_PAYED);

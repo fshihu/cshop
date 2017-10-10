@@ -17,10 +17,6 @@ class Session extends SessionAbs
         return 2;
     }
 
-    public static function getName()
-    {
-        return '张三';
-    }
 
     public static function setWxUser($user_info)
     {

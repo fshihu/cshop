@@ -19,7 +19,7 @@ class MemberRecommRegWxAction extends \CAction
         $pid = $request->getParams('pid');
         $user = UserServer::getUser();
         if(!$user['first_leader']){
-            UpdateModel::make('users')->addColumnsCondition(array(
+            UpdateModel::make('users')->addData(array(
                 'first_leader' => $pid,
             ))->addColumnsCondition(array(
                 'user_id' => $user['user_id'],

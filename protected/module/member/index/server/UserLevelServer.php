@@ -10,7 +10,9 @@ namespace module\member\index\server;
 
 use biz\Session;
 use CC\db\base\select\ListModel;
+use CC\db\base\update\IncrementModel;
 use CC\db\base\update\UpdateModel;
+use module\member\index\UserServer;
 
 class UserLevelServer
 {
@@ -66,6 +68,16 @@ class UserLevelServer
         return '待赠送';
     }
 
+    public static function renewLevel($uid)
+    {
+        $user = UserServer::getUser($uid);
+        UpdateModel::make('users')->addColumnsCondition(array(
+            'user_id' => $uid,
+        ))->addData(array(
+            'level_end_time' => strtotime('+1 year',$user['level_end_time']),
+            'recomm_golden_num' => 0
+        ))->execute();
+    }
     public static function updateLevel($uid,$level)
     {
         UpdateModel::make('users')->addColumnsCondition(array(
@@ -74,7 +86,16 @@ class UserLevelServer
             'level' => $level,
             'level_start_time' => time(),
             'level_end_time' => strtotime('+1 year'),
+            'recomm_golden_num' => 0
         ))->execute();
 
+        if($level == UserLevelServer::LEVEL_GOLDED_CARD){
+            $user = UserServer::getUser($uid);
+            IncrementModel::make('users')->addColumnsCondition(array(
+                'user_id' => $user['first_leader']
+            ))->addData(array(
+                'recomm_golden_num' => 1,
+            ))->execute();
+        }
     }
 }

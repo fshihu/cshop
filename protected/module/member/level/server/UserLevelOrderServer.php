@@ -18,5 +18,8 @@ class UserLevelOrderServer
         if($order['order_prom_type'] == PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY){
             UserLevelServer::updateLevel($order['user_id'],UserLevelServer::LEVEL_GOLDED_CARD);
         }
+        if($order['order_prom_type'] == PromTypeEnum::USER_LEVEL_RENEW_TRUN_MONEY){
+            UserLevelServer::renewLevel($order['user_id']);
+        }
     }
 }
