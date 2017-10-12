@@ -100,7 +100,7 @@
                     $("#tip").text(tip);
                     turnWheel.bRotate = !turnWheel.bRotate;
 //                    roatebg();
-                    alert('恭喜：'+tip);
+                    alert('恭喜：'+tip+'获得产品，抽取结果信息以短信形式通知各团员');
                     location.href='<?php echo $this->genurl('groupon/my/own',['is_end'=>2]) ?>'
                 }
             });

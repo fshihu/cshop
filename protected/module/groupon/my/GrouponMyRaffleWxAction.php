@@ -12,6 +12,7 @@ use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
 use CC\db\base\update\UpdateModel;
 use CRequest;
+use module\cart\index\server\OrderStatusServer;
 
 class GrouponMyRaffleWxAction extends \CAction
 {
@@ -34,6 +35,12 @@ class GrouponMyRaffleWxAction extends \CAction
                 ->addData(array(
                     'is_clearing' => 1,
                 ))->execute();
+            UpdateModel::make('order')->addData(array(
+                'is_show' => 1,
+            ))->addColumnsCondition(array(
+                'order_id' => $order['order_id']
+            ))->execute();
+            OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_CONFIRM);
             return new \CJsonData(array(
                 'win_i' => $win_i,
                 'win_name' => $win_item['nickname'],
@@ -43,5 +50,9 @@ class GrouponMyRaffleWxAction extends \CAction
         return new \CRenderData(array(
             'group_one_members' => $group_one_members,
         ));
+    }
+    protected function getIsOpenTransaction()
+    {
+        return true;
     }
 }

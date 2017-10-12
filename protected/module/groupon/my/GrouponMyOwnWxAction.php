@@ -40,13 +40,14 @@ class GrouponMyOwnWxAction extends ListAction
             $conditon['gb.end_time'] = ['<',time()];
         }
         $this->dbCondition->addColumnsCondition(array(
-            'user_id' => Session::getUserID(),
+            't.user_id' => Session::getUserID(),
             't.pay_status' => OrderPayStatusEnum::PAYED,
             'deleted' => YesNoEnum::NO,
             'order_prom_type' => PromTypeEnum::GROUP_OPNE,
         ))->addColumnsCondition($conditon)->leftJoin('group_one','go','t.order_prom_id = go.id')
             ->leftJoin('group_buy','gb','go.group_buy_id = gb.id')
-            ->select('t.*,go.remain_num,gb.end_time ')
+            ->leftJoin('users','u','go.win_uid = u.user_id')
+            ->select('t.*,go.remain_num,gb.end_time,u.nickname ')
             ->order('order_id desc');
     }
     protected function getTable()

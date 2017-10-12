@@ -53,9 +53,9 @@
          <div class="t3">
              实支付： <span class="t3_s">￥ <?php echo $item['goods_price'] ?></span>（免运费）
          </div>
-         <div class="t5">
               <?php if($is_end == 0):?>
 
+         <div class="t5">
             <span class="t5_1">剩余 <span id="timer"></span> 结束拼团</span>
              <script language="javascript" type="text/javascript">
 
@@ -63,17 +63,32 @@
                   </script>
 
             <span class="t5_2">还差<?php echo $item['remain_num'] ?>人</span>
+         </div>
               <?php endif;?>
               <?php if($is_end == 1):?>
 
 
+         <div class="t5">
 
             <span class="t5_2">
                 <a href="<?php echo $this->genurl('raffle',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default  ">去抽奖</a>
             </span>
+         </div>
+              <?php endif;?>
+         <?php if($is_end == 2):?>
+
+
+         <div class="t5">
+
+            <span class="t5_2">
+                恭喜： <?php echo $item['nickname'] ?>
+                 <?php if($item['user_id']== \biz\Session::getUserID()):?>
+                     ，请查看待发货订单
+                 <?php endif;?>
+            </span>
+         </div>
               <?php endif;?>
 
-         </div>
      </div>
         <?php endforeach?>
 
