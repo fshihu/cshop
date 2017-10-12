@@ -36,7 +36,7 @@ class MemberInfoIndexWxAction extends SaveAction implements IFormViewBuilder
         return array(
             (new TextInput('name','姓名',['must']))->setPlaceHolder('请输入姓名'),
             (new TextInput('mobile','手机号',['must']))->setPlaceHolder('请输入手机号'),
-            new CaptchaInput('code','验证码',['must']),
+            (new CaptchaInput('code','验证码',['must']))->setPhoneId('form_mobile'),
             new RadioButtonListInput('sex','性别',SexEnum::getValues()),
             (new TextInput('id_card','身份证号',['must']))->setPlaceHolder('请输入身份证号'),
             (new TextInput('email','邮箱',['must']))->setPlaceHolder('请输入邮箱'),

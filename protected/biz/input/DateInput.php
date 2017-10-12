@@ -26,21 +26,21 @@ class DateInput extends BaseInput
         $name = $this->getName();
         $attrs = $this->buildAttributes();
         $str = '';
-        $str .=  sprintf('<input type="text" name="%s" id="%s" value="%s" class="input_year"  placeholder="年" %s />',
+        $str .=  sprintf('<input style="width: 50px;" type="text" name="%s" id="%s" value="%s" class="input_year"  placeholder="年" %s />',
             $name.'_year',
             $id.'_year',
             $this->mModel[$name.'_year'],
             $attrs
             );
         $str .= '<span class="date_input_tip date_input_tip_year">年</span>';
-        $str .=  sprintf('<input type="text" name="%s" id="%s" value="%s" class="input_month"  placeholder="月" %s />',
+        $str .=  sprintf('<input  style="width: 50px;" type="text" name="%s" id="%s" value="%s" class="input_month"  placeholder="月" %s />',
             $name.'_month',
             $id.'_month',
             $this->mModel[$name.'_month'],
             $attrs
             );
         $str .= '<span class="date_input_tip date_input_tip_month">月</span>';
-        $str .=  sprintf('<input type="text" name="%s" id="%s" value="%s" class="input_day"  placeholder="日" %s />',
+        $str .=  sprintf('<input  style="width: 50px;" type="text" name="%s" id="%s" value="%s" class="input_day"  placeholder="日" %s />',
             $name.'_day',
             $id.'_day',
             $this->mModel[$name.'_day'],
