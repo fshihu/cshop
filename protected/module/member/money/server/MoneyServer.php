@@ -1,39 +1,37 @@
 <?php
 /**
  * User: fu
- * Date: 2017/10/7
- * Time: 22:44
+ * Date: 2017/10/13
+ * Time: 0:51
  */
 
-namespace module\member\gold\server;
+namespace module\member\money\server;
 
 
 use CC\db\base\insert\InsertModel;
 use CC\db\base\select\ItemModel;
 use CC\db\base\update\UpdateModel;
-use module\member\index\UserServer;
 
-class UserGoldRecordServer
+class MoneyServer
 {
-    const TYPE_GIVE = 1;
-    const TYPE_REVICE_GIVE = 2;
-    public static function addGold($uid,$type,$gold,$content,$data_id)
+    const GROUP_BUY_RETURNED = 1;//团购退回
+    public static function addRecord($uid, $type, $money, $content, $data_id)
     {
         $user =    ItemModel::make('users')->addColumnsCondition(array(
                     'user_id' => $uid,
                 ))->execute();
 
-        InsertModel::make('user_gold_record')->addData(array(
+        InsertModel::make('user_money_record')->addData(array(
             'uid' => $uid,
-            'money' => $gold,
-            'cur_money' => $user['gold'] + $gold,
+            'money' => $money,
+            'cur_money' => $user['money'] + $money,
             'content' => $content,
             'data_id' => $data_id,
-            'type' => $type,//转增
+            'type' => $type,
             'crate_time' => time(),
         ))->execute();
         UpdateModel::make('users')->addData(array(
-            'gold' => $user['gold'] + $gold
+            'money' => $user['money'] + $money
         ))->addColumnsCondition(array(
             'user_id' => $uid
         ))->execute();

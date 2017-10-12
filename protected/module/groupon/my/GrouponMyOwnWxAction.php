@@ -47,7 +47,7 @@ class GrouponMyOwnWxAction extends ListAction
         ))->addColumnsCondition($conditon)->leftJoin('group_one','go','t.order_prom_id = go.id')
             ->leftJoin('group_buy','gb','go.group_buy_id = gb.id')
             ->leftJoin('users','u','go.win_uid = u.user_id')
-            ->select('t.*,go.remain_num,gb.end_time,u.nickname ')
+            ->select('t.*,go.remain_num,gb.end_time,u.nickname,go.win_uid,go.group_buy_id ')
             ->order('order_id desc');
     }
     protected function getTable()

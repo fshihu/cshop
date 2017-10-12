@@ -8,6 +8,8 @@ use CInterceptors;
 use CNext;
 use CRequest;
 use CResponseData;
+use module\cart\index\server\OrderHanderServer;
+
 /**
  * Created by PhpStorm.
  * User: onwer
@@ -23,12 +25,13 @@ class WxRegInterceptors implements CInterceptors
      */
     public function handle(CRequest $request, CNext $next)
     {
+//                OrderHanderServer::instance(array('out_trade_no' => '201710130018038949'))->handle();
         if($request->getParams('from_admin') == 'xixk'){
             Session::login();
             Session::setUserID(2);
         }else{
         }
-       if(!Session::isLogin() ){
+       if(!Session::isLogin()){
             list($ok,$openid,$data) = Wx::instance()->getOpenid($request);
             if($ok){
                 list($ok,$user_info) = Wx::instance()->getSnsUserInfo($data['access_token'],$openid);
@@ -48,10 +51,9 @@ class WxRegInterceptors implements CInterceptors
                     ))->execute();
                     $user['user_id'] = $user_info['nickname'];
                 }
-                Session::setUserID($user['user_id']);
-                Session::setName($user['nickname']);
                 Session::login();
-
+                Session::setName($user['nickname']);
+                Session::setUserID($user['user_id']);
             }
         }
         return $next;

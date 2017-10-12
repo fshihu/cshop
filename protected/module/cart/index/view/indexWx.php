@@ -97,7 +97,7 @@
                  <div class="buy_btn_w">
                      <span class="price">应支付： <span class="price_red">￥ <?php echo $total_price ?> （免运费）</span></span>
 
-                     <a href="<?php echo $this->genurl('cart/index/confirm',array('address_id' => $addr['address_id'],'prom_type'=>$prom_type,'cart_ids'=>$ids)); ?>" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red">立即支付</a>
+                     <a href="<?php echo $this->genurl('cart/index/confirm',array('address_id' => $addr['address_id'],'prom_type'=>$prom_type,'cart_ids'=>$ids)); ?>" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red ">立即支付</a>
                  </div>
              </div>
               <?php endif;?>
@@ -108,3 +108,12 @@
      </div>
 
 </div>
+    <script type="text/javascript">
+        $('.buy_btn_red ').click(function () {
+            var s = <?php echo (int)$addr['address_id'] ?>;
+           if(!s){
+               alert('请填写收货地址');
+               return false;
+           }
+        });
+    </script>

@@ -15,9 +15,9 @@ class MemberAddrDeleteWxAction extends \CAction
 {
     public function execute(CRequest $request)
     {
-        DeleteModel::make('users_bank')->addColumnsCondition(array(
+        DeleteModel::make('user_address')->addColumnsCondition(array(
             'user_id' => Session::getUserID(),
-            'id' => $request->getParams('id'),
+            'address_id' => $request->getParams('id'),
         ))->execute();
         return new \CJsonData();
     }

@@ -89,7 +89,7 @@ line-height: 1; width: 45px; height:45px;display: inline-block; color: #0950a0;}
 
 .mslide .dot {
     position: absolute;
-    right: 150px;
+    left: 50%;
     bottom: 10px;
     z-index: 5;
     font-size: 0

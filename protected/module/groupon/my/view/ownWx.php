@@ -40,7 +40,7 @@
 
          <?php $order_goods = ListModel::make('order_goods')->addColumnsCondition(array('order_id' => $item['order_id']))->execute(); ?>
          <?php foreach($order_goods as $order_good):?>
-             <a href="<?php echo $this->genurl('goods/det/index',['id' => $order_good['goods_id']]); ?>">
+             <a href="<?php echo $this->genurl('groupon/index/det',['id' => $item['group_buy_id']]); ?>">
                  <div class="t2">
                               <img class="t2_img" src="<?php echo GoodsServer::getImg($order_good['original_img']) ?>" alt="">
                               <div class="ts_s">
@@ -82,7 +82,7 @@
 
             <span class="t5_2">
                 恭喜： <?php echo $item['nickname'] ?>
-                 <?php if($item['user_id']== \biz\Session::getUserID()):?>
+                 <?php if($item['win_uid']== \biz\Session::getUserID()):?>
                      ，请查看待发货订单
                  <?php endif;?>
             </span>

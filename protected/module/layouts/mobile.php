@@ -20,8 +20,8 @@
                 '/public/biz/swiper/css/swiper.min.css',
             '/public/biz/swiper/js/swiper.min.js',
                 '/public/biz/swipeSlide/js/swipeSlide.min.js',
-                '/public/biz/wx/common/css/style.css?5',
-                '/public/biz/wx/common/js/script.js?5',
+                '/public/biz/wx/common/css/style.css?7',
+                '/public/biz/wx/common/js/script.js?6',
 
             ]
         ]

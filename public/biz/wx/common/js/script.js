@@ -170,3 +170,61 @@ function get_area(t){
         }
     });
 }
+
+function ajax_request(url, post_data, fn, datatype, hide_loading, err_fn,options) {
+    if (!datatype) {
+        datatype = 'json';
+    }
+    var loading;
+    if (!hide_loading) {
+        var tip;
+        if (options){
+            tip = options.start_load_tip;
+        }
+        loading = weui.loading('请求中...', {
+            className: 'custom-classname'
+        });
+    }
+    $.ajax({
+        url: url,
+        type: 'post',
+        dataType: datatype,
+        data: post_data,
+        success: function (data) {
+            if (!hide_loading) {
+                if (loading){
+                    loading.hide(function() {
+                        });
+                }
+            }
+            if (datatype == 'json') {
+                if (data.ok) {
+                    if (fn) fn(data);
+                } else {
+                    console.error(data.error, url);
+                    if (err_fn) err_fn();
+                    if (!hide_loading) {
+                        Tip(data.error, 'error');
+                    }
+                }
+            } else {
+                if (fn) fn(data);
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            if(XMLHttpRequest.readyState == 0){
+                console.error('未初始化', url);
+                return;
+            }
+            console.error(XMLHttpRequest.responseText, url);
+            if (err_fn) err_fn();
+            if (!hide_loading) {
+                Tip(t('tips_err_server'), 'error');
+                if (loading){
+                    loading.hide(function() {
+                        });
+                }
+            }
+        }
+    });
+}

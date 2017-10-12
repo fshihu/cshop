@@ -62,7 +62,7 @@ class OrderServer
             ))->execute();
 
         }else if($this->prom_type == PromTypeEnum::GROUP_JOIN){
-
+            $this->prom_id = $this->cart_list[0]['prom_id'];
         }
     }
     private function calculatePrice()

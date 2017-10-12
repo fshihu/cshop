@@ -22,6 +22,13 @@ use CRequest;
 class MemberAddrAddWxAction extends SaveAction implements IFormViewBuilder
 {
 
+    protected function onExecute()
+    {
+        return [
+            'is_sel' => $this->request->getParams('is_sel'),
+        ];
+    }
+
     /**
      * @return  IInput[]
      */

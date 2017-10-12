@@ -12,10 +12,6 @@ use CC\util\common\server\SessionAbs;
 
 class Session extends SessionAbs
 {
-    public static function getUserID()
-    {
-        return 2;
-    }
 
 
     public static function setWxUser($user_info)

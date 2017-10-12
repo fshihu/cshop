@@ -117,9 +117,8 @@
 
             // 这里应该是从服务器获取用户真实的获奖信息（对应的获奖序号）
             // 简单模拟随机获取奖品的序号(奖品个数范围内)
-            var item = randomNum(0,count - 1);
             ajax_request('',{start:1},function (data) {
-                rotateFunc(data.win_i, turnWheel.rewardNames[item],count);
+                rotateFunc(data.win_i, turnWheel.rewardNames[data.win_i],count);
             });
         });
 

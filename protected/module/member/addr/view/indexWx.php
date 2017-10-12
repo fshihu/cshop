@@ -42,7 +42,7 @@
  
 
         <div class="addr_eidt_btn_w">
-            <a href="<?php echo $this->genurl('add') ?>" class="weui-btn weui-btn_primary addr_eidt_btn">添加</a>
+            <a href="<?php echo $this->genurl('add',['is_sel'=>$is_sel]) ?>" class="weui-btn weui-btn_primary addr_eidt_btn">添加</a>
 
         </div>
 
@@ -56,7 +56,7 @@
 
         var $this = $(this);
         ajax_request($this.attr('href'),{},function () {
-            $this.closest('.list_item').remove();
+            $this.closest('.addr_info_item').remove();
         });
         return false;
     });
