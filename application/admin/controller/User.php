@@ -740,6 +740,56 @@ class User extends Base {
 
     }
 
+    public function merchantlist()
+    {
+        $model = M("merchant");
+                $where = "";
+                $keyword = I('keyword');
+                $where = $keyword ? " name like '%$keyword%' " : "";
+                $count = $model->where($where)->count();
+                $Page = $pager = new Page($count,10);
+//        $model->join('left join t_service s on t.');
+        $model->alias('t');
+//        $model->field('t.*,s.name service_name');
+                $brandList = $model->where($where)->order("t.`id` asc")->limit($Page->firstRow.','.$Page->listRows)->select();
+                $show  = $Page->show();
+        $cat_list = M('goods_category')->where("parent_id = 0")->getField('id,name'); // 已经改成联动菜单
+                $this->assign('cat_list',$cat_list);
+                $this->assign('pager',$pager);
+                $this->assign('show',$show);
+                $this->assign('brandList',$brandList);
+                return $this->fetch();
+    }
+
+    public function merchantdetail()
+    {
+        $model = M("merchant");
+                $where = "";
+
+                $count = $model->where(array('id' => $_GET['id']))->count();
+                $Page = $pager = new Page($count,10);
+//        $model->join('left join t_service s on t.');
+
+                $service = $model->where($where)->order("`id` asc")->limit($Page->firstRow.','.$Page->listRows)->find();
+
+        $service['c_time'] = date('Y-m-d',$service['c_time']);
+                $this->assign('service',$service);
+                return $this->fetch();
+    }
+
+    public function merchantconfirm()
+    {
+        $User = M("merchant"); // 实例化User对象
+        // 要修改的数据对象属性赋值
+        if($_GET['p'] == 1){
+            $data['status'] = 1;
+        }else if($_GET['p'] == 2){
+            $data['status'] = 2;
+        }
+        $User->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
+        $this->success('操作成功!',U('index'));
+
+    }
     public function transfer($atype,$data){
         if($atype == 'weixin'){
             include_once  PLUGIN_PATH."payment/weixin/weixin.class.php";

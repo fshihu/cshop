@@ -296,7 +296,8 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 
 .horizontal_form{padding: 0 15px;}
 
-.data-group input{ width:100%;}
+.data-group textarea,.data-group  input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+    width:100%;}
 .row-group{ padding:5px 0; }
 .row-group-xq .data-label,.row-group .data-label,.input-group .input-group-label { padding-right: 10px; float: left;width: 100px; font-size: 14px; line-height: 30px; text-align: right; }
 .row-group .data-group,.input-group .input-group-data{ float: left; line-height: 28px;word-break: break-all;}
@@ -329,7 +330,8 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
     bottom: 0;}
 .row-group-form_ .data-label{ padding-right:0; width:0;}
 .row-group-form_ .data-group-form_{ width:100%;}
-.sub_btn{ width:100%;border-radius: 0px;background: #2CC7C5; height:44px; line-height:44px; font-size: 15px;}
+.sub_btn{ width:100%;border-radius: 0px;background: #2CC7C5; height:44px; line-height:44px; font-size: 15px;
+box-sizing: border-box;}
 
 .weui-dialog__btn_primary{ color: #2CC7C5;}
 .weui-msg__title{font-size: 18px;}
@@ -463,3 +465,13 @@ border-left: 80px solid transparent; top:0; right:0;
 .list7 .list_item .icont .t2{ font-size: 9px;}
 .list7 .list_item .icont .t3{ font-size: 9px;}
 .list7 .list_item .icont .t4{ text-align: right; padding-top:10px;}
+
+
+.merchant_enter .weui-uploader__input-box{background: url("../images/my/icon_zhengmian.png") no-repeat ; width:99px; height:74px;
+background-size: 100%;border: none;}
+.merchant_enter .weui-uploader__input-box1{background-image: url("../images/my/icon_fanmian.png");}
+.merchant_enter .weui-uploader__input-box2{background-image: url("../images/my/icon_yingye.png");}
+.merchant_enter .weui-uploader__input-box3{background-image: url("../images/my/icon_zhengmian.png");}
+.merchant_enter .weui-uploader__input-box4{background-image: url("../images/my/icon_fanmian.png");}
+.merchant_enter .weui-uploader__file{ width:99px; height:74px;}
+.merchant_enter .weui-uploader__input-box:after,.merchant_enter .weui-uploader__input-box:before{display: none;}

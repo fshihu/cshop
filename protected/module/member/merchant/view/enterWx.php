@@ -11,7 +11,7 @@
      '/public/biz/datepicker/js/mobiscroll_date.js',
         '/public/biz/datepicker/js/mobiscroll.js',
 )) ?>
-<div class="page  weui-tab__panel  "  >
+<div class="page  "  >
     <div class="page__bd"  style="min-height: 100%;">
         <div class="weui-cells weui-title-title">
 
@@ -21,176 +21,191 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">补充预约人信息</p>
+                            <p class="title">申请入驻商家</p>
                         </div>
                     </div>
 
                 </div>
-        <form action="">
-        <div class="  weui-panel_access  " >
-             <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
-                    <span>联系人：</span>
-                </label>
-                <div class="data-group data-group-form_name">
-                    <input type="text" name="name" id="form_name"  class="" placeholder="请输入联系人"
-                           >
-                </div>
-            </div>
-            <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
-                    <span>联系方式：</span>
-                </label>
-                <div class="data-group data-group-form_name">
-                    <input type="text" name="contact" id="form_contact"  class="" placeholder="请输入联系方式"
-                           >
-                </div>
-            </div>
-            <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
-                    <span>邮箱：</span>
-                </label>
-                <div class="data-group data-group-form_name">
-                    <input type="text" name="email" id="form_email"  class="" placeholder="请输入邮箱"
-                           >
-                </div>
-            </div>
-
-            <div class="row-group  row-group-form_cost_date  clearfix"><label class="data-label">
-                <span>联系人身份证：</span>
-                </label>
-                <div class="data-group data-group-form_cost_date">
-                    <div class="  weui-cells_form" style="display: inline-block;" id="uploader">
-                        <div class=" ">
-                            <div class="weui-cell__bd">
-                                <div class="weui-uploader">
-                                    <div class="weui-uploader__hd" style="display: none;">
-                                        <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
-                                    </div>
-                                    <div class="weui-uploader__bd">
-                                        <ul class="weui-uploader__files" id="uploaderFiles"></ul>
-                                        <div class="weui-uploader__input-box weui-uploader__input-box0">
-                                            <input id="" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
-                                        </div>
-                                    </div>
-                                 </div>
-                            </div>
+        <?php  if($merchant && $merchant['status'] != 2):?>
+                 <?php if($merchant['status'] == 0):?>
+                        <div style="padding: 10px;">
+                            申请中
                         </div>
-                    </div>
-                    <div class="  weui-cells_form"  style="display: inline-block;" id="uploader1">
-                        <div class=" ">
-                            <div class="weui-cell__bd">
-                                <div class="weui-uploader">
-                                    <div class="weui-uploader__hd" style="display: none;">
-                                        <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
-                                    </div>
-                                    <div class="weui-uploader__bd">
-                                        <ul class="weui-uploader__files" id="uploaderFiles"></ul>
-                                        <div class="weui-uploader__input-box weui-uploader__input-box1">
-                                            <input id="" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
-                                        </div>
-                                    </div>
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="id_card_front" id="id_card_front"/>
-                    <input type="hidden" name="id_card_behind" id="id_card_behind"/>
-                </div>
-            </div>
-            <div class="row-group  row-group-form_cost_date  clearfix"><label class="data-label">
-                <span>营业执照：</span>
-                </label>
-                <div class="data-group data-group-form_cost_date">
-                    <div class="  weui-cells_form" style="display: inline-block;" id="uploader2">
-                        <div class=" ">
-                            <div class="weui-cell__bd">
-                                <div class="weui-uploader">
-                                    <div class="weui-uploader__hd" style="display: none;">
-                                        <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
-                                    </div>
-                                    <div class="weui-uploader__bd">
-                                        <ul class="weui-uploader__files" id="uploaderFiles"></ul>
-                                        <div class="weui-uploader__input-box weui-uploader__input-box2">
-                                            <input id="" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
-                                        </div>
-                                    </div>
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                     <input type="hidden" name="business_license" id="business_license"/>
-                </div>
-            </div>
-            <div class="row-group  row-group-form_cost_date  clearfix"><label class="data-label">
-                <span>法人身份证：</span>
-                </label>
-                <div class="data-group data-group-form_cost_date">
-                    <div class="  weui-cells_form" style="display: inline-block;" id="uploader3">
-                        <div class=" ">
-                            <div class="weui-cell__bd">
-                                <div class="weui-uploader">
-                                    <div class="weui-uploader__hd" style="display: none;">
-                                        <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
-                                    </div>
-                                    <div class="weui-uploader__bd">
-                                        <ul class="weui-uploader__files" id="uploaderFiles"></ul>
-                                        <div class="weui-uploader__input-box weui-uploader__input-box3">
-                                            <input id="" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
-                                        </div>
-                                    </div>
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="  weui-cells_form"  style="display: inline-block;" id="uploader4">
-                        <div class=" ">
-                            <div class="weui-cell__bd">
-                                <div class="weui-uploader">
-                                    <div class="weui-uploader__hd" style="display: none;">
-                                        <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
-                                    </div>
-                                    <div class="weui-uploader__bd">
-                                        <ul class="weui-uploader__files" id="uploaderFiles"></ul>
-                                        <div class="weui-uploader__input-box weui-uploader__input-box4">
-                                            <input id="" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
-                                        </div>
-                                    </div>
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="legal_id_card_front" id="legal_id_card_front"/>
-                    <input type="hidden" name="legal_id_card_behind" id="legal_id_card_behind"/>
-                </div>
-            </div>
-            <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
-                    <span>用户名：</span>
-                </label>
-                <div class="data-group data-group-form_name">
-                    <input type="text" name="account" id="form_account"  class="" placeholder="请输入用户名"
-                           >
-                </div>
-            </div>
-            <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
-                    <span>密码：</span>
-                </label>
-                <div class="data-group data-group-form_name">
-                    <input type="text" name="pwd" id="form_pwd"  class="" placeholder="请输入密码"
-                           >
-                </div>
-            </div>
-            <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
-                    <span>重复密码：</span>
-                </label>
-                <div class="data-group data-group-form_name">
-                    <input type="text" name="repet_pwd" id="form_repet_pwd"  class="" placeholder="请输入重复密码"
-                           >
-                </div>
-            </div>
-                     </div>
-        <div class="addr_eidt_btn_w">
-            <a href="javascript:;" class="weui-btn weui-btn_primary addr_eidt_btn">添加</a>
-
+                 <?php endif;?>
+                <?php if($merchant['status'] == 1):?>
+                       <div style="padding: 10px;">
+                           申请成功
+                       </div>
+                 <?php endif;?>
+          <?php else:?>
+            <?php if($merchant['status'] == 2):?>
+        <div style="padding: 10px;">
+                   申请失败，重新申请
         </div>
-        </form>
+            <?php endif;?>
+             <form action="">
+             <div class="  weui-panel_access merchant_enter "  style="margin-bottom:20px;">
+                  <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
+                         <span>联系人：</span>
+                     </label>
+                     <div class="data-group data-group-form_name">
+                         <input type="text" name="name" id="form_name"  class="" placeholder="请输入联系人"
+                                >
+                     </div>
+                 </div>
+                 <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
+                         <span>联系方式：</span>
+                     </label>
+                     <div class="data-group data-group-form_name">
+                         <input type="text" name="contact" id="form_contact"  class="" placeholder="请输入联系方式"
+                                >
+                     </div>
+                 </div>
+                 <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
+                         <span>邮箱：</span>
+                     </label>
+                     <div class="data-group data-group-form_name">
+                         <input type="text" name="email" id="form_email"  class="" placeholder="请输入邮箱"
+                                >
+                     </div>
+                 </div>
+
+                 <div class="row-group  row-group-form_cost_date  clearfix"><label class="data-label">
+                     <span>联系人身份证：</span>
+                     </label>
+                     <div class="data-group data-group-form_cost_date">
+                         <div class="  weui-cells_form" style="display: inline-block;" id="uploader">
+                             <div class=" ">
+                                 <div class="weui-cell__bd">
+                                     <div class="weui-uploader">
+                                         <div class="weui-uploader__hd" style="display: none;">
+                                             <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
+                                         </div>
+                                         <div class="weui-uploader__bd">
+                                             <ul class="weui-uploader__files" id="uploaderFiles"></ul>
+                                             <div class="weui-uploader__input-box weui-uploader__input-box0">
+                                                 <input id="" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
+                                             </div>
+                                         </div>
+                                      </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="  weui-cells_form"  style="display: inline-block;" id="uploader1">
+                             <div class=" ">
+                                 <div class="weui-cell__bd">
+                                     <div class="weui-uploader">
+                                         <div class="weui-uploader__hd" style="display: none;">
+                                             <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
+                                         </div>
+                                         <div class="weui-uploader__bd">
+                                             <ul class="weui-uploader__files" id="uploaderFiles"></ul>
+                                             <div class="weui-uploader__input-box weui-uploader__input-box1">
+                                                 <input id="" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
+                                             </div>
+                                         </div>
+                                      </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <input type="hidden" name="id_card_front" id="id_card_front"/>
+                         <input type="hidden" name="id_card_behind" id="id_card_behind"/>
+                     </div>
+                 </div>
+                 <div class="row-group  row-group-form_cost_date  clearfix"><label class="data-label">
+                     <span>营业执照：</span>
+                     </label>
+                     <div class="data-group data-group-form_cost_date">
+                         <div class="  weui-cells_form" style="display: inline-block;" id="uploader2">
+                             <div class=" ">
+                                 <div class="weui-cell__bd">
+                                     <div class="weui-uploader">
+                                         <div class="weui-uploader__hd" style="display: none;">
+                                             <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
+                                         </div>
+                                         <div class="weui-uploader__bd">
+                                             <ul class="weui-uploader__files" id="uploaderFiles"></ul>
+                                             <div class="weui-uploader__input-box weui-uploader__input-box2">
+                                                 <input id="" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
+                                             </div>
+                                         </div>
+                                      </div>
+                                 </div>
+                             </div>
+                         </div>
+                          <input type="hidden" name="business_license" id="business_license"/>
+                     </div>
+                 </div>
+                 <div class="row-group  row-group-form_cost_date  clearfix"><label class="data-label">
+                     <span>法人身份证：</span>
+                     </label>
+                     <div class="data-group data-group-form_cost_date">
+                         <div class="  weui-cells_form" style="display: inline-block;" id="uploader3">
+                             <div class=" ">
+                                 <div class="weui-cell__bd">
+                                     <div class="weui-uploader">
+                                         <div class="weui-uploader__hd" style="display: none;">
+                                             <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
+                                         </div>
+                                         <div class="weui-uploader__bd">
+                                             <ul class="weui-uploader__files" id="uploaderFiles"></ul>
+                                             <div class="weui-uploader__input-box weui-uploader__input-box3">
+                                                 <input id="" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
+                                             </div>
+                                         </div>
+                                      </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="  weui-cells_form"  style="display: inline-block;" id="uploader4">
+                             <div class=" ">
+                                 <div class="weui-cell__bd">
+                                     <div class="weui-uploader">
+                                         <div class="weui-uploader__hd" style="display: none;">
+                                             <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
+                                         </div>
+                                         <div class="weui-uploader__bd">
+                                             <ul class="weui-uploader__files" id="uploaderFiles"></ul>
+                                             <div class="weui-uploader__input-box weui-uploader__input-box4">
+                                                 <input id="" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
+                                             </div>
+                                         </div>
+                                      </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <input type="hidden" name="legal_id_card_front" id="legal_id_card_front"/>
+                         <input type="hidden" name="legal_id_card_behind" id="legal_id_card_behind"/>
+                     </div>
+                 </div>
+                 <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
+                         <span>用户名：</span>
+                     </label>
+                     <div class="data-group data-group-form_name">
+                         <input type="text" name="account" id="form_account"  class="" placeholder="请输入用户名"
+                                >
+                     </div>
+                 </div>
+                 <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
+                         <span>密码：</span>
+                     </label>
+                     <div class="data-group data-group-form_name">
+                         <input type="password" name="pwd" id="form_pwd"  class="" placeholder="请输入密码"
+                                >
+                     </div>
+                 </div>
+                 <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
+                         <span>重复密码：</span>
+                     </label>
+                     <div class="data-group data-group-form_name">
+                         <input type="password" name="repet_pwd" id="form_repet_pwd"  class="" placeholder="请输入重复密码"
+                                >
+                     </div>
+                 </div>
+                          </div>
+                 <a href="javascript:;" class="btn sub_btn">提交申请</a>
+             </form>
+         <?php endif;?>
      </div>
 
 </div>

@@ -18,6 +18,7 @@ return	array(
 //						array('name'=>'会员等级','act'=>'levelList','op'=>'User'),
 //						array('name'=>'充值记录','act'=>'recharge','op'=>'User'),
 						array('name'=>'提现申请','act'=>'withdrawals','op'=>'User'),
+						array('name'=>'商家申请','act'=>'merchantlist','op'=>'User'),
 //						array('name'=>'汇款记录','act'=>'remittance','op'=>'User'),
 						//array('name'=>'会员整合','act'=>'integrate','op'=>'User'),
 				)),
