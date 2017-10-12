@@ -23,6 +23,7 @@ class GoodsCateListWxAction extends ListAction
     public $cate_item;
     public $cate_list;
     public $cate_id;
+    public $cate_i = 0;
     protected function onExecute()
     {
 
@@ -31,12 +32,21 @@ class GoodsCateListWxAction extends ListAction
             'cate_list' => $this->cate_list,
             'id' => $this->id,
             'cate_id' => $this->cate_id,
+            'cate_i' => $this->cate_i,
             'ad_list' => AdServer::getList(AdPosition::CATE_LIST),
 
         ));
     }
     protected function getSearchCondition()
     {
+        $list = ListModel::make('goods_category')->addColumnsCondition(array(
+            'parent_id' => 0,
+        ))->execute();
+        foreach ($list as $i => $item) {
+            if($item['id'] == $this->id){
+                $this->cate_i = $i;
+            }
+        }
         $this->cate_item =  ItemModel::make('goods_category')->addId($this->id)->execute();
         $this->cate_list =  ListModel::make('goods_category')->addColumnsCondition(array(
             'parent_id' => $this->cate_item['id'],

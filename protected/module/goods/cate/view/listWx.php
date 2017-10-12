@@ -15,8 +15,16 @@
                     </div>
 
                 </div>
+        <style type="text/css">
+            .cate_goods_list_1 .gl_nav a.ac{ color: #d27b43;}
+            .cate_goods_list_1 .goods_item a .price{ color: #d27b43;}
+            .cate_goods_list_2 .gl_nav a.ac{ color: #5C9242;}
+            .cate_goods_list_2 .goods_item a .price{ color: #5C9242;}
+            .cate_goods_list_3 .gl_nav a.ac{ color: #375767;}
+            .cate_goods_list_3 .goods_item a .price{ color: #375767;}
+        </style>
         <div class="  weui-panel_access  " style="height: 100%;background: #f3f7f8">
- <div class="goods_list">
+ <div class="goods_list cate_goods_list_<?php echo $cate_i ?>">
      <div class="gl_nav">
          <a href="<?php echo $this->genurl('',['id' =>$id]); ?>" class="<?php echo $cate_id?'':'ac' ?>">全部</a>
          <?php foreach($cate_list as $item):?>

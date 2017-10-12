@@ -99,7 +99,7 @@ line-height: 1; width: 45px; height:45px;display: inline-block; color: #0950a0;}
     display: inline-block;
     width: 5px;
     height: 5px;
-    margin-left: 10px;
+    margin-left: 5px;
     border: 1px solid #fff;
     background-color: #fff;
     border-radius: 50%
@@ -296,7 +296,7 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 
 .horizontal_form{padding: 0 15px;}
 
-
+.data-group input{ width:100%;}
 .row-group{ padding:5px 0; }
 .row-group-xq .data-label,.row-group .data-label,.input-group .input-group-label { padding-right: 10px; float: left;width: 100px; font-size: 14px; line-height: 30px; text-align: right; }
 .row-group .data-group,.input-group .input-group-data{ float: left; line-height: 28px;word-break: break-all;}

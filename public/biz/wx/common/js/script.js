@@ -22,7 +22,7 @@ $(function(){
 	};
 	$('.mslide .dot span:first').addClass('cur');
 	var wid = - ($('.mslide .dot').width() / 2);
-	$('.mslide .dot').css('position','absolute').css('left','50%').css('margin-left',wid);
+	$('.mslide .dot').css('position','absolute').css('margin-left',wid);
 
 
     $(".buy_num_w").each(function () {

@@ -25,7 +25,7 @@ class GoodsCateGoodsWxAction extends ListAction
     {
         if($this->cate_id){
             $this->dbCondition->addColumnsCondition(array(
-                'parent_id' => $this->cate_id,
+                'cat_id' => $this->cate_id,
             ));
         }
         if($this->list_type == 'hot'){

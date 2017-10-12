@@ -134,6 +134,13 @@ use module\cart\index\server\OrderWaitStatusEnum;
                         <p>收藏和足迹</p>
                     </div>
                 </a>
+                <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('/member/merchant/enter') ?>">
+                    <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/icon_Businessoccupancy.png" alt="" class="icon"></div>
+                    <div class="weui-cell__bd">
+                        <p>商家入驻</p>
+                    </div>
+                </a>
+
             </div>
             <div class="weui-cells menu_s">
 
@@ -181,12 +188,6 @@ use module\cart\index\server\OrderWaitStatusEnum;
                         <p>电子名片</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('info/pwd') ?>">
-                    <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Passwordchange_icon.png" alt="" class="icon"></div>
-                    <div class="weui-cell__bd">
-                        <p>修改密码</p>
-                    </div>
-                </a>
                 <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('addr/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/address_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
@@ -205,12 +206,6 @@ use module\cart\index\server\OrderWaitStatusEnum;
                         <p>推荐会员</p>
                     </div>
                     <div class="weui-cell__ft"><?php echo $user['recomm_count'] ?></div>
-                </a>
-                <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('/member/merchant/enter') ?>">
-                    <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/recommend_icon.png" alt="" class="icon"></div>
-                    <div class="weui-cell__bd">
-                        <p>商家申请入驻</p>
-                    </div>
                 </a>
 
 
