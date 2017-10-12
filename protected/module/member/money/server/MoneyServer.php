@@ -24,14 +24,14 @@ class MoneyServer
         InsertModel::make('user_money_record')->addData(array(
             'uid' => $uid,
             'money' => $money,
-            'cur_money' => $user['money'] + $money,
+            'cur_money' => $user['user_money'] + $money,
             'content' => $content,
             'data_id' => $data_id,
             'type' => $type,
             'crate_time' => time(),
         ))->execute();
         UpdateModel::make('users')->addData(array(
-            'money' => $user['money'] + $money
+            'user_money' => $user['user_money'] + $money
         ))->addColumnsCondition(array(
             'user_id' => $uid
         ))->execute();

@@ -35,7 +35,6 @@ class GrouponMyRaffleWxAction extends \CAction
                 throw new CErrorException('已抽奖');
             }
             $win_i = mt_rand(0,count($group_one_members) - 1);;
-            $win_i = 0;
             $win_item = $group_one_members[$win_i];
             UpdateModel::make('group_one_member')->addData(array(
                 'is_win' => 1,
@@ -46,7 +45,7 @@ class GrouponMyRaffleWxAction extends \CAction
                     'win_uid' => $win_item['uid'],
                 ))->execute();
 
-            $order_list = ItemModel::make('order')->addColumnsCondition(array(
+            $order_list = ListModel::make('order')->addColumnsCondition(array(
                 'order_prom_type' => ['in',[PromTypeEnum::GROUP_JOIN,PromTypeEnum::GROUP_OPNE]],
                 'order_prom_id' => $order['order_prom_id'],
             ))->execute();

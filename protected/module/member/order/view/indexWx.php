@@ -51,7 +51,7 @@
           <?php if($wait_status == OrderWaitStatusEnum::WAIT_RECIVE):?>
           <div class="t4">
 
-             <a href="https://www.kuaidi100.com/chaxun?com=<?php echo $item['shipping_name'] ?>&nu=<?php echo $item['invoice_no'] ?>"  class="deletopbtn weui-btn weui-btn_mini weui-btn_default">查看物流</a>
+             <a href="https://www.kuaidi100.com/chaxun?com=<?php echo $item['shipping_name'] ?>&nu=<?php echo $item['invoice_no'] ?>"  class="  weui-btn weui-btn_mini weui-btn_default">查看物流</a>
              <a href="<?php echo $this->genurl('confirm',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_warn confrim_shouhuo">确认收货</a>
          </div>
           <?php endif;?>
@@ -79,7 +79,7 @@
         $('.confrim_shouhuo').click(function () {
             var $list_item = $(this).closest('.list_item');
             ajax_request($(this).attr('href'),{},function () {
-                $list_item.remove();
+                location.href = '<?php echo $this->genurl('',['wait_status' => OrderWaitStatusEnum::WAIT_COMMENT]);?>'
             });
             return false;
         });

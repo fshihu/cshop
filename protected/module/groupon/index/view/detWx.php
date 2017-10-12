@@ -10,7 +10,9 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title"><?php echo $data['goods_name'] ?></p>
+                            <p class="title"><?php use module\member\index\UserServer;
+
+                                echo $data['goods_name'] ?></p>
                         </div>
                     </div>
 
@@ -74,6 +76,9 @@
             </span>
         </div>
         <?php endforeach?>
+         <?php if(empty($other_group_buys)):?>
+             <div style="text-align: center;padding: 10px;">暂无</div>
+         <?php endif;?>
      </div>
 
      <div class="weui-navbar navbar-sm nav_click">
@@ -92,7 +97,7 @@
                <?php foreach($comment_list as $comment_item):?>
                <div class="comm_item">
                    <div class="t1">
-                       <img class="img" src="<?php echo $comment_item['avatar'] ?>" alt="">
+                       <img class="img" src="<?php echo UserServer::getAvatar($comment_item) ?>" alt="">
                        <span class="t1_s"><?php echo $comment_item['uname'] ?></span>
                    </div>
                    <div class="t2"><?php echo $comment_item['comment_content'] ?></div>

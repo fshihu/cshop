@@ -33,10 +33,15 @@ class GrouponIndexDetWxAction extends \CAction
             'is_finish' => 0,
             'pay_status' => 1,
         ))->select('t.*,u.nickname,u.head_pic')->leftJoin('users','u','t.uid = u.user_id')->execute();
+
+        $comment_list = ListModel::make('comment')->addColumnsCondition(array(
+            'goods_id' => $group_buy['goods_id'],
+        ))->leftJoin('users','u','t.user_id = u.user_id')
+            ->select('t.content comment_content,t.add_time comment_time,u.nickname uname,u.head_pic ')->execute();
         return new \CRenderData(array(
             'group_buy' => $group_buy,
             'data' => $data,
-            'comment_list' => [],
+            'comment_list' => $comment_list,
             'goods_images' => $goods_images,
             'other_group_buys' => $other_group_buys,
         ));

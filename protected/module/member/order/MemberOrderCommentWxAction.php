@@ -15,6 +15,7 @@ use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
 use CRequest;
 use module\cart\index\server\OrderStatusServer;
+use module\member\index\UserServer;
 
 class MemberOrderCommentWxAction extends \CAction
 {
@@ -32,12 +33,13 @@ class MemberOrderCommentWxAction extends \CAction
             $list = ListModel::make('order_goods')->addColumnsCondition(array(
                 'order_id' => $order['order_id'],
             ))->execute();
+            $user = UserServer::getUser();
             foreach ($list as $item) {
                 InsertModel::make('comment')->addData(array(
                     'goods_id' => $item['goods_id'],
                     'content' => $request->getParams('content'),
-                    'user_id' => Session::getUserID(),
-                    'username' => Session::getName(),
+                    'user_id' =>  $user['user_id'],
+                    'username' => $user['nickname'],
                     'add_time' => time(),
                 ))->execute();
             }
@@ -48,5 +50,7 @@ class MemberOrderCommentWxAction extends \CAction
 
         );
     }
+
+
 
 }

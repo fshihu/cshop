@@ -20,6 +20,7 @@ class OrderServer
     protected $cart_ids;
     protected $cart_list = [];
     protected $prom_id = 0;
+    protected $is_show = 0;
     public static function instance($address_id,$prom_type,$cart_ids)
     {
         $obj = new static();
@@ -32,12 +33,19 @@ class OrderServer
     {
         $this->cart_list = CartServer::getListByIds($this->prom_type,$this->cart_ids);
         $this->genPromid();
+        $this->genIsShow();
         $car_price = $this->calculatePrice();
         $order_id = $this->addOrderInfo($car_price);
         $this->addOrderGoods($order_id);
         return $order_id;
     }
 
+    protected function genIsShow()
+    {
+        if($this->prom_type == PromTypeEnum::NORMAL) {
+            $this->is_show = 1;
+        }
+    }
     protected function genPromid()
     {
         if($this->prom_type == PromTypeEnum::GROUP_OPNE){
@@ -136,6 +144,7 @@ class OrderServer
             'order_prom_type'    =>$car_price['order_prom_type'],//'订单优惠活动id',
             'order_prom_id'    =>$car_price['order_prom_id'],//'订单优惠活动id',
             'order_prom_amount'=>$car_price['order_prom_amount'],//'订单优惠活动优惠了多少钱',
+            'is_show' => $this->is_show,
             'user_note'        =>$user_note, // 用户下单备注
             'pay_name'         =>$pay_name,//支付方式，可能是余额支付或积分兑换，后面其他支付方式会替换
         );

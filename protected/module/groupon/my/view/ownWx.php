@@ -29,7 +29,7 @@
            已完成
        </a>
        <a href="<?php echo $this->genurl('',['is_end'=>3]) ?>" class="weui-navbar__item   <?php echo $is_end ==3?'weui-bar__item_on':'' ?>">
-           已失效
+           已过期
        </a>
      </div>
 

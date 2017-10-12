@@ -32,7 +32,13 @@
                          </div>
             <div class="buy_user">
                 <div class="avatar_label">
-                    <?php foreach($group_one_members as $group_one_member):?>
+                    <?php
+                    $has_join = false;
+                    foreach($group_one_members as $group_one_member):
+                        if(!$has_join && $group_one_member['uid'] == \biz\Session::getUserID()){
+                            $has_join = true;
+                        }
+                        ?>
                     <span class="avatar_label_item">
                         <img src="<?php echo $group_one_member['head_pic'] ?>" alt="" class="avatar">
                          <?php if($group_one_member['is_leader']):?>
@@ -56,7 +62,11 @@
                      leftTimer(<?php echo date('Y,n,j,h,i,s',$group_buy['end_time']) ?>,'#timer');
                      </script>
 
-                <a href="ecg" class="weui-btn  lijcantbtn btn2">立即参团</a>
+                 <?php if($has_join):?>
+                     <a href="javascript:;" class="weui-btn    btn2">已参团</a>
+                  <?php else:?>
+                     <a href="ecg" class="weui-btn  lijcantbtn btn2">立即参团</a>
+                 <?php endif;?>
             </div>
                     </div>
 
