@@ -12,7 +12,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">我的购物车</p>
+                            <p class="title"><?php echo $this->getPageTitle() ?></p>
                         </div>
                     </div>
 

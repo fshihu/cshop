@@ -102,15 +102,7 @@
             </ul>
         </div>
     </div>
-    <!-- 操作说明 -->
-    <div class="explanation" id="explanation">
-        <div class="title" id="checkZoom"><i class="fa fa-lightbulb-o"></i>
-            <h4 title="提示相关设置操作时应注意的要点">操作提示</h4>
-            <span id="explanationZoom" title="收起提示"></span> </div>
-        <ul>
-            <li>请务必正确填写商品信息</li>
-        </ul>
-    </div>
+
     <!--表单数据-->
     <form method="post" id="addEditGoodsForm">
         <input type="hidden" value="{$Request.param.is_distribut}" name="is_distribut" class="input-txt"/>
@@ -361,6 +353,20 @@
             <label for="is_free_shipping0" class="cb-disable <if condition="$goodsInfo[is_free_shipping] eq 0">selected</if>">否</label>
             <input id="is_free_shipping1" name="is_free_shipping" value="1" type="radio" <if condition="$goodsInfo[is_free_shipping] eq 1"> checked="checked"</if>>
             <input id="is_free_shipping0" name="is_free_shipping" value="0" type="radio" <if condition="$goodsInfo[is_free_shipping] eq 0"> checked="checked"</if>>
+          </div>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+	  <dl class="row"  >
+        <dt class="tit">
+          <label>允许自建团</label>
+        </dt>
+        <dd class="opt">
+          <div class="onoff">
+            <label for="is_create_group1" class="cb-enable <if condition="$goodsInfo[is_create_group] eq 1">selected</if>">是</label>
+            <label for="is_create_group0" class="cb-disable <if condition="$goodsInfo[is_create_group] eq 0">selected</if>">否</label>
+            <input id="is_create_group1" name="is_create_group" value="1" type="radio" <if condition="$goodsInfo[is_create_group] eq 1"> checked="checked"</if>>
+            <input id="is_create_group0" name="is_create_group" value="0" type="radio" <if condition="$goodsInfo[is_create_group] eq 0"> checked="checked"</if>>
           </div>
           <p class="notic"></p>
         </dd>

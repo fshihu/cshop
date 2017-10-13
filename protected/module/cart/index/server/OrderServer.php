@@ -12,6 +12,7 @@ use biz\Session;
 use CC\db\base\delete\DeleteModel;
 use CC\db\base\insert\InsertModel;
 use CC\db\base\select\ItemModel;
+use module\groupon\index\enum\GroupTypeEnum;
 
 class OrderServer
 {
@@ -60,6 +61,7 @@ class OrderServer
                 'crate_time' => time(),
                 'is_finish' => 0,
                 'pay_status' => 0,
+                'group_type' => GroupTypeEnum::TYPE_LIMIT,
             ))->execute();
             $this->prom_id = $id;
             InsertModel::make('group_one_member')->addData(array(

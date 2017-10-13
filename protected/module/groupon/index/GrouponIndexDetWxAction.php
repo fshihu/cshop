@@ -13,6 +13,7 @@ use biz\Session;
 use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
 use CRequest;
+use module\groupon\index\enum\GroupTypeEnum;
 
 class GrouponIndexDetWxAction extends \CAction
 {
@@ -32,6 +33,7 @@ class GrouponIndexDetWxAction extends \CAction
             't.uid' => ['!=',Session::getUserID()],
             'is_finish' => 0,
             'pay_status' => 1,
+            'group_type' => GroupTypeEnum::TYPE_LIMIT,
         ))->select('t.*,u.nickname,u.head_pic')->leftJoin('users','u','t.uid = u.user_id')->execute();
 
         $comment_list = ListModel::make('comment')->addColumnsCondition(array(

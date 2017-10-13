@@ -14,9 +14,19 @@ use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
 use CRequest;
 use module\cart\index\server\CartServer;
+use module\cart\index\server\PromTypeEnum;
 
 class CartIndexIndexWxAction extends \CAction
 {
+    public $prom_type = 0;
+    public function getPageTitle()
+    {
+        if($this->prom_type == PromTypeEnum::GROUP_OPNE){
+            return '一键开团';
+        }
+        return '我的购物车';
+    }
+
     public function execute(CRequest $request)
     {
         $addr_condition = array(

@@ -39,10 +39,7 @@
 						<th align="center" abbr="article_show" axis="col5" class="">
 							<div style="text-align: center; width: 120px;" class="">结束时间</div>
 						</th>
- 						<th align="center" abbr="article_time" axis="col6" class="">
-							<div style="text-align: center; width: 80px;" class="">折扣</div>
-						</th>
-						<th align="left" axis="col1" class="handle">
+ 						<th align="left" axis="col1" class="handle">
 							<div style="text-align: center; width: 150px;">操作</div>
 						</th>
 						<th style="width:100%" axis="col7">
@@ -86,10 +83,7 @@
 							<td align="left" class="">
 								<div style="text-align: center; width: 120px;">{$vo.end_time}</div>
 							</td>
- 							<td align="left" class="">
-								<div style="text-align: center; width: 80px;">{$vo.rebate}</div>
-							</td>
-							<td align="left" class="handle">
+ 							<td align="left" class="handle">
 								<div style="text-align: left; width: 170px; max-width:170px;">
 									<a class="btn blue" href="{:U('Promotion/group_buy',array('act'=>'edit','id'=>$vo['id']))}"><i class="fa fa-pencil-square-o"></i>编辑</a>
 									<a class="btn red" href="javascript:void(0)" data-url="{:U('Promotion/groupbuyHandle')}" data-id="{$vo.id}" onClick="delfun(this)"><i class="fa fa-trash-o"></i>删除</a>

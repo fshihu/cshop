@@ -17,6 +17,8 @@ class PromTypeEnum extends Enum
     const GROUP_JOIN = 2;
     const USER_LEVEL_UPGRADE_TRUN_MONEY = 3;
     const USER_LEVEL_RENEW_TRUN_MONEY = 4;
+    const GROUP_OWN_OPEN = 5;
+    const GROUP_OWN_JOIN = 6;
     protected function initAddDatas()
     {
 

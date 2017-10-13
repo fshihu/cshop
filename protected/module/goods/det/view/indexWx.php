@@ -9,8 +9,11 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">商品详情</p>
+                            <p class="title"><?php echo \biz\Util::subString($data['goods_name'],6) ?></p>
                         </div>
+                         <a href="" class="weui-cell__hd">
+                             自主建团
+                         </a>
                     </div>
 
                 </div>
