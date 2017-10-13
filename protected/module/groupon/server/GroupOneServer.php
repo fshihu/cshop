@@ -22,7 +22,11 @@ class GroupOneServer
 
     public function handler($order)
     {
-        if($order['order_prom_type'] == PromTypeEnum::GROUP_OPNE || $order['order_prom_type'] == PromTypeEnum::GROUP_OWN_OPEN){
+        if($order['order_prom_type'] == PromTypeEnum::GROUP_OPNE
+            || $order['order_prom_type'] == PromTypeEnum::GROUP_JOIN
+            || $order['order_prom_type'] == PromTypeEnum::GROUP_OWN_OPEN
+            || $order['order_prom_type'] == PromTypeEnum::GROUP_OWN_JOIN){
+
             $group_one = ItemModel::make('group_one')->addId($order['order_prom_id'])->execute();
             $finish_num = $group_one['finish_num'] + 1;
             UpdateModel::make('group_one')->addColumnsCondition(array(
@@ -34,7 +38,7 @@ class GroupOneServer
                 'is_finish' => $group_one['total_num'] == $finish_num?1:0,
             ))->execute();
         }
-        if($order['order_prom_type'] == PromTypeEnum::GROUP_JOIN){
+        if($order['order_prom_type'] == PromTypeEnum::GROUP_JOIN || PromTypeEnum::GROUP_OWN_JOIN){
             InsertModel::make('group_one_member')->addData(array(
                 'group_one_id' => $order['order_prom_id'],
                 'uid' => $order['user_id'],

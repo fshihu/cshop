@@ -36,9 +36,9 @@ class OrderServer
     public  function addOrder()
     {
         $this->cart_list = CartServer::getListByIds($this->prom_type,$this->cart_ids);
-        $this->genPromid();
-        $this->genIsShow();
         $car_price = $this->calculatePrice();
+        $this->genPromid($car_price);
+        $this->genIsShow();
         $order_id = $this->addOrderInfo($car_price);
         $this->addOrderGoods($order_id);
         return $order_id;
@@ -50,14 +50,16 @@ class OrderServer
             $this->is_show = 1;
         }
     }
-    protected function genPromid()
+    protected function genPromid($car_price)
     {
-        if($this->prom_type == PromTypeEnum::GROUP_OPNE||$this->prom_id == PromTypeEnum::GROUP_OWN_OPEN){
+        if($this->prom_type == PromTypeEnum::GROUP_OPNE||$this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
 
             $group_buy_id = 0;
-            if($this->prom_id == PromTypeEnum::GROUP_OWN_OPEN){
+            if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
                 $total_num = $this->total_person_num;
+                $group_type = GroupTypeEnum::TYPE_OWN;
             }else{
+                $group_type = GroupTypeEnum::TYPE_LIMIT;
                 $group_buy = ItemModel::make('group_buy')->addId($this->cart_list[0]['prom_id'])->execute();
                 $group_buy_id = $group_buy['id'];
                 $total_num = $group_buy['goods_num'];
@@ -72,7 +74,8 @@ class OrderServer
                 'crate_time' => time(),
                 'is_finish' => 0,
                 'pay_status' => 0,
-                'group_type' => GroupTypeEnum::TYPE_LIMIT,
+                'group_type' => $group_type,
+                'goods_price' => $car_price['goodsFee'],
             ))->execute();
             $this->prom_id = $id;
             InsertModel::make('group_one_member')->addData(array(
@@ -99,10 +102,10 @@ class OrderServer
         $car_price['order_prom_type'] = $this->prom_type;
         $car_price['order_prom_amount'] = 0;
         foreach ($this->cart_list as $cart) {
-            $car_price['payables'] += $cart['shop_price'];
+            $car_price['goodsFee'] += $cart['shop_price'];
         }
         if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
-            $car_price['payables'] =  NumberUtil::formatFloat(($car_price['payables'] / $this->total_person_num));
+            $car_price['goodsFee'] =  NumberUtil::formatFloat(($car_price['goodsFee'] / $this->total_person_num));
         }
         $car_price['payables'] = $car_price['goodsFee'];
         return $car_price;

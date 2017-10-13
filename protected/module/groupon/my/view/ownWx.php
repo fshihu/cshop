@@ -37,7 +37,7 @@
 
          <?php $order_goods = ListModel::make('order_goods')->addColumnsCondition(array('order_id' => $item['order_id']))->execute(); ?>
          <?php foreach($order_goods as $order_good):?>
-             <a href="<?php echo $this->genurl('groupon/index/det',['id' => $item['group_buy_id']]); ?>">
+             <a href="<?php echo $this->genurl('goods/det/index',['id' => $order_good['goods_id']]); ?>">
                  <div class="t2">
                               <img class="t2_img" src="<?php echo GoodsServer::getImg($order_good['original_img']) ?>" alt="">
                               <div class="ts_s">
@@ -48,16 +48,11 @@
              </a>
          <?php endforeach?>
          <div class="t3">
-             实支付： <span class="t3_s">￥ <?php echo $item['goods_price'] ?></span>（免运费）
+             实支付： <span class="t3_s">￥ <?php echo $item['order_amount'] ?></span>（免运费）
          </div>
               <?php if($is_end == 0):?>
 
          <div class="t5">
-            <span class="t5_1">剩余 <span id="timer"></span> 结束拼团</span>
-             <script language="javascript" type="text/javascript">
-
-                  leftTimer(<?php echo date('Y,n,j,h,i,s',$item['end_time']) ?>,'#timer');
-                  </script>
 
             <span class="t5_2">还差<?php echo $item['remain_num'] ?>人</span>
          </div>

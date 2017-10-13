@@ -13,6 +13,20 @@ use CC\util\common\server\SessionAbs;
 class Session extends SessionAbs
 {
 
+    public static function setCartPromType($prom_type)
+    {
+        self::set('cart_prom_type',$prom_type);
+    }
+    public static function getCartPromType()
+    {
+        return self::get('cart_prom_type');
+    }
+
+    public static function getUserID()
+    {
+        return 2593;
+//        return parent::getUserID();
+    }
 
     public static function setWxUser($user_info)
     {

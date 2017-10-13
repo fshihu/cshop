@@ -38,7 +38,7 @@
 <script type="text/javascript">
     $('.addr_eidt_btn').click(function () {
         ajax_request('',$('.form-panel form').serialize(),function () {
-           location.href='<?php echo $this->genurl('index',['is_sel' =>$is_sel]);?>';
+           location.href='<?php echo $this->genurl('index',['is_sel' =>$is_sel,'prom_type'=>$prom_type]);?>';
         });
         return false;
     });

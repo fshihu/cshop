@@ -22,7 +22,7 @@
 
               <?php if($addr):?>
                   <div class="addr_info">
-                       <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('member/addr/index',['is_sel'=>1]); ?>">
+                       <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('member/addr/index',['is_sel'=>1,'prom_type'=>$prom_type]); ?>">
                                       <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/coordinates_icon.png" alt="" style="width:18px;margin-right:30px;margin-left:15px;display:block"></div>
                                       <div class="weui-cell__bd">
                                           <div class="t1">
@@ -72,7 +72,7 @@
                         </div>
 
                     </div>
-                    <div class="buy_num_w">
+                    <div class="buy_num_w" style="<?php echo $prom_type == PromTypeEnum::GROUP_OWN_JOIN?'display:none;':'' ?>">
                         <span class="fl">数量</span>
                         <span class="fr">
                             <span class="jian no_ac"></span>
@@ -89,13 +89,17 @@
 
              </div>
 
-              <?php if(!empty($list) && $prom_type == PromTypeEnum::GROUP_OWN_OPEN):?>
+              <?php if(!empty($list) && ($prom_type == PromTypeEnum::GROUP_OWN_OPEN || $prom_type == PromTypeEnum::GROUP_OWN_JOIN)):?>
              <div class="row-group  row-group-form_name  clearfix" style="background: #fff;border-top: 1px solid #dbdbdb; "><label class="data-label">
                      <span>开团人数：</span>
                  </label>
                  <div class="data-group data-group-form_name">
-                     <input type="text" id="form_renshu" value="1" class="" placeholder="请输入人数"
-                             >
+                      <?php if($prom_type == PromTypeEnum::GROUP_OWN_JOIN):?>
+                          <?php echo $item['total_num'] ?>
+                       <?php else:?>
+                          <input type="text" id="form_renshu" value="1" class="" placeholder="请输入人数"
+                                  >
+                      <?php endif;?>
                  </div>
              </div>
              <div class="row-group  row-group-form_name  clearfix" style="background: #fff;margin-bottom:10px;border-bottom: 1px solid #dbdbdb;

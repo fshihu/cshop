@@ -13,9 +13,9 @@ use CC\util\db\Enum;
 class GroupOneStatusEnum extends Enum
 {
     const WAIT_GROUP = 0;
-    const WAIT_RAFFLE = 0;
-    const FINISH = 0;
-    const INVALID = 0;
+    const WAIT_RAFFLE = 1;
+    const FINISH = 2;
+    const INVALID = 3;
     protected function initAddDatas()
     {
         $this->add(self::WAIT_GROUP,'待成团');

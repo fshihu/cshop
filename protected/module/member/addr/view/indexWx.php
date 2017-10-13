@@ -5,7 +5,7 @@
     <div class="weui-cells weui-title-title">
 
                  <div class="weui-cell weui-cell_access">
-                     <a  href="<?php echo $this->genurl($is_sel?'cart/index/index':'member/index/index') ?>">
+                     <a  href="<?php echo $this->genurl($is_sel?'cart/index/index':'member/index/index',['prom_type'=>$prom_type]) ?>">
                          <div class="weui-cell__ft">
                          </div>
                      </a>
@@ -42,7 +42,7 @@
  
 
         <div class="addr_eidt_btn_w">
-            <a href="<?php echo $this->genurl('add',['is_sel'=>$is_sel]) ?>" class="weui-btn weui-btn_primary addr_eidt_btn">添加</a>
+            <a href="<?php echo $this->genurl('add',['is_sel'=>$is_sel,'prom_type'=>$prom_type]) ?>" class="weui-btn weui-btn_primary addr_eidt_btn">添加</a>
 
         </div>
 
@@ -64,7 +64,7 @@
 
         var $this = $(this);
         ajax_request($this.attr('href'),{},function () {
-            location.href = '<?php echo $this->genurl($is_sel?'cart/index/index':'index') ?>';
+            location.href = '<?php echo $this->genurl($is_sel?'cart/index/index':'index',['prom_type'=>$prom_type]) ?>';
         });
         return false;
     });

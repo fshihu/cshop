@@ -39,11 +39,18 @@ class CartServer
             $list_mode->leftJoin('group_buy', 'gb', 't.prom_id = gb.id')->addSelect('gb.price group_price');
         }else if($prom_type == PromTypeEnum::GROUP_JOIN){
             $list_mode->leftJoin('group_one','go','t.prom_id = go.id')->leftJoin('group_buy', 'gb', 'go.group_buy_id = gb.id')->addSelect('gb.price group_price');
+        }else if($prom_type == PromTypeEnum::GROUP_OWN_JOIN){
+            $list_mode->leftJoin('group_one','go','t.prom_id = go.id')->addSelect('go.goods_price,go.total_num');
         }
         $list = $list_mode->execute();
-        if ($prom_type == PromTypeEnum::GROUP_OPNE) {
+        if ($prom_type == PromTypeEnum::GROUP_OPNE || $prom_type == PromTypeEnum::GROUP_JOIN) {
             foreach ($list as $i => $item) {
                 $list[$i]['shop_price'] = $item['group_price'];
+            }
+        }
+        if ($prom_type == PromTypeEnum::GROUP_OWN_JOIN) {
+            foreach ($list as $i => $item) {
+                $list[$i]['shop_price'] = $item['goods_price'];
             }
         }
         return $list;

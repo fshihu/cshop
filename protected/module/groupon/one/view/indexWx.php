@@ -21,12 +21,13 @@
                                 <div class="weui-media-box__hd">
                                     <img style="" class="weui-media-box__thumb" src="<?php use module\cart\index\server\PromTypeEnum;
                                     use module\goods\server\GoodsServer;
+                                    use module\groupon\index\enum\GroupTypeEnum;
 
                                     echo GoodsServer::getImg($data['original_img']) ?>" alt="">
                                 </div>
                                 <div class="weui-media-box__bd">
                                     <p class="weui-media-box__desc"><?php echo $data['goods_name'] ?></p>
-                                    <p class="t1"><?php echo $group_one['total_num'] ?>人参团： <span class="t1_s">￥<?php echo $group_buy['price'] ?>/件</span></p>
+                                    <p class="t1"><?php echo $group_one['total_num'] ?>人参团： <span class="t1_s">￥<?php echo $group_one['goods_price'] ?>/件</span></p>
                                 </div>
                             </a>
                          </div>
@@ -54,6 +55,7 @@
                 <div class="t2">
                     剩余<?php echo $group_one['remain_num'] ?>个名额
                 </div>
+                 <?php if($group_one['group_type'] == GroupTypeEnum::TYPE_LIMIT):?>
                 <div class="t3">
                     剩余时间 <span id="timer"></span>
                 </div>
@@ -61,6 +63,7 @@
 
                      leftTimer(<?php echo date('Y,n,j,h,i,s',$group_buy['end_time']) ?>,'#timer');
                      </script>
+                 <?php endif;?>
 
                  <?php if($has_join):?>
                      <a href="javascript:;" class="weui-btn    btn2">已参团</a>
@@ -81,9 +84,9 @@
                 goods_id:'<?php echo $data['goods_id'] ?>',
                 goods_num:<?php echo $group_one['buy_num'] ?>,
                 prom_id:'<?php echo $group_one['id'] ?>',
-                prom_type:<?php echo PromTypeEnum::GROUP_JOIN ?>
+                prom_type:<?php echo $group_one['group_type']==GroupTypeEnum::TYPE_LIMIT?PromTypeEnum::GROUP_JOIN :PromTypeEnum::GROUP_OWN_JOIN?>
             },function () {
-                location.href = '<?php echo $this->genurl('cart/index/index',array('prom_type'=> PromTypeEnum::GROUP_JOIN));?>';
+                location.href = '<?php echo $this->genurl('cart/index/index',array('prom_type'=>$group_one['group_type']==GroupTypeEnum::TYPE_LIMIT?PromTypeEnum::GROUP_JOIN :PromTypeEnum::GROUP_OWN_JOIN));?>';
             });
             return false;
         });

@@ -17,6 +17,7 @@ use CRequest;
 class MemberAddrIndexWxAction extends \CAction
 {
     public $is_sel;
+    public $prom_type;
     public function execute(CRequest $request)
     {
         $list = ListModel::make('user_address')
@@ -30,6 +31,8 @@ class MemberAddrIndexWxAction extends \CAction
         return new \CRenderData(array(
             'list' => $list,
             'is_sel' => $this->is_sel,
+            'prom_type' => $this->prom_type,
+
         ));
     }
 

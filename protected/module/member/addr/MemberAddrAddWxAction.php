@@ -26,6 +26,7 @@ class MemberAddrAddWxAction extends SaveAction implements IFormViewBuilder
     {
         return [
             'is_sel' => $this->request->getParams('is_sel'),
+            'prom_type' => $this->request->getParams('prom_type'),
         ];
     }
 
