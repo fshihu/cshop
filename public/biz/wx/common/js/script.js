@@ -103,8 +103,9 @@ function leftTimer(year,month,day,hour,minute,second,sel,style){
 /**
  * 获取省份
  */
-function get_province(){
-    var url = baseUrlGroup+'/basic/region/index?level=1&parent_id=0';
+function get_province(selected){
+    selected = selected||0;
+    var url = baseUrlGroup+'/basic/region/index?level=1&parent_id=0&selected='+selected;
     $.ajax({
         type : "GET",
         url  : url,
@@ -124,13 +125,14 @@ function get_province(){
  * 获取城市
  * @param t  省份select对象
  */
-function get_city(t){
-    var parent_id = $(t).val();
+function get_city(t,parent_id,selected){
+    selected = selected||0;
+    var parent_id = parent_id||$(t).val();
     if(!parent_id > 0){
         return;
     }
     $('#district').empty().html('<option>-区-</option>');
-    var url = baseUrlGroup+'/basic/region/index?level=2&parent_id='+ parent_id;
+    var url = baseUrlGroup+'/basic/region/index?level=2&parent_id='+ parent_id+'&selected='+ selected;
     $.ajax({
         type : "GET",
         url  : url,
@@ -149,14 +151,15 @@ function get_city(t){
  * 获取地区
  * @param t  城市select对象
  */
-function get_area(t){
-    var parent_id = $(t).val();
+function get_area(t,parent_id,selected){
+    selected = selected||0;
+  var parent_id = parent_id||$(t).val();
     if(!parent_id > 0){
         return;
     }
     $('#district').empty().css('display','inline');
     $('#twon').empty().css('display','none');
-    var url = baseUrlGroup+'/basic/region/index?level=3&parent_id='+ parent_id;
+    var url = baseUrlGroup+'/basic/region/index?level=3&parent_id='+ parent_id+'&selected='+ selected;
     $.ajax({
         type : "GET",
         url  : url,

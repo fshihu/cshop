@@ -10,6 +10,7 @@ namespace module\basic\phone;
 
 use CC\db\base\insert\InsertModel;
 use CRequest;
+use module\basic\phone\server\PhoneServer;
 
 class BasicPhoneIndexAction extends \CAction
 {
@@ -23,6 +24,7 @@ class BasicPhoneIndexAction extends \CAction
             'code' => $code,
             'c_time' => time(),
         ))->execute();
+        PhoneServer::sendMsg();
         return new \CJsonData();
     }
 }
