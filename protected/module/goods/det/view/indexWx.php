@@ -11,9 +11,11 @@
                         <div class="weui-cell__bd">
                             <p class="title"><?php echo \biz\Util::subString($data['goods_name'],6) ?></p>
                         </div>
-                         <a href="" class="weui-cell__hd">
+                          <?php if($data['is_create_group']):?>
+                         <a href="javascript:;" class="own_create_btn">
                              自主建团
                          </a>
+                          <?php endif;?>
                     </div>
 
                 </div>
@@ -22,7 +24,8 @@
       <div class="banner ban1">
          <div class="mslide" id="slideTpshop">
              <ul>
-                <?php use module\goods\server\GoodsServer;
+                <?php use module\cart\index\server\PromTypeEnum;
+                use module\goods\server\GoodsServer;
                 use module\member\index\UserServer;
 
                 foreach($goods_images as $goods_image):?>
@@ -88,6 +91,8 @@
      </div>
 
      <div class="buy_confirm" style="display: none;">
+         <div class="bc_bg" style="position: fixed;width: 100%;top:0;bottom: 0;display: none;z-index: 11;background: rgba(0,0,0,.2)"></div>
+         <div class="bc_bd_w" style="position: relative;z-index: 12;background: #fff">
          <div class="bc_hd">
              <img class="bc_img" src="<?php echo GoodsServer::getImg($data['original_img']) ?>" alt="">
             <div class="bc_info">
@@ -113,7 +118,7 @@
 
          </div>
          <a href="javascript:;" class="weui-btn confirm_btn weui-btn_warn">确认</a>
-
+         </div>
      </div>
  </div>
                     </div>
@@ -136,12 +141,20 @@
             if($(this).hasClass('bt_a2')){
                 click_type = 2;
             }
-            $('.buy_confirm').show().animate({bottom:0});
+            show_buy_confirm();
            return false;
         });
-        var spec_goods_prices = <?php echo json_encode($spec_goods_prices) ?>;
-        $('.buy_confirm .bc_hd .bc_close').click(function () {
+        function show_buy_confirm() {
+            $('.buy_confirm').show().animate({bottom:0});
+            $('.buy_confirm .bc_bg').show();
+        }
+        function hide_buy_confirm() {
             $('.buy_confirm').show().animate({bottom:-$('.buy_confirm').height()-20});
+            $('.buy_confirm .bc_bg').hide();
+        }
+        var spec_goods_prices = <?php echo json_encode($spec_goods_prices) ?>;
+        $('.buy_confirm .bc_hd .bc_close,.buy_confirm .bc_bg').click(function () {
+            hide_buy_confirm();
         });
         function getAttr() {
             var has = true;
@@ -183,19 +196,31 @@
             if(!attr.has){
                 Tip('请选择商品规格','error');
             }else{
+                var prom_type = 0;
+                if(click_type == 3){
+                    prom_type = '<?php echo PromTypeEnum::GROUP_OWN_OPEN ?>';
+                }
                 ajax_request('<?php echo $this->genurl('cart/index/add');?>',{
                     goods_id:'<?php echo $data['goods_id'] ?>',
                     goods_num:$('.buy_num_w .text').val(),
-                    spec_key:attr.key
+                    spec_key:attr.key,
+                    prom_type:prom_type
                 },function () {
-                    $('.buy_confirm').show().animate({bottom:-$('.buy_confirm').height()-20});
+                    hide_buy_confirm();
                     if(click_type == 2){
                         location.href = '<?php echo $this->genurl('cart/index/index');?>';
+                    }else if(click_type == 3){
+                        location.href = '<?php echo $this->genurl('cart/index/index',['prom_type'=>PromTypeEnum::GROUP_OWN_OPEN]);?>';
                     }else{
                         Tip('添加成功');
                     }
                 })
             }
+            return false;
+        });
+        $('.own_create_btn').click(function () {
+            click_type = 3;
+            show_buy_confirm();
             return false;
         });
     </script>

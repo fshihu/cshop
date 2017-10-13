@@ -41,7 +41,7 @@ class CartServer
             $list_mode->leftJoin('group_one','go','t.prom_id = go.id')->leftJoin('group_buy', 'gb', 'go.group_buy_id = gb.id')->addSelect('gb.price group_price');
         }
         $list = $list_mode->execute();
-        if ($prom_type) {
+        if ($prom_type == PromTypeEnum::GROUP_OPNE) {
             foreach ($list as $i => $item) {
                 $list[$i]['shop_price'] = $item['group_price'];
             }

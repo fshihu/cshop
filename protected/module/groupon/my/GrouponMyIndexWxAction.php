@@ -25,7 +25,7 @@ class GrouponMyIndexWxAction extends ListAction
             't.user_id' => Session::getUserID(),
             't.pay_status' => OrderPayStatusEnum::PAYED,
             'deleted' => YesNoEnum::NO,
-            'order_prom_type' => PromTypeEnum::GROUP_JOIN,
+            'order_prom_type' => ['in',[PromTypeEnum::GROUP_JOIN,PromTypeEnum::GROUP_OPNE]],
             'go.is_finish' => 0,
             'gb.end_time' => [$this->is_end?'<':'>',time()],
         ))->leftJoin('group_one','go','t.order_prom_id = go.id')

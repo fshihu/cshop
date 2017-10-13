@@ -5,7 +5,8 @@
         <div class="weui-cells weui-title-title">
 
                      <div class="weui-cell weui-cell_access" href="javascript:;">
-                         <a href="<?php use module\goods\server\GoodsServer;
+                         <a href="<?php use module\cart\index\server\PromTypeEnum;
+                         use module\goods\server\GoodsServer;
 
                          echo $this->genurl('member/index/index'); ?>">
                              <div class="weui-cell__ft">
@@ -88,16 +89,34 @@
 
              </div>
 
+              <?php if(!empty($list) && $prom_type == PromTypeEnum::GROUP_OWN_OPEN):?>
+             <div class="row-group  row-group-form_name  clearfix" style="background: #fff;border-top: 1px solid #dbdbdb; "><label class="data-label">
+                     <span>开团人数：</span>
+                 </label>
+                 <div class="data-group data-group-form_name">
+                     <input type="text" id="form_renshu" value="1" class="" placeholder="请输入人数"
+                             >
+                 </div>
+             </div>
+             <div class="row-group  row-group-form_name  clearfix" style="background: #fff;margin-bottom:10px;border-bottom: 1px solid #dbdbdb;
+border-top: 1px solid #dbdbdb;"><label class="data-label">
+                     <span>人均支付：</span>
+                 </label>
+                 <div class="data-group data-group-form_name">
+                     <span class="price_renjun"><?php echo $total_price ?></span>
+                 </div>
+             </div>
+              <?php endif;?>
 
-              <?php if(!empty($list)):?>
+             <?php if(!empty($list)):?>
              <div class="buy_price">
                  <div class="buy_jifen">
                      使用0积分,抵扣0元
                  </div>
                  <div class="buy_btn_w">
-                     <span class="price">应支付： <span class="price_red">￥ <?php echo $total_price ?> （免运费）</span></span>
+                     <span class="price">应支付： <span class="price_red">￥<span class="price_renjun"><?php echo $total_price ?></span> （免运费）</span></span>
 
-                     <a href="<?php echo $this->genurl('cart/index/confirm',array('address_id' => $addr['address_id'],'prom_type'=>$prom_type,'cart_ids'=>$ids)); ?>" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red ">立即支付</a>
+                     <a href="#" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red ">立即支付</a>
                  </div>
              </div>
               <?php endif;?>
@@ -109,11 +128,24 @@
 
 </div>
     <script type="text/javascript">
+        var url = '<?php echo $this->genurl('cart/index/confirm',array('address_id' => $addr['address_id'],'prom_type'=>$prom_type,'cart_ids'=>$ids)); ?>';
+        var tpl_url = url;
+        var total_price = <?php echo $total_price ?>;
         $('.buy_btn_red ').click(function () {
             var s = <?php echo (int)$addr['address_id'] ?>;
+            $(this).attr('href',url);
            if(!s){
                alert('请填写收货地址');
                return false;
            }
+        });
+        $('#form_renshu').keyup(function () {
+            var val = $(this).val();
+            if(val <= 0){
+                $(this).val('');
+                val = 1;
+            }
+            url = tpl_url+'&total_person_num='+ val;
+            $('.price_renjun').text((total_price/val).toFixed(2));
         });
     </script>

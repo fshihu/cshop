@@ -35,7 +35,9 @@ class OrderHanderServer
         }else{
             OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_PAYED);
         }
-        if($order['order_prom_type'] == PromTypeEnum::GROUP_OPNE || $order['order_prom_type'] == PromTypeEnum::GROUP_JOIN){
+        if($order['order_prom_type'] == PromTypeEnum::GROUP_OPNE || $order['order_prom_type'] == PromTypeEnum::GROUP_JOIN
+            || $order['order_prom_type'] == PromTypeEnum::GROUP_OWN_OPEN
+            || $order['order_prom_type'] == PromTypeEnum::GROUP_OWN_JOIN){
             GroupOneServer::instance()->handler($order);
         }
         return true;

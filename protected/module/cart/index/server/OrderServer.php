@@ -12,6 +12,7 @@ use biz\Session;
 use CC\db\base\delete\DeleteModel;
 use CC\db\base\insert\InsertModel;
 use CC\db\base\select\ItemModel;
+use CC\util\number\NumberUtil;
 use module\groupon\index\enum\GroupTypeEnum;
 
 class OrderServer
@@ -21,13 +22,15 @@ class OrderServer
     protected $cart_ids;
     protected $cart_list = [];
     protected $prom_id = 0;
+    protected $total_person_num;
     protected $is_show = 0;
-    public static function instance($address_id,$prom_type,$cart_ids)
+    public static function instance($address_id,$prom_type,$cart_ids,$total_person_num)
     {
         $obj = new static();
         $obj->address_id = $address_id;
         $obj->prom_type = $prom_type;
         $obj->cart_ids = $cart_ids;
+        $obj->total_person_num = $total_person_num;
         return $obj;
     }
     public  function addOrder()
@@ -49,15 +52,23 @@ class OrderServer
     }
     protected function genPromid()
     {
-        if($this->prom_type == PromTypeEnum::GROUP_OPNE){
-            $group_buy = ItemModel::make('group_buy')->addId($this->cart_list[0]['prom_id'])->execute();
+        if($this->prom_type == PromTypeEnum::GROUP_OPNE||$this->prom_id == PromTypeEnum::GROUP_OWN_OPEN){
+
+            $group_buy_id = 0;
+            if($this->prom_id == PromTypeEnum::GROUP_OWN_OPEN){
+                $total_num = $this->total_person_num;
+            }else{
+                $group_buy = ItemModel::make('group_buy')->addId($this->cart_list[0]['prom_id'])->execute();
+                $group_buy_id = $group_buy['id'];
+                $total_num = $group_buy['goods_num'];
+            }
             $id = InsertModel::make('group_one')->addData(array(
-                'group_buy_id' => $group_buy['id'],
-                'goods_id' => $group_buy['goods_id'],
+                'group_buy_id' => $group_buy_id,
+                'goods_id' => $this->cart_list[0]['goods_id'],
                 'uid' => Session::getUserID(),
-                'total_num' => $group_buy['goods_num'],
+                'total_num' => $total_num,
                 'finish_num' => 0,
-                'remain_num' => $group_buy['goods_num'],
+                'remain_num' => $total_num,
                 'crate_time' => time(),
                 'is_finish' => 0,
                 'pay_status' => 0,
@@ -88,7 +99,10 @@ class OrderServer
         $car_price['order_prom_type'] = $this->prom_type;
         $car_price['order_prom_amount'] = 0;
         foreach ($this->cart_list as $cart) {
-            $car_price['goodsFee'] += $cart['shop_price'];
+            $car_price['payables'] += $cart['shop_price'];
+        }
+        if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
+            $car_price['payables'] =  NumberUtil::formatFloat(($car_price['payables'] / $this->total_person_num));
         }
         $car_price['payables'] = $car_price['goodsFee'];
         return $car_price;
@@ -147,6 +161,7 @@ class OrderServer
             'order_prom_id'    =>$car_price['order_prom_id'],//'订单优惠活动id',
             'order_prom_amount'=>$car_price['order_prom_amount'],//'订单优惠活动优惠了多少钱',
             'is_show' => $this->is_show,
+            'total_person_num' => $this->total_person_num,
             'user_note'        =>$user_note, // 用户下单备注
             'pay_name'         =>$pay_name,//支付方式，可能是余额支付或积分兑换，后面其他支付方式会替换
         );

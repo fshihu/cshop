@@ -48,10 +48,10 @@
          实支付： <span class="t3_s">￥ <?php echo $item['goods_price'] ?></span>（免运费）
      </div>
      <div class="t5">
-        <span class="t5_1">剩余 <span id="timer"></span> 结束拼团</span>
+        <span class="t5_1">剩余 <span id="timer_<?php echo $item['order_id'] ?>"></span> 结束拼团</span>
          <script language="javascript" type="text/javascript">
 
-              leftTimer(<?php echo date('Y,n,j,h,i,s',$item['end_time']) ?>,'#timer');
+              leftTimer(<?php echo date('Y,n,j,h,i,s',$item['end_time']) ?>,'#timer_<?php echo $item['order_id'] ?>');
               </script>
 
         <span class="t5_2">还差<?php echo $item['remain_num'] ?>人</span>

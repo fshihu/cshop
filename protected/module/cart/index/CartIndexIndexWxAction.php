@@ -21,6 +21,9 @@ class CartIndexIndexWxAction extends \CAction
     public $prom_type = 0;
     public function getPageTitle()
     {
+        if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
+            return '自主建团';
+        }
         if($this->prom_type == PromTypeEnum::GROUP_OPNE){
             return '一键开团';
         }
