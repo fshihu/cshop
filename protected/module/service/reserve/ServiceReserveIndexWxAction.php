@@ -45,7 +45,7 @@ class ServiceReserveIndexWxAction extends SaveAction implements IFormViewBuilder
         return [
             (new TextInput('consignee','预约人姓名',['must']))->setPlaceHolder('请输入姓名'),
             (new TextInput('mobile','预约手机号',['must']))->setPlaceHolder('请输入手机号'),
-            new CaptchaInput('code','验证码',['must']),
+            (new CaptchaInput('code','验证码',['must']))->setPhoneId('form_mobile'),
             new RadioButtonListInput('sex','性别',SexEnum::getValues()),
             new DateInput('briday','出生日期'),
             (new TextInput('occupation','职业',['must']))->setPlaceHolder('请输入职业'),

@@ -63,7 +63,7 @@ class MemberLevelGiveWxAction extends \CAction implements IFormViewBuilder
     {
         return array(
             (new TextInput('account','转赠好友账号'))->setPlaceHolder('请输入转赠好友账号'),
-            new CaptchaInput('code','验证码'),
+            (new CaptchaInput('name','验证码'))->setPhoneId('own_phone'),
         );
     }
 }

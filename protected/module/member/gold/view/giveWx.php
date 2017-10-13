@@ -32,7 +32,7 @@
                 <img class="avatar" src="<?php echo \module\member\index\UserServer::getAvatar($user) ?>"/>
                 <div class="t1"><?php echo $user['nickname'] ?></div>
             </div>
-
+             <input type="hidden" id="own_phone" value="<?php echo \module\member\index\UserServer::getPhone() ?>"/>
         </div>
         <?php echo \CC\util\common\widget\widget\WidgetBuilder::build(new \CC\util\common\widget\widget\FormWidget($this,$data), \CC\util\common\widget\panel\FormPanel::instance()) ?>
         <div class="addr_eidt_btn_w">

@@ -35,6 +35,11 @@ class UserServer
         ))->execute();
 
     }
+
+    public static function getPhone()
+    {
+        return self::getUser()['mobile'];
+    }
     public static function getRecommUser()
     {
         $first_leader = self::getUser()['first_leader'];

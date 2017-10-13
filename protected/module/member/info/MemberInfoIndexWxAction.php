@@ -52,14 +52,15 @@ class MemberInfoIndexWxAction extends SaveAction implements IFormViewBuilder
     protected function onBeforeSave(&$data)
     {
         PhoneServer::checkCode($data['mobile'],$data['code']);
-        if(!$data['briday_year'] || !$data['briday_month'] || !$data['briday_day']){
+
+        if(!$data['birthday_year'] || !$data['birthday_month'] || !$data['birthday_day']){
             throw new CErrorException('出生日期不能为空');
         }
-        $birthday = $data['briday_year'].'-'.$data['briday_month'].'-'.$data['briday_day'];
+        $birthday = $data['birthday_year'].'-'.$data['birthday_month'].'-'.$data['birthday_day'];
         $data['birthday'] = strtotime($birthday);
-        unset($data['briday_year']);
-        unset($data['briday_month']);
-        unset($data['briday_day']);
+        unset($data['birthday_year']);
+        unset($data['birthday_month']);
+        unset($data['birthday_day']);
         if(!$data['birthday']){
             throw new CErrorException('出生日期格式不正确');
         }

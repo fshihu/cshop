@@ -52,6 +52,7 @@ class DateInput extends BaseInput
     }
     public function getPostNames()
     {
-        return ['briday_year','briday_month','briday_day'];
+        $name = $this->getName();
+        return [$name.'_year',$name.'_month',$name.'_day'];
     }
 }

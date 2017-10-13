@@ -38,6 +38,7 @@ use module\member\index\UserServer;
             <a href="<?php echo $this->genurl('add') ?>" class="weui-btn weui-btn_primary addr_eidt_btn">确认转赠</a>
 
         </div>
+        <input type="hidden" id="own_phone" value="<?php echo \module\member\index\UserServer::getPhone() ?>"/>
 
                  </div>
 
