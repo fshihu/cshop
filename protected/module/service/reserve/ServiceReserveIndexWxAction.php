@@ -27,6 +27,7 @@ use CC\util\common\widget\form\TimeInput;
 use CC\util\db\SexEnum;
 use CErrorException;
 use CRequest;
+use module\basic\phone\server\PhoneServer;
 use module\service\reserve\enum\MarriageEnum;
 use module\service\reserve\enum\ReserveReasonEnum;
 
@@ -73,6 +74,7 @@ class ServiceReserveIndexWxAction extends SaveAction implements IFormViewBuilder
 
     protected function onBeforeSave(&$data)
     {
+        PhoneServer::checkCode($data['mobile'],$data['code']);
         if(!$data['briday_year'] || !$data['briday_month'] || !$data['briday_day']){
             throw new CErrorException('出生日期不能为空');
         }

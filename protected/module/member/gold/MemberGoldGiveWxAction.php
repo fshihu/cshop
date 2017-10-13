@@ -17,6 +17,7 @@ use CC\util\common\widget\form\IInput;
 use CC\util\common\widget\form\TextInput;
 use CErrorException;
 use CRequest;
+use module\basic\phone\server\PhoneServer;
 use module\member\gold\server\UserGoldRecordServer;
 use module\member\index\UserServer;
 
@@ -31,6 +32,7 @@ class MemberGoldGiveWxAction extends \CAction implements IFormViewBuilder
             $item = ItemModel::make('users')->addColumnsCondition(array(
                 'user_id' => $account,
             ))->execute();
+            PhoneServer::checkCode(UserServer::getPhone(), $request->getParams('code'));
             if($item['user_id'] == $user['user_id']){
                 throw new CErrorException('不能转给自己');
             }
@@ -65,7 +67,7 @@ class MemberGoldGiveWxAction extends \CAction implements IFormViewBuilder
         return array(
             (new TextInput('account','转赠好友账号'))->setPlaceHolder('请输入转赠好友账号'),
             (new TextInput('gold','转赠积分数'))->setPlaceHolder('请输入转赠积分数'),
-            (new CaptchaInput('name','验证码'))->setPhoneId('own_phone'),
+            (new CaptchaInput('code','验证码'))->setPhoneId('own_phone'),
         );
     }
 }
