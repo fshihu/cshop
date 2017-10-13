@@ -24,8 +24,8 @@ class Session extends SessionAbs
 
     public static function getUserID()
     {
-        return 2593;
-//        return parent::getUserID();
+//        return 2593;
+        return parent::getUserID();
     }
 
     public static function setWxUser($user_info)

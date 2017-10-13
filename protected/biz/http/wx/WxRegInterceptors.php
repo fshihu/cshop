@@ -25,7 +25,7 @@ class WxRegInterceptors implements CInterceptors
      */
     public function handle(CRequest $request, CNext $next)
     {
-                OrderHanderServer::instance(array('out_trade_no' => '201710140155082047'))->handle();
+//                OrderHanderServer::instance(array('out_trade_no' => '201710140204323491'))->handle();
         if($request->getParams('from_admin') == 'xixk'){
             Session::login();
             Session::setUserID(2);

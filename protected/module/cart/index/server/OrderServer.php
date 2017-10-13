@@ -85,7 +85,7 @@ class OrderServer
                 'time' => time(),
             ))->execute();
 
-        }else if($this->prom_type == PromTypeEnum::GROUP_JOIN){
+        }else if($this->prom_type == PromTypeEnum::GROUP_JOIN || $this->prom_type == PromTypeEnum::GROUP_OWN_JOIN){
             $this->prom_id = $this->cart_list[0]['prom_id'];
         }
     }
@@ -160,8 +160,8 @@ class OrderServer
             'total_amount'     =>($car_price['goodsFee'] + $car_price['postFee']),// 订单总额
             'order_amount'     =>$car_price['payables'],//'应付款金额',
             'add_time'         =>time(), // 下单时间
-            'order_prom_type'    =>$car_price['order_prom_type'],//'订单优惠活动id',
-            'order_prom_id'    =>$car_price['order_prom_id'],//'订单优惠活动id',
+            'order_prom_type'    =>$this->prom_type,//'订单优惠活动id',
+            'order_prom_id'    =>$this->prom_id,//'订单优惠活动id',
             'order_prom_amount'=>$car_price['order_prom_amount'],//'订单优惠活动优惠了多少钱',
             'is_show' => $this->is_show,
             'total_person_num' => $this->total_person_num,
