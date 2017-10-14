@@ -83,8 +83,8 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                 <dl>
                     <dt>用户id：</dt>
                     <dd>
-                        <a class="open" href="{:U('Admin/user/detail',array('id'=>$service[uid]))}" target="blank">
-                            {$service.uid}<i class="fa fa-external-link " title="新窗口打开"></i>
+                        <a class="open" href="{:U('Admin/user/detail',array('id'=>$service[user_id]))}" target="blank">
+                            {$service.user_id}<i class="fa fa-external-link " title="新窗口打开"></i>
                         </a>
 
                     </dd>
@@ -154,10 +154,30 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                                		服务完成</a>
                 <?php endif;?>
                 <?php if($service['status'] == 4):?>
-                <a class="ncap-btn-big ncap-btn-green" href="{:U('Admin/Service/confirm',array('id'=>$service['id'],'p'=>4))}" >
+                <div>
+                   <!-- 管理员后台设置市场部人员佣金比例为10%，市场部人员a，
+                    推荐金卡用户b，有足够的积分用于抵扣（抵扣10%），预约服务g，成功到医院消费2000，
+                    医院补贴公司1000，用户补贴比例20%，市场部人员返现比例10%，
+-->
+                    <div>医院消费：<input id="yiyuan_xiaofei" type="text"/>元 </div>
+                    <div style="padding:10px 0;">
+                        医院补贴公司：<input id="yiyuan_butie" type="text"/>元
+                    </div>
+                   <div style="padding-bottom:10px;">
+                       用户补贴比例：<input id="user_bili" type="text"/>%
+                   </div>
+                </div>
+                <a class="ncap-btn-big ncap-btn-green pass_btn" href="{:U('Admin/Service/confirm',array('id'=>$service['id'],'p'=>4))}" >
                                		补贴通过</a>
                 <a class="ncap-btn-big ncap-btn-green" href="{:U('Admin/Service/confirm',array('id'=>$service['id'],'p'=>5))}">
                     补贴不通过</a>
+                <script type="text/javascript">
+                    var pass_btn_href = $('.pass_btn').attr('href');
+                    $('.pass_btn').click(function () {
+                        pass_btn_href += '&yiyuan_xiaofei='+$('#yiyuan_xiaofei').val()+'&yiyuan_butie='+$('#yiyuan_butie').val()+'&user_bili='+$('#user_bili').val();
+                        $(this).attr('href',pass_btn_href);
+                    });
+                </script>
                 <?php endif;?>
 
 	        </dd>

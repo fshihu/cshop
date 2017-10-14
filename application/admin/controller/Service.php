@@ -64,7 +64,7 @@ class Service  extends Base
                 $count = $model->where(array('id' => $_GET['id']))->count();
                 $Page = $pager = new Page($count,10);
 //        $model->join('left join t_service s on t.');
-        $model->alias('t')->join('t_service s','s.id = t.service_id','left ');
+        $model->where(array('t.id' => $_GET['id']))->alias('t')->join('t_service s','s.id = t.service_id','left ');
         $model   ->join('t_region p','t.province = p.id','left');
         $model ->join('t_region c','t.city = c.id','left');
         $model ->join('t_region d','t.district = d.id','left');
@@ -112,14 +112,112 @@ class Service  extends Base
         }else if($_GET['p'] == 3){
             $data['status'] = 3;
         }else if($_GET['p'] == 4){
+            $yiyuan_xiaofei = $_POST['yiyuan_xiaofei'];
+            $yiyuan_butie = $_POST['yiyuan_butie'];
+            $user_bili = $_POST['user_bili'];
+            if($yiyuan_xiaofei <=0 || $yiyuan_butie <= 0 || $user_bili <= 0){
+                $this->success('请填写完整信息!');
+            }
+            $data['yiyuan_xiaofei'] = $yiyuan_xiaofei;
+            $data['yiyuan_butie'] = $yiyuan_butie;
+            $data['user_bili'] = $user_bili;
+            /**
+             * 例子：管理员后台设置市场部人员佣金比例为10%，市场部人员a，推荐金卡用户b，
+             * 有足够的积分用于抵扣（抵扣10%），预约服务g，成功到医院消费2000，
+             * 医院补贴公司1000，用户补贴比例20%，市场部人员返现比例10%，则：
+             * 用户抵扣金额：2000*10%=200
+             市场部人员获得佣金：（1000-200）*10%=80
+             用户返补贴金额：（1000-200）*20+200=360
+             */
+            $service_reserve = M('service_reserve')->where(array('id' => $_GET['id']))->find();
+            $max_ratio = self::getUseGoldMaxRatio($service_reserve['user_id']);
+            $user =    M('users')->where(array(
+                        'user_id' => $service_reserve['user_id'],
+                    ))->execute();
+            $user_gold = min($user['gold'],$max_ratio * $yiyuan_xiaofei);
+            if($user['first_leader'] && $user['is_sale']){
+                $first_leader = M('users')->where(array(
+                                        'user_id' => $user['first_leader'],
+                                    ))->execute();
+                $shic_price = ($yiyuan_butie -  $user_gold ) *  $first_leader['sale_ratio'];
+                if($shic_price > 0){
+                    self::addRecord($first_leader['user_id'],4,$shic_price,'服务预约佣金',$service_reserve['id']);
+                }
+            }
+            if($user_gold > 0){
+                self::addGold($user['user_id'],6,-$user_gold,'服务补贴扣除',$service_reserve['id']);
+            }
+            $butie_price = ($yiyuan_butie - $user_gold) * $user_bili / 100 + $user_gold;
+            if($butie_price > 0){
+                self::addRecord($user['user_id'],3,$butie_price,'服务补贴',$service_reserve['id']);
+            }
             $data['status'] = 6;
         }else if($_GET['p'] == 5){
             $data['status'] = 5;
         }
         $User->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
-        $this->success('操作成功!',U('index'));
+        $this->success('操作成功!',U('reserve'));
 
     }
+
+    public static function addGold($uid,$type,$gold,$content,$data_id)
+     {
+         $user =    M('users')->where(array(
+                     'user_id' => $uid,
+                 ))->execute();
+
+         M('user_gold_record')->insert(array(
+             'uid' => $uid,
+             'money' => $gold,
+             'cur_money' => $user['gold'] + $gold,
+             'content' => $content,
+             'data_id' => $data_id,
+             'type' => $type,//转增
+             'crate_time' => time(),
+         ));
+         M('users')->where(array(
+             'user_id' => $uid
+         ))->save(array(
+                     'gold' => $user['gold'] + $gold
+                 ));
+     }
+
+     public static function addRecord($uid, $type, $money, $content, $data_id)
+    {
+        $user =    M('users')->where(array(
+                    'user_id' => $uid,
+                ))->execute();
+
+       M('user_money_record')->insert(array(
+            'uid' => $uid,
+            'money' => $money,
+            'cur_money' => $user['user_money'] + $money,
+            'content' => $content,
+            'data_id' => $data_id,
+            'type' => $type,
+            'crate_time' => time(),
+        ));
+        M('users')->where(array(
+            'user_id' => $uid
+        ))->save(array(
+                    'user_money' => $user['user_money'] + $money
+                ));
+    }
+
+    public static function getUseGoldMaxRatio($uid)
+    {
+        $user = M('users')->where(array('user_id' => $uid))->find();
+        $ration = 0.05;
+        /*普通会员购买产品最多抵扣产品价格5%，金卡会员购买产品最多抵扣产品价格10%，黑卡/黑卡附属卡会员购买产品最多抵扣产品价格20%。*/
+         if($user['level'] == 3||$user['level'] ==4){
+             $ration = 0.2;
+         }
+         if($user['level'] == 2){
+             $ration = 0.1;
+         }
+        return $ration;
+    }
+
     /**
      * 添加修改编辑  商品品牌
      */

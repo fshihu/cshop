@@ -17,7 +17,9 @@ use module\cart\index\server\PromTypeEnum;
 class MoneyServer
 {
     const GROUP_BUY_RETURNED = 1;//团购退回
-    const PROFIT_PRICE = 2;
+    const PROFIT_PRICE = 2;//合伙人获得的佣金
+    const SERVICE_SUBSIDY =3;//服务补贴
+    const MARKET_SERVICE_COMMISSION = 4;//服务预约佣金
     public static function addRecord($uid, $type, $money, $content, $data_id)
     {
         $user =    ItemModel::make('users')->addColumnsCondition(array(

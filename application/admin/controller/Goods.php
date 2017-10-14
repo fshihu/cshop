@@ -323,7 +323,9 @@ class Goods extends Base {
                 );
                 $this->ajaxReturn($return_arr);
             }
-            $data['admin_uid'] = session('admin_id');
+            if($goods_id <= 0){
+                $data['admin_uid'] = session('admin_id');
+            }
             if(!$this->isAdmin() && !$goods_id){
                 $data['is_on_sale'] = 0;
             }

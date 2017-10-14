@@ -14,6 +14,7 @@ use CC\db\base\select\ListModel;
 use CC\db\base\update\UpdateModel;
 use CRequest;
 use module\cart\index\server\OrderStatusServer;
+use module\member\index\UserServer;
 use module\service\index\enum\ServiceStatusEnum;
 
 class ServiceMyCommentWxAction extends \CAction
@@ -31,11 +32,12 @@ class ServiceMyCommentWxAction extends \CAction
                 'id' => $id,
             ))->execute();
 
+            $user = UserServer::getUser();
             InsertModel::make('service_comment')->addData(array(
                 'service_id' =>  $service_reserve['service_id'],
                 'content' => $request->getParams('content'),
-                'user_id' => Session::getUserID(),
-                'username' => Session::getName(),
+                'user_id' => $user['user_id'],
+                'username' => $user['nickname'],
                 'add_time' => time(),
             ))->execute();
             UpdateModel::make('service_reserve')->addData(array(
