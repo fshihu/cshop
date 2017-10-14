@@ -171,7 +171,8 @@ background: url("../images/time_background.png") no-repeat;text-align: center;ba
 .h_item_1 .name{ color: #474747; padding:10px;}
 .h_item_1 .ft_s1{ overflow: hidden; padding:10px; padding-top:0;}
 .h_item_1 .ft_s1 .fl{float: left;}
-.h_item_1 .ft_s1 .price{ color: #2cc8c7;font-size: 18px;}
+.h_item_1 .ft_s1 .tuan_num{  vertical-align: middle;display: inline-block;}
+.h_item_1 .ft_s1 .price{ color: #2cc8c7;font-size: 18px;vertical-align: middle;display: inline-block;}
 .h_item_1 .ft_s1 .fr{float: right;}
 .btn_r{display: inline-block; padding:5px 10px; color: #fff;background: #e72b29;}
 

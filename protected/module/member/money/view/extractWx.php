@@ -35,7 +35,7 @@
               <a class="weui-cell weui-cell_access" href="javascript:sel_bank();">
                    <?php $bank = $bank_list[0] ?>
                   <div class="weui-cell__bd">
-                      <div class="t1"><?php echo BankEnum::getValueByIndex($bank['bank_name']) ?>
+                      <div class="t1 bank_name_ssr"><?php echo BankEnum::getValueByIndex($bank['bank_name']) ?>
                           尾号<?php echo substr($bank['bank_card'], -4) ?></div>
                       <input type="hidden" name="bank_id" id="bank_id" value="<?php echo $bank['id'] ?>"/>
                   </div>
@@ -94,6 +94,7 @@
                 label: '<?php echo BankEnum::getValueByIndex($item['bank_name']) ?> 尾号<?php echo substr($item['bank_card'], -4) ?>',
                 onClick: function () {
                     $('#bank_id').val(<?php echo $item['id'] ?>);
+                    $('.bank_name_ssr').text('<?php echo BankEnum::getValueByIndex($item['bank_name']) ?> 尾号<?php echo substr($item['bank_card'], -4) ?>');
                 }
             },
             <?php endforeach?>

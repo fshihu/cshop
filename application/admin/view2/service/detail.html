@@ -127,6 +127,18 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                     <dt>预约日期：</dt>
                     <dd>{$service.date}</dd>
                 </dl>
+                 <?php if($service['status'] == 6):?>
+                <dl>
+                    <dt>医院消费：</dt>
+                    <dd>{$service.yiyuan_xiaofei}元</dd>
+                    <dt>医院补贴公司：</dt>
+                                       <dd>{$service.yiyuan_butie}元</dd>
+                </dl>
+                <dl>
+                    <dt>用户补贴比例：</dt>
+                    <dd>{$service.user_bili}%</dd>
+                 </dl>
+                <?php endif;?>
                 <dl>
                     <dt>状态：</dt>
                     <dd>{$service.status_desc}</dd>
@@ -169,13 +181,16 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                 </div>
                 <a class="ncap-btn-big ncap-btn-green pass_btn" href="{:U('Admin/Service/confirm',array('id'=>$service['id'],'p'=>4))}" >
                                		补贴通过</a>
+                <br><br>
                 <a class="ncap-btn-big ncap-btn-green" href="{:U('Admin/Service/confirm',array('id'=>$service['id'],'p'=>5))}">
                     补贴不通过</a>
                 <script type="text/javascript">
                     var pass_btn_href = $('.pass_btn').attr('href');
                     $('.pass_btn').click(function () {
-                        pass_btn_href += '&yiyuan_xiaofei='+$('#yiyuan_xiaofei').val()+'&yiyuan_butie='+$('#yiyuan_butie').val()+'&user_bili='+$('#user_bili').val();
+                        pass_btn_href += '?yiyuan_xiaofei='+$('#yiyuan_xiaofei').val()+'&yiyuan_butie='+$('#yiyuan_butie').val()+'&user_bili='+$('#user_bili').val();
                         $(this).attr('href',pass_btn_href);
+                        location.href = pass_btn_href;
+                        return false;
                     });
                 </script>
                 <?php endif;?>

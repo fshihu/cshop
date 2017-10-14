@@ -16,11 +16,11 @@
 
                 </div>
         <style type="text/css">
-            .cate_goods_list_1 .gl_nav a.ac{ color: #d27b43;}
+            .cate_goods_list_1 .gl_nav a.ac{ color: #d27b43;border-bottom-color: #d27b43;}
             .cate_goods_list_1 .goods_item a .price{ color: #d27b43;}
-            .cate_goods_list_2 .gl_nav a.ac{ color: #5C9242;}
+            .cate_goods_list_2 .gl_nav a.ac{ color: #5C9242;border-bottom-color: #5C9242;}
             .cate_goods_list_2 .goods_item a .price{ color: #5C9242;}
-            .cate_goods_list_3 .gl_nav a.ac{ color: #375767;}
+            .cate_goods_list_3 .gl_nav a.ac{ color: #375767;border-bottom-color: #375767;}
             .cate_goods_list_3 .goods_item a .price{ color: #375767;}
         </style>
         <div class="  weui-panel_access  " style="height: 100%;background: #f3f7f8">

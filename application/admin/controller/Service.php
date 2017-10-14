@@ -112,11 +112,11 @@ class Service  extends Base
         }else if($_GET['p'] == 3){
             $data['status'] = 3;
         }else if($_GET['p'] == 4){
-            $yiyuan_xiaofei = $_POST['yiyuan_xiaofei'];
-            $yiyuan_butie = $_POST['yiyuan_butie'];
-            $user_bili = $_POST['user_bili'];
+            $yiyuan_xiaofei = $_GET['yiyuan_xiaofei'];
+            $yiyuan_butie = $_GET['yiyuan_butie'];
+            $user_bili = $_GET['user_bili'];
             if($yiyuan_xiaofei <=0 || $yiyuan_butie <= 0 || $user_bili <= 0){
-                $this->success('请填写完整信息!');
+                $this->error('请填写完整信息!');exit;
             }
             $data['yiyuan_xiaofei'] = $yiyuan_xiaofei;
             $data['yiyuan_butie'] = $yiyuan_butie;
@@ -133,13 +133,13 @@ class Service  extends Base
             $max_ratio = self::getUseGoldMaxRatio($service_reserve['user_id']);
             $user =    M('users')->where(array(
                         'user_id' => $service_reserve['user_id'],
-                    ))->execute();
+                    ))->find();
             $user_gold = min($user['gold'],$max_ratio * $yiyuan_xiaofei);
             if($user['first_leader'] && $user['is_sale']){
                 $first_leader = M('users')->where(array(
                                         'user_id' => $user['first_leader'],
-                                    ))->execute();
-                $shic_price = ($yiyuan_butie -  $user_gold ) *  $first_leader['sale_ratio'];
+                                    ))->find();
+                $shic_price = ($yiyuan_butie -  $user_gold ) *  $first_leader['sale_ratio']/100;
                 if($shic_price > 0){
                     self::addRecord($first_leader['user_id'],4,$shic_price,'服务预约佣金',$service_reserve['id']);
                 }
@@ -155,7 +155,7 @@ class Service  extends Base
         }else if($_GET['p'] == 5){
             $data['status'] = 5;
         }
-        $User->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
+        M("ServiceReserve")->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
         $this->success('操作成功!',U('reserve'));
 
     }
@@ -164,7 +164,7 @@ class Service  extends Base
      {
          $user =    M('users')->where(array(
                      'user_id' => $uid,
-                 ))->execute();
+                 ))->find();
 
          M('user_gold_record')->insert(array(
              'uid' => $uid,
@@ -186,7 +186,7 @@ class Service  extends Base
     {
         $user =    M('users')->where(array(
                     'user_id' => $uid,
-                ))->execute();
+                ))->find();
 
        M('user_money_record')->insert(array(
             'uid' => $uid,
