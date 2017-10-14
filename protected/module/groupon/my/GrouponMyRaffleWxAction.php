@@ -14,6 +14,7 @@ use CC\db\base\select\ListModel;
 use CC\db\base\update\UpdateModel;
 use CErrorException;
 use CRequest;
+use module\basic\phone\server\PhoneServer;
 use module\cart\index\server\OrderStatusServer;
 use module\cart\index\server\PromTypeEnum;
 use module\member\money\server\MoneyServer;
@@ -57,6 +58,9 @@ class GrouponMyRaffleWxAction extends \CAction
                 }
             }
 
+            $user = ItemModel::make('user')->addColumnsCondition(array('user_id' => $order['user_id']))->execute();
+            $group_buy = ItemModel::make('group_buy')->addColumnsCondition(array('id' => $group_one['group_buy_id']))->execute();
+            PhoneServer::sendMsg($user['mobile'],'【灏维网络】恭喜你的团购'.$group_buy['title'].'获得产品');
             UpdateModel::make('order')->addData(array(
                 'is_show' => 1,
             ))->addColumnsCondition(array(

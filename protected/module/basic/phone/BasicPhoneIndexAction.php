@@ -24,7 +24,7 @@ class BasicPhoneIndexAction extends \CAction
             'code' => $code,
             'c_time' => time(),
         ))->execute();
-        PhoneServer::sendMsg();
+        PhoneServer::sendMsg($this->phone,$code);
         return new \CJsonData();
     }
     protected function getIsOpenTransaction()
