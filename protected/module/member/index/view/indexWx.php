@@ -182,12 +182,14 @@ use module\cart\index\server\OrderWaitStatusEnum;
                         <p>个人信息</p>
                     </div>
                 </a>
+                 <?php if($user['is_sale'] || $user['is_merchant']):?>
                 <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('info/card') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Businesscard_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>电子名片</p>
                     </div>
                 </a>
+                 <?php endif;?>
                 <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('addr/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/address_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">

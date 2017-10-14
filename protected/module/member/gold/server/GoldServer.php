@@ -22,6 +22,10 @@ class GoldServer
 
     public static function getGoldRatio()
     {
+        return 0.01;
+    }
+    public static function getUseGoldMaxRatio()
+    {
         $user = UserServer::getUser();
         $ration = 0.05;
         /*普通会员购买产品最多抵扣产品价格5%，金卡会员购买产品最多抵扣产品价格10%，黑卡/黑卡附属卡会员购买产品最多抵扣产品价格20%。*/

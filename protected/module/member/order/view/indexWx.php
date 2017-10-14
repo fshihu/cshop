@@ -39,7 +39,7 @@
              </a>
          <?php endforeach?>
          <div class="t3">
-             实支付： <span class="t3_s">￥ <?php echo $item['goods_price'] ?></span>（免运费）
+             实支付： <span class="t3_s">￥ <?php echo $item['order_amount'] ?></span>（免运费）
          </div>
           <?php if($wait_status == OrderWaitStatusEnum::WAIT_PAY):?>
           <div class="t4">

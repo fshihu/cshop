@@ -11,7 +11,11 @@ namespace module\cart\index\server;
 use CC\db\base\select\ItemModel;
 use CC\db\base\update\UpdateModel;
 use module\groupon\server\GroupOneServer;
+use module\member\gold\server\GoldServer;
+use module\member\gold\server\UserGoldRecordServer;
+use module\member\index\UserServer;
 use module\member\level\server\UserLevelOrderServer;
+use module\member\money\server\MoneyServer;
 
 class OrderHanderServer
 {
@@ -34,6 +38,13 @@ class OrderHanderServer
             UserLevelOrderServer::handle($order);
         }else{
             OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_PAYED);
+        }
+        if($order['order_prom_type'] == PromTypeEnum::NORMAL){
+            $get_gold = (int)($order['order_amount'] * GoldServer::getGoldRatio());
+            if($get_gold > 0){
+                UserGoldRecordServer::addGold($order['user_id'],UserGoldRecordServer::TYPE_BUY_GOODS_GET,$get_gold,'购买商品获得积分',$order['order_id']);
+            }
+            MoneyServer::handlerOrder($order);
         }
         if($order['order_prom_type'] == PromTypeEnum::GROUP_OPNE || $order['order_prom_type'] == PromTypeEnum::GROUP_JOIN
             || $order['order_prom_type'] == PromTypeEnum::GROUP_OWN_OPEN

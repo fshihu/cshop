@@ -13,6 +13,11 @@ use module\cart\index\server\OrderStatusServer;
 
 class MemberOrderCancelWxAction extends \CAction
 {
+    protected function getIsOpenTransaction()
+    {
+        return true;
+    }
+
     public function execute(CRequest $request)
     {
         $order_id = $request->getParams('order_id');

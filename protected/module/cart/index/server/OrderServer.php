@@ -113,7 +113,7 @@ class OrderServer
         }
         if($this->use_gold){
             $gold = GoldServer::getGold();
-            $gold_ratio = GoldServer::getGoldRatio();
+            $gold_ratio = GoldServer::getUseGoldMaxRatio();
             $use_gold_num = min((int)($car_price['goodsFee'] * $gold_ratio),$gold);
             $car_price['integral'] = $use_gold_num;
             $car_price['pointsFee'] = $use_gold_num;
@@ -181,7 +181,7 @@ class OrderServer
         );
         $id = InsertModel::make('order')->addData($data)->execute();
         if($data['integral_money'] > 0){
-            UserGoldRecordServer::addGold(Session::getUserID(),UserGoldRecordServer::TYPE_BUY_GOODS_COST,$data['integral_money'],'购买商品消耗积分',$id);
+            UserGoldRecordServer::addGold(Session::getUserID(),UserGoldRecordServer::TYPE_BUY_GOODS_COST,-$data['integral_money'],'购买商品消耗积分',$id);
         }
 
         return $id;

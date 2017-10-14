@@ -121,7 +121,7 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
                      <span class="checkbox jifen_check" style="vertical-align: middle;"></span>
                      <span class="jf_w" style="display: inline-block;vertical-align: middle;">
                          使用<span class="total_gold"><?php $total_gold = GoldServer::getGold();
-                                                  $goldRatio = GoldServer::getGoldRatio();
+                                                  $goldRatio = GoldServer::getUseGoldMaxRatio();
                                                   $gold = min($total_gold, (int)($total_price* $goldRatio));
                                                                        echo $gold ?></span>积分,抵扣<span class="gold_price"><?php echo $gold ?></span>元
                      </span>
@@ -183,7 +183,7 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
 
         });
         $('.jifen_check').click(function () {
-            var ratio = <?php echo GoldServer::getGoldRatio() ?>;
+            var ratio = <?php echo GoldServer::getUseGoldMaxRatio() ?>;
             console.log(ratio);
             if($(this).hasClass('checkboxed')){
                 url = tpl_url +'&use_gold=0';

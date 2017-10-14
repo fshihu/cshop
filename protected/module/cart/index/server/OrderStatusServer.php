@@ -8,8 +8,11 @@
 namespace module\cart\index\server;
 
 
+use CC\db\base\select\ItemModel;
 use CC\db\base\update\UpdateModel;
 use CC\util\db\YesNoEnum;
+use CErrorException;
+use module\member\gold\server\UserGoldRecordServer;
 
 class OrderStatusServer
 {
@@ -27,12 +30,19 @@ class OrderStatusServer
     public function changeStatus($to_status)
     {
         if($to_status == self::TO_CANCEL){
+            $order = ItemModel::make('order')->addColumnsCondition(array('order_id' => $this->order_id))->execute();
+            if($order['order_status'] != OrderWaitStatusEnum::WAIT_PAY){
+                throw new CErrorException('已取消');
+            }
             UpdateModel::make('order')->addColumnsCondition(array(
                 'order_id' => $this->order_id,
             ))->addData(array(
                 'deleted' => YesNoEnum::YES,
                 'order_status' => OrderStatusEnum::CANCELED,
             ))->execute();
+            if($order['integral'] > 0){
+                UserGoldRecordServer::addGold($order['user_id'],UserGoldRecordServer::TYPE_BUY_GOODS_CANCEL,$order['integral'],'订单取消',$order['order_id']);
+            }
         }elseif ($to_status == self::TO_PAYED){
             UpdateModel::make('order')->addData(array(
                 'pay_status' => OrderPayStatusEnum::PAYED,
