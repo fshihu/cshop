@@ -17,6 +17,8 @@ class UserGoldRecordServer
 {
     const TYPE_GIVE = 1;
     const TYPE_REVICE_GIVE = 2;
+    const TYPE_BUY_GOODS_COST = 3;
+    const TYPE_BUY_GOODS_GET = 4;
     public static function addGold($uid,$type,$gold,$content,$data_id)
     {
         $user =    ItemModel::make('users')->addColumnsCondition(array(

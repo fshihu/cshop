@@ -15,6 +15,7 @@ use CC\db\base\select\ItemModel;
 use CC\util\number\NumberUtil;
 use module\groupon\index\enum\GroupTypeEnum;
 use module\member\gold\server\GoldServer;
+use module\member\gold\server\UserGoldRecordServer;
 
 class OrderServer
 {
@@ -113,11 +114,11 @@ class OrderServer
         if($this->use_gold){
             $gold = GoldServer::getGold();
             $gold_ratio = GoldServer::getGoldRatio();
-            $use_gold_num = min($car_price['goodsFee'] * $gold_ratio,$gold);
+            $use_gold_num = min((int)($car_price['goodsFee'] * $gold_ratio),$gold);
             $car_price['integral'] = $use_gold_num;
-            $car_price['integral_money'] = $use_gold_num;
+            $car_price['pointsFee'] = $use_gold_num;
         }
-        $car_price['payables'] = $car_price['goodsFee'] - $car_price['integral_money'];
+        $car_price['payables'] = $car_price['goodsFee'] - $car_price['pointsFee'];
         return $car_price;
     }
 
@@ -178,8 +179,12 @@ class OrderServer
             'user_note'        =>$user_note, // 用户下单备注
             'pay_name'         =>$pay_name,//支付方式，可能是余额支付或积分兑换，后面其他支付方式会替换
         );
-        return InsertModel::make('order')->addData($data)->execute();
+        $id = InsertModel::make('order')->addData($data)->execute();
+        if($data['integral_money'] > 0){
+            UserGoldRecordServer::addGold(Session::getUserID(),UserGoldRecordServer::TYPE_BUY_GOODS_COST,$data['integral_money'],'购买商品消耗积分',$id);
+        }
 
+        return $id;
     }
 
     protected function addOrderGoods($order_id)
