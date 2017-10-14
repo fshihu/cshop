@@ -27,4 +27,8 @@ class BasicPhoneIndexAction extends \CAction
         PhoneServer::sendMsg();
         return new \CJsonData();
     }
+    protected function getIsOpenTransaction()
+    {
+        return true;
+    }
 }

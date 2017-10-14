@@ -69,7 +69,9 @@ class User extends Base {
         $this->assign('third_leader',$third_leader);                                
         $show = $Page->show();
         $this->assign('userList',$userList);
-        $this->assign('level',M('user_level')->getField('level_id,level_name'));
+        $this->assign('level',[
+            '普通会员','普通会员','金卡会员','黑卡会员','黑卡附属卡会员'
+        ]);
         $this->assign('page',$show);// 赋值分页输出
         $this->assign('pager',$Page);
         return $this->fetch();
@@ -107,7 +109,6 @@ class User extends Base {
                 $c = M('users')->where("user_id != $uid and mobile = '$mobile'")->count();
                 $c && exit($this->error('手机号不得和已有用户重复'));
             }            
-            
             $row = M('users')->where(array('user_id'=>$uid))->save($_POST);
             if($row)
                 exit($this->success('修改成功'));
@@ -119,6 +120,9 @@ class User extends Base {
         $user['third_lower'] = M('users')->where("third_leader = {$user['user_id']}")->count();
  
         $this->assign('user',$user);
+        $this->assign('level',[
+            '普通会员','普通会员','金卡会员','黑卡会员','黑卡附属卡会员'
+        ]);
         return $this->fetch();
     }
     /**
@@ -786,7 +790,31 @@ class User extends Base {
         }else if($_GET['p'] == 2){
             $data['status'] = 2;
         }
-        $User->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
+        if($_GET['p'] == 1){
+            $merchant = $User->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
+            $admin_data = array(
+                'user_name' => $merchant['account'],
+                'password' => $merchant['pwd'],
+                'role_id' => 2,
+            );
+           	if(empty($admin_data['password'])){
+           		unset($admin_data['password']);
+           	}else{
+                $admin_data['password'] = encrypt($admin_data['password']);
+           	}
+           		unset($admin_data['admin_id']);
+            $admin_data['add_time'] = time();
+           		if(M('admin')->where("user_name", $admin_data['user_name'])->count()){
+           			$this->error("此用户名已被注册，确认失败");
+           			exit;
+           		}
+            $r = M('admin')->add($admin_data);
+            M('users')->where(array('user_id'=>$merchant['uid']))->save(array(
+                'admin_uid' => $r,
+                'is_merchant' => 1,
+            ));
+        }
+        M("merchant")->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
         $this->success('操作成功!',U('index'));
 
     }

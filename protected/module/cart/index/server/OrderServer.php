@@ -14,6 +14,7 @@ use CC\db\base\insert\InsertModel;
 use CC\db\base\select\ItemModel;
 use CC\util\number\NumberUtil;
 use module\groupon\index\enum\GroupTypeEnum;
+use module\member\gold\server\GoldServer;
 
 class OrderServer
 {
@@ -24,13 +25,15 @@ class OrderServer
     protected $prom_id = 0;
     protected $total_person_num;
     protected $is_show = 0;
-    public static function instance($address_id,$prom_type,$cart_ids,$total_person_num)
+    protected $use_gold = 0;
+    public static function instance($address_id,$prom_type,$cart_ids,$total_person_num,$use_gold)
     {
         $obj = new static();
         $obj->address_id = $address_id;
         $obj->prom_type = $prom_type;
         $obj->cart_ids = $cart_ids;
         $obj->total_person_num = $total_person_num;
+        $obj->use_gold = $use_gold;
         return $obj;
     }
     public  function addOrder()
@@ -107,7 +110,14 @@ class OrderServer
         if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
             $car_price['goodsFee'] =  NumberUtil::formatFloat(($car_price['goodsFee'] / $this->total_person_num));
         }
-        $car_price['payables'] = $car_price['goodsFee'];
+        if($this->use_gold){
+            $gold = GoldServer::getGold();
+            $gold_ratio = GoldServer::getGoldRatio();
+            $use_gold_num = min($car_price['goodsFee'] * $gold_ratio,$gold);
+            $car_price['integral'] = $use_gold_num;
+            $car_price['integral_money'] = $use_gold_num;
+        }
+        $car_price['payables'] = $car_price['goodsFee'] - $car_price['integral_money'];
         return $car_price;
     }
 

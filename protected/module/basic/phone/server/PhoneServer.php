@@ -16,9 +16,21 @@ class PhoneServer
     public static function sendMsg()
     {
         $url = 'https://sms.yunpian.com/v2/sms/single_send.json';
-        $apikey = '';
-        $mobile = '';
-        $text = '';
+        $apikey = 'c55b480e75f882cccabb385dc6fc8998';
+        $mobile = '13518169049';
+        $code = '12345';
+        $text = "【灏维网络】您的验证码是".$code."。如非本人操作，请忽略本短信";
+        $r = \Curl::instance()->post($url,array(
+            'apikey' => $apikey,
+            'mobile' => $mobile,
+            'text' => $text,
+        ));
+        $r = json_decode($r,true);
+
+        if($r['code']!= 0){
+            throw new CErrorException('发送失败，请稍后重试');
+        }
+        return true;
     }
 
     public static function checkCode($phone,$code )

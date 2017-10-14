@@ -5,8 +5,10 @@
         <div class="weui-cells weui-title-title">
 
                      <div class="weui-cell weui-cell_access" href="javascript:;">
-                         <a href="<?php use module\cart\index\server\PromTypeEnum;
+                         <a href="<?php use CC\util\number\NumberUtil;
+                         use module\cart\index\server\PromTypeEnum;
                          use module\goods\server\GoodsServer;
+                         use module\member\gold\server\GoldServer;
 
                          echo $this->genurl('member/index/index'); ?>">
                              <div class="weui-cell__ft">
@@ -72,7 +74,7 @@
                         </div>
 
                     </div>
-                    <div class="buy_num_w" style="<?php echo $prom_type == PromTypeEnum::GROUP_OWN_JOIN?'display:none;':'' ?>">
+                    <div class="buy_num_w" data-price="<?php echo $item['shop_price'] ?>" style="<?php echo $prom_type == PromTypeEnum::GROUP_OWN_JOIN?'display:none;':'' ?>">
                         <span class="fl">数量</span>
                         <span class="fr">
                             <span class="jian no_ac"></span>
@@ -114,11 +116,20 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
 
              <?php if(!empty($list)):?>
              <div class="buy_price">
+                  <?php if($prom_type == PromTypeEnum::NORMAL):?>
                  <div class="buy_jifen">
-                     使用0积分,抵扣0元
+                     <span class="checkbox jifen_check" style="vertical-align: middle;"></span>
+                     <span class="jf_w" style="display: inline-block;vertical-align: middle;">
+                         使用<span class="total_gold"><?php $total_gold = GoldServer::getGold();
+                                                  $goldRatio = GoldServer::getGoldRatio();
+                                                  $gold = min($total_gold, (int)($total_price* $goldRatio));
+                                                                       echo $gold ?></span>积分,抵扣<span class="gold_price"><?php echo $gold ?></span>元
+                     </span>
                  </div>
+                  <?php endif;?>
+
                  <div class="buy_btn_w">
-                     <span class="price">应支付： <span class="price_red">￥<span class="price_renjun"><?php echo $total_price ?></span> （免运费）</span></span>
+                     <span class="price">应支付： <span class="price_red">￥<span class="price_renjun"><?php echo $total_price?></span> （免运费）</span></span>
 
                      <a href="#" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red ">立即支付</a>
                  </div>
@@ -135,6 +146,8 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
         var url = '<?php echo $this->genurl('cart/index/confirm',array('address_id' => $addr['address_id'],'prom_type'=>$prom_type,'cart_ids'=>$ids)); ?>';
         var tpl_url = url;
         var total_price = <?php echo $total_price ?>;
+        var total_gold = <?php echo $total_gold ?>;
+        var goldRatio = <?php echo $goldRatio ?>;
         $('.buy_btn_red ').click(function () {
             var s = <?php echo (int)$addr['address_id'] ?>;
             $(this).attr('href',url);
@@ -151,5 +164,35 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
             }
             url = tpl_url+'&total_person_num='+ val;
             $('.price_renjun').text((total_price/val).toFixed(2));
+        });
+        $('.jia,.jian').click(function () {
+            setTimeout(function () {
+                var total_price = 0;
+                $('.list4_s').find('.buy_num_w .text').each(function () {
+                    total_price += $(this).val()*$(this).closest('.buy_num_w').data('price');
+                });
+                var gold = Math.min(total_gold,parseInt(total_price * goldRatio,10));
+                $('.total_gold').text(gold);
+                $('.gold_price').text(gold);
+                if($('.buy_jifen .checkbox').hasClass('checkboxed')){
+                    total_price -= $('.gold_price').text()*1;
+                }
+
+                $('.price_renjun').text(total_price);
+            },20);
+
+        });
+        $('.jifen_check').click(function () {
+            var ratio = <?php echo GoldServer::getGoldRatio() ?>;
+            console.log(ratio);
+            if($(this).hasClass('checkboxed')){
+                url = tpl_url +'&use_gold=0';
+                $(this).removeClass('checkboxed');
+                $('.price_renjun').text($('.price_renjun').text()*1+$('.gold_price').text()*1);
+            }else{
+                url = tpl_url +'&use_gold=1';
+                $('.price_renjun').text($('.price_renjun').text()*1-$('.gold_price').text()*1);
+                $(this).addClass('checkboxed');
+            }
         });
     </script>
