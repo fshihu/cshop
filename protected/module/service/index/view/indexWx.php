@@ -35,3 +35,4 @@
      </div>
 
 </div>
+<?php include \biz\Util::getFooterNav(); ?>

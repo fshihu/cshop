@@ -85,7 +85,7 @@ class ServiceReserveIndexWxAction extends SaveAction implements IFormViewBuilder
         unset($data['briday_year']);
         unset($data['briday_month']);
         unset($data['briday_day']);
-        if(!$data['birthday']){
+        if(!$data['birthday'] || $data['birthday'] > time()){
             throw new CErrorException('出生日期格式不正确');
         }
         if(!$data['province'] || !$data['city'] || !$data['district']){

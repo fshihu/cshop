@@ -28,7 +28,7 @@ class PhoneServer
         $r = json_decode($r,true);
 
         if($r['code']!= 0){
-            throw new CErrorException('发送失败，请稍后重试');
+            throw new CErrorException($r['msg']);
         }
         return true;
     }

@@ -1,7 +1,7 @@
 <div class="weui-tabbar">
     <a href="<?php echo $this->genurl('/home/index/index') ?>" class="weui-tabbar__item">
         <span style="display: inline-block;position: relative;">
-            <img style="width:20px;height:20px;margin-top:3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/index_icon.png" alt="" class="weui-tabbar__icon">
+            <img style="width:20px;height:20px;margin-top:3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/index_icon<?php echo \biz\Util::isPageHome() ?>.png" alt="" class="weui-tabbar__icon">
         </span>
         <p class="weui-tabbar__label">首页</p>
     </a>
@@ -13,7 +13,7 @@
     </a>
     <a href="<?php echo $this->genurl('/service/index/index') ?>" class="weui-tabbar__item">
         <span style="display: inline-block;position: relative;">
-            <img style="width:20px;height:20px;margin-top:3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/service_icon.png" alt="" class="weui-tabbar__icon">
+            <img style="width:20px;height:20px;margin-top:3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/service_icon<?php echo \biz\Util::isPageHome() ?>.png" alt="" class="weui-tabbar__icon">
         </span>
         <p class="weui-tabbar__label">服务</p>
     </a>

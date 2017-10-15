@@ -34,14 +34,14 @@ class DateInput extends BaseInput
             $attrs
             );
         $str .= '<span class="date_input_tip date_input_tip_year">年</span>';
-        $str .=  sprintf('<input  style="width: 50px;" type="text" name="%s" id="%s" value="%s" class="input_month"  placeholder="月" %s />',
+        $str .=  sprintf('<input  style="width: 40px;" type="text" name="%s" id="%s" value="%s" class="input_month"  placeholder="月" %s />',
             $name.'_month',
             $id.'_month',
             $val?date('n',$val):'',
             $attrs
             );
         $str .= '<span class="date_input_tip date_input_tip_month">月</span>';
-        $str .=  sprintf('<input  style="width: 50px;" type="text" name="%s" id="%s" value="%s" class="input_day"  placeholder="日" %s />',
+        $str .=  sprintf('<input  style="width: 40px;" type="text" name="%s" id="%s" value="%s" class="input_day"  placeholder="日" %s />',
             $name.'_day',
             $id.'_day',
             $val?date('j',$val):'',

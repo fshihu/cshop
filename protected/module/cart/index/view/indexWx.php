@@ -22,6 +22,7 @@
                 </div>
          <div class="  weui-panel_access  "  >
 
+              <?php if(!empty($list)):?>
               <?php if($addr):?>
                   <div class="addr_info">
                        <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('member/addr/index',['is_sel'=>1,'prom_type'=>$prom_type]); ?>">
@@ -58,6 +59,8 @@
                        <?php endif;?>
                   </div>
               <?php endif;?>
+              <?php endif;?>
+
             <div class="weui-panel__bd list4 list4_s"  >
                 <?php $total_price = 0;$ids = ''; ?>
                 <?php foreach($list as $item):?>
@@ -146,8 +149,8 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
         var url = '<?php echo $this->genurl('cart/index/confirm',array('address_id' => $addr['address_id'],'prom_type'=>$prom_type,'cart_ids'=>$ids)); ?>';
         var tpl_url = url;
         var total_price = <?php echo $total_price ?>;
-        var total_gold = <?php echo $total_gold ?>;
-        var goldRatio = <?php echo $goldRatio ?>;
+        var total_gold = <?php echo (int)$total_gold ?>;
+        var goldRatio = <?php echo (float)$goldRatio ?>;
         $('.buy_btn_red ').click(function () {
             var s = <?php echo (int)$addr['address_id'] ?>;
             $(this).attr('href',url);

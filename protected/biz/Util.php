@@ -18,6 +18,17 @@ class Util
         return CC::app()->basePath.'/module/layouts/footer_nav.php';
     }
 
+    public static function isPageHome()
+    {
+        $b = CC::app()->url->getActionStr() == '/home/index/index';
+        return $b ? '1' :'';
+    }
+
+    public static function isPageServer()
+    {
+        $b = CC::app()->url->getActionStr() == '/service/index/index';
+        return $b?'1':'';
+    }
     public static function subString($str,$len)
     {
         if(mb_strlen($str,'utf-8') > $len){
