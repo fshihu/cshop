@@ -20,13 +20,24 @@ class Util
 
     public static function isPageHome()
     {
-        $b = CC::app()->url->getActionStr() == '/home/index/index';
+        $actionStr = CC::app()->url->getActionStr();
+        $b = in_array($actionStr,['/home/index/index','/goods/det/index']);
+        return $b ? '1' :'';
+    }
+    public static function isPageCate()
+    {
+        $b = CC::app()->url->getActionStr() == '/goods/cate/index';
         return $b ? '1' :'';
     }
 
     public static function isPageServer()
     {
         $b = CC::app()->url->getActionStr() == '/service/index/index';
+        return $b?'1':'';
+    }
+    public static function isPageNews()
+    {
+        $b = CC::app()->url->getActionStr() == '/news/index/index';
         return $b?'1':'';
     }
     public static function subString($str,$len)

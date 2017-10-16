@@ -1,4 +1,4 @@
-<div class="page   " style="height: 100%;">
+<div class="page weui-tab__panel  " style="height: 100%;">
     <div class="page__bd"  style="height: 100%;">
         <div class="weui-cells weui-title-title">
 
@@ -50,3 +50,4 @@
         $(this).find('.c_s').show();
     }).eq(0).click();
 </script>
+<?php include \biz\Util::getFooterNav();?>

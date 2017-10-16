@@ -1,6 +1,6 @@
 
     <!--搜索栏-s-->
-<div class="page   " style="height: 100%;">
+<div class="page   " style="min-height: 100%;background: #f3f7f8">
     <div class="page__bd"  style="min-height: 100%;">
         <div class="weui-cells weui-title-title">
 
@@ -17,7 +17,7 @@
                     </div>
 
                 </div>
-        <div class="  weui-panel_access  " style="height: 100%;background: #f3f7f8">
+        <div class="  weui-panel_access  " style="">
  <div class="goods_list">
 
      <div class="goods_item_w server_itme_w">

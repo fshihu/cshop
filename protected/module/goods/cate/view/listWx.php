@@ -1,4 +1,4 @@
-<div class="page   " style="height: 100%;">
+<div class="page   " style="min-height: 100%;background: #f3f7f8;">
     <div class="page__bd"  style="min-height: 100%;">
         <div class="weui-cells weui-title-title">
 
@@ -23,7 +23,7 @@
             .cate_goods_list_3 .gl_nav a.ac{ color: #375767;border-bottom-color: #375767;}
             .cate_goods_list_3 .goods_item a .price{ color: #375767;}
         </style>
-        <div class="  weui-panel_access  " style="height: 100%;background: #f3f7f8">
+        <div class="  weui-panel_access  " style="">
  <div class="goods_list cate_goods_list_<?php echo $cate_i ?>">
      <div class="gl_nav">
          <a href="<?php echo $this->genurl('',['id' =>$id]); ?>" class="<?php echo $cate_id?'':'ac' ?>">全部</a>

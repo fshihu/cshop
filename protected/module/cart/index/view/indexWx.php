@@ -77,7 +77,8 @@
                         </div>
 
                     </div>
-                    <div class="buy_num_w" data-price="<?php echo $item['shop_price'] ?>" style="<?php echo $prom_type == PromTypeEnum::GROUP_OWN_JOIN?'display:none;':'' ?>">
+                    <div class="buy_num_w" data-price="<?php echo $item['shop_price'] ?>"
+                         style="<?php echo in_array($prom_type,[PromTypeEnum::GROUP_OWN_JOIN,PromTypeEnum::GROUP_OWN_OPEN])?'display:none;':'' ?>">
                         <span class="fl">数量</span>
                         <span class="fr">
                             <span class="jian no_ac"></span>
@@ -102,8 +103,8 @@
                       <?php if($prom_type == PromTypeEnum::GROUP_OWN_JOIN):?>
                           <?php echo $item['total_num'] ?>
                        <?php else:?>
-                          <input type="text" id="form_renshu" value="1" class="" placeholder="请输入人数"
-                                  >
+                          <input type="text" id="form_renshu" style="width:50px;text-align: center;" value="1" class="" placeholder="人数"
+                                  > 人
                       <?php endif;?>
                  </div>
              </div>
@@ -115,6 +116,9 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
                      <span class="price_renjun"><?php echo $total_price ?></span>
                  </div>
              </div>
+                  <div style="padding: 15px 35px;color: red;font-size: 12px;">
+                      成团后，团长运行随机抽取获得产品人员，并将抽取结果以短信形式通知各位团员
+                  </div>
               <?php endif;?>
 
              <?php if(!empty($list)):?>
