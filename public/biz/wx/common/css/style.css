@@ -350,7 +350,7 @@ box-sizing: content-box;}
 .my .info .t2_s_m_2{  padding-bottom:10px;}
 
 .my .order{border-bottom: 1px solid #DBDBDB;background: #ffffff; padding-bottom:20px;;}
-.my .t1{ padding:20px}
+.my .order .t1{ padding:10px;border-bottom: 1px solid #dbdbdb; margin-bottom:20px;}
 .my .t2_w{ overflow: hidden;}
 .my .t2_w .t2{float: left; width:20%;text-align: center;font-size: 12px;}
 .my .t2_w .t2 .t2_s_w{ height:22px;vertical-align: bottom;}
@@ -434,7 +434,7 @@ border-left: 80px solid transparent; top:0; right:0;
 .mem_money_ext .money_info .t2 .btsa{float:right; color: #2CC7C5; margin-top:19px;}
 
 
-.mem_info_qrcode{ margin:0 22px; margin-top: 100px;background: #ffffff;border: 1px solid #DBDBDB;border-radius: 5px;}
+.mem_info_qrcode{ margin:0 22px; margin-top: 60px;background: #ffffff;border: 1px solid #DBDBDB;border-radius: 5px;}
 .mem_info_qrcode .qrcode_w{ padding:15px;text-align: center;}
 .mem_info_qrcode .qrcode{ width:100%;}
 .mem_info_qrcode .info:before{ left:0;}

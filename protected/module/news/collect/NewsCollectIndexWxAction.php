@@ -32,7 +32,7 @@ class NewsCollectIndexWxAction extends ListAction
         $this->dbCondition->addColumnsCondition(array(
             't.uid' => Session::getUserID(),
             't.type' => $this->type,
-        ))->leftJoin('article','a','t.article_id = a.article_id')
+        ))->rightJoin('article','a','t.article_id = a.article_id')
             ->select('a.*');
     }
 }

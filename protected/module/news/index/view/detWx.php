@@ -26,8 +26,8 @@
 
             </div>
             <div class="coloct_btn">
-                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default collect_btn" style="<?php echo $old?'':'display: none;' ?>">收藏</a>
-                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default cancel_collect_btn" style="<?php echo $old?'display: none;':'' ?>">取消收藏</a>
+                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default collect_btn" style="<?php echo $old?'display: none;':'' ?>">收藏</a>
+                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default cancel_collect_btn" style="<?php echo $old?'':'display: none;' ?>">取消收藏</a>
 
             </div>
         </div>

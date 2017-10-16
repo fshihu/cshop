@@ -38,7 +38,7 @@ class MemberAddrAddWxAction extends SaveAction implements IFormViewBuilder
         return array(
             (new TextInput('consignee','姓名'))->setPlaceHolder('请输入姓名'),
             (new TextInput('mobile','手机号'))->setPlaceHolder('请输入手机号'),
-            (new AddrInput('name','地址')),
+            (new AddrInput('name','所在省份'))->setInputStyle(1),
             (new TextInput('address','详细地址'))->setPlaceHolder('请输入详细地址'),
         );
     }

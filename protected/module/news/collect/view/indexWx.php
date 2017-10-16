@@ -30,7 +30,7 @@
                  <?php foreach($list as $item):?>
                  <div class="list2">
                          <div class="item_2 =">
-                             <a  href="<?php echo $this->genurl('det',['id'=>$item['cat_id']]) ?>">
+                             <a  href="<?php echo $this->genurl('index/det',['id'=>$item['article_id']]) ?>">
                                  <img src="<?php echo $item['thumb'] ?>" alt="">
                                  <div class="conts"><?php echo $item['title']  ?></div>
                              </a>
