@@ -25,9 +25,9 @@
     </a>
     <a href="<?php echo $this->genurl('member/index/index') ?>" class="weui-tabbar__item">
         <span style="display: inline-block;position: relative;">
-            <img style="width:20px;height:20px;margin-top:3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/me_icon.png" alt="" class="weui-tabbar__icon">
+            <img style="width:20px;height:20px;margin-top:3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/me_icon<?php echo \biz\Util::isPageMy() ?>.png" alt="" class="weui-tabbar__icon">
         </span>
-        <p class="weui-tabbar__label">我的</p>
+        <p class="weui-tabbar__label weui-tabbar__label<?php echo \biz\Util::isPageMy() ?>">我的</p>
     </a>
 
 

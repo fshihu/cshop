@@ -26,7 +26,8 @@
 
             </div>
             <div class="coloct_btn">
-                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default collect_btn">收藏</a>
+                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default collect_btn" style="<?php echo $old?'':'display: none;' ?>">收藏</a>
+                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default cancel_collect_btn" style="<?php echo $old?'display: none;':'' ?>">取消收藏</a>
 
             </div>
         </div>
@@ -40,6 +41,16 @@
     $('.collect_btn').click(function () {
         ajax_request('<?php echo $this->genurl('collect/add');?>',{id:'<?php echo $data['article_id'] ?>'},function () {
            Tip('收藏成功');
+        });
+        $('.cancel_collect_btn').show();
+        $('.collect_btn').hide();
+        return false;
+    });
+    $('.cancel_collect_btn').click(function () {
+        ajax_request('<?php echo $this->genurl('collect/add',['cancel' =>1]);?>',{id:'<?php echo $data['article_id'] ?>'},function () {
+           Tip('取消收藏成功');
+            $('.cancel_collect_btn').hide();
+            $('.collect_btn').show();
         });
         return false;
     });

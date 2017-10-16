@@ -1,6 +1,6 @@
 
     <!--搜索栏-s-->
-<div class="page   " style="height: 100%;">
+<div class="page weui-tab__panel   " style="height: 100%;">
     <div class="page__bd"  style="min-height: 100%;">
         <div class="weui-cells weui-title-title">
 
@@ -61,3 +61,4 @@
      </div>
 
 </div>
+    <?php include \biz\Util::getFooterNav(); ?>

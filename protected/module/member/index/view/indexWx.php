@@ -21,7 +21,7 @@ use module\cart\index\server\OrderWaitStatusEnum;
                          </div>
                      </a>
                     <div class="weui-cell__bd">
-                        <p class="title">我的</p>
+                        <p class="title">会员中心</p>
                     </div>
                 </div>
 
@@ -219,3 +219,4 @@ use module\cart\index\server\OrderWaitStatusEnum;
  </div>
 
 </div>
+<?php include \biz\Util::getFooterNav()?>

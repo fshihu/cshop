@@ -9,6 +9,7 @@
 namespace module\news\index;
 
 
+use biz\Session;
 use CC\db\base\select\ItemModel;
 use CRequest;
 
@@ -17,10 +18,16 @@ class NewsIndexDetWxAction extends \CAction
     public $id;
     public function execute(CRequest $request)
     {
-        return new \CRenderData(array(
+        $old = ItemModel::make('article_collect')->addColumnsCondition(array(
+            'uid' => Session::getUserID(),
+            'article_id' => $this->id,
+            'type' => 0,
+        ))->execute();
+       return new \CRenderData(array(
             'data' => ItemModel::make('article')->addColumnsCondition(array(
                 'article_id' => $this->id,
             ))->execute(),
+           'old' => $old,
         ));
     }
 }

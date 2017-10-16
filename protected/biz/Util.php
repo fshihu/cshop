@@ -18,6 +18,12 @@ class Util
         return CC::app()->basePath.'/module/layouts/footer_nav.php';
     }
 
+    public static function isPageMy()
+    {
+        $actionStr = CC::app()->url->getActionStr();
+        $b = in_array($actionStr,['/memberindex/index']);
+        return $b ? '1' :'';
+    }
     public static function isPageHome()
     {
         $actionStr = CC::app()->url->getActionStr();
