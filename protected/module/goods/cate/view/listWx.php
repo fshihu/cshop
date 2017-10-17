@@ -25,13 +25,15 @@
         </style>
         <div class="  weui-panel_access  " style="">
  <div class="goods_list cate_goods_list_<?php echo $cate_i ?>">
-     <div class="gl_nav">
+     <div class="gl_nav" style="position: relative;">
          <a href="<?php echo $this->genurl('',['id' =>$id]); ?>" class="<?php echo $cate_id?'':'ac' ?>">全部</a>
          <?php foreach($cate_list as $item):?>
          <a class="<?php echo $item['id']== $cate_id?'ac':'' ?>" href="<?php echo $this->genurl('',['id' => $id,'cate_id'=>$item['id']]); ?>"><?php echo $item['name'] ?></a>
          <?php endforeach?>
-         <a href="" style="display: none;">
-             <img style="position: relative;top:-3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pull-down_icon.png" width="10" alt=""></a>
+         <a  class="right_xialat" style=" position: absolute;
+             right: 10px;
+             top: 15px;">
+             <img style="position: relative;top:-3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pull-down_icon<?php echo $cate_i ?>.png" width="10" alt=""></a>
      </div>
      <div class="banner ban1">
          <div class="mslide" id="slideTpshop">
@@ -67,3 +69,15 @@
      </div>
 
 </div>
+<script type="text/javascript">
+    var is_click = false;
+    $('.right_xialat').click(function () {
+        if(!is_click){
+            is_click = true;
+            $('.gl_nav').css({'height':'auto'});
+        }else {
+            is_click = false;
+            $('.gl_nav').css({'height':'20px'});
+        }
+    })
+</script>
