@@ -12,7 +12,7 @@ use biz\pay\weixin\WxPay;
 use CRequest;
 use module\cart\index\server\OrderHanderServer;
 
-class PayIndexNotifyWxAction extends \CAction
+class PayIndexNotifyWxInterfaceAction extends \CAction
 {
     protected function getIsOpenTransaction()
     {

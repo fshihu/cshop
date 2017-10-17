@@ -9,6 +9,7 @@ namespace module\pay\index;
 
 
 use biz\pay\weixin\WxPay;
+use CC;
 use CC\db\base\select\ItemModel;
 use CC\db\base\update\UpdateModel;
 use CRequest;
@@ -31,7 +32,7 @@ class PayIndexIndexWxAction  extends \CAction
         $order_info['body'] = '微整形';
         $order_info['attach'] = 'wzx';
         $order_info['goods_tag'] = '微整形';
-        $order_info['notify_url'] = $this->genurl('pay/index/notify',[],true);
+        $order_info['notify_url'] = CC::app()->request->getHostInfo(true).'/wxInterface/pay/index/notify';
         $order_info['order_amount'] = 1;//$order_info['order_amount'];
         $ok_url = $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_SEND]);
         $err_url = $this->genurl('member/index/index');
