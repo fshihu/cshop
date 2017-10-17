@@ -8,7 +8,7 @@
 ?>
 
 <?php echo \CC\util\common\widget\widget\WidgetBuilder::build(new \CC\util\common\widget\widget\LayoutsWidget(
-        '微整形',
+        '美丽服务平台',
         $content,
         include "leftnav.php",
         'mobile',
