@@ -21,7 +21,7 @@ class Util
     public static function isPageMy()
     {
         $actionStr = CC::app()->url->getActionStr();
-        $b = in_array($actionStr,['/memberindex/index']);
+        $b = in_array($actionStr,['/member/index/index']);
         return $b ? '1' :'';
     }
     public static function isPageHome()
