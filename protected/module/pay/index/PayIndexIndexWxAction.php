@@ -40,6 +40,10 @@ class PayIndexIndexWxAction  extends \CAction
             $ok_url = $this->genurl('member/index/index');
             $err_url = $ok_url;
         }
+        if($order_info['order_prom_type'] == PromTypeEnum::GROUP_OWN_OPEN||$order_info['order_prom_type'] == PromTypeEnum::GROUP_OWN_JOIN){
+            $ok_url = $this->genurl('groupon/my/own');
+            $err_url = $ok_url;
+        }
         if($order_info['order_prom_type'] == PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY){
             $ok_url = $this->genurl('member/level/index');
             $err_url = $ok_url;

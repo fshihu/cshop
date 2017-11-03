@@ -309,7 +309,7 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 .data-only-group{display: inline-block;}
 .row-group span.required { color: #FF0000; display: none;}
 .row-group .form-radio-default-label{ margin-right:10px;display: inline-block;}
-.row-group .check_box_list_label_w { width:260px;}
+.row-group .check_box_list_label_w { width:200px;}
 .row-group .check_box_list_label { margin-right:10px;display: inline-block;}
 .row-group .text-group{ padding-top: 6px; word-wrap:break-word; word-break:normal; float: left; }
 .row-group .data-error-message{ color: #ff210d; padding-left:10px;}
