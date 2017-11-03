@@ -32,7 +32,7 @@
                 <div class="weui-mask"></div>
                 <div class="weui-dialog">
                     <div class="weui-dialog__bd">
-                        您填写的预约资料必须与服务是使用人资料需要一致才能上传资料进入返还流程
+                        您填写的预约资料必须与服务使用人资料需要一致才能上传资料进入返还流程
                     </div>
                     <div class="weui-dialog__ft">
                         <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
