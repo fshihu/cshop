@@ -58,9 +58,9 @@ class GrouponMyRaffleWxAction extends \CAction
                 }
             }
 
-            $user = ItemModel::make('user')->addColumnsCondition(array('user_id' => $order['user_id']))->execute();
+            $user = ItemModel::make('users')->addColumnsCondition(array('user_id' => $order['user_id']))->execute();
             $group_buy = ItemModel::make('group_buy')->addColumnsCondition(array('id' => $group_one['group_buy_id']))->execute();
-            PhoneServer::sendMsg($user['mobile'],'【灏维网络】恭喜你的团购'.$group_buy['title'].'获得产品');
+            PhoneServer::sendMsg($user['mobile'],'恭喜你参与的团购产品'.$group_buy['title'].'成功获得产品');
             UpdateModel::make('order')->addData(array(
                 'is_show' => 1,
             ))->addColumnsCondition(array(

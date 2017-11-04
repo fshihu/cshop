@@ -21,6 +21,14 @@ class PayIndexIndexWxAction  extends \CAction
 {
     public function execute(CRequest $request)
     {
+        $code = $request->getParams('code');
+        if($code){
+            if($_SESSION['code'] == $code){
+                return new \CRedirectData('home/index/index');
+            }else{
+                $_SESSION['code'] = $code;
+            }
+        }
         $order_info = ItemModel::make('order')->addColumnsCondition(array(
             'order_id' => $request->getParams('order_id'),
         ))->execute();

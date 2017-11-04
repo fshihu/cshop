@@ -42,7 +42,7 @@ class Service  extends Base
 //        $model->join('left join t_service s on t.');
         $model->alias('t')->join('t_service s','s.id = t.service_id','left ');
         $model->field('t.*,s.name service_name');
-                $brandList = $model->where($where)->order("t.`id` asc")->limit($Page->firstRow.','.$Page->listRows)->select();
+                $brandList = $model->where($where)->order("t.`id` desc")->limit($Page->firstRow.','.$Page->listRows)->select();
                 $show  = $Page->show();
         foreach ($brandList as $i => $item) {
             $brandList[$i]['sex'] = $item['sex'] == 1?'男':'女';

@@ -27,7 +27,7 @@ class DateInput extends BaseInput
         $attrs = $this->buildAttributes();
         $str = '';
         $val = $this->getValue();
-        $str .=  sprintf('<input style="width: 50px;" type="text" name="%s" id="%s" value="%s" class="input_year"  placeholder="年" %s />',
+        $str .=  sprintf('<input style="width: 54px;" type="text" name="%s" id="%s" value="%s" class="input_year"  placeholder="年" %s />',
             $name.'_year',
             $id.'_year',
             $val?date('Y',$val):'',

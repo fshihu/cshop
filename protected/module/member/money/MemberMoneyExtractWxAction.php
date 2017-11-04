@@ -41,6 +41,7 @@ class MemberMoneyExtractWxAction  extends \CAction
                 'uid' => $user['user_id'],
                 'money' => $money,
                 'status' => 0,
+                'bank_id' => $bank_id,
                 'c_time' => time(),
             ))->execute();
             return new \CJsonData();
