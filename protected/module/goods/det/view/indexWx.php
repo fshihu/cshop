@@ -81,51 +81,52 @@
              </div>
      </div>
 
-      <div class="buy_btn">
-         <a href="<?php echo $this->genurl('cart/index/index') ?>" class="bt_a bt_a1">
-            <div class="t3">加入购物车</div>
-         </a>
-         <a href="" class="bt_a bt_a2">
-             <div class="t3">立即购买</div>
-         </a>
-     </div>
 
-     <div class="buy_confirm" style="display: none;">
-         <div class="bc_bg" style="position: fixed;width: 100%;top:0;bottom: 0;display: none;z-index: 11;background: rgba(0,0,0,.2)"></div>
-         <div class="bc_bd_w" style="position: relative;z-index: 12;background: #fff">
-         <div class="bc_hd">
-             <img class="bc_img" src="<?php echo GoodsServer::getImg($data['original_img']) ?>" alt="">
-            <div class="bc_info">
-                <div class="t1">￥<?php echo $data['shop_price'] ?></div>
-                <div class="t2" style="display: none;">已选: <span class="t2_sm">杏色 中码</span></div>
-            </div>
-             <div class="bc_close">×</div>
-         </div>
-         <div class="bc_bd">
-             <?php foreach($specs as $spec):?>
-             <div class="bcb_item">
-                 <div class="t1"><?php echo $spec['name'] ?></div>
-                 <div class="t2 btn_group_sel">
-                     <?php foreach($spec_items as $spec_item):?>
-                         <?php if($spec['id'] != $spec_item['spec_id']){continue;} ?>
-                     <a data-id="<?php echo $spec_item['id'] ?>" href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default "><?php echo $spec_item['item'] ?></a>
-                     <?php endforeach?>
-
-                 </div>
-             </div>
-             <?php endforeach?>
-
-
-         </div>
-         <a href="javascript:;" class="weui-btn confirm_btn weui-btn_warn">确认</a>
-         </div>
-     </div>
  </div>
                     </div>
 
      </div>
 
 </div>
+    <div class="buy_btn">
+       <a href="<?php echo $this->genurl('cart/index/index') ?>" class="bt_a bt_a1">
+          <div class="t3">加入购物车</div>
+       </a>
+       <a href="" class="bt_a bt_a2">
+           <div class="t3">立即购买</div>
+       </a>
+   </div>
+
+   <div class="buy_confirm" style="display: none;">
+       <div class="bc_bg" style="position: fixed;width: 100%;top:0;bottom: 0;display: none;z-index: 11;background: rgba(0,0,0,.2)"></div>
+       <div class="bc_bd_w" style="position: relative;z-index: 12;background: #fff">
+       <div class="bc_hd">
+           <img class="bc_img" src="<?php echo GoodsServer::getImg($data['original_img']) ?>" alt="">
+          <div class="bc_info">
+              <div class="t1">￥<?php echo $data['shop_price'] ?></div>
+              <div class="t2" style="display: none;">已选: <span class="t2_sm">杏色 中码</span></div>
+          </div>
+           <div class="bc_close">×</div>
+       </div>
+       <div class="bc_bd">
+           <?php foreach($specs as $spec):?>
+           <div class="bcb_item">
+               <div class="t1"><?php echo $spec['name'] ?></div>
+               <div class="t2 btn_group_sel">
+                   <?php foreach($spec_items as $spec_item):?>
+                       <?php if($spec['id'] != $spec_item['spec_id']){continue;} ?>
+                   <a data-id="<?php echo $spec_item['id'] ?>" href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default "><?php echo $spec_item['item'] ?></a>
+                   <?php endforeach?>
+
+               </div>
+           </div>
+           <?php endforeach?>
+
+
+       </div>
+       <a href="javascript:;" class="weui-btn confirm_btn weui-btn_warn">确认</a>
+       </div>
+   </div>
     <div id="toast" style="display: none;">
             <div class="weui-mask_transparent"></div>
             <div class="weui-toast">
