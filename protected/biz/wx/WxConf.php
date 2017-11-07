@@ -12,12 +12,12 @@ class WxConf
 {
     public static function getAppid()
     {
-        return 'wxb31ff021c62891c0';
+        return 'wx28f2c25031b7dcca';
     }
 
     public static function getAppSecret()
     {
-        return '44891e7c6938d3c28fbd5da82dd9382a';
+        return '660dce034274663a150bd04d8eb09a85';
     }
 
     public static function getKey()
