@@ -33,6 +33,7 @@ class GrouponIndexDetWxAction extends \CAction
             't.uid' => ['!=',Session::getUserID()],
             'is_finish' => 0,
             'pay_status' => 1,
+            'group_buy_id' => $group_buy['id'],
         ))->select('t.*,u.nickname,u.head_pic')->leftJoin('users','u','t.uid = u.user_id')->execute();
 
         $comment_list = ListModel::make('comment')->addColumnsCondition(array(
