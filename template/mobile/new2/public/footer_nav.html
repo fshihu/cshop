@@ -1,0 +1,94 @@
+<div class="weui-tabbar">
+                <a href="{:U('Index/index')}" class="weui-tabbar__item">
+                    <span style="display: inline-block;position: relative;">
+                        <img style="width:20px;height:20px;margin-top:3px;" <if condition="CONTROLLER_NAME eq 'Index'">class="yello" </if> src="__STATIC__/images/home/index_icon.png" alt="" class="weui-tabbar__icon">
+                    </span>
+                    <p class="weui-tabbar__label">首页</p>
+                </a>
+                <a href="{:U('Goods/categoryList')}" class="weui-tabbar__item">
+                    <span style="display: inline-block;position: relative;">
+                        <img style="width:20px;height:20px;margin-top:3px;" <if condition="CONTROLLER_NAME eq 'Index'">class="yello" </if> src="__STATIC__/images/home/classification_icon.png" alt="" class="weui-tabbar__icon">
+                    </span>
+                    <p class="weui-tabbar__label">分类</p>
+                </a>
+                <a href="{:U('Service/serviceList')}" class="weui-tabbar__item">
+                    <span style="display: inline-block;position: relative;">
+                        <img style="width:20px;height:20px;margin-top:3px;" <if condition="CONTROLLER_NAME eq 'Index'">class="yello" </if> src="__STATIC__/images/home/service_icon.png" alt="" class="weui-tabbar__icon">
+                    </span>
+                    <p class="weui-tabbar__label">服务</p>
+                </a>
+                <a href="{:U('Article/articleList')}" class="weui-tabbar__item">
+                    <span style="display: inline-block;position: relative;">
+                        <img style="width:20px;height:20px;margin-top:3px;" <if condition="CONTROLLER_NAME eq 'Index'">class="yello" </if> src="__STATIC__/images/home/information_icon.png" alt="" class="weui-tabbar__icon">
+                    </span>
+                    <p class="weui-tabbar__label">资讯</p>
+                </a>
+                <a href="{:U('Index/index')}" class="weui-tabbar__item">
+                    <span style="display: inline-block;position: relative;">
+                        <img style="width:20px;height:20px;margin-top:3px;" <if condition="CONTROLLER_NAME eq 'Index'">class="yello" </if> src="__STATIC__/images/home/me_icon.png" alt="" class="weui-tabbar__icon">
+                    </span>
+                    <p class="weui-tabbar__label">我的</p>
+                </a>
+
+
+            </div>
+<div class="foohi" style="display: none;">
+    <div class="footer">
+        <ul>
+            <li>
+
+            </li>
+            <li>
+                <a href="{:U('Goods/categoryList')}">
+                    <div class="icon">
+                        <i class="icon-fenlei iconfont"></i>
+                        <p>分类</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="{:U('Goods/categoryList')}">
+                    <div class="icon">
+                        <i class="icon-fenlei iconfont"></i>
+                        <p>分类</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="{:U('Cart/cart')}">
+                    <div class="icon">
+                        <i class="icon-gouwuche iconfont"></i>
+                        <p>购物车</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a <if condition="CONTROLLER_NAME eq 'User'">class="yello" </if> href="{:U('User/index')}">
+                    <div class="icon">
+                        <i class="icon-wode iconfont"></i>
+                        <p>我的</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	  var cart_cn = getCookie('cn');
+	  if(cart_cn == ''){
+		$.ajax({
+			type : "GET",
+			url:"/index.php?m=Home&c=Cart&a=header_cart_list",//+tab,
+			success: function(data){								 
+				cart_cn = getCookie('cn');
+				$('#cart_quantity').html(cart_cn);						
+			}
+		});	
+	  }
+	  $('#cart_quantity').html(cart_cn);
+});
+</script>
+<!-- 微信浏览器 调用微信 分享js-->
+<include file="public/wx_share"/>
+<!-- 微信浏览器 调用微信 分享js  end-->

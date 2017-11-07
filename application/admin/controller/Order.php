@@ -84,6 +84,7 @@ class Order extends Base {
         I('pay_code') != '' ? $condition['pay_code'] = I('pay_code') : false;
         I('shipping_status') != '' ? $condition['shipping_status'] = I('shipping_status') : false;
         I('user_id') ? $condition['user_id'] = trim(I('user_id')) : false;
+        $condition['is_show'] = 1;
         $sort_order = I('order_by','DESC').' '.I('sort');
         $count = M('order')->where($condition)->count();
         $Page  = new AjaxPage($count,20);
@@ -596,9 +597,9 @@ class Order extends Base {
 		$data = I('post.');
 		$res = $orderLogic->deliveryHandle($data);
 		if($res){
-			$this->success('操作成功',U('Admin/Order/delivery_info',array('order_id'=>$data['order_id'])));
+			$this->success('操作成功',U('Admin/Order/detail',array('order_id'=>$data['order_id'])));
 		}else{
-			$this->success('操作失败',U('Admin/Order/delivery_info',array('order_id'=>$data['order_id'])));
+			$this->success('操作失败',U('Admin/Order/detail',array('order_id'=>$data['order_id'])));
 		}
     }
 

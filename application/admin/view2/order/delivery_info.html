@@ -68,11 +68,7 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
         <h3>订单发货</h3>
         <h5>订单发货编辑</h5>
       </div>
-      <div class="subject" style="width:62%">
-      		<a href="{:U('Order/order_print',array('order_id'=>$order['order_id'],'template'=>'picking'))}" style="float:right;margin-right:10px" class="ncap-btn-big ncap-btn-green" ><i class="fa fa-print"></i>打印配货单</a>
-      	 </a>	
-      </div>
-    </div>
+     </div>
       
   </div>
   <div class="ncap-order-style">
@@ -89,17 +85,8 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
 		            <dd>{$order.order_sn}</dd>
 		            <dt>下单时间：</dt>
 		            <dd>{$order.add_time|date='Y-m-d H:i',###}</dd>
-		            <dt>配送方式：</dt>
-		            <dd>{$order.shipping_name}</dd>
+
 		          </dl>
-	              <dl>
-	              	<dt>配送费用：</dt>
-		            <dd>{$order.shipping_price}</dd>
-		            <dt>配送单号：</dt>
-		            <dd><input class="input-txt" name="invoice_no" id="invoice_no" value="{$order.invoice_no}" onkeyup="this.value=this.value.replace(/[^\d]/g,'')"></dd>
-		            <dt></dt>
-		            <dd></dd>
-			       </dl>
         	</div>
         
         <div class="addr-note">
@@ -107,31 +94,21 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
           <dl>
             <dt>收货人：</dt>
             <dd>{$order.consignee}</dd>
-            <dt>电子邮件：</dt>
-            <dd>{$order.email}</dd>
+
           </dl>
           <dl>
             <dt>收货地址：</dt>
             <dd>{$order.address}</dd>
           </dl>
-          <dl>
-            <dt>邮编：</dt>
-            	<dd><if condition="$order.zipcode neq ''"> {$order.zipcode}<else/>N</if></dd>
-          </dl>
-          <dl>
+           <dl>
            		<dt>电话：</dt>
             	<dd>{$order.mobile}</dd>
-            	<dt>发票抬头：</dt>
-            	<dd>{$order.invoice_title}</dd>
+
           	</dl>
-            <dl>
-           		<dt>用户备注：</dt>
-            	<dd>{$order.user_note}</dd>
-          	</dl>
-        </div>
+         </div>
   
          
-        <div class="goods-info">
+        <div class="goods-info" style="display: none;">
           <h4>商品信息</h4>
           <table>
             <thead>
@@ -152,27 +129,31 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                 <td class="w60">{$good.goods_num}</td>
                 <td class="w100">{$good.goods_price}</td>
                 <td class="w60">
-                	<if condition="$good['is_send'] eq 1">
-                        	已发货
-                   <else />
-                        	<input type="checkbox" name="goods[]" value="{$good.rec_id}" checked="checked">
-                    </if>
+                    <input type="checkbox" name="goods[]" value="{$good.rec_id}" checked="checked">
+
                 </td>
               </tr>
               </volist>
           </table>
         </div>
         <div class="contact-info"  style="margin-top:10px;">
-          <h3>发货单备注</h3>
-          <dl class="row">
-	        <dt class="tit">
-	          <label for="note">发货单备注</label>
-	        </dt>
-	        <dd class="opt" style="margin-left:10px">
-	        <input type="hidden" name="order_id" value="{$order.order_id}">
-	         <textarea id="note" name="note" style="width:600px" rows="6"  placeholder="请输入操作备注" class="tarea" id="note">{$keyword.text}</textarea>
-	        </dd>
-	      </dl> 
+             <dl> <dt>配送快递：</dt>
+            		            <dd><input type="text" name="shipping_name" ></dd>
+
+           <dt>配送单号：</dt>
+           <dd><input type="text" class="input-txt" name="invoice_no" id="invoice_no" value="{$order.invoice_no}" onkeyup="this.value=this.value.replace(/[^\d]/g,'')"></dd>
+           <dt></dt>
+           <dd></dd>
+       </dl>
+            <dl class="row" style="display: none;">
+  	        <dt class="tit">
+  	          <label for="note">发货单备注</label>
+  	        </dt>
+  	        <dd class="opt" style="margin-left:10px">
+  	        <input type="hidden" name="order_id" value="{$order.order_id}">
+  	         <textarea id="note" name="note" style="width:600px" rows="6"  placeholder="请输入操作备注" class="tarea" id="note">{$keyword.text}</textarea>
+  	        </dd>
+  	      </dl>
 	      <dl class="row">
 	        <dt class="tit">
 	          <label for="note">可执行操作</label>
@@ -182,35 +163,7 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
 	        </dd>
 	      </dl> 
         </div>
-        <div class="goods-info">
-          <h4>发货记录</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>操作者</th>
-                <th>发货时间</th>
-                <th>发货单号</th>
-                <th>收货人</th>
-                <th>快递公司</th>
-                <th>备注</th>
-                <th>查看</th>
-              </tr>
-            </thead>
-            <tbody>
-            <volist name="delivery_record" id="log">
-	           	<tr>
-	                 <td class="text-center">{$log.user_name}</td>
-	                 <td class="text-center">{$log.create_time|date='Y-m-d H:i:s',###}</td>
-	                 <td class="text-center">{$log.invoice_no}</td>
-	                 <td class="text-center">{$log.consignee}</td>
-	                 <td class="text-center">{$log.shipping_name}</td>
-	                 <td class="text-center">{$log.status_desc}</td>
-	                 <td class="text-center">{$log.note}</td>
-	             </tr>
-              </volist>
-          </table>
-        </div>
-      </div>
+       </div>
   	</div>
   	</form>
   </div>

@@ -17,7 +17,8 @@ return	array(
 						array('name'=>'会员列表','act'=>'index','op'=>'User'),
 //						array('name'=>'会员等级','act'=>'levelList','op'=>'User'),
 //						array('name'=>'充值记录','act'=>'recharge','op'=>'User'),
-//						array('name'=>'提现申请','act'=>'withdrawals','op'=>'User'),
+						array('name'=>'提现申请','act'=>'withdrawals','op'=>'User'),
+						array('name'=>'商家申请','act'=>'merchantlist','op'=>'User'),
 //						array('name'=>'汇款记录','act'=>'remittance','op'=>'User'),
 						//array('name'=>'会员整合','act'=>'integrate','op'=>'User'),
 				)),
@@ -33,6 +34,14 @@ return	array(
 						//array('name' => '公告管理', 'act'=>'notice_list', 'op'=>'Article'),
 //						array('name' => '专题列表', 'act'=>'topicList', 'op'=>'Topic'),
 				)),
+        array('name' => '系统管理','child' => array(
+            array('name' => '系统消息', 'act'=>'index', 'op'=>'Sysmsg'),
+            array('name' => '银行管理', 'act'=>'index', 'op'=>'Bank'),
+
+//                array('name' => '微信菜单管理', 'act'=>'menu', 'op'=>'Wechat'),
+//                array('name' => '文本回复', 'act'=>'text', 'op'=>'Wechat'),
+            //array('name' => '图文回复', 'act'=>'img', 'op'=>'Wechat'),
+        )),
 //				array('name' => '权限','child'=>array(
 //						array('name' => '管理员列表', 'act'=>'index', 'op'=>'Admin'),
 //						array('name' => '角色管理', 'act'=>'role', 'op'=>'Admin'),
@@ -92,10 +101,13 @@ return	array(
 
             array('name' => '服务','child' => array(
                 array('name' => '服务列表', 'act'=>'index', 'op'=>'Service'),
+                array('name' => '预约列表', 'act'=>'reserve', 'op'=>'Service'),
+
 //                array('name' => '微信菜单管理', 'act'=>'menu', 'op'=>'Wechat'),
 //                array('name' => '文本回复', 'act'=>'text', 'op'=>'Wechat'),
                 //array('name' => '图文回复', 'act'=>'img', 'op'=>'Wechat'),
             )),
+
 
 //    	    array('name' => '微信','child' => array(
 //    	        array('name' => '公众号配置', 'act'=>'index', 'op'=>'Wechat'),

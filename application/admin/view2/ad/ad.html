@@ -18,12 +18,26 @@
           <label><em>*</em>广告名称：</label>
         </dt>
         <dd class="opt">
-          <input type="text" placeholder="名称" class="input-txt" name="ad_name" value="{$info.ad_name|default='自定义广告名称'}">
+          <input type="text" placeholder="名称" class="input-txt" name="ad_name" value="{$info.ad_name}">
           <span class="err" id="err_ad_name" style="color:#F00; display:none;">广告名称不能为空</span>
           <p class="notic"></p>
         </dd>
       </dl>
        <dl class="row">
+        <dt class="tit" colspan="2">
+          <label>广告位置：</label>
+        </dt>
+        <dd class="opt">
+          <div>
+            <select name="pid" class="input-sm" class="form-control">
+              <volist name="position" id="item">
+                <option value="{$item.position_id}" <if condition="$info[pid] eq $item[position_id]">selected</if>>{$item.position_name}</option>
+              </volist>
+            </select>
+          </div>
+        </dd>
+      </dl>
+      <dl class="row" style="display: none;">
         <dt class="tit">
           <label>开始日期：</label>
         </dt>
@@ -32,7 +46,7 @@
           <span class="err"></span>
         </dd>
       </dl>
-      <dl class="row">
+      <dl class="row" style="display: none;">
         <dt class="tit">
           <label>结束时间：</label>
         </dt>
@@ -72,7 +86,7 @@
           <p class="notic">请上传图片格式文件</p>
         </dd>
       </dl>
-       <dl class="row">
+       <dl class="row" style="display: none;">
         <dt class="tit">
           <label>默认排序：</label>
         </dt>

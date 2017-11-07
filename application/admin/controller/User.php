@@ -69,7 +69,9 @@ class User extends Base {
         $this->assign('third_leader',$third_leader);                                
         $show = $Page->show();
         $this->assign('userList',$userList);
-        $this->assign('level',M('user_level')->getField('level_id,level_name'));
+        $this->assign('level',[
+            '普通会员','普通会员','金卡会员','黑卡会员','黑卡附属卡会员'
+        ]);
         $this->assign('page',$show);// 赋值分页输出
         $this->assign('pager',$Page);
         return $this->fetch();
@@ -107,7 +109,6 @@ class User extends Base {
                 $c = M('users')->where("user_id != $uid and mobile = '$mobile'")->count();
                 $c && exit($this->error('手机号不得和已有用户重复'));
             }            
-            
             $row = M('users')->where(array('user_id'=>$uid))->save($_POST);
             if($row)
                 exit($this->success('修改成功'));
@@ -119,6 +120,9 @@ class User extends Base {
         $user['third_lower'] = M('users')->where("third_leader = {$user['user_id']}")->count();
  
         $this->assign('user',$user);
+        $this->assign('level',[
+            '普通会员','普通会员','金卡会员','黑卡会员','黑卡附属卡会员'
+        ]);
         return $this->fetch();
     }
     /**
@@ -279,9 +283,9 @@ class User extends Base {
         //获取类型
         $type = I('get.type');
         //获取记录总数
-        $count = M('account_log')->where(array('user_id'=>$user_id))->count();
+        $count = M('user_money_record')->where(array('uid'=>$user_id))->count();
         $page = new Page($count);
-        $lists  = M('account_log')->where(array('user_id'=>$user_id))->order('change_time desc')->limit($page->firstRow.','.$page->listRows)->select();
+        $lists  = M('user_money_record')->where(array('uid'=>$user_id))->order('id desc')->limit($page->firstRow.','.$page->listRows)->select();
 
         $this->assign('user_id',$user_id);
         $this->assign('page',$page->show());
@@ -590,7 +594,7 @@ class User extends Base {
      */
     public function withdrawals()
     {
-        $model = M("withdrawals");
+        $model = M("extract_apply");
         $_GET = array_merge($_GET,$_POST);
         unset($_GET['create_time']);
 
@@ -603,17 +607,23 @@ class User extends Base {
         $create_time2 = explode('-',$create_time);
         $this->assign('start_time', $create_time2[0]);
         $this->assign('end_time', $create_time2[1]);
-        $where = " create_time >= '".strtotime($create_time2[0])."' and create_time <= '".strtotime($create_time2[1])."' ";
-
-        if($status === '0' || $status > 0)
-            $where .= " and status = $status ";
+//        $where = " create_time >= '".strtotime($create_time2[0])."' and create_time <= '".strtotime($create_time2[1])."' ";
+        $where = '';
+//        if($status === '0' || $status > 0)
+//            $where .= " and status = $status ";
         $user_id && $where .= " and user_id = $user_id ";
         $account_bank && $where .= " and account_bank like '%$account_bank%' ";
         $account_name && $where .= " and account_name like '%$account_name%' ";
 
         $count = $model->where($where)->count();
         $Page  = new Page($count,16);
-        $list = $model->where($where)->order("`id` desc")->limit($Page->firstRow.','.$Page->listRows)->select();
+        $model->field('t.*,ub.bank_name bank_name,ub.bank_card,ub.id_card bank_id_card,ub.name bank_user_name');
+        $model->alias('t')->join('users_bank ub','t.bank_id = ub.id','left');
+        $list = $model->where($where)->order("t.`id` desc")->limit($Page->firstRow.','.$Page->listRows)->select();
+        $names = array_column(M('bank')->select(),'name','id');
+        foreach ($list as $i => $item) {
+            $list[$i]['bank_name'] = $names[$item['bank_name']];
+        }
 
         $this->assign('create_time',$create_time);
         $show  = $Page->show();
@@ -640,45 +650,37 @@ class User extends Base {
     public function editWithdrawals()
     {
         $id = I('id');
-        $withdrawals = DB::name('withdrawals')->where('id',$id)->find();
-        $user = M('users')->where("user_id = {$withdrawals[user_id]}")->find();
-        if (IS_POST) {
+        $withdrawals = DB::name('extract_apply')->where('id',$id)->find();
+        $user = M('users')->where("user_id = {$withdrawals[uid]}")->find();
             $data = I('post.');
             // 如果是已经给用户转账 则生成转账流水记录
-            if ($data['status'] == 1 && $withdrawals['status'] != 1) {
-                if ($user['user_money'] < $withdrawals['money']) {
-                    $this->error("用户余额不足{$withdrawals['money']}，不够提现");
-                    exit;
-                }
-                accountLog($withdrawals['user_id'], ($withdrawals['money'] * -1), 0, "平台提现");
-                $remittance = array(
-                    'user_id' => $withdrawals['user_id'],
-                    'bank_name' => $withdrawals['bank_name'],
-                    'account_bank' => $withdrawals['account_bank'],
-                    'account_name' => $withdrawals['account_name'],
-                    'money' => $withdrawals['money'],
-                    'status' => 1,
-                    'create_time' => time(),
-                    'admin_id' => session('admin_id'),
-                    'withdrawals_id' => $withdrawals['id'],
-                    'remark' => $data['remark'],
-                );
-                M('remittance')->add($remittance);
+            if ($user['user_money'] < $withdrawals['money']) {
+                $this->error("用户余额不足{$withdrawals['money']}，不够提现");
+                exit;
             }
-            DB::name('withdrawals')->update($data);
-            $this->success("操作成功!", U('Admin/User/remittance'), 3);
+            if($_GET['p'] == 1){
+                $data = ['status' => 1];
+            }else{
+                $data = ['status' => 2];
+            }
+        $money = $user['user_money'] - $withdrawals['money'];
+        M('users')->where('user_id','in', $user['user_id'])->save(array(
+            'user_money' => $money,
+            'extract_money' => $user['extract_money'] + $withdrawals['money'],
+        ));
+        M('user_money_record')->add(array(
+            'uid' => $user['user_id'],
+            'money' => -$withdrawals['money'],
+            'cur_money' => $money,
+            'content' => '提现成功',
+            'data_id' => $id,
+            'type' => 1,
+            'crate_time' => time(),
+        ));
+        M('extract_apply')->where('id','in', $id)->save($data);
+            $this->success("操作成功!");
             exit;
-        }
 
-        if ($user['nickname'])
-            $withdrawals['user_name'] = $user['nickname'];
-        elseif ($user['email'])
-            $withdrawals['user_name'] = $user['email'];
-        elseif ($user['mobile'])
-            $withdrawals['user_name'] = $user['mobile'];
-        $this->assign('user', $user);
-        $this->assign('data', $withdrawals);
-        return $this->fetch();
     }
 
     public function withdrawals_update(){
@@ -742,6 +744,80 @@ class User extends Base {
 
     }
 
+    public function merchantlist()
+    {
+        $model = M("merchant");
+                $where = "";
+                $keyword = I('keyword');
+                $where = $keyword ? " name like '%$keyword%' " : "";
+                $count = $model->where($where)->count();
+                $Page = $pager = new Page($count,10);
+//        $model->join('left join t_service s on t.');
+        $model->alias('t');
+//        $model->field('t.*,s.name service_name');
+                $brandList = $model->where($where)->order("t.`id` asc")->limit($Page->firstRow.','.$Page->listRows)->select();
+                $show  = $Page->show();
+        $cat_list = M('goods_category')->where("parent_id = 0")->getField('id,name'); // 已经改成联动菜单
+                $this->assign('cat_list',$cat_list);
+                $this->assign('pager',$pager);
+                $this->assign('show',$show);
+                $this->assign('brandList',$brandList);
+                return $this->fetch();
+    }
+
+    public function merchantdetail()
+    {
+        $model = M("merchant");
+                $where = "";
+
+                $count = $model->where(array('id' => $_GET['id']))->count();
+                $Page = $pager = new Page($count,10);
+//        $model->join('left join t_service s on t.');
+
+                $service = $model->where($where)->order("`id` asc")->limit($Page->firstRow.','.$Page->listRows)->find();
+
+        $service['c_time'] = date('Y-m-d',$service['c_time']);
+                $this->assign('service',$service);
+                return $this->fetch();
+    }
+
+    public function merchantconfirm()
+    {
+        $User = M("merchant"); // 实例化User对象
+        // 要修改的数据对象属性赋值
+        if($_GET['p'] == 1){
+            $data['status'] = 1;
+        }else if($_GET['p'] == 2){
+            $data['status'] = 2;
+        }
+        if($_GET['p'] == 1){
+            $merchant = $User->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
+            $admin_data = array(
+                'user_name' => $merchant['account'],
+                'password' => $merchant['pwd'],
+                'role_id' => 2,
+            );
+           	if(empty($admin_data['password'])){
+           		unset($admin_data['password']);
+           	}else{
+                $admin_data['password'] = encrypt($admin_data['password']);
+           	}
+           		unset($admin_data['admin_id']);
+            $admin_data['add_time'] = time();
+           		if(M('admin')->where("user_name", $admin_data['user_name'])->count()){
+           			$this->error("此用户名已被注册，确认失败");
+           			exit;
+           		}
+            $r = M('admin')->add($admin_data);
+            M('users')->where(array('user_id'=>$merchant['uid']))->save(array(
+                'admin_uid' => $r,
+                'is_merchant' => 1,
+            ));
+        }
+        M("merchant")->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
+        $this->success('操作成功!',U('index'));
+
+    }
     public function transfer($atype,$data){
         if($atype == 'weixin'){
             include_once  PLUGIN_PATH."payment/weixin/weixin.class.php";

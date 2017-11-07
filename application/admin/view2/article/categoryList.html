@@ -27,14 +27,8 @@
                 <th align="center" class="handle" axis="col1">
                   <div style="text-align: center; width: 150px;">操作</div>
                 </th>
-                <th align="center" axis="col2">
-                  <div style="text-align: center; width: 60px;">排序</div>
-                </th>
                 <th align="left" axis="col3" class="">
                   <div class="sundefined" style="text-align: left; width: 350px;">分类名称</div>
-                </th>
-                <th align="left" axis="col3" class="">
-                  <div style="text-align: left; width: 350px;">分类描述</div>
                 </th>
                 <th axis="col4">
                   <div></div>
@@ -78,22 +72,12 @@
                   </span>
                 </div>
               </td>
-              <td class="sort">
-                <div style="text-align: center; width: 60px;">
-                  <input type="text" onKeyUp="this.value=this.value.replace(/[^\d]/g,'')" onpaste="this.value=this.value.replace(/[^\d]/g,'')" onChange="changeTableVal('article_cat','cat_id','{$vo.cat_id}','sort_order',this)" size="4" value="{$vo.sort_order}" />
-                </div>
-              </td>
-              <td class="name">
+               <td class="name">
                 <div style="text-align: left; width: 350px;">
                   <input type="text" value="{$vo.name}" <in name="vo.id" value="$article_system_id">readonly="readonly"</in> onchange="changeTableVal('article_cat','cat_id',{$vo.cat_id},'cat_name',this)"/>
                 </div>
               </td>
-            <td class="name">
-              <div style="text-align: left; width: 350px;">
-                <span>{$vo.cat_desc}</span>
-              </div>
-            </td>
-              <td style="width: 100%;">
+               <td style="width: 100%;">
                 <div>&nbsp;</div>
               </td>
             </tr>
