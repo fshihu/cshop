@@ -66,7 +66,7 @@
             <span class="fl">
                 <img class="avatar" src="<?php echo $other_group_buy['head_pic'] ?>" alt="">
                 <span class="t1">
-                    <span class="t1_s"><?php echo $other_group_buy['nikname'] ?></span>
+                    <span class="t1_s"><?php echo $other_group_buy['nickname'] ?></span>
                     <span class="t1_m">正在开团中</span>
                 </span>
             </span>

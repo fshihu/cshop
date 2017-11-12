@@ -121,27 +121,6 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
                   </div>
               <?php endif;?>
 
-             <?php if(!empty($list)):?>
-             <div class="buy_price">
-                  <?php if($prom_type == PromTypeEnum::NORMAL):?>
-                 <div class="buy_jifen">
-                     <span class="checkbox jifen_check" style="vertical-align: middle;"></span>
-                     <span class="jf_w" style="display: inline-block;vertical-align: middle;">
-                         使用<span class="total_gold"><?php $total_gold = GoldServer::getGold();
-                                                  $goldRatio = GoldServer::getUseGoldMaxRatio();
-                                                  $gold = min($total_gold, (int)($total_price* $goldRatio));
-                                                                       echo $gold ?></span>积分,抵扣<span class="gold_price"><?php echo $gold ?></span>元
-                     </span>
-                 </div>
-                  <?php endif;?>
-
-                 <div class="buy_btn_w">
-                     <span class="price">应支付： <span class="price_red">￥<span class="price_renjun"><?php echo $total_price?></span> （免运费）</span></span>
-
-                     <a href="#" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red ">立即支付</a>
-                 </div>
-             </div>
-              <?php endif;?>
 
                     </div>
 
@@ -149,6 +128,28 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
      </div>
 
 </div>
+    <?php if(!empty($list)):?>
+    <div class="buy_price">
+         <?php if($prom_type == PromTypeEnum::NORMAL):?>
+        <div class="buy_jifen">
+            <span class="checkbox jifen_check" style="vertical-align: middle;"></span>
+            <span class="jf_w" style="display: inline-block;vertical-align: middle;">
+                使用<span class="total_gold"><?php $total_gold = GoldServer::getGold();
+                                         $goldRatio = GoldServer::getUseGoldMaxRatio();
+                                         $gold = min($total_gold, (int)($total_price* $goldRatio));
+                                                              echo $gold ?></span>积分,抵扣<span class="gold_price"><?php echo $gold ?></span>元
+            </span>
+        </div>
+         <?php endif;?>
+
+        <div class="buy_btn_w">
+            <span class="price">应支付： <span class="price_red">￥<span class="price_renjun"><?php echo $total_price?></span> （免运费）</span></span>
+
+            <a href="#" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red ">立即支付</a>
+        </div>
+    </div>
+     <?php endif;?>
+
     <script type="text/javascript">
         var url = '<?php echo $this->genurl('cart/index/confirm',array('address_id' => $addr['address_id'],'prom_type'=>$prom_type,'cart_ids'=>$ids)); ?>';
         var tpl_url = url;
