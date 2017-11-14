@@ -334,7 +334,7 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 .row-group-form_ .data-label{ padding-right:0; width:0;}
 .row-group-form_ .data-group-form_{ width:100%;}
 .sub_btn{ width:100%;border-radius: 0px;background: #2CC7C5; height:34px; line-height:34px; font-size: 15px;-webkit-appearance: none;
-box-sizing: content-box;}
+box-sizing: border-box;}
 
 .weui-dialog__btn_primary{ color: #2CC7C5;}
 .weui-msg__title{font-size: 18px;}

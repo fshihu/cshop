@@ -203,7 +203,7 @@
                      </div>
                  </div>
                           </div>
-                 <a href="javascript:;" class="btn sub_btn">提交申请</a>
+                 <a href="javascript:;" class="btn sub_btn  ">提交申请</a>
              </form>
          <?php endif;?>
      </div>
@@ -229,7 +229,7 @@
                $('#iosDialog2').fadeOut(200);
                location.href='<?php echo $this->genurl('ok') ?>';
            });
-        $('.addr_eidt_btn').click(function () {
+        $('.sub_btn').click(function () {
             if($('#form_name').val() == ''){
                 alert('请填写联系人');
                 return false;
@@ -251,7 +251,7 @@
                 return false;
             }
             if($('#business_license').val() == ''){
-                alert('请上传联系人身份证背面');
+                alert('请上传营业执照');
                 return false;
             }
             if($('#legal_id_card_front').val() == ''){
