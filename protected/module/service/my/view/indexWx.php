@@ -17,9 +17,8 @@
             </div>
     <div class="gl_nav swiper-container" style="height: 20px;">
         <div class="swiper-wrapper">
-            <a href="<?php use module\service\index\enum\ServiceStatusEnum;
-
-                echo $this->genurl(''); ?>" class="swiper-slide <?php echo $status == 0 ?'ac':'' ?>">待审核</a>
+            <a href="<?php use module\service\index\enum\ServiceStatusEnum; echo $this->genurl('',['status' => '_all']); ?>" class="swiper-slide <?php echo $status == '_all' ?'ac':'' ?>">全部</a>
+             <a class="swiper-slide <?php echo $status == '0' ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_CHECK]); ?>">待审核</a>
                 <a class="swiper-slide <?php echo $status == 1 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_SERVICE]); ?>">待服务</a>
                 <a class="swiper-slide <?php echo $status == 2 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_NO_PASS]); ?>">未通过</a>
                 <a class="swiper-slide <?php echo $status == 3 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_COMMONT]); ?>">待评价</a>
