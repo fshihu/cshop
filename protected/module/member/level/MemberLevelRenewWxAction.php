@@ -21,7 +21,7 @@ class MemberLevelRenewWxAction extends \CAction
     public function execute(CRequest $request)
     {
         if($this->renew_type == UserLevelServer::LEVEL_RENEW_TRUN_MONEY){
-            $id = OrderServer::addOrderBaseInfo(Session::getUserID(),$this->money,PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY,Session::getUserID());
+            $id = OrderServer::addOrderBaseInfo(Session::getUserID(),$this->money,PromTypeEnum::USER_LEVEL_RENEW_TRUN_MONEY,Session::getUserID());
             return new \CRedirectData('pay/index/index',['order_id' => $id]);
         }
         if($this->renew_type == UserLevelServer::LEVEL_RENEW_RECOMM_GOLDEN){

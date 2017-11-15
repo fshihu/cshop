@@ -36,7 +36,7 @@ class GoodsDetIndexWxAction  extends \CAction
         ))->execute();
         $comment_list = ListModel::make('comment')->addColumnsCondition(array(
             'goods_id' => $id,
-        ))->leftJoin('users','u','t.user_id = u.user_id')
+        ))->leftJoin('users','u','t.user_id = u.user_id')->order('t.comment_id desc')
             ->select('t.content comment_content,t.add_time comment_time,u.nickname uname,u.head_pic ')->execute();
         return new \CRenderData(array(
             'data' => $data,

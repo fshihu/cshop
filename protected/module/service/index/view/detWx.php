@@ -64,7 +64,7 @@
                     </div>
                     <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
                     <div class="t3">
-                        <?php echo $comment_item['comment_time'] ?>
+                        <?php echo date('Y-m-d h:i:s',$comment_item['comment_time']) ?>
                     </div>
                 </div>
                 <?php endforeach?>
