@@ -9,6 +9,7 @@ namespace module\cart\index\server;
 
 
 use CC\db\base\select\ItemModel;
+use CC\db\base\update\IncrementModel;
 use CC\db\base\update\UpdateModel;
 use module\groupon\server\GroupOneServer;
 use module\member\gold\server\GoldServer;
@@ -42,6 +43,11 @@ class OrderHanderServer
             $get_gold = (int)($order['order_amount'] * GoldServer::getGoldRatio());
             if($get_gold > 0){
                 UserGoldRecordServer::addGold($order['user_id'],UserGoldRecordServer::TYPE_BUY_GOODS_GET,$get_gold,'购买商品获得积分',$order['order_id']);
+                IncrementModel::make('users')->addColumnsCondition(array(
+                    'user_id' => $order['user_id'],
+                ))->addData(array(
+                    'total_amount' => $order['order_amount'],
+                ))->execute();
             }
             MoneyServer::handlerOrder($order);
         }
