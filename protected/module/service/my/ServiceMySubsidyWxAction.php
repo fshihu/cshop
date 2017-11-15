@@ -38,7 +38,7 @@ class ServiceMySubsidyWxAction extends SaveAction  implements IFormViewBuilder
     {
         return [
             new TextInput('money','金额',['must']),
-            new TextInput('bills','消费单据',['must']),
+            new TextInput('bills','消费单号',['must']),
             new TextInput('cost_date','消费日期',['must']),
             new HiddenInput('bills_file',''),
         ];

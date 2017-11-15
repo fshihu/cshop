@@ -166,11 +166,30 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                         </script>
                     </dd>
                 </dl>
+                <dl>
+                    <dt>消费金额：</dt>
+                    <dd>{$service.money}</dd>
+                    <dt>消费单号：</dt>
+                    <dd>{$service.bills}</dd>
+                </dl>
+                <dl>
+                    <dt>消费日期：</dt>
+                    <dd>{$service.cost_date}</dd>
+                    <dt>单据文件：</dt>
+                    <dd>
+                         <?php if($service['bills_file']):?>
+                        <a href="{$service.bills_file}" target="_blank">点击查看</a>
+                        <?php else: ?>
+                        无
+                        <?php endif;?>
+                    </dd>
+                </dl>
+
                  <?php if($service['status'] == 6):?>
                 <dl>
                     <dt>医院消费：</dt>
                     <dd>{$service.yiyuan_xiaofei}元</dd>
-                    <dt>医院补贴公司：</dt>
+                    <dt>机构结算价：</dt>
                                        <dd>{$service.yiyuan_butie}元</dd>
                 </dl>
                 <dl>

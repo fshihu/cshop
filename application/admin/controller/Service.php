@@ -96,6 +96,7 @@ class Service  extends Base
         $service['reserve_reason'] = $r[$service['reserve_reason']].$service['reserve_reason_other'];
         $service['marriage'] = $m[$service['marriage']];
         $service['date'] = date('Y-m-d',$service['date']);
+        $service['cost_date'] = $service['cost_date']?date('Y-m-d',$service['cost_date']):'';
         $service['status_desc'] = $s[$service['status']];
                 $this->assign('service',$service);
                 return $this->fetch();
