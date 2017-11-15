@@ -24,7 +24,7 @@ class Session extends SessionAbs
 
     public static function getUserID()
     {
-//        return 2593;
+        return 2;
         return parent::getUserID();
     }
 

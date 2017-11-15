@@ -32,7 +32,7 @@
 <div class="list5">
     <?php foreach($list as $item):?>
  <div class="list_item">
-     <div class="t1"><?php echo $status_desc ?></div>
+     <div class="t1"><?php echo ServiceStatusEnum::getValueByIndex($item['status']) ?></div>
 
      <a href="<?php echo $this->genurl('service/index/det',['id'=>$item['service_id']]); ?>">
 
