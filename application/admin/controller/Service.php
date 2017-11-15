@@ -70,7 +70,7 @@ class Service  extends Base
         $model ->join('t_region d','t.district = d.id','left');
         $model->field('t.*,s.name service_name,p.name p_name,c.name c_name,d.name d_name');
                 $service = $model->where($where)->order("t.`id` asc")->limit($Page->firstRow.','.$Page->listRows)->find();
-        $service['birthday'] =date('Y年m月d日',$service['birthday']);
+        $service['birthday'] =date('Y年',$service['birthday']);
         $service['sex'] =  $service['sex'] == 1?'男':'女';
         $service['addrs'] =  $service['p_name']. $service['c_name']. $service['d_name'];
         $m = array(
@@ -100,15 +100,47 @@ class Service  extends Base
                 $this->assign('service',$service);
                 return $this->fetch();
     }
+    public function changetime()
+    {
+        $time = strtotime($_POST['date']);
+        if(!$time){
+            echo 'err';exit;
+        }
+        M("ServiceReserve")->where(array('id' => $_POST['id']))->save(array(
+            'date' => $time
+        )); // 根据条件更新记录
+        echo 'ok';
+    }
+
+    public function sendMsg($mobile,$text)
+    {
+        $url = 'https://sms.yunpian.com/v2/sms/single_send.json';
+        $apikey = 'c55b480e75f882cccabb385dc6fc8998';
+        $text = "【灏维网络】".$text;
+        $r = \Curl::instance()->post($url,array(
+            'apikey' => $apikey,
+            'mobile' => $mobile,
+            'text' => $text,
+        ));
+        $r = json_decode($r,true);
+
+        if($r['code']!= 0){
+            $this->error('短信发送失败!');exit;
+        }
+        return true;
+    }
 
     public function confirm()
     {
         $User = M("ServiceReserve"); // 实例化User对象
         // 要修改的数据对象属性赋值
+        $s = M("ServiceReserve")->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
         if($_GET['p'] == 1){
             $data['status'] = 1;
+            $this->sendMsg($s['mobile'],'您预约的服务未通过。');
         }else if($_GET['p'] == 2){
             $data['status'] = 2;
+            $this->sendMsg($s['mobile'],'您预约的服务已通过。');
         }else if($_GET['p'] == 3){
             $data['status'] = 3;
         }else if($_GET['p'] == 4){

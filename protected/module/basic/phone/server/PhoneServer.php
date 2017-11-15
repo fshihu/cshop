@@ -13,13 +13,11 @@ use CErrorException;
 
 class PhoneServer
 {
-    public static function sendMsg($mobile,$code,$text = '')
+    public static function sendMsg($mobile,$text)
     {
         $url = 'https://sms.yunpian.com/v2/sms/single_send.json';
         $apikey = 'c55b480e75f882cccabb385dc6fc8998';
-        if($text == ''){
-            $text = "【灏维网络】您的验证码是".$code."。如非本人操作，请忽略本短信";
-        }
+        $text = "【灏维网络】".$text;
         $r = \Curl::instance()->post($url,array(
             'apikey' => $apikey,
             'mobile' => $mobile,
