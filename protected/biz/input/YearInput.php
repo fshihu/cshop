@@ -16,7 +16,7 @@ class YearInput extends BaseInput
 
     protected function onCreateInputInternal()
     {
-        $input =  sprintf('<input type="text" style="width: 100px;" class="year_input" name="%s" id="%s" value="%s"   placeholder="验证码" %s />',
+        $input =  sprintf('<input type="text" style="width: 100px;" class="year_input" name="%s" id="%s" value="%s"   placeholder="出生日期" %s />',
                     $this->getName(),
                     $this->getId(),
                     $this->getValue(),

@@ -39,6 +39,6 @@ class ServiceMyIndexWxAction extends ListAction
         $this->dbCondition->addColumnsCondition(array(
             'user_id' => Session::getUserID(),
 
-        ))->select('t.*,s.name,s.image')->leftJoin('service','s','t.service_id = s.id');
+        ))->order('t.id desc')->select('t.*,s.name,s.image')->leftJoin('service','s','t.service_id = s.id');
     }
 }

@@ -35,8 +35,8 @@ class PhoneServer
     {
         $item = ItemModel::make('phone_code')->addColumnsCondition(array(
             'phone' => $phone,
-            'c_time' => ['>',time() - 60 * 5],
-        ))->execute();
+            'c_time' => ['>',time() - 60 * 10],
+        ))->order('id desc')->execute();
         if($item['code'] != $code){
             throw new CErrorException('验证码错误');
         }
