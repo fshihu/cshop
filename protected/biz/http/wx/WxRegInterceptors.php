@@ -49,7 +49,7 @@ class WxRegInterceptors implements CInterceptors
                         'sex' => $user_info['sex'],
                         'head_pic' => $user_info['headimgurl'],
                     ))->execute();
-                    $user['user_id'] = $user_info['nickname'];
+                    $user['nickname'] = $user_info['nickname'];
                 }
                 Session::login();
                 Session::setName($user['nickname']);
