@@ -139,10 +139,10 @@ class Service  extends Base
         $s = M("ServiceReserve")->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
         if($_GET['p'] == 1){
             $data['status'] = 1;
-            $this->sendMsg($s['mobile'],'您预约的服务未通过。');
+            $this->sendMsg($s['mobile'],'您预约的服务已通过。');
         }else if($_GET['p'] == 2){
             $data['status'] = 2;
-            $this->sendMsg($s['mobile'],'您预约的服务已通过。');
+            $this->sendMsg($s['mobile'],'您预约的服务未通过。');
         }else if($_GET['p'] == 3){
             $data['status'] = 3;
         }else if($_GET['p'] == 4){
