@@ -117,7 +117,7 @@ use module\cart\index\server\OrderWaitStatusEnum;
 
                         <div class="t2_m">已完成</div>
                          <?php if($user['order_status'][OrderWaitStatusEnum::FINISH]>0):?>
-                        <span class="weui-badge" style="position: absolute;top: -.4em;right:3px;">
+                        <span class="weui-badge" style="position: absolute;top: -.4em;right:3px;display: none;">
                             <?php echo (int)$user['order_status'][OrderWaitStatusEnum::FINISH] ?>
                         </span>
                          <?php endif;?>

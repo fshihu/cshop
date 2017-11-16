@@ -774,27 +774,40 @@ class User extends Base {
     public function merchantdetail()
     {
         $model = M("merchant");
-                $where = "";
 
                 $count = $model->where(array('id' => $_GET['id']))->count();
                 $Page = $pager = new Page($count,10);
 //        $model->join('left join t_service s on t.');
 
-                $service = $model->where($where)->order("`id` asc")->limit($Page->firstRow.','.$Page->listRows)->find();
+                $service = $model->where(array('id' => $_GET['id']))->order("`id` asc")->limit($Page->firstRow.','.$Page->listRows)->find();
 
         $service['c_time'] = date('Y-m-d',$service['c_time']);
                 $this->assign('service',$service);
                 return $this->fetch();
+    }
+    public function sendMsg($mobile, $text)
+    {
+        $rs = Phone::sendMsg($mobile, $text);
+        if (!$rs) {
+            $this->error('短信发送失败!');
+            exit;
+        }
+        return true;
     }
 
     public function merchantconfirm()
     {
         $User = M("merchant"); // 实例化User对象
         // 要修改的数据对象属性赋值
+        $s = M("merchant")->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
+        $s = M("users")->where(array('user_id' => $s['uid']))->find(); // 根据条件更新记录
         if($_GET['p'] == 1){
             $data['status'] = 1;
+            $this->sendMsg($s['mobile'],'您预约的服务已通过。');
+
         }else if($_GET['p'] == 2){
             $data['status'] = 2;
+            $this->sendMsg($s['mobile'],'您预约的服务未通过。');
         }
         if($_GET['p'] == 1){
             $merchant = $User->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录

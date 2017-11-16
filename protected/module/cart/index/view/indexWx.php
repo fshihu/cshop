@@ -64,7 +64,8 @@
             <div class="weui-panel__bd list4 list4_s"  >
                 <?php $total_price = 0;$ids = ''; ?>
                 <?php foreach($list as $item):?>
-                <div class="list_4s_item">
+                <div class="list_4s_item" style="position: relative;">
+                    <span class="close_xs" data-id="<?php echo $item['id'] ?>" style="z-index:111;position: absolute;color:  red; right:6px;top:-5px;font-size: 22px;">×</span>
                     <div  class="weui-media-box weui-media-box_appmsg">
                         <div class="weui-media-box__hd">
                             <img style="" class="weui-media-box__thumb" src="<?php echo GoodsServer::getImg($item['original_img']) ?>" alt="">
@@ -151,6 +152,11 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
      <?php endif;?>
 
     <script type="text/javascript">
+        $('.close_xs').click(function () {
+            ajax_request('<?php echo $this->genurl('del') ?>',{id:$(this).data('id')},function () {
+                location.href = '';
+            });
+        });
         var url = '<?php echo $this->genurl('cart/index/confirm',array('address_id' => $addr['address_id'],'prom_type'=>$prom_type,'cart_ids'=>$ids)); ?>';
         var tpl_url = url;
         var total_price = <?php echo $total_price ?>;

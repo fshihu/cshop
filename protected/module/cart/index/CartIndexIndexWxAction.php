@@ -35,6 +35,17 @@ class CartIndexIndexWxAction extends \CAction
         return '我的购物车';
     }
 
+    protected function getHasDel()
+    {
+        if($this->prom_type){
+            return false;
+        }
+        if($this->is_buy_now){
+            return  false;
+        }
+        return true;
+    }
+
     public function execute(CRequest $request)
     {
         $addr_condition = array(
@@ -66,6 +77,7 @@ class CartIndexIndexWxAction extends \CAction
             'list' => CartServer::getListByIds($prom_type,$ids),
             'addr' => $addr,
             'prom_type' => $prom_type,
+            'has_del' => $this->getHasDel(),
         ));
     }
 }

@@ -53,7 +53,7 @@ class GoodsCateListWxAction extends ListAction
         ))->execute();
         $this->dbCondition->addColumnsCondition(array(
             'cat_id' => array('in', ArrayUtil::arrayColumn(array_merge($this->cate_list, [$this->cate_item]), 'id'))
-        ));
+        ))->order('t.goods_id desc');
         if($this->cate_id){
             $this->dbCondition->addColumnsCondition(array(
                 'cat_id' => $this->cate_id,
