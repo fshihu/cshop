@@ -58,6 +58,7 @@ class CartIndexIndexWxAction extends \CAction
             $cart = ItemModel::make('cart')->addColumnsCondition(array(
                 'goods_id' => $this->goods_id,
                 'user_id' => Session::getUserID(),
+                'prom_type' => $prom_type,
             ))->execute();
             $ids = [$cart['id']];
         }
