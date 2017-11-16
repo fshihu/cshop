@@ -18,10 +18,14 @@ class GoodsDetIndexWxAction  extends \CAction
 {
     public function execute(CRequest $request)
     {
+
         $id = $request->getParams('id');
         $data = ItemModel::make('goods')->addColumnsCondition(array(
             'goods_id' => $id,
         ))->execute();
+        if(!$data['is_on_sale']){
+            throw new \CErrorException('商品未上架');
+        }
         $goods_images = ListModel::make('goods_images')->addColumnsCondition(array(
             'goods_id' => $id,
         ))->execute();

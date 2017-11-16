@@ -23,6 +23,9 @@ class GoodsCateGoodsWxAction extends ListAction
 
     protected function getSearchCondition()
     {
+        $this->dbCondition->addColumnsCondition(array(
+            'is_on_sale' => 1,
+        ))->order('t.goods_id desc');
         if($this->cate_id){
             $this->dbCondition->addColumnsCondition(array(
                 'cat_id' => $this->cate_id,

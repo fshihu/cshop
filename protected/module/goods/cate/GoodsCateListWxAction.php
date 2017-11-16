@@ -52,7 +52,8 @@ class GoodsCateListWxAction extends ListAction
             'parent_id' => $this->cate_item['id'],
         ))->execute();
         $this->dbCondition->addColumnsCondition(array(
-            'cat_id' => array('in', ArrayUtil::arrayColumn(array_merge($this->cate_list, [$this->cate_item]), 'id'))
+            'cat_id' => array('in', ArrayUtil::arrayColumn(array_merge($this->cate_list, [$this->cate_item]), 'id')),
+            'is_on_sale' => 1,
         ))->order('t.goods_id desc');
         if($this->cate_id){
             $this->dbCondition->addColumnsCondition(array(
