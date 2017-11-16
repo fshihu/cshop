@@ -73,6 +73,23 @@
                     </div>
                     <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
                     <div class="t3">
+                        <?php for($i =0; $i< $comment_item['rating'];$i++):?>
+                        <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
+                                width: 10px;
+                                height: 10px;
+                                display: inline-block;
+                                background-size: 10px;
+                                background-position: 0px -10px;"></span>
+                        <?php endfor;?>
+                        <?php for($i =0; $i< 5-$comment_item['rating'];$i++):?>
+                        <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
+                                width: 10px;
+                                height: 10px;
+                                display: inline-block;
+                                background-size: 10px;
+                                background-position: 0px 0;"></span>
+                        <?php endfor;?>
+
                         <?php echo date('Y-m-d h:i:s',$comment_item['comment_time']) ?>
                     </div>
                 </div>
@@ -209,7 +226,7 @@
                 },function () {
                     hide_buy_confirm();
                     if(click_type == 2){
-                        location.href = '<?php echo $this->genurl('cart/index/index');?>';
+                        location.href = '<?php echo $this->genurl('cart/index/index',['is_buy_now' => 1,'goods_id' => $data['goods_id']]);?>';
                     }else if(click_type == 3){
                         location.href = '<?php echo $this->genurl('cart/index/index',['prom_type'=>PromTypeEnum::GROUP_OWN_OPEN]);?>';
                     }else{

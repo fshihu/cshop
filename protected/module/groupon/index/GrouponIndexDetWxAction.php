@@ -39,7 +39,7 @@ class GrouponIndexDetWxAction extends \CAction
         $comment_list = ListModel::make('comment')->addColumnsCondition(array(
             'goods_id' => $group_buy['goods_id'],
         ))->leftJoin('users','u','t.user_id = u.user_id')
-            ->select('t.content comment_content,t.add_time comment_time,u.nickname uname,u.head_pic ')->execute();
+            ->select('t.content comment_content,t.rating,t.add_time comment_time,u.nickname uname,u.head_pic ')->execute();
         return new \CRenderData(array(
             'group_buy' => $group_buy,
             'data' => $data,

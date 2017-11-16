@@ -19,6 +19,8 @@ use module\cart\index\server\PromTypeEnum;
 class CartIndexIndexWxAction extends \CAction
 {
     public $prom_type = 0;
+    public $is_buy_now = 0;
+    public $goods_id = 0;
     public function getPageTitle()
     {
         if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
@@ -26,6 +28,9 @@ class CartIndexIndexWxAction extends \CAction
         }
         if($this->prom_type == PromTypeEnum::GROUP_OPNE){
             return '一键开团';
+        }
+        if($this->is_buy_now){
+            return  '立即购买';
         }
         return '我的购物车';
     }
@@ -48,8 +53,16 @@ class CartIndexIndexWxAction extends \CAction
             ->addColumnsCondition($addr_condition)->execute();
 
         $prom_type = $request->getParams('prom_type', 0);
+        $ids = null;
+        if($this->goods_id && $this->is_buy_now){
+            $cart = ItemModel::make('cart')->addColumnsCondition(array(
+                'goods_id' => $this->goods_id,
+                'user_id' => Session::getUserID(),
+            ))->execute();
+            $ids = [$cart['id']];
+        }
         return new \CRenderData(array(
-            'list' => CartServer::getMyList($prom_type),
+            'list' => CartServer::getListByIds($prom_type,$ids),
             'addr' => $addr,
             'prom_type' => $prom_type,
         ));
