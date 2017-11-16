@@ -35,7 +35,7 @@
                 <div class="weui-cell__bd">
                     <p><?php echo date('Y-m-d',$user['reg_time']) ?>至<?php echo date('Y-m-d') ?></p>
                 </div>
-                <div class="weui-cell__ft">共推荐<?php echo $page->pageCount ?>位好友</div>
+                <div class="weui-cell__ft">共推荐<?php echo $page->count ?>位好友</div>
             </div>
              <div class="weui-cells list4_w">
                  <?php foreach($list as $item):?>

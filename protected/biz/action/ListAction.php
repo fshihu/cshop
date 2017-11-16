@@ -15,5 +15,9 @@ class ListAction extends \CC\action\ListAction
         return 'render';
     }
 
+    public function getPageSize()
+    {
+        return 50;
+    }
 
 }
