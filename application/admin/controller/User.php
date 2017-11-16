@@ -803,11 +803,11 @@ class User extends Base {
         $s = M("users")->where(array('user_id' => $s['uid']))->find(); // 根据条件更新记录
         if($_GET['p'] == 1){
             $data['status'] = 1;
-            $this->sendMsg($s['mobile'],'您预约的服务已通过。');
+            $this->sendMsg($s['mobile'],'您的商家申请已通过审核。');
 
         }else if($_GET['p'] == 2){
             $data['status'] = 2;
-            $this->sendMsg($s['mobile'],'您预约的服务未通过。');
+            $this->sendMsg($s['mobile'],'您的商家申请未通过审核。');
         }
         if($_GET['p'] == 1){
             $merchant = $User->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
