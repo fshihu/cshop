@@ -666,23 +666,24 @@ class User extends Base {
                 exit;
             }
             $data = ['status' => 1];
+            $money = $user['user_money'] - $withdrawals['money'];
+            M('users')->where('user_id','in', $user['user_id'])->save(array(
+                'user_money' => $money,
+                'extract_money' => $user['extract_money'] + $withdrawals['money'],
+            ));
+            M('user_money_record')->add(array(
+                'uid' => $user['user_id'],
+                'money' => -$withdrawals['money'],
+                'cur_money' => $money,
+                'content' => '提现成功',
+                'data_id' => $id,
+                'type' => 1,
+                'crate_time' => time(),
+            ));
         }else{
             $data = ['status' => 2];
         }
-        $money = $user['user_money'] - $withdrawals['money'];
-        M('users')->where('user_id','in', $user['user_id'])->save(array(
-            'user_money' => $money,
-            'extract_money' => $user['extract_money'] + $withdrawals['money'],
-        ));
-        M('user_money_record')->add(array(
-            'uid' => $user['user_id'],
-            'money' => -$withdrawals['money'],
-            'cur_money' => $money,
-            'content' => '提现成功',
-            'data_id' => $id,
-            'type' => 1,
-            'crate_time' => time(),
-        ));
+
         M('extract_apply')->where('id','in', $id)->save($data);
             $this->success("操作成功!");
             exit;
