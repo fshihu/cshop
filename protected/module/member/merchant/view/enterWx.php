@@ -34,7 +34,7 @@
                  <?php endif;?>
                 <?php if($merchant['status'] == 1):?>
                        <div style="padding: 10px;">
-                           申请成功
+                           申请成功，您已经是商家了
                        </div>
                  <?php endif;?>
           <?php else:?>
