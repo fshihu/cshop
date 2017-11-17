@@ -28,15 +28,25 @@
                 </div>
         <?php  if($merchant && $merchant['status'] != 2):?>
                  <?php if($merchant['status'] == 0):?>
-                        <div style="padding: 10px;">
-                            申请中
+                <div class="page msg_success js_show">
+                    <div class="weui-msg">
+                        <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+                        <div class="weui-msg__text-area">
+                            <p class="weui-msg__desc">申请中</p>
                         </div>
-                 <?php endif;?>
+                     </div>
+                </div>
+                  <?php endif;?>
                 <?php if($merchant['status'] == 1):?>
-                       <div style="padding: 10px;">
-                           申请成功，您已经是商家了
-                       </div>
-                 <?php endif;?>
+                <div class="page msg_success js_show">
+                    <div class="weui-msg">
+                        <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+                        <div class="weui-msg__text-area">
+                            <p class="weui-msg__desc">申请成功，您已经是商家了</p>
+                        </div>
+                     </div>
+                </div>
+                  <?php endif;?>
           <?php else:?>
             <?php if($merchant['status'] == 2):?>
         <div style="padding: 10px;">
