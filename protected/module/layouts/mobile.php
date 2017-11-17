@@ -17,7 +17,7 @@
                 '/public/biz/wx/common/css/wx.css',
                 '/public/biz/wx/common/js/wx.js',
 
-                '/public/biz/starability/css/starability.css',
+                '/public/biz/starability/css/starability.css?1',
 
                 '/public/biz/swiper/css/swiper.min.css',
             '/public/biz/swiper/js/swiper.min.js',

@@ -29,7 +29,7 @@
                         </div>
                <?php if(empty($bank_list)):?>
               <div class="weui-cell weui-cell_access">
-                  无
+                  <a href="<?php echo $this->genurl('member/bank/index') ?>">添加银行卡</a>
               </div>
                 <?php else:?>
               <a class="weui-cell weui-cell_access" href="javascript:sel_bank();">

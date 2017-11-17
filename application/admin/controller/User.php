@@ -660,15 +660,15 @@ class User extends Base {
         $user = M('users')->where("user_id = {$withdrawals[uid]}")->find();
             $data = I('post.');
             // 如果是已经给用户转账 则生成转账流水记录
+        if($_GET['p'] == 1){
             if ($user['user_money'] < $withdrawals['money']) {
                 $this->error("用户余额不足{$withdrawals['money']}，不够提现");
                 exit;
             }
-            if($_GET['p'] == 1){
-                $data = ['status' => 1];
-            }else{
-                $data = ['status' => 2];
-            }
+            $data = ['status' => 1];
+        }else{
+            $data = ['status' => 2];
+        }
         $money = $user['user_money'] - $withdrawals['money'];
         M('users')->where('user_id','in', $user['user_id'])->save(array(
             'user_money' => $money,

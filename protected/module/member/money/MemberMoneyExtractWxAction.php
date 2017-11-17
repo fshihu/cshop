@@ -50,7 +50,7 @@ class MemberMoneyExtractWxAction  extends \CAction
             'user_id' => $user['user_id']
         ))->order('id desc')->execute();
         return new \CRenderData(array(
-            'bank_list' => $bank_list,
+            'bank_list' => [],
             'user' => $user,
         ));
     }

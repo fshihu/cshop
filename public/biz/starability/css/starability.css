@@ -33,7 +33,7 @@
 
 .starability-slot > input:checked ~ label, .starability-slot > input:focus ~ label, .starability-slot > input:hover ~ label { transition: background-position .7s }
 
-@keyframes a {
+@keyframes a111 {
     0% { transform: scale(1) }
     99% { transform: scale(4); opacity: 0 }
     to { transform: scale(1); opacity: 0 }
@@ -59,9 +59,9 @@
     .starability-grow > label:before { background-image: url(../starability-images/icons@2x.png); background-size: 30px auto }
 }
 
-.starability-grow > input:checked + label:before { display: block; animation-duration: 1s; animation-name: a; animation-fill-mode: forwards }
+.starability-grow > input:checked + label:before { display: block; animation-duration: 1s; animation-name: a111; animation-fill-mode: forwards }
 
-@keyframes b {
+@keyframes b111 {
     0% { transform: scale(1) rotate(0) }
     99% { transform: scale(4) rotate(90deg); opacity: 0 }
     to { transform: scale(1) rotate(0); opacity: 0 }
@@ -87,9 +87,9 @@
     .starability-growRotate > label:before { background-image: url(../starability-images/icons@2x.png); background-size: 30px auto }
 }
 
-.starability-growRotate > input:checked + label:before { display: block; animation-duration: 1s; animation-name: b; animation-fill-mode: forwards }
+.starability-growRotate > input:checked + label:before { display: block; animation-duration: 1s; animation-name: b111; animation-fill-mode: forwards }
 
-@keyframes c {
+@keyframes c111 {
     0% { transform: translateY(30px) }
     80% { opacity: 1 }
     to { transform: none; opacity: 0 }
@@ -115,9 +115,9 @@
     .starability-fade > label:before { background-image: url(../starability-images/icons@2x.png); background-size: 30px auto }
 }
 
-.starability-fade > input:checked + label:before { display: block; animation-name: c; animation-duration: 1s; animation-fill-mode: forwards }
+.starability-fade > input:checked + label:before { display: block; animation-name: c111; animation-duration: 1s; animation-fill-mode: forwards }
 
-@keyframes d {
+@keyframes d111 {
     0% { transform: translateX(-15px) }
     60% { opacity: 1 }
     70% { transform: none }
@@ -147,4 +147,4 @@
     .starability-checkmark > label:before { background-image: url(../starability-images/icons-checkmark@2x.png); background-size: 30px auto }
 }
 
-.starability-checkmark > input:checked + label:before { display: block; animation-name: d; animation-duration: .7s; animation-fill-mode: forwards }
+.starability-checkmark > input:checked + label:before { display: block; animation-name: d111; animation-duration: .7s; animation-fill-mode: forwards }
