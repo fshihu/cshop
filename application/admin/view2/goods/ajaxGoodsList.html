@@ -29,6 +29,18 @@
                 <td align="center" axis="col0">
                   <div style="text-align: center; width: 50px;">{$list.shop_price}</div>
                 </td>
+                  <?php if(!$is_admin):?>
+                  <td align="center" axis="col0">
+                    <div style="text-align: center; width: 50px;">
+                      <if condition='$list[is_on_sale] eq 1'>
+                          是
+                        <else />
+                          否
+                      </if>
+                    </div>
+                  </td>
+
+                  <?php endif;?>
                   <?php if($is_admin):?>
                   <td align="center" axis="col0">
                     <div style="text-align: center; width: 50px;">
