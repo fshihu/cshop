@@ -37,7 +37,7 @@ class MemberLevelGiveWxAction extends \CAction implements IFormViewBuilder
         if($request->hasPost()){
             $account = $request->getParams('account');
             $item = ItemModel::make('users')->addColumnsCondition(array(
-                'user_id' => $account,
+                'mobile' => $account,
             ))->execute();
             PhoneServer::checkCode(UserServer::getPhone(), $request->getParams('code'));
             if($item['user_id'] == $user['user_id']){
