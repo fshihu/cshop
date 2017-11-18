@@ -213,12 +213,13 @@
                      </div>
                  </div>
                           </div>
-                 <a href="javascript:;" class="btn sub_btn  ">提交申请</a>
              </form>
          <?php endif;?>
      </div>
 
 </div>
+<a href="javascript:;" class="btn sub_btn  ">提交申请</a>
+
     <div class="js_dialog" id="iosDialog2" style="display: none;">
                 <div class="weui-mask"></div>
                 <div class="weui-dialog">

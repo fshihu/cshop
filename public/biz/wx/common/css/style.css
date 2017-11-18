@@ -1,5 +1,5 @@
 html,body{height: 100%;}
-body{background: #fff;color: #474747;font-size: 14px;}
+body{background: #fff;color: #474747;font-size: 14px; }
 a{ color: #474747;}
 body>.content{ height:100%;}
 .daily_list .time{text-align: center; line-height:1;}
@@ -121,7 +121,7 @@ line-height: 1; width: 45px; height:45px;display: inline-block; color: #0950a0;}
 .home_item .text2{background: #171717; color: #fcf7f7;font-size: 16px; padding:2px 9px; margin-top:5px;
 display: inline-block;}
 
-.weui-tabbar{ position: fixed;background: #fff;}
+.weui-tabbar{ position: absolute;background: #fff;}
 .weui-tabbar__label{ color: #474747;font-size: 12px;}
 .weui-tabbar__label1{ color: #2CC7C5; }
 
@@ -212,7 +212,7 @@ background: url("../images/time_background.png") no-repeat;text-align: center;ba
 .navbar-sm .weui-navbar__item{ font-size: 16px;    padding: 7px 0; color: #474747;}
 .navbar-sm .weui-navbar__item.weui-bar__item_on{background: #2CC7C5; color: #ffffff;}
 
-.buy_btn{position: fixed;bottom: 0;right: 0;left: 20%; overflow: hidden; z-index:501;}
+.buy_btn{position: absolute;bottom: 0;right: 0;left: 20%; overflow: hidden; z-index:501;}
 .buy_btn .bt_a{ width:50%;float: left; height:49px; color: #ffffff;text-align: center; padding-top:6px;box-sizing: border-box;}
 .buy_btn .bt_a .t1{font-size: 12px;}
 .buy_btn .bt_a .t2{font-size: 15px;}
@@ -240,7 +240,7 @@ text-align: center;vertical-align: middle; margin:0 20px; margin-bottom:20px;}
 .buy_user .btn2{ width:184px; height:30px; line-height:30px;font-size: 14px;background: #2CC7C5;}
 
 .buy_btn_now{ color: #484848;background: #F3F7F7; height:43px; line-height:43px;text-align: center;border-top: 1px solid #DBDBDB;
-    position: fixed;bottom: 0px; width:100%;}
+    position: absolute;bottom: 0px; width:100%;}
 
 .list4_s.list4 .weui-media-box__hd{ width:70px; height:70px;}
 .list4_s.list4 .weui-media-box__bd .weui-media-box__desc{ height:32px; margin-bottom:8px;}
@@ -252,7 +252,7 @@ text-align: center;vertical-align: middle; margin:0 20px; margin-bottom:20px;}
 background-size: 16px;}
 .addr_info .t1{ font-size: 15px; color: #484848; padding-top:10px; margin-bottom:5px;}
 .addr_info .t2{ color: #666; padding-bottom:10px;}
-.buy_price{ position: fixed;bottom: 0px; width:100%;}
+.buy_price{ position: absolute;bottom: 0px; width:100%;}
 .buy_price .buy_jifen{background: #ffffff; line-height:40px;text-align: right;border-top: 1px solid #DBDBDB;
    padding-right:10px; font-size: 11px;}
 .buy_price .buy_btn_w { overflow: hidden;background: #ffffff;border-top: 1px solid #DBDBDB;}
@@ -260,7 +260,7 @@ background-size: 16px;}
 .buy_price .buy_btn_w .price_red { color: red;}
 .buy_price .buy_btn_w .buy_btn_red {  border-radius: 0px;float:right; height:50px; line-height:50px; font-size: 15px;}
 
-.buy_confirm{ position: fixed;bottom: 0; z-index:502; width:100%;background: #ffffff;}
+.buy_confirm{ position: absolute;bottom: 0; z-index:502; width:100%;background: #ffffff;}
 .buy_confirm .bc_hd{border-top: 1px solid #DBDBDB;border-bottom: 1px solid #DBDBDB;position: relative;min-height: 80px;}
 .buy_confirm .bc_hd .bc_img{ width:85px;height:85px;position: absolute;top:-20px; left:20px;border: 1px solid #dbdbdb;}
 .buy_confirm .bc_hd .bc_info{ padding-left:120px; padding-right:30px; padding-top:10px;}
@@ -328,7 +328,7 @@ input:focus,textarea:focus{border-color: #2CC7C5;}
 .row-group .addr_input_city { width:71px;}
 .row-group .addr_input_district { width:160px; margin-top:10px;}
 
-.row-group-form_{ padding-bottom:0;position: fixed;
+.row-group-form_{ padding-bottom:0;position: absolute;
     width: 100%;
     bottom: 0;}
 .row-group-form_ .data-label{ padding-right:0; width:0;}
