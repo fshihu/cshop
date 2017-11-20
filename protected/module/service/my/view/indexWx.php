@@ -69,7 +69,7 @@
      <?php if($item['status'] == ServiceStatusEnum::STATUS_WAIT_COMMONT):?>
      <div class="t4" style="padding-bottom: 10px;">
          <a class="weui-btn weui-btn_mini weui-btn_default" href="<?php echo $this->genurl('comment',['id'=>$item['id']]); ?>" style="font-size: 11px;">
-             请消费完成后评价服务，并进入补贴返还流程
+             请服务完成后评价服务，并进入补贴返还流程
          </a>
 
      </div>
@@ -80,7 +80,7 @@
               已上传，等待审核
            <?php else:?>
               <a class="weui-btn weui-btn_mini weui-btn_default" href="<?php echo $this->genurl('subsidy',['id'=>$item['id']]); ?>" style="font-size: 11px;">
-                  请点击并上传消费单据，审核成功后将补贴返还到您的系统钱包
+                  请点击并上传服务单据，审核成功后将补贴返还到您的系统钱包
               </a>
           <?php endif;?>
 
@@ -92,7 +92,7 @@
               已上传，等待审核
            <?php else:?>
               <a class="weui-btn weui-btn_mini weui-btn_default" href="<?php echo $this->genurl('subsidy',['id'=>$item['id']]); ?>" style="font-size: 11px;">
-                  您上传的消费单据有误，申请审核未通过，请重新上传
+                  您上传的服务单据有误，申请审核未通过，请重新上传
               </a>
           <?php endif;?>
 

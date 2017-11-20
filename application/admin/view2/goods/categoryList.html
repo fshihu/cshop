@@ -30,6 +30,7 @@
                 <th align="center" axis="col2"><div style="text-align: center; width: 60px;">分类id</div></th>
                 <th align="center" axis="col3"><div style="text-align: center; width: 200px;">分类名称</div></th>
                 <th align="center" axis="col4"><div style="text-align: center; width: 200px;">描述</div></th>
+                  <th align="center" axis="col6"><div style="text-align: center; width: 80px;">是否显示</div></th>
                 <th axis="col10"><div></div></th>
               </tr>
             </thead>
@@ -84,7 +85,15 @@
                   <input type="text" value="{$vo.mobile_name}" onChange="changeTableVal('goods_category','id','{$vo.id}','mobile_name',this)" style="text-align: left; width:180px;"/>
                 </div>
               </td>
-
+             <td align="center" class="">
+               <div style="text-align: center; width: 80px;">
+                 <if condition='$vo[is_show] eq 1'>
+                   <span class="yes" onClick="changeTableVal('goods_category','id','{$vo.id}','is_show',this)" ><i class="fa fa-check-circle"></i>是</span>
+                   <else />
+                   <span class="no" onClick="changeTableVal('goods_category','id','{$vo.id}','is_show',this)" ><i class="fa fa-ban"></i>否</span>
+                 </if>
+               </div>
+             </td>
               <td style="width: 100%;">
                 <div>&nbsp;</div>
               </td>
