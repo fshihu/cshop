@@ -157,7 +157,7 @@ background: url("../images/time_background.png") no-repeat;text-align: center;ba
 .gl_nav a.ac{border-bottom: 1px solid #63b4c5; color: #63b4c5;}
 
 .goods_item_w{ overflow: hidden; padding:4px;}
-.goods_item{float: left; width:50%;box-sizing: border-box; padding:16px 4px;
+.goods_item{float: left; width:50%;box-sizing: border-box; padding:4px 4px;
 }
 .goods_item a{display:block;padding: 10px;background: #fff;border:1px solid #ebebeb;text-align: center;}
 .goods_item a .txt{ color: #505050; padding:5px; height:20px; overflow: hidden;}
@@ -260,7 +260,7 @@ background-size: 16px;}
 .buy_price .buy_btn_w .price_red { color: red;}
 .buy_price .buy_btn_w .buy_btn_red {  border-radius: 0px;float:right; height:50px; line-height:50px; font-size: 15px;}
 
-.buy_confirm{ position: absolute;bottom: 0; z-index:502; width:100%;background: #ffffff;}
+.buy_confirm{ position: fixed;bottom: 0; z-index:502; width:100%;background: #ffffff;}
 .buy_confirm .bc_hd{border-top: 1px solid #DBDBDB;border-bottom: 1px solid #DBDBDB;position: relative;min-height: 80px;}
 .buy_confirm .bc_hd .bc_img{ width:85px;height:85px;position: absolute;top:-20px; left:20px;border: 1px solid #dbdbdb;}
 .buy_confirm .bc_hd .bc_info{ padding-left:120px; padding-right:30px; padding-top:10px;}
