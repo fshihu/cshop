@@ -40,10 +40,7 @@ class OrderHanderServer
             UserLevelOrderServer::handle($order);
         }
         if($order['order_prom_type'] == PromTypeEnum::NORMAL){
-            $get_gold = (int)($order['order_amount'] * GoldServer::getGoldRatio());
-            if($get_gold > 0){
-                UserGoldRecordServer::addGold($order['user_id'],UserGoldRecordServer::TYPE_BUY_GOODS_GET,$get_gold,'购买商品获得积分',$order['order_id']);
-            }
+
             IncrementModel::make('users')->addColumnsCondition(array(
                 'user_id' => $order['user_id'],
             ))->addData(array(

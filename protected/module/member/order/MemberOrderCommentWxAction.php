@@ -15,6 +15,9 @@ use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
 use CRequest;
 use module\cart\index\server\OrderStatusServer;
+use module\cart\index\server\PromTypeEnum;
+use module\member\gold\server\GoldServer;
+use module\member\gold\server\UserGoldRecordServer;
 use module\member\index\UserServer;
 
 class MemberOrderCommentWxAction extends \CAction
@@ -43,6 +46,12 @@ class MemberOrderCommentWxAction extends \CAction
                     'rating' => $request->getParams('rating'),
                     'add_time' => time(),
                 ))->execute();
+            }
+            if($order['order_prom_type'] == PromTypeEnum::NORMAL) {
+                $get_gold = (int)($order['order_amount'] * GoldServer::getGoldRatio());
+                if ($get_gold > 0) {
+                    UserGoldRecordServer::addGold($order['user_id'], UserGoldRecordServer::TYPE_BUY_GOODS_GET, $get_gold, '购买商品获得积分', $order['order_id']);
+                }
             }
             OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_FINISH);
             return new \CJsonData();

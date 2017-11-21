@@ -158,6 +158,7 @@ class Service  extends Base
              用户抵扣金额：（2000-2000*20%）*10=160
              返还用户补贴金额：2000*20%+160=560
              销售人员获得佣金：（1000-2000*20%）*30%=180
+            返积分：（医院消费-用户返还金额）*1%
 
              */
             $service_reserve = M('service_reserve')->where(array('id' => $_GET['id']))->find();
@@ -193,7 +194,10 @@ class Service  extends Base
                 self::addRecord($user['user_id'],3,$butie_price,'服务补贴',$service_reserve['id']);
             }
 
-            self::addGold($user['user_id'],6,-$user_gold,'服务补贴扣除',$service_reserve['id']);
+            $new_user_gold = (int)(($yiyuan_xiaofei -  $butie_price) * 0.01);
+            if($new_user_gold > 0){
+                self::addGold($user['user_id'],7,$new_user_gold,'服务补贴返还积分',$service_reserve['id']);
+            }
 
             $data['status'] = 6;
         }else if($_GET['p'] == 5){
