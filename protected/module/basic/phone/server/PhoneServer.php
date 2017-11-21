@@ -28,7 +28,7 @@ class PhoneServer
 
         if($r['code']!= 0){
             \CC::log(['url' => $url,'params' => $params,'rs' => $rs],'phone_err');
-            throw new CErrorException($r['msg']);
+            throw new CErrorException('短信发送失败：'.$r['msg']);
         }
         return true;
     }

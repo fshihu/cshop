@@ -65,8 +65,6 @@ class GrouponMyRaffleWxAction extends \CAction
                 }
             }
 
-            foreach ($group_one_members as $group_one_member) {
-            }
 
 
             UpdateModel::make('order')->addData(array(

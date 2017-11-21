@@ -95,7 +95,7 @@
             $('#wheelCanvas').rotate({
                 angle:0,
                 animateTo:angles + 360 * 5, // 这里多旋转了5圈，圈数越多，转的越快
-                duration:8000,
+                duration:5000,
                 callback:function (){ // 回调方法
                     $("#tip").text(tip);
                     turnWheel.bRotate = !turnWheel.bRotate;
