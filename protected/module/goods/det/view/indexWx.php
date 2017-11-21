@@ -51,6 +51,33 @@
              </span>
          </div>
      </div>
+     <?php if($data['is_create_group']):?>
+
+     <div class="m_title_1" >
+        <span class="line"></span> 别人开的团 <span class="line"></span>
+    </div>
+
+        <div class="list3_w">
+            <?php foreach($other_group_buys as $other_group_buy):?>
+            <div class="list3_item">
+                <span class="fl">
+                    <img class="avatar" src="<?php echo $other_group_buy['head_pic'] ?>" alt="">
+                    <span class="t1">
+                        <span class="t1_s"><?php echo $other_group_buy['nickname'] ?></span>
+                        <span class="t1_m">正在开团中</span>
+                    </span>
+                </span>
+                <span class="fr">
+                    <span class="t2">还差<?php echo $other_group_buy['remain_num'] ?>人成团</span>
+                    <a href="<?php echo $this->genurl('groupon/one/index',['group_one_id'=>$other_group_buy['id']]); ?>" class="btn_r">去参团</a>
+                </span>
+            </div>
+            <?php endforeach?>
+             <?php if(empty($other_group_buys)):?>
+                 <div style="text-align: center;padding: 10px;">暂无</div>
+             <?php endif;?>
+         </div>
+     <?php endif;?>
 
       <div class="weui-navbar navbar-sm nav_click">
          <a href="javascript:;" class="weui-navbar__item weui-bar__item_on">

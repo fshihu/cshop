@@ -65,7 +65,9 @@
                 <?php $total_price = 0;$ids = ''; ?>
                 <?php foreach($list as $item):?>
                 <div class="list_4s_item" style="position: relative;">
+                     <?php if($has_del):?>
                     <span class="close_xs" data-id="<?php echo $item['id'] ?>" style="z-index:111;position: absolute;color:  red; right:6px;top:-5px;font-size: 22px;">×</span>
+                     <?php endif;?>
                     <div  class="weui-media-box weui-media-box_appmsg">
                         <div class="weui-media-box__hd">
                             <img style="" class="weui-media-box__thumb" src="<?php echo GoodsServer::getImg($item['original_img']) ?>" alt="">
