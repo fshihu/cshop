@@ -65,7 +65,7 @@ class MoneyServer
                     //goods_price
                     $gold_price = (int)($order['integral_money'] / $good_count);
                     $profit_price = $item['goods_price'] - $gold_price - $item['cost_price'];
-                    $profit_price = $profit_price *  $item['merchant_ratio'] / 100;
+                    $profit_price = $profit_price *  $item['merchant_ratio'] / 100 + $item['cost_price'];
                     if($profit_price > 0){
                         MoneyServer::addRecord($item['admin_to_uid'],MoneyServer::PROFIT_PRICE,$profit_price,'合伙人佣金',$item['rec_id']);
                     }

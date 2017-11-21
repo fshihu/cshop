@@ -15,6 +15,7 @@
 
 namespace app\admin\controller;
 use app\admin\logic\OrderLogic;
+use app\admin\logic\Phone;
 use think\AjaxPage;
 use think\Page;
 use think\Verify;
@@ -801,14 +802,13 @@ class User extends Base {
         $User = M("merchant"); // 实例化User对象
         // 要修改的数据对象属性赋值
         $s = M("merchant")->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
-        $s = M("users")->where(array('user_id' => $s['uid']))->find(); // 根据条件更新记录
         if($_GET['p'] == 1){
             $data['status'] = 1;
-            $this->sendMsg($s['mobile'],'您的商家申请已通过审核。');
+            $this->sendMsg($s['contact'],'您的商家申请已通过审核。');
 
         }else if($_GET['p'] == 2){
             $data['status'] = 2;
-            $this->sendMsg($s['mobile'],'您的商家申请未通过审核。');
+            $this->sendMsg($s['contact'],'您的商家申请未通过审核。');
         }
         if($_GET['p'] == 1){
             $merchant = $User->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
