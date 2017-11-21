@@ -41,7 +41,7 @@ class GroupOneServer
                 'is_finish' => $is_finish,
             ))->execute();
 
-            if($is_finish && ($order['order_prom_type'] == PromTypeEnum::GROUP_OWN_OPEN||$order['order_prom_type'] == PromTypeEnum::GROUP_OWN_JOIN)){
+            if($is_finish && ($order['order_prom_type'] == PromTypeEnum::GROUP_JOIN||$order['order_prom_type'] == PromTypeEnum::GROUP_OPNE)){
                 $order_list = ListModel::make('order')->addColumnsCondition(array(
                     'order_prom_type' => ['in',[PromTypeEnum::GROUP_JOIN,PromTypeEnum::GROUP_OPNE]],
                     'order_prom_id' => $order['order_prom_id'],
