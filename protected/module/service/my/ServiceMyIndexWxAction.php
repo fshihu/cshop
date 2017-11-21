@@ -11,6 +11,8 @@ namespace module\service\my;
 
 use biz\Session;
 use CC\action\ListAction;
+use CC\db\base\select\ListModel;
+use CC\util\arr\ArrayUtil;
 use CRequest;
 use module\service\index\enum\ServiceStatusEnum;
 
@@ -23,8 +25,13 @@ class ServiceMyIndexWxAction extends ListAction
     }
     protected function onExecute()
     {
+        $stats = ListModel::make('service_reserve')->addColumnsCondition(array(
+            'user_id' => Session::getUserID(),
+        ))->select('count(*) count_num,status')->group('status')->execute();
+        $stat = ArrayUtil::arrayColumn($stats,'count_num','status');
         return array(
             'status' => $this->status,
+            'stat' => $stat,
             'status_desc' => ServiceStatusEnum::getValueByIndex($this->status),
         );
     }

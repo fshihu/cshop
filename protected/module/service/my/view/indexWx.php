@@ -18,12 +18,47 @@
     <div class="gl_nav swiper-container" style="height: 20px;">
         <div class="swiper-wrapper">
             <a href="<?php use module\service\index\enum\ServiceStatusEnum; echo $this->genurl('',['status' => '_all']); ?>" class="swiper-slide <?php echo $status == '_all' ?'ac':'' ?>">全部</a>
-             <a class="swiper-slide <?php echo $status == '0' ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_CHECK]); ?>">待审核</a>
-                <a class="swiper-slide <?php echo $status == 1 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_SERVICE]); ?>">待服务</a>
-                <a class="swiper-slide <?php echo $status == 2 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_NO_PASS]); ?>">未通过</a>
-                <a class="swiper-slide <?php echo $status == 3 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_COMMONT]); ?>">待评价</a>
-                <a class="swiper-slide <?php echo $status == 4 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_SUBSIDY]); ?>">待补贴</a>
-                <a class="swiper-slide <?php echo $status == 5 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_SUBSIDY_NO_PADD]); ?>">补贴申请未通过</a>
+             <a class="swiper-slide <?php echo $status == '0' ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_CHECK]); ?>">待审核
+                 <?php if($stat[ServiceStatusEnum::STATUS_WAIT_CHECK]>0):?>
+                           <span class="weui-badge" style="position: absolute;top: -9PX;right: -16px;">
+                               <?php echo (int)$stat[ServiceStatusEnum::STATUS_WAIT_CHECK] ?>
+                           </span>
+                            <?php endif;?>
+             </a>
+                <a class="swiper-slide <?php echo $status == 1 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_SERVICE]); ?>">待服务
+                    <?php if($stat[ServiceStatusEnum::STATUS_WAIT_SERVICE]>0):?>
+                                               <span class="weui-badge" style="position: absolute;top: -9PX;right: -16px;">
+                                                   <?php echo (int)$stat[ServiceStatusEnum::STATUS_WAIT_SERVICE] ?>
+                                               </span>
+                                                <?php endif;?>
+                </a>
+                <a class="swiper-slide <?php echo $status == 2 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_NO_PASS]); ?>">未通过
+                    <?php if($stat[ServiceStatusEnum::STATUS_NO_PASS]>0):?>
+                                                         <span class="weui-badge" style="position: absolute;top: -9PX;right: -16px;">
+                                                             <?php echo (int)$stat[ServiceStatusEnum::STATUS_NO_PASS] ?>
+                                                         </span>
+                                                          <?php endif;?>
+                </a>
+                <a class="swiper-slide <?php echo $status == 3 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_COMMONT]); ?>">待评价
+                    <?php if($stat[ServiceStatusEnum::STATUS_WAIT_COMMONT]>0):?>
+                                                            <span class="weui-badge" style="position: absolute;top: -9PX;right: -16px;">
+                                                                <?php echo (int)$stat[ServiceStatusEnum::STATUS_WAIT_COMMONT] ?>
+                                                            </span>
+                                                             <?php endif;?>
+                </a>
+                <a class="swiper-slide <?php echo $status == 4 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_WAIT_SUBSIDY]); ?>">待补贴
+                    <?php if($stat[ServiceStatusEnum::STATUS_WAIT_SUBSIDY]>0):?>
+                                                              <span class="weui-badge" style="position: absolute;top: -9PX;right: -16px;">
+                                                                  <?php echo (int)$stat[ServiceStatusEnum::STATUS_WAIT_SUBSIDY] ?>
+                                                              </span>
+                                                               <?php endif;?></a>
+                <a class="swiper-slide <?php echo $status == 5 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_SUBSIDY_NO_PADD]); ?>">补贴申请未通过
+                    <?php if($stat[ServiceStatusEnum::STATUS_SUBSIDY_NO_PADD]>0):?>
+                                                                 <span class="weui-badge" style="position: absolute;top: -9PX;right: -16px;">
+                                                                     <?php echo (int)$stat[ServiceStatusEnum::STATUS_SUBSIDY_NO_PADD] ?>
+                                                                 </span>
+                                                                  <?php endif;?>
+                </a>
                 <a class="swiper-slide <?php echo $status == 6 ?'ac':'' ?>" href="<?php echo $this->genurl('',['status' => ServiceStatusEnum::STATUS_FINISH]); ?>">已完成</a>
         </div>
 

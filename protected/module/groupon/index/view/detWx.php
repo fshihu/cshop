@@ -10,9 +10,9 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title"><?php use module\member\index\UserServer;
+                             <p class="title"><?php use module\member\index\UserServer;
+                            echo \biz\Util::subString($data['goods_name'],6) ?></p>
 
-                                echo $data['goods_name'] ?></p>
                         </div>
                     </div>
 
@@ -127,22 +127,23 @@
             </div>
     </div>
 
-     <div class="buy_btn">
-         <a href="<?php echo $this->genurl('goods/det/index',['id'=>$data['goods_id']]) ?>" class="bt_a bt_a1">
-             <div class="t1">￥<?php echo $data['shop_price'] ?></div>
-            <div class="t2">单独购买</div>
-         </a>
-         <a href="javascript:;" class="bt_a bt_a2">
-             <div class="t1">￥<?php echo $group_buy['price'] ?></div>
-             <div class="t2">一键开团</div>
-         </a>
-     </div>
  </div>
                     </div>
 
      </div>
 
 </div>
+    <div class="buy_btn">
+        <a href="<?php echo $this->genurl('goods/det/index',['id'=>$data['goods_id']]) ?>" class="bt_a bt_a1">
+            <div class="t1">￥<?php echo $data['shop_price'] ?></div>
+           <div class="t2">单独购买</div>
+        </a>
+        <a href="javascript:;" class="bt_a bt_a2">
+            <div class="t1">￥<?php echo $group_buy['price'] ?></div>
+            <div class="t2">一键开团</div>
+        </a>
+    </div>
+
     <script type="text/javascript">
         $('.buy_btn .bt_a .t2').click(function () {
             ajax_request('<?php echo $this->genurl('cart/index/add');?>',{
