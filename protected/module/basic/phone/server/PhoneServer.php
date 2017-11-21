@@ -18,14 +18,16 @@ class PhoneServer
         $url = 'https://sms.yunpian.com/v2/sms/single_send.json';
         $apikey = 'c55b480e75f882cccabb385dc6fc8998';
         $text = "【灏维网络】".$text;
-        $r = \Curl::instance()->post($url,array(
+        $params = [
             'apikey' => $apikey,
             'mobile' => $mobile,
             'text' => $text,
-        ));
-        $r = json_decode($r,true);
+        ];
+        $rs = \Curl::instance()->post($url,$params);
+        $r = json_decode($rs,true);
 
         if($r['code']!= 0){
+            \CC::log(['url' => $url,'params' => $params,'rs' => $rs],'phone_err');
             throw new CErrorException($r['msg']);
         }
         return true;

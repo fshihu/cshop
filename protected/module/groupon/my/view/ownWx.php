@@ -63,7 +63,7 @@
          <div class="t5">
 
             <span class="t5_2">
-                 <?php if($item['user_id'] == \biz\Session::getUserID()):?>
+                 <?php if($item['group_one_uid'] == \biz\Session::getUserID()):?>
                      <a href="<?php echo $this->genurl('raffle',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default  ">去抽奖</a>
                   <?php else:?>
                      等待团长抽奖

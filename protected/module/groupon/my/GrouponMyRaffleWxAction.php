@@ -59,8 +59,8 @@ class GrouponMyRaffleWxAction extends \CAction
             }
 
             $user = ItemModel::make('users')->addColumnsCondition(array('user_id' => $order['user_id']))->execute();
-            $group_buy = ItemModel::make('group_buy')->addColumnsCondition(array('id' => $group_one['group_buy_id']))->execute();
-            PhoneServer::sendMsg($user['mobile'],'恭喜你参与的团购产品'.$group_buy['title'].'成功获得产品');
+            $goods = ItemModel::make('goods')->addColumnsCondition(array('goods_id' => $group_one['goods_id']))->execute();
+            PhoneServer::sendMsg($user['mobile'],'恭喜你参与的团购产品'.$goods['goods_name'].'成功获得产品');
             UpdateModel::make('order')->addData(array(
                 'is_show' => 1,
             ))->addColumnsCondition(array(
