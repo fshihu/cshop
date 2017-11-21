@@ -67,7 +67,7 @@ class GroupOneServer
 
             }
         }
-        if($order['order_prom_type'] == PromTypeEnum::GROUP_JOIN || PromTypeEnum::GROUP_OWN_JOIN){
+        if($order['order_prom_type'] == PromTypeEnum::GROUP_JOIN || $order['order_prom_type'] == PromTypeEnum::GROUP_OWN_JOIN){
             InsertModel::make('group_one_member')->addData(array(
                 'group_one_id' => $order['order_prom_id'],
                 'uid' => $order['user_id'],
