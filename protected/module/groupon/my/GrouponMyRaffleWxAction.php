@@ -47,7 +47,7 @@ class GrouponMyRaffleWxAction extends \CAction
                 ))->execute();
 
             $order_list = ListModel::make('order')->addColumnsCondition(array(
-                'order_prom_type' => ['in',[PromTypeEnum::GROUP_JOIN,PromTypeEnum::GROUP_OPNE]],
+                'order_prom_type' => ['in',[PromTypeEnum::GROUP_OWN_JOIN,PromTypeEnum::GROUP_OWN_OPEN]],
                 'order_prom_id' => $order['order_prom_id'],
             ))->execute();
             $goods = ItemModel::make('goods')->addColumnsCondition(array('goods_id' => $group_one['goods_id']))->execute();
@@ -61,7 +61,7 @@ class GrouponMyRaffleWxAction extends \CAction
                 if($item['user_id'] == $win_item['uid']){
                     PhoneServer::sendMsg($item['mobile'],'恭喜你参与的团购产品'.$goods['goods_name'].'成功获得产品');
                 }else{
-//                    PhoneServer::sendMsg($item['mobile'],'很遗憾你参与的团购产品'.$goods['goods_name'].'未获得产品');
+                    PhoneServer::sendMsg($item['mobile'],'很遗憾你参与的团购产品'.$goods['goods_name'].'未获得产品');
                 }
             }
 
