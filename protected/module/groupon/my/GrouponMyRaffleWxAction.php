@@ -29,6 +29,10 @@ class GrouponMyRaffleWxAction extends \CAction
         $group_one_members = ListModel::make('group_one_member')->addColumnsCondition(array(
             't.group_one_id' => $order['order_prom_id'],
         ))->select('t.*,u.nickname,u.head_pic')->leftJoin('users','u','t.uid = u.user_id')->execute();
+        $order_list = ListModel::make('order')->addColumnsCondition(array(
+            'order_prom_type' => ['in',[PromTypeEnum::GROUP_OWN_JOIN,PromTypeEnum::GROUP_OWN_OPEN]],
+            'order_prom_id' => $order['order_prom_id'],
+        ))->execute();
 
         if($request->getParams('start')){
             $group_one = ItemModel::make('group_one')->addId($order['order_prom_id'])->execute();
@@ -58,10 +62,14 @@ class GrouponMyRaffleWxAction extends \CAction
                 }else{
                     MoneyServer::addRecord($item['user_id'],MoneyServer::GROUP_BUY_RETURNED,$item['order_amount'],'拼团失败，退回支付款',$item['order_id']);
                 }
-                if($item['user_id'] == $win_item['uid']){
-                    PhoneServer::sendMsg($item['mobile'],'恭喜你参与的团购产品'.$goods['goods_name'].'成功获得产品');
-                }else{
-                    PhoneServer::sendMsg($item['mobile'],'很遗憾你参与的团购产品'.$goods['goods_name'].'未获得产品');
+                try{
+                    if($item['user_id'] == $win_item['uid']){
+                        PhoneServer::sendMsg($item['mobile'],'恭喜你参与的团购产品'.$goods['goods_name'].'成功获得产品');
+                    }else{
+                        PhoneServer::sendMsg($item['mobile'],'很遗憾你参与的团购产品'.$goods['goods_name'].'未获得产品');
+                    }
+                }catch (\Exception $e){
+
                 }
             }
 
@@ -82,6 +90,7 @@ class GrouponMyRaffleWxAction extends \CAction
 
         return new \CRenderData(array(
             'group_one_members' => $group_one_members,
+            'order_list' => $order_list,
         ));
     }
     protected function getIsOpenTransaction()
