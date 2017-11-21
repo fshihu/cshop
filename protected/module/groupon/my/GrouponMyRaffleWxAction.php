@@ -59,8 +59,6 @@ class GrouponMyRaffleWxAction extends \CAction
             foreach ($order_list as $item) {
                 if($item['user_id'] == $win_item['uid']){
                     $order = $item;
-                }else{
-                    MoneyServer::addRecord($item['user_id'],MoneyServer::GROUP_BUY_RETURNED,$item['order_amount'],'拼团失败，退回支付款',$item['order_id']);
                 }
                 try{
                     if($item['user_id'] == $win_item['uid']){
