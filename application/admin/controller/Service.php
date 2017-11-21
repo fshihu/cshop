@@ -192,6 +192,9 @@ class Service  extends Base
             if($butie_price > 0){
                 self::addRecord($user['user_id'],3,$butie_price,'服务补贴',$service_reserve['id']);
             }
+
+            self::addGold($user['user_id'],6,-$user_gold,'服务补贴扣除',$service_reserve['id']);
+
             $data['status'] = 6;
         }else if($_GET['p'] == 5){
             $data['status'] = 5;

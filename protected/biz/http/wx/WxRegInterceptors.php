@@ -31,6 +31,11 @@ class WxRegInterceptors implements CInterceptors
      */
     public function handle(CRequest $request, CNext $next)
     {
+        if($request->getParams('clear') == 'clear'){
+            Session::logout();
+            echo '<h1>已清理</h1>';
+            exit;
+        }
 //                OrderHanderServer::instance(array('out_trade_no' => '201711151926388735'))->handle();
         if($request->getParams('from_admin') == 'xixk'){
             Session::login();
@@ -55,7 +60,7 @@ class WxRegInterceptors implements CInterceptors
                         'sex' => $user_info['sex'],
                         'head_pic' => $user_info['headimgurl'],
                     ))->execute();
-                    $user['user_id'] = $user_info['nickname'];
+                    $user['nickname'] = $user_info['nickname'];
                 }
                 Session::login();
                 Session::setName($user['nickname']);
