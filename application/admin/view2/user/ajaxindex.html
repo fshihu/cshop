@@ -10,6 +10,11 @@
                     <div style="text-align: center; width: 40px;">{$list.user_id}</div>
                 </td>
                 <td align="left" class="">
+                    <div style="text-align: center; width: 40px;">
+                        <img src="{$list.head_pic}" alt="" style="width: 40px;height: 40px;">
+                    </div>
+                </td>
+                <td align="left" class="">
                     <div style="text-align: center; width: 150px;">{$list.nickname}</div>
                 </td>
                 <td align="left" class="">
@@ -33,6 +38,13 @@
                 </td>
                 <td align="left" class="">
                     <div style="text-align: center; width: 120px;">{$list.reg_time|date='Y-m-d H:i',###}</div>
+                </td>
+                <td align="left" class="">
+                    <div style="text-align: center; width: 80px;">
+                        <a target="_blank" href="{:U('Admin/user/detail',array('id'=>$list['first_leader']))}">
+                            {$goods_list[$list.first_leader]}
+                        </a>
+                    </div>
                 </td>
                 <td align="center" class="handle">
                     <div style="text-align: center; width: 170px; max-width:250px;">

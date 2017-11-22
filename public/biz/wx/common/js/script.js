@@ -67,6 +67,9 @@ $(function(){
         });
     });
 
+    $('.year_input').click(function () {
+
+    });
 
 });
 function leftTimer(year,month,day,hour,minute,second,sel,style){

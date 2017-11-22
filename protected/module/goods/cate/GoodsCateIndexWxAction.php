@@ -16,7 +16,9 @@ class GoodsCateIndexWxAction extends \CAction
 {
     public function execute(CRequest $request)
     {
-        $list =  ListModel::make('goods_category')->execute();
+        $list =  ListModel::make('goods_category')->addColumnsCondition(array(
+            'is_show' => 1,
+        ))->execute();
         return new \CRenderData(array(
             'list' => $list,
         ));

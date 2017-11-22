@@ -205,7 +205,8 @@ use module\member\index\UserServer;
                                      </div>
                                      <div class="t3"><?php echo UserLevelServer::getBlackStatusDesc($item['status']) ?></div>
                                      <div class="t1"><?php echo $item['name'] ?></div>
-                                     <div class="t2">已赠送好友沁怡（账号：<?php substr_replace(UserServer::getUser($item['give_uid'])['mobile'],'****',3,4) ?>） <br> 好友已接受，并成为黑卡附属卡会员</div>
+                                     <?php $give_user = UserServer::getUser($item['give_uid']); ?>
+                                     <div class="t2">已赠送好友<?php echo $give_user['nickname'] ?>（账号：<?php echo  $give_user['mobile'] ?>） <br> 好友已接受，并成为黑卡附属卡会员</div>
                                  </div>
                          <?php endif;?>
                              <?php if($item['status'] == UserLevelServer::BLACK_STATSU_WAIT_GIVE):?>
@@ -214,7 +215,8 @@ use module\member\index\UserServer;
                                      </div>
                                      <div class="t3"><?php echo UserLevelServer::getBlackStatusDesc($item['status']) ?></div>
                                      <div class="t1"><?php echo $item['name'] ?></div>
-                                     <div class="t2">已赠送好友沁怡（账号：<?php substr_replace(UserServer::getUser($item['give_uid'])['mobile'],'****',3,4) ?>） <br>好友暂未接受成为黑卡附属卡会员</div>
+                                     <?php $give_user = UserServer::getUser($item['give_uid']); ?>
+                                     <div class="t2">已赠送好友<?php echo $give_user['nickname'] ?>（账号：<?php echo $give_user['mobile'] ?>） <br>好友暂未接受成为黑卡附属卡会员</div>
                                  </div>
                              <?php endif;?>
                          <?php endforeach?>

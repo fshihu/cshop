@@ -47,9 +47,11 @@
                          <?php endif;?>
                     </span>
                     <?php endforeach?>
+                     <?php if($group_one['remain_num'] > 0):?>
                    <span class="avatar_label_item">
                         <span class="t1">?</span>
                     </span>
+                     <?php endif;?>
 
                 </div>
                 <div class="t2">
@@ -67,7 +69,7 @@
 
                  <?php if($has_join):?>
                      <a href="javascript:;" class="weui-btn    btn2">已参团</a>
-                  <?php else:?>
+                  <?php elseif($group_one['remain_num'] > 0):?>
                      <a href="ecg" class="weui-btn  lijcantbtn btn2">立即参团</a>
                  <?php endif;?>
             </div>

@@ -24,7 +24,7 @@
   <div class="list5">
       <?php foreach($list as $item):?>
      <div class="list_item">
-         <div class="t1"><?php echo $wait_status_val ?></div>
+         <div class="t1"> <?php echo $wait_status_val ?></div>
          <?php $order_goods = ListModel::make('order_goods')->addColumnsCondition(array('order_id' => $item['order_id']))->execute(); ?>
 
          <?php foreach($order_goods as $order_good):?>

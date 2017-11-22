@@ -12,6 +12,7 @@ use CC\db\base\insert\InsertModel;
 use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
 use CC\db\base\update\UpdateModel;
+use module\basic\phone\server\PhoneServer;
 use module\cart\index\server\OrderStatusServer;
 use module\cart\index\server\PromTypeEnum;
 
@@ -41,7 +42,7 @@ class GroupOneServer
                 'is_finish' => $is_finish,
             ))->execute();
 
-            if($is_finish && ($order['order_prom_type'] == PromTypeEnum::GROUP_OWN_OPEN||$order['order_prom_type'] == PromTypeEnum::GROUP_OWN_JOIN)){
+            if($is_finish && ($order['order_prom_type'] == PromTypeEnum::GROUP_JOIN||$order['order_prom_type'] == PromTypeEnum::GROUP_OPNE)){
                 $order_list = ListModel::make('order')->addColumnsCondition(array(
                     'order_prom_type' => ['in',[PromTypeEnum::GROUP_JOIN,PromTypeEnum::GROUP_OPNE]],
                     'order_prom_id' => $order['order_prom_id'],
@@ -53,11 +54,20 @@ class GroupOneServer
                     ))->addColumnsCondition(array(
                         'order_id' => $item['order_id']
                     ))->execute();
+
+                    $user = ItemModel::make('users')->addColumnsCondition(array('user_id' => $item['user_id']))->execute();
+                    $group_buy = ItemModel::make('group_buy')->addColumnsCondition(array('id' => $group_one['group_buy_id']))->execute();
+                    try{
+                        PhoneServer::sendMsg($user['mobile'],'恭喜你参与的团购产品'.$group_buy['title'].'成功获得产品');
+                    }catch (\Exception $exception){
+                        \CC::log(['user' => $user,'order' => $item],'phone_err');
+                    }
                     OrderStatusServer::instance($item['order_id'])->changeStatus(OrderStatusServer::TO_PAYED);
                 }
+
             }
         }
-        if($order['order_prom_type'] == PromTypeEnum::GROUP_JOIN || PromTypeEnum::GROUP_OWN_JOIN){
+        if($order['order_prom_type'] == PromTypeEnum::GROUP_JOIN || $order['order_prom_type'] == PromTypeEnum::GROUP_OWN_JOIN){
             InsertModel::make('group_one_member')->addData(array(
                 'group_one_id' => $order['order_prom_id'],
                 'uid' => $order['user_id'],

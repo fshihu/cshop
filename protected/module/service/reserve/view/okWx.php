@@ -19,7 +19,7 @@
                 </div>
                 <div class="weui-msg__text-area">
                     <h2 class="weui-msg__title">提交成功</h2>
-                    <p class="weui-msg__desc">您的预约信息提交成功，请耐心等待审核</p>
+                    <p class="weui-msg__desc">您的预约信息提交成功，我们将在1~3个工作日内完成审核，请耐心等待</p>
                 </div>
                 <div class="weui-msg__opr-area">
                     <p class="weui-btn-area">

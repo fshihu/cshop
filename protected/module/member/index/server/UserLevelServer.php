@@ -9,6 +9,7 @@ namespace module\member\index\server;
 
 
 use biz\Session;
+use CC\db\base\insert\InsertModel;
 use CC\db\base\select\ListModel;
 use CC\db\base\update\IncrementModel;
 use CC\db\base\update\UpdateModel;
@@ -97,5 +98,34 @@ class UserLevelServer
                 'recomm_golden_num' => 1,
             ))->execute();
         }
+        if($level == UserLevelServer::LEVEL_BLACK_CARD){
+            InsertModel::make('black_card_give')->addData(array(
+                'name' => '黑卡附属卡一',
+                'uid' => $uid,
+                'status' => 0,
+                'give_uid' => 0,
+            ))->addData(array(
+                'name' => '黑卡附属卡二',
+                'uid' => $uid,
+                'status' => 0,
+                'give_uid' => 0,
+            ))->addData(array(
+                'name' => '黑卡附属卡三',
+                'uid' => $uid,
+                'status' => 0,
+                'give_uid' => 0,
+            ))->addData(array(
+                'name' => '黑卡附属卡四',
+                'uid' => $uid,
+                'status' => 0,
+                'give_uid' => 0,
+            ))->addData(array(
+                'name' => '黑卡附属卡五',
+                'uid' => $uid,
+                'status' => 0,
+                'give_uid' => 0,
+            ))->execute();
+        }
+
     }
 }

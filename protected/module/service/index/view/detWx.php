@@ -54,7 +54,10 @@
      <div class="nav_click_cont">
          <div class="nav_click_cont_item gooods_content">
     <?php echo html_entity_decode($data['desc']) ?>
-         </div>
+         </div>                        <style type="text/css">
+                                     .starability-fade>label{ width:10px; height:10px;background-size: 100%;}
+                                 </style>
+
             <div class="nav_click_cont_item commont_list" style="display: none;">
                 <?php foreach($comment_list as $comment_item):?>
                 <div class="comm_item">
@@ -64,7 +67,24 @@
                     </div>
                     <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
                     <div class="t3">
-                        <?php echo $comment_item['comment_time'] ?>
+                        <?php for($i =0; $i< $comment_item['rating'];$i++):?>
+                        <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
+                                width: 10px;
+                                height: 10px;
+                                display: inline-block;
+                                background-size: 10px;
+                                background-position: 0px -10px;"></span>
+                        <?php endfor;?>
+                        <?php for($i =0; $i< 5-$comment_item['rating'];$i++):?>
+                        <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
+                                width: 10px;
+                                height: 10px;
+                                display: inline-block;
+                                background-size: 10px;
+                                background-position: 0px 0;"></span>
+                        <?php endfor;?>
+
+                        <?php echo date('Y-m-d h:i:s',$comment_item['comment_time']) ?>
                     </div>
                 </div>
                 <?php endforeach?>
@@ -72,15 +92,17 @@
              </div>
      </div>
 
-     <a class="buy_btn_now" href="<?php echo $this->genurl('reserve/index',['service_id'=>$data['id']]) ?>">
-         立即预约
-     </a>
  </div>
                     </div>
 
      </div>
 
 </div>
+
+    <a class="buy_btn_now"  href="<?php echo $this->genurl('reserve/index',['service_id'=>$data['id']]) ?>">
+        立即预约
+    </a>
+
     <script type="text/javascript">
         $(function () {
             $('.btn_group_sel .weui-btn').click(function () {

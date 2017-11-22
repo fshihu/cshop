@@ -28,15 +28,25 @@
                 </div>
         <?php  if($merchant && $merchant['status'] != 2):?>
                  <?php if($merchant['status'] == 0):?>
-                        <div style="padding: 10px;">
-                            申请中
+                <div class="page msg_success js_show">
+                    <div class="weui-msg">
+                        <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+                        <div class="weui-msg__text-area">
+                            <p class="weui-msg__desc">申请中</p>
                         </div>
-                 <?php endif;?>
+                     </div>
+                </div>
+                  <?php endif;?>
                 <?php if($merchant['status'] == 1):?>
-                       <div style="padding: 10px;">
-                           申请成功
-                       </div>
-                 <?php endif;?>
+                <div class="page msg_success js_show">
+                    <div class="weui-msg">
+                        <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+                        <div class="weui-msg__text-area">
+                            <p class="weui-msg__desc">申请成功，您已经是商家了</p>
+                        </div>
+                     </div>
+                </div>
+                  <?php endif;?>
           <?php else:?>
             <?php if($merchant['status'] == 2):?>
         <div style="padding: 10px;">
@@ -203,12 +213,13 @@
                      </div>
                  </div>
                           </div>
-                 <a href="javascript:;" class="btn sub_btn">提交申请</a>
              </form>
          <?php endif;?>
      </div>
 
 </div>
+<a href="javascript:;" class="btn sub_btn  ">提交申请</a>
+
     <div class="js_dialog" id="iosDialog2" style="display: none;">
                 <div class="weui-mask"></div>
                 <div class="weui-dialog">
@@ -229,7 +240,7 @@
                $('#iosDialog2').fadeOut(200);
                location.href='<?php echo $this->genurl('ok') ?>';
            });
-        $('.addr_eidt_btn').click(function () {
+        $('.sub_btn').click(function () {
             if($('#form_name').val() == ''){
                 alert('请填写联系人');
                 return false;
@@ -251,7 +262,7 @@
                 return false;
             }
             if($('#business_license').val() == ''){
-                alert('请上传联系人身份证背面');
+                alert('请上传营业执照');
                 return false;
             }
             if($('#legal_id_card_front').val() == ''){

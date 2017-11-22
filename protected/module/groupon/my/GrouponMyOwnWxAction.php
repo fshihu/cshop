@@ -41,7 +41,7 @@ class GrouponMyOwnWxAction extends ListAction
             'order_prom_type' => ['in',[PromTypeEnum::GROUP_OWN_OPEN,PromTypeEnum::GROUP_OWN_JOIN]],
         ))->addColumnsCondition($conditon)->leftJoin('group_one','go','t.order_prom_id = go.id')
             ->leftJoin('users','u','go.win_uid = u.user_id')
-            ->select('t.*,go.remain_num,u.nickname,go.win_uid,go.group_buy_id ')
+            ->select('t.*,go.remain_num,u.nickname,go.win_uid,go.group_buy_id,go.uid group_one_uid')
             ->order('order_id desc');
     }
     protected function getTable()

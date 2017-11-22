@@ -30,7 +30,7 @@ class MemberGoldGiveWxAction extends \CAction implements IFormViewBuilder
             $account = $request->getParams('account');
             $gold = $request->getParams('gold');
             $item = ItemModel::make('users')->addColumnsCondition(array(
-                'user_id' => $account,
+                'mobile' => $account,
             ))->execute();
             PhoneServer::checkCode(UserServer::getPhone(), $request->getParams('code'));
             if($item['user_id'] == $user['user_id']){

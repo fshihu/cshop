@@ -32,11 +32,19 @@
        </div>
     <div class="avatar_label">
         <?php foreach($group_one_members as $group_one_member):?>
-        <span class="avatar_label_item">
+        <span class="avatar_label_item" style="width:auto;">
             <img src="<?php echo $group_one_member['head_pic'] ?>" alt="" class="avatar">
              <?php if($group_one_member['is_leader']):?>
             <span class="weui-badge" style="margin-left: 5px;">团长</span>
              <?php endif;?>
+            <?php
+            foreach ($order_list as $order) {
+                if($group_one_member['uid'] == $order['user_id']){
+                    echo '手机号：'.$order['mobile'];
+                }
+                }
+
+            ?>
         </span>
         <?php endforeach?>
 
@@ -95,7 +103,7 @@
             $('#wheelCanvas').rotate({
                 angle:0,
                 animateTo:angles + 360 * 5, // 这里多旋转了5圈，圈数越多，转的越快
-                duration:8000,
+                duration:5000,
                 callback:function (){ // 回调方法
                     $("#tip").text(tip);
                     turnWheel.bRotate = !turnWheel.bRotate;

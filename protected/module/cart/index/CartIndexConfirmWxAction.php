@@ -26,7 +26,7 @@ class CartIndexConfirmWxAction extends \CAction
         $cart_ids = $request->getParams('cart_ids');
         $address_id = $request->getParams('address_id');
         $total_person_num = $request->getParams('total_person_num',1);
-        $use_gold = $request->getParams('use_gold',1);
+        $use_gold = $request->getParams('use_gold',0);
         $cart_ids = ArrayUtil::explodeStr($cart_ids);
         if(empty($cart_ids)){
             return new \CRenderData();

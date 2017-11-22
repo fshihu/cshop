@@ -51,6 +51,33 @@
              </span>
          </div>
      </div>
+     <?php if($data['is_create_group']):?>
+
+     <div class="m_title_1" >
+        <span class="line"></span> 别人开的团 <span class="line"></span>
+    </div>
+
+        <div class="list3_w">
+            <?php foreach($other_group_buys as $other_group_buy):?>
+            <div class="list3_item">
+                <span class="fl">
+                    <img class="avatar" src="<?php echo $other_group_buy['head_pic'] ?>" alt="">
+                    <span class="t1">
+                        <span class="t1_s"><?php echo $other_group_buy['nickname'] ?></span>
+                        <span class="t1_m">正在开团中</span>
+                    </span>
+                </span>
+                <span class="fr">
+                    <span class="t2">还差<?php echo $other_group_buy['remain_num'] ?>人成团</span>
+                    <a href="<?php echo $this->genurl('groupon/one/index',['group_one_id'=>$other_group_buy['id']]); ?>" class="btn_r">去参团</a>
+                </span>
+            </div>
+            <?php endforeach?>
+             <?php if(empty($other_group_buys)):?>
+                 <div style="text-align: center;padding: 10px;">暂无</div>
+             <?php endif;?>
+         </div>
+     <?php endif;?>
 
       <div class="weui-navbar navbar-sm nav_click">
          <a href="javascript:;" class="weui-navbar__item weui-bar__item_on">
@@ -73,6 +100,23 @@
                     </div>
                     <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
                     <div class="t3">
+                        <?php for($i =0; $i< $comment_item['rating'];$i++):?>
+                        <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
+                                width: 10px;
+                                height: 10px;
+                                display: inline-block;
+                                background-size: 10px;
+                                background-position: 0px -10px;"></span>
+                        <?php endfor;?>
+                        <?php for($i =0; $i< 5-$comment_item['rating'];$i++):?>
+                        <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
+                                width: 10px;
+                                height: 10px;
+                                display: inline-block;
+                                background-size: 10px;
+                                background-position: 0px 0;"></span>
+                        <?php endfor;?>
+
                         <?php echo date('Y-m-d h:i:s',$comment_item['comment_time']) ?>
                     </div>
                 </div>
@@ -209,7 +253,7 @@
                 },function () {
                     hide_buy_confirm();
                     if(click_type == 2){
-                        location.href = '<?php echo $this->genurl('cart/index/index');?>';
+                        location.href = '<?php echo $this->genurl('cart/index/index',['is_buy_now' => 1,'goods_id' => $data['goods_id']]);?>';
                     }else if(click_type == 3){
                         location.href = '<?php echo $this->genurl('cart/index/index',['prom_type'=>PromTypeEnum::GROUP_OWN_OPEN]);?>';
                     }else{

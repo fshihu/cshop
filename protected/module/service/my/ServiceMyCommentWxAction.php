@@ -38,6 +38,7 @@ class ServiceMyCommentWxAction extends \CAction
                 'content' => $request->getParams('content'),
                 'user_id' => $user['user_id'],
                 'username' => $user['nickname'],
+                'rating' => $request->getParams('rating'),
                 'add_time' => time(),
             ))->execute();
             UpdateModel::make('service_reserve')->addData(array(

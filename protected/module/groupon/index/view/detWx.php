@@ -10,9 +10,9 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title"><?php use module\member\index\UserServer;
+                             <p class="title"><?php use module\member\index\UserServer;
+                            echo \biz\Util::subString($data['goods_name'],6) ?></p>
 
-                                echo $data['goods_name'] ?></p>
                         </div>
                     </div>
 
@@ -66,7 +66,7 @@
             <span class="fl">
                 <img class="avatar" src="<?php echo $other_group_buy['head_pic'] ?>" alt="">
                 <span class="t1">
-                    <span class="t1_s"><?php echo $other_group_buy['nikname'] ?></span>
+                    <span class="t1_s"><?php echo $other_group_buy['nickname'] ?></span>
                     <span class="t1_m">正在开团中</span>
                 </span>
             </span>
@@ -102,7 +102,24 @@
                    </div>
                    <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
                    <div class="t3">
-                       <?php echo $comment_item['comment_time'] ?>
+                       <?php for($i =0; $i< $comment_item['rating'];$i++):?>
+                       <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
+                               width: 10px;
+                               height: 10px;
+                               display: inline-block;
+                               background-size: 10px;
+                               background-position: 0px -10px;"></span>
+                       <?php endfor;?>
+                       <?php for($i =0; $i< 5-$comment_item['rating'];$i++):?>
+                       <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
+                               width: 10px;
+                               height: 10px;
+                               display: inline-block;
+                               background-size: 10px;
+                               background-position: 0px 0;"></span>
+                       <?php endfor;?>
+
+                       <?php echo date('Y-m-d h:i:s',$comment_item['comment_time']) ?>
                    </div>
                </div>
                <?php endforeach?>
@@ -110,22 +127,23 @@
             </div>
     </div>
 
-     <div class="buy_btn">
-         <a href="<?php echo $this->genurl('goods/det/index',['id'=>$data['goods_id']]) ?>" class="bt_a bt_a1">
-             <div class="t1">￥<?php echo $data['shop_price'] ?></div>
-            <div class="t2">单独购买</div>
-         </a>
-         <a href="javascript:;" class="bt_a bt_a2">
-             <div class="t1">￥<?php echo $group_buy['price'] ?></div>
-             <div class="t2">一键开团</div>
-         </a>
-     </div>
  </div>
                     </div>
 
      </div>
 
 </div>
+    <div class="buy_btn">
+        <a href="<?php echo $this->genurl('goods/det/index',['id'=>$data['goods_id']]) ?>" class="bt_a bt_a1">
+            <div class="t1">￥<?php echo $data['shop_price'] ?></div>
+           <div class="t2">单独购买</div>
+        </a>
+        <a href="javascript:;" class="bt_a bt_a2">
+            <div class="t1">￥<?php echo $group_buy['price'] ?></div>
+            <div class="t2">一键开团</div>
+        </a>
+    </div>
+
     <script type="text/javascript">
         $('.buy_btn .bt_a .t2').click(function () {
             ajax_request('<?php echo $this->genurl('cart/index/add');?>',{

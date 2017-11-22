@@ -45,7 +45,7 @@ use module\service\reserve\enum\ReserveReasonEnum;
                 </div>
                 <div class="card_list">
                     <span class="t1">出生日期：</span>
-                    <span class="t2"><?php echo DateUtil::formatDate($service_reserve['birthday'],'Y年m月d日') ?></span>
+                    <span class="t2"><?php echo DateUtil::formatDate($service_reserve['birthday'],'Y年') ?></span>
                 </div>
                 <div class="card_list">
                     <span class="t1">职业：</span>
@@ -62,7 +62,7 @@ use module\service\reserve\enum\ReserveReasonEnum;
                     <span class="t2"><?php echo MarriageEnum::getValueByIndex($service_reserve['marriage']) ?></span>
                 </div>
                 <div class="card_list">
-                    <span class="t1">性格爱好：</span>
+                    <span class="t1">月收入：</span>
                     <span class="t2"><?php echo $service_reserve['hobby'] ?></span>
                 </div>
                 <div class="card_list">

@@ -15,6 +15,7 @@
 
 namespace app\admin\controller;
 use app\admin\logic\OrderLogic;
+use app\admin\logic\Phone;
 use think\AjaxPage;
 use think\Page;
 use think\Verify;
@@ -64,9 +65,15 @@ class User extends Base {
             $third_leader = DB::query("select third_leader,count(1) as count  from __PREFIX__users where third_leader in(".  implode(',', $user_id_arr).")  group by third_leader");
             $third_leader = convert_arr_key($third_leader,'third_leader');            
         }
+        if(!empty($user_id_arr))
+        {
+            $first_leader_id_arr = get_arr_column($userList, 'first_leader');
+            $goods_list = M('users')->where("user_id", "in" , implode(',', $first_leader_id_arr))->getField("user_id,nickname");
+        }
         $this->assign('first_leader',$first_leader);
         $this->assign('second_leader',$second_leader);
         $this->assign('third_leader',$third_leader);                                
+        $this->assign('goods_list',$goods_list);
         $show = $Page->show();
         $this->assign('userList',$userList);
         $this->assign('level',[
@@ -654,29 +661,30 @@ class User extends Base {
         $user = M('users')->where("user_id = {$withdrawals[uid]}")->find();
             $data = I('post.');
             // 如果是已经给用户转账 则生成转账流水记录
+        if($_GET['p'] == 1){
             if ($user['user_money'] < $withdrawals['money']) {
                 $this->error("用户余额不足{$withdrawals['money']}，不够提现");
                 exit;
             }
-            if($_GET['p'] == 1){
-                $data = ['status' => 1];
-            }else{
-                $data = ['status' => 2];
-            }
-        $money = $user['user_money'] - $withdrawals['money'];
-        M('users')->where('user_id','in', $user['user_id'])->save(array(
-            'user_money' => $money,
-            'extract_money' => $user['extract_money'] + $withdrawals['money'],
-        ));
-        M('user_money_record')->add(array(
-            'uid' => $user['user_id'],
-            'money' => -$withdrawals['money'],
-            'cur_money' => $money,
-            'content' => '提现成功',
-            'data_id' => $id,
-            'type' => 1,
-            'crate_time' => time(),
-        ));
+            $data = ['status' => 1];
+            $money = $user['user_money'] - $withdrawals['money'];
+            M('users')->where('user_id','in', $user['user_id'])->save(array(
+                'user_money' => $money,
+                'extract_money' => $user['extract_money'] + $withdrawals['money'],
+            ));
+            M('user_money_record')->add(array(
+                'uid' => $user['user_id'],
+                'money' => -$withdrawals['money'],
+                'cur_money' => $money,
+                'content' => '提现成功',
+                'data_id' => $id,
+                'type' => 1,
+                'crate_time' => time(),
+            ));
+        }else{
+            $data = ['status' => 2];
+        }
+
         M('extract_apply')->where('id','in', $id)->save($data);
             $this->success("操作成功!");
             exit;
@@ -768,27 +776,39 @@ class User extends Base {
     public function merchantdetail()
     {
         $model = M("merchant");
-                $where = "";
 
                 $count = $model->where(array('id' => $_GET['id']))->count();
                 $Page = $pager = new Page($count,10);
 //        $model->join('left join t_service s on t.');
 
-                $service = $model->where($where)->order("`id` asc")->limit($Page->firstRow.','.$Page->listRows)->find();
+                $service = $model->where(array('id' => $_GET['id']))->order("`id` asc")->limit($Page->firstRow.','.$Page->listRows)->find();
 
         $service['c_time'] = date('Y-m-d',$service['c_time']);
                 $this->assign('service',$service);
                 return $this->fetch();
+    }
+    public function sendMsg($mobile, $text)
+    {
+        $rs = Phone::sendMsg($mobile, $text);
+        if (!$rs) {
+            $this->error('短信发送失败!');
+            exit;
+        }
+        return true;
     }
 
     public function merchantconfirm()
     {
         $User = M("merchant"); // 实例化User对象
         // 要修改的数据对象属性赋值
+        $s = M("merchant")->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
         if($_GET['p'] == 1){
             $data['status'] = 1;
+            $this->sendMsg($s['contact'],'您的商家申请已通过审核。');
+
         }else if($_GET['p'] == 2){
             $data['status'] = 2;
+            $this->sendMsg($s['contact'],'您的商家申请未通过审核。');
         }
         if($_GET['p'] == 1){
             $merchant = $User->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录

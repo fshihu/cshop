@@ -14,6 +14,11 @@ use CRequest;
 
 class ServiceIndexIndexWxAction extends ListAction
 {
+    protected function getSearchCondition()
+    {
+        $this->dbCondition->order('id desc');
+    }
+
     protected function getTable()
     {
         return 'service';
