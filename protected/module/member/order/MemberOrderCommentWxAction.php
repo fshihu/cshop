@@ -13,6 +13,7 @@ use biz\Session;
 use CC\db\base\insert\InsertModel;
 use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
+use CC\db\base\update\UpdateModel;
 use CRequest;
 use module\cart\index\server\OrderStatusServer;
 use module\cart\index\server\PromTypeEnum;
@@ -53,6 +54,12 @@ class MemberOrderCommentWxAction extends \CAction
                 if ($get_gold > 0) {
                     UserGoldRecordServer::addGold($order['user_id'], UserGoldRecordServer::TYPE_BUY_GOODS_GET, $get_gold, '购买商品获得积分', $order['order_id']);
                 }
+                UpdateModel::make('order')->addData(array(
+                    'get_gold' => $get_gold,
+                ))->addColumnsCondition(array(
+                    'order_id' => $order['order_id'],
+                ))->execute();
+
             }
             OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_FINISH);
             return new \CJsonData();

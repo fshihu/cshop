@@ -61,6 +61,12 @@
              <a href="<?php echo $this->genurl('comment',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default  ">去评价</a>
          </div>
           <?php endif;?>
+          <?php if($wait_status == OrderWaitStatusEnum::FINISH):?>
+          <div class="t4">
+
+             <a href="<?php echo $this->genurl('return',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default  ">申请退换货</a>
+         </div>
+          <?php endif;?>
 
      </div>
       <?php endforeach?>

@@ -644,8 +644,11 @@ class Order extends Base {
         $order_by = I('order_by') ? I('order_by') : 'id';
         $sort_order = I('sort_order') ? I('sort_order') : 'desc';
         $status =  I('status');
-
+        $is_admin = $this->isAdmin();
         $where = " 1 = 1 ";
+        if(!$is_admin){
+            $where .= ' and admin_uid = '.session('admin_id');
+        }
         $order_sn && $where.= " and order_sn like '%$order_sn%' ";
         empty($order_sn)&& !empty($status) && $where.= " and status = '$status' ";
         $count = M('return_goods')->where($where)->count();
@@ -656,7 +659,11 @@ class Order extends Base {
         if(!empty($goods_id_arr)){
             $goods_list = M('goods')->where("goods_id in (".implode(',', $goods_id_arr).")")->getField('goods_id,goods_name');
         }
-        $state = C('REFUND_STATUS');
+        $state = [
+            '退换货待处理',
+            '退换货处理中',
+            '退换货已处理',
+        ];
         $this->assign('state',$state);
         $this->assign('goods_list',$goods_list);
         $this->assign('list',$list);
@@ -690,6 +697,7 @@ class Order extends Base {
         $goods = M('goods')->where("goods_id = {$return_goods[goods_id]}")->find();
         $type_msg = array('仅退款','退货退款','换货');
         $status_msg = C('REFUND_STATUS');
+        $order = M('order')->where(array('order_id'=>$return_goods['order_id']))->find();
         if(IS_POST)
         {
             $data = I('post.');
@@ -699,16 +707,26 @@ class Order extends Base {
             }
             $note ="退换货:{$type_msg[$return_goods['type']]}, 状态:{$status_msg[$data['status']]},处理备注：{$data['remark']}";
             $result = M('return_goods')->where("id= $return_id")->save($data);
-            if($result && $data['status']==1)
-            {
-                $orderLogic = new OrderLogic();
-                //审核通过才更改订单商品状态，进行退货，退款时要改对应商品修改库存
-                $type = ($return_goods['type']<2) ? 3 : 2;
-                M('order_goods')->where(['order_id' =>$return_goods['order_id'],'goods_id'=>$return_goods['goods_id']])
-                        ->save(array('is_send' => $type));//更改商品状态
-                $orderLogic->alterReturnGoodsInventory($return_goods['order_id'],$return_goods['goods_id']); //审核通过，恢复原来库存
+            if($_POST['price'] > 0){
+                self::addRecord($return_goods['user_id'],5,$_POST['price'],'退货退款',$return_goods['id']);
             }
-            $log = $orderLogic->orderActionLog($return_goods['order_id'],'refund',$note);
+            if($order['integral_money'] > 0){
+                self::addGold($return_goods['user_id'],8,$order['integral_money'],'退货退款',$return_goods['id']);
+            }
+            if($_POST['gold'] > 0){
+                self::addGold($return_goods['user_id'],9,$_POST['gold'],'退货退款扣除',$return_goods['id']);
+            }
+
+//            if($result && $data['status']==1)
+//            {
+//                $orderLogic = new OrderLogic();
+//                //审核通过才更改订单商品状态，进行退货，退款时要改对应商品修改库存
+//                $type = ($return_goods['type']<2) ? 3 : 2;
+//                M('order_goods')->where(['order_id' =>$return_goods['order_id'],'goods_id'=>$return_goods['goods_id']])
+//                        ->save(array('is_send' => $type));//更改商品状态
+//                $orderLogic->alterReturnGoodsInventory($return_goods['order_id'],$return_goods['goods_id']); //审核通过，恢复原来库存
+//            }
+//            $log = $orderLogic->orderActionLog($return_goods['order_id'],'refund',$note);
             $this->success('修改成功!');
             exit;
         }
@@ -718,11 +736,53 @@ class Order extends Base {
         $this->assign('user',$user); // 用户
         $this->assign('goods',$goods);// 商品
         $this->assign('return_goods',$return_goods);// 退换货
-        $order = M('order')->where(array('order_id'=>$return_goods['order_id']))->find();
         $this->assign('order',$order);//退货订单信息
         return $this->fetch();
     }
-    
+    public static function addGold($uid,$type,$gold,$content,$data_id)
+     {
+         $user =    M('users')->where(array(
+                     'user_id' => $uid,
+                 ))->find();
+
+         M('user_gold_record')->insert(array(
+             'uid' => $uid,
+             'money' => $gold,
+             'cur_money' => $user['gold'] + $gold,
+             'content' => $content,
+             'data_id' => $data_id,
+             'type' => $type,//转增
+             'crate_time' => time(),
+         ));
+         M('users')->where(array(
+             'user_id' => $uid
+         ))->save(array(
+                     'gold' => $user['gold'] + $gold
+                 ));
+     }
+
+    public static function addRecord($uid, $type, $money, $content, $data_id)
+   {
+       $user =    M('users')->where(array(
+                   'user_id' => $uid,
+               ))->find();
+
+      M('user_money_record')->insert(array(
+           'uid' => $uid,
+           'money' => $money,
+           'cur_money' => $user['user_money'] + $money,
+           'content' => $content,
+           'data_id' => $data_id,
+           'type' => $type,
+           'crate_time' => time(),
+       ));
+       M('users')->where(array(
+           'user_id' => $uid
+       ))->save(array(
+                   'user_money' => $user['user_money'] + $money
+               ));
+   }
+
     public function refund_back(){
     	$return_id = I('id');
         $return_goods = M('return_goods')->where("id= $return_id")->find();
