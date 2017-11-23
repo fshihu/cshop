@@ -719,7 +719,7 @@ class Order extends Base {
                     self::addGold($return_goods['user_id'],8,$order['integral_money'],'退货退款',$return_goods['id']);
                 }
                 if($_POST['gold'] > 0){
-                    self::addGold($return_goods['user_id'],9,$_POST['gold'],'退货退款扣除',$return_goods['id']);
+                    self::addGold($return_goods['user_id'],9,-$_POST['gold'],'退货退款扣除',$return_goods['id']);
                 }
              }
 
