@@ -5,7 +5,9 @@
  * Date: 2017/9/20
  * Time: 15:32
  */
+use CC\db\base\select\ListModel;
 use module\cart\index\server\OrderWaitStatusEnum;
+use module\goods\server\GoodsServer;
 
 ?>
 
@@ -26,6 +28,28 @@ use module\cart\index\server\OrderWaitStatusEnum;
 
         </div>
         <div class="  weui-panel_access  ">
+            <div class="list5">
+                <?php foreach([['order_id' => $_GET['order_id']]] as $item):?>
+               <div class="list_item">
+                   <div class="t1"> <?php echo $wait_status_val ?></div>
+                   <?php $order_goods = ListModel::make('order_goods')->addColumnsCondition(array('order_id' => $item['order_id']))->execute(); ?>
+
+                   <?php foreach($order_goods as $order_good):?>
+                           <a href="<?php echo $this->genurl('goods/det/index',['id' => $order_good['goods_id']]); ?>">
+                           <div class="t2">
+                                        <img class="t2_img" src="<?php echo GoodsServer::getImg($order_good['original_img']) ?>" alt="">
+                                        <div class="ts_s">
+                                            <div class="t2_s_1"><?php echo $order_good['goods_name'] ?></div>
+                                        </div>
+                                    </div>
+                       </a>
+                   <?php endforeach?>
+
+
+               </div>
+                <?php endforeach?>
+            </div>
+
             <form action="" style="padding:10px;">
                 <div style="padding:10px 0;">
                     <span style="display: inline-block;vertical-align: middle;">满意度：</span>

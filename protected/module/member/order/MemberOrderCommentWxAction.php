@@ -29,6 +29,7 @@ class MemberOrderCommentWxAction extends \CAction
 
     public function execute(CRequest $request)
     {
+
         if($this->request->hasPost()){
             $order = ItemModel::make('order')->addColumnsCondition(array(
                 'order_id' => $request->getParams('order_id'),

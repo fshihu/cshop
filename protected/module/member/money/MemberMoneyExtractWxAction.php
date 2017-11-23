@@ -14,12 +14,14 @@ use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
 use CErrorException;
 use CRequest;
+use module\basic\phone\server\PhoneServer;
 use module\member\index\UserServer;
 
 class MemberMoneyExtractWxAction  extends \CAction
 {
     public function execute(CRequest $request)
     {
+//        PhoneServer::sendMsg2();
         $user = UserServer::getUser();
         if($request->hasPost()){
             $bank_id = $request->getParams('bank_id');
