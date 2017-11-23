@@ -57,7 +57,7 @@
          </div>
      </div>
  <div class="m_title_1" >
-    <span class="line"></span> 别人开的团 <span class="line"></span>
+    <span class="line"></span> 正在进行的团购 <span class="line"></span>
 </div>
 
     <div class="list3_w">

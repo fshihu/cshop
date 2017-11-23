@@ -46,7 +46,6 @@ class GoodsDetIndexWxAction  extends \CAction
             ->select('t.content comment_content,t.rating,t.add_time comment_time,u.nickname uname,u.head_pic ')->execute();
 
         $other_group_buys = ListModel::make('group_one')->addColumnsCondition(array(
-            't.uid' => ['!=',Session::getUserID()],
             'is_finish' => 0,
             'pay_status' => 1,
             'group_buy_id' => 0,
