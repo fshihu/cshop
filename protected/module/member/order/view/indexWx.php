@@ -63,8 +63,15 @@
           <?php endif;?>
           <?php if($wait_status == OrderWaitStatusEnum::FINISH):?>
           <div class="t4">
-
-             <a href="<?php echo $this->genurl('return',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default  ">申请退换货</a>
+             <?php if($item['return_status'] == 0):?>
+                 <a href="<?php echo $this->genurl('return',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default  ">申请退换货</a>
+             <?php endif;?>
+              <?php if($item['return_status'] == 1):?>
+                  退换货处理中
+              <?php endif;?>
+              <?php if($item['return_status'] == 2):?>
+                  退换货已处理
+              <?php endif;?>
          </div>
           <?php endif;?>
 

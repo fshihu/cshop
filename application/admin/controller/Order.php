@@ -707,15 +707,21 @@ class Order extends Base {
             }
             $note ="退换货:{$type_msg[$return_goods['type']]}, 状态:{$status_msg[$data['status']]},处理备注：{$data['remark']}";
             $result = M('return_goods')->where("id= $return_id")->save($data);
-            if($_POST['price'] > 0){
-                self::addRecord($return_goods['user_id'],5,$_POST['price'],'退货退款',$return_goods['id']);
-            }
-            if($order['integral_money'] > 0){
-                self::addGold($return_goods['user_id'],8,$order['integral_money'],'退货退款',$return_goods['id']);
-            }
-            if($_POST['gold'] > 0){
-                self::addGold($return_goods['user_id'],9,$_POST['gold'],'退货退款扣除',$return_goods['id']);
-            }
+             M('order')->where(array('order_id' => $order['order_id']))->save(array(
+                 'return_status' => $data['status'],
+             ));
+             if($return_goods['type'] == 1 && $data['status'] == 2){
+
+                if($_POST['price'] > 0){
+                    self::addRecord($return_goods['user_id'],5,$_POST['price'],'退货退款',$return_goods['id']);
+                }
+                if($order['integral_money'] > 0){
+                    self::addGold($return_goods['user_id'],8,$order['integral_money'],'退货退款',$return_goods['id']);
+                }
+                if($_POST['gold'] > 0){
+                    self::addGold($return_goods['user_id'],9,$_POST['gold'],'退货退款扣除',$return_goods['id']);
+                }
+             }
 
 //            if($result && $data['status']==1)
 //            {
