@@ -18,7 +18,7 @@
         <div class="  weui-panel_access  " style="height: 100%;background: #f3f7f8">
  <div class="goods_list">
       <div class="banner ban1">
-         <div class="mslide" id="slideTpshop">
+         <div class="mslide" id="slideTpshop_noauto">
              <ul>
                  <!--广告表-->
                      <?php foreach($service_images as $service_image):?>

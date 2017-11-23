@@ -482,3 +482,6 @@ background-size: 100%;border: none;}
 .cart_btn{position: absolute;bottom:70px;right:15px;background: rgba(232, 232, 232, 0.8);border-radius: 50%; padding: 10px; width:24px; height:24px;     }
 .cart_btn img{ width:20px;}
 .cart_btn_no_bottom{bottom: 20px;}
+
+#slideTpshop_noauto{ height:240px;}
+#slideTpshop_noauto li img{ height:240px;}

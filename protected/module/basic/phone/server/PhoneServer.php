@@ -35,7 +35,7 @@ class PhoneServer
 
     public static function sendMsg2()
     {
-        $sms = new SmsApi("your access key", "your access key secret"); // 请参阅 https://ak-console.aliyun.com/ 获取AK信息
+        $sms = new SmsApi("LTAIaARN1CpPFU3S", "your access key secret"); // 请参阅 https://ak-console.aliyun.com/ 获取AK信息
 
         $response = $sms->sendSms(
             "短信签名", // 短信签名
