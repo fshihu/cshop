@@ -71,7 +71,10 @@ class Order extends Base {
         $consignee =  ($keyType && $keyType == 'consignee') ? $keywords : I('consignee','','trim');
         $consignee ? $condition['consignee'] = trim($consignee) : false;
         
-        
+        $is_admin = $this->isAdmin();
+        if(!$is_admin){
+            $condition['admin_uid'] = session('admin_id');
+        }
         if($begin && $end){
         	$condition['add_time'] = array('between',"$begin,$end");
         }
@@ -105,6 +108,11 @@ class Order extends Base {
         $this->assign('page',$show);// 赋值分页输出
         $this->assign('pager',$Page);
         return $this->fetch();
+    }
+    protected function isAdmin()
+    {
+        $admin_info = getAdminInfo(session('admin_id'));
+        return $admin_info['role_id'] != 2;
     }
 
     /*

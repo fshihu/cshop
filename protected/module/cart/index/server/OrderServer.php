@@ -140,6 +140,11 @@ class OrderServer
         );
         return InsertModel::make('order')->addData($data)->execute();
     }
+
+    protected function getAdminUid()
+    {
+        return (int)$this->cart_list[0]['admin_uid'];
+    }
     private  function addOrderInfo($car_price)
     {
         $user_id = Session::getUserID();
@@ -147,6 +152,7 @@ class OrderServer
         $shipping_code = 0;
         $user_note = '';
         $pay_name = '微信支付';
+        $admin_uid = $this->getAdminUid();
         $data = array(
             'order_sn'         => self::getOrderSn(), // 订单编号
             'user_id'          =>$user_id, // 用户id
@@ -178,6 +184,7 @@ class OrderServer
             'total_person_num' => $this->total_person_num,
             'user_note'        =>$user_note, // 用户下单备注
             'pay_name'         =>$pay_name,//支付方式，可能是余额支付或积分兑换，后面其他支付方式会替换
+            'admin_uid' => $admin_uid,
         );
         $id = InsertModel::make('order')->addData($data)->execute();
         if($data['integral_money'] > 0){

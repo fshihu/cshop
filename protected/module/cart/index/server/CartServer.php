@@ -31,7 +31,7 @@ class CartServer
         $list_mode->addColumnsCondition($conditon)
             ->select('
             t.id,t.goods_id,t.goods_num,t.spec_key,t.prom_type,t.prom_id,
-            g.goods_name,g.shop_price,g.original_img,g.cost_price,
+            g.goods_name,g.shop_price,g.original_img,g.cost_price,g.admin_uid,
             sgp.key_name spec_key_name')
             ->leftJoin('goods', 'g', 't.goods_id = g.goods_id')
             ->leftJoin('spec_goods_price', 'sgp', 't.goods_id = sgp.goods_id and t.spec_key = sgp.key');
