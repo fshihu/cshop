@@ -62,8 +62,16 @@ use module\cart\index\server\OrderWaitStatusEnum;
                 </div>
             </div>
 
-            <div class="order">
-                <div class="t1">我的订单</div>
+            <div class="order" style="  ">
+                <div class="weui-cells  " style="overflow:visible;margin-bottom: 20px;">
+                    <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('order/index',['wait_status'=> '_all']) ?>">
+                    <div class="weui-cell__bd">
+                        <p>我的订单</p>
+                    </div>
+                    <div class="weui-cell__ft"></div>
+                    </a>
+                </div>
+
                 <div class="t2_w clearfix">
                     <a class="t2" href="<?php echo $this->genurl('order/index',['wait_status'=> OrderWaitStatusEnum::WAIT_PAY]) ?>">
                         <div class="t2_s_w">
