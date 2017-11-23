@@ -27,6 +27,6 @@ class WxConf
 
     public static function getMchid()
     {
-        return '1487688512';
+        return '1491393722';
     }
 }
