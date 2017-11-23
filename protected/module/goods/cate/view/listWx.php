@@ -1,4 +1,4 @@
-<div class="page   " style="min-height: 100%;background: #f3f7f8;">
+<div class="page  weui-tab__panel " style="min-height: 100%;padding-bottom:0;background: #f3f7f8;">
     <div class="page__bd"  style="min-height: 100%;">
         <div class="weui-cells weui-title-title">
 
@@ -69,6 +69,9 @@
      </div>
 
 </div>
+<a class="cart_btn cart_btn_no_bottom" style="" href="<?php echo $this->genurl('cart/index/index') ?>">
+    <img src="/public/biz/wx/common/images/my/Shoppingcart_icon.png" alt="" class="icon">
+</a>
 <script type="text/javascript">
     var is_click = false;
     $('.right_xialat').click(function () {
