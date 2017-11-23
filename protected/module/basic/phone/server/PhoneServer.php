@@ -35,32 +35,21 @@ class PhoneServer
 
     public static function sendMsg2()
     {
-        $sms = new SmsApi("LTAIaARN1CpPFU3S", "your access key secret"); // 请参阅 https://ak-console.aliyun.com/ 获取AK信息
+        $sms = new SmsApi("LTAIaARN1CpPFU3S", "puSLjJMRYhISnOlscbpEgIAvEcxV2h"); // 请参阅 https://ak-console.aliyun.com/ 获取AK信息
 
         $response = $sms->sendSms(
-            "短信签名", // 短信签名
-            "SMS_0000001", // 短信模板编号
-            "12345678901", // 短信接收者
+            "阿里云短信测试专用", // 短信签名
+            "SMS_106015134", // 短信模板编号
+            "18080487295", // 短信接收者
             Array (  // 短信模板中字段的值
-                "code"=>"12345",
-                "product"=>"dsd"
+                "customer"=>"12345",
             ),
             "123"   // 流水号,选填
         );
         echo "发送短信(sendSms)接口返回的结果:\n";
         print_r($response);
 
-        sleep(2);
 
-        $response = $sms->queryDetails(
-            "12345678901",  // 手机号码
-            "20170718", // 发送时间
-            10, // 分页大小
-            1 // 当前页码
-            // "abcd" // bizId 短信发送流水号，选填
-        );
-        echo "查询短信发送情况(queryDetails)接口返回的结果:\n";
-        print_r($response);
     }
 
     public static function checkCode($phone,$code )

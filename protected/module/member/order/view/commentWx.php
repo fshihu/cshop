@@ -5,6 +5,8 @@
  * Date: 2017/9/20
  * Time: 15:32
  */
+use module\cart\index\server\OrderWaitStatusEnum;
+
 ?>
 
 <!--搜索栏-s-->
@@ -63,7 +65,7 @@
         ajax_request('', $('form').serialize(), function () {
             Tip('提交成功');
             setTimeout(function () {
-                location.href = '<?php echo $this->genurl('member/index/index');?>';
+                location.href = '<?php echo $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::FINISH]);?>'
             }, 200);
         });
         return false;
