@@ -189,6 +189,14 @@
                      </div>
                  </div>
                  <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
+                         <span>客服微信号：</span>
+                     </label>
+                     <div class="data-group data-group-form_name">
+                         <input type="text" name="wx_account" id="form_wx_account"  class="" placeholder="请输入客服微信号"
+                                >
+                     </div>
+                 </div>
+                 <div class="row-group  row-group-form_name  clearfix"><label class="data-label">
                          <span>用户名：</span>
                      </label>
                      <div class="data-group data-group-form_name">
@@ -218,7 +226,10 @@
      </div>
 
 </div>
+<?php  if(!($merchant && $merchant['status'] != 2)):?>
+
 <a href="javascript:;" class="btn sub_btn  ">提交申请</a>
+<?php endif;?>
 
     <div class="js_dialog" id="iosDialog2" style="display: none;">
                 <div class="weui-mask"></div>

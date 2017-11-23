@@ -763,7 +763,7 @@ class User extends Base {
 //        $model->join('left join t_service s on t.');
         $model->alias('t');
 //        $model->field('t.*,s.name service_name');
-                $brandList = $model->where($where)->order("t.`id` asc")->limit($Page->firstRow.','.$Page->listRows)->select();
+                $brandList = $model->where($where)->order("t.`id` desc")->limit($Page->firstRow.','.$Page->listRows)->select();
                 $show  = $Page->show();
         $cat_list = M('goods_category')->where("parent_id = 0")->getField('id,name'); // 已经改成联动菜单
                 $this->assign('cat_list',$cat_list);
@@ -781,7 +781,7 @@ class User extends Base {
                 $Page = $pager = new Page($count,10);
 //        $model->join('left join t_service s on t.');
 
-                $service = $model->where(array('id' => $_GET['id']))->order("`id` asc")->limit($Page->firstRow.','.$Page->listRows)->find();
+                $service = $model->where(array('id' => $_GET['id']))->order("`id` desc")->limit($Page->firstRow.','.$Page->listRows)->find();
 
         $service['c_time'] = date('Y-m-d',$service['c_time']);
                 $this->assign('service',$service);

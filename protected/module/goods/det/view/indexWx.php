@@ -42,6 +42,11 @@
              <span class="t1_s">价格： <span class="t1_s_m">￥<?php echo $data['shop_price'] ?>元</span></span>
              <span class="t1_k">市场价：¥<?php echo $data['market_price'] ?>元 </span>
          </div>
+          <?php if($merchant['wx_account']):?>
+         <div class="t1">
+             <span class="t1_s">客服微信号： <span class="t1_s_"><?php echo $merchant['wx_account'] ?></span></span>
+         </div>
+          <?php endif;?>
           <div class="buy_num_w">
              <span class="fl">数量</span>
              <span class="fr">

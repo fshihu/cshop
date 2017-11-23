@@ -22,7 +22,7 @@
                 '/public/biz/swiper/css/swiper.min.css',
             '/public/biz/swiper/js/swiper.min.js',
                 '/public/biz/swipeSlide/js/swipeSlide.min.js',
-                '/public/biz/wx/common/css/style.css?32',
+                '/public/biz/wx/common/css/style.css?33',
                 '/public/biz/wx/common/js/script.js?10',
 
             ]

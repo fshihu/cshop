@@ -15,6 +15,7 @@ use CC\db\base\select\ListModel;
 use CC\util\arr\ArrayUtil;
 use CRequest;
 use module\groupon\index\enum\GroupTypeEnum;
+use module\member\index\UserServer;
 
 class GoodsDetIndexWxAction  extends \CAction
 {
@@ -52,7 +53,8 @@ class GoodsDetIndexWxAction  extends \CAction
             'goods_id' => $id,
             'group_type' => GroupTypeEnum::TYPE_OWN,
         ))->select('t.*,u.nickname,u.head_pic')->leftJoin('users','u','t.uid = u.user_id')->execute();
-
+        $user = ItemModel::make('users')->addColumnsCondition(array('admin_uid' =>$data['admin_uid']))->execute();
+        $merchant = ItemModel::make('merchant')->addColumnsCondition(array('uid' => $user['user_id']))->execute();
         return new \CRenderData(array(
             'data' => $data,
             'goods_images' => $goods_images,
@@ -61,6 +63,7 @@ class GoodsDetIndexWxAction  extends \CAction
             'specs' => $specs,
             'spec_items' => $spec_items,
             'other_group_buys' => $other_group_buys,
+            'merchant' => $merchant,
         ));
     }
 }
