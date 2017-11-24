@@ -73,7 +73,7 @@ function drawWheelCanvas(){
     //strokeStyle 绘制颜色
     ctx.strokeStyle = "#2CC7C5"; // 红色
     //font 画布上文本内容的当前字体属性
-    ctx.font = '16px Microsoft YaHei';
+    ctx.font = '26px Microsoft YaHei';
 
     // 注意，开始画的位置是从0°角的位置开始画的。也就是水平向右的方向。
     // 画具体内容
@@ -106,7 +106,7 @@ function drawWheelCanvas(){
         // 红色字体
         ctx.fillStyle = "#fff";
         var rewardName = turnWheel.rewardNames[index];
-        var line_height = 17;
+        var line_height = 26;
         // translate方法重新映射画布上的 (0,0) 位置
         // context.translate(x,y);
         // 见PPT图片，
@@ -128,7 +128,7 @@ function drawWheelCanvas(){
         if(rewardName.indexOf("M")>0){//查询是否包含字段 流量包
             var rewardNames = rewardName.split("M");
             for(var j = 0; j<rewardNames.length; j++){
-                ctx.font = (j == 0)?'bold 20px Microsoft YaHei':'16px Microsoft YaHei';
+                ctx.font = (j == 0)?'bold 40px Microsoft YaHei':'44px Microsoft YaHei';
                 if(j == 0){
                     ctx.fillText(rewardNames[j]+"M", -ctx.measureText(rewardNames[j]+"M").width / 2, j * line_height);
                 }else{
