@@ -1,0 +1,55 @@
+
+
+/* 大转盘样式 */
+.trun_content{
+    display:block;
+    width:95%;
+    /*居中显示*/
+    margin: 30px auto;
+}
+
+.trun_content .wheel{
+    display:block;
+    width:100%;
+    position:relative;
+
+    /*转盘的背景*/
+    background: #0A817F;
+    border-radius: 50%;
+
+}
+
+.trun_content .wheel canvas.item{
+    width:100%;
+    position: relative;top:3px;
+}
+
+.trun_content .wheel .pointer{
+    width: 80px;
+        height: 80px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -40px;
+        margin-top: -40px;
+        background: #36B8B6;
+        border-radius: 50%;
+    padding:5px;
+}
+.trun_content .wheel .pointer_inner {
+    width:100%; height:100%;
+    background: #2CC7C5;
+    border: 6px solid #8FF5F4;
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: #fff;
+        font-size: 12px;
+        line-height: 68px;
+        text-align: center;
+}
+
+.tips{
+    text-align:center;
+    margin:20px 0;
+    font:normal 24px 'MicroSoft YaHei';
+}
