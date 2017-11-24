@@ -66,9 +66,8 @@ class GrouponMyOwnWxAction extends ListAction
             'go.is_clearing' => 0,
         ))->leftJoin('group_one','go','t.order_prom_id = go.id')
             ->leftJoin('users','u','go.win_uid = u.user_id')
-            ->select('t.*,go.remain_num,u.nickname,go.win_uid,go.group_buy_id,go.is_finish go_is_finish ')
             ->group('go.is_finish')
-            ->order('order_id desc')->select('count(*) count_num')->execute();
+            ->order('order_id desc')->select('count(*) count_num,go.is_finish go_is_finish')->execute();
 
         return [
             'end_desc' => $end_desc,
