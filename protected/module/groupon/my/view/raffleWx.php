@@ -1,7 +1,7 @@
 <?php echo \CC\util\common\server\AssetManager::instance()->getCssJs([
         '/public/biz/turntable/js/jQueryRotate.js',
         '/public/biz/turntable/js/index.js?4',
-        '/public/biz/turntable/css/index.css?2',
+        '/public/biz/turntable/css/index.css?3',
 ]) ?>
 <!--搜索栏-s-->
 <div class="page   " style="height: 100%; ">
