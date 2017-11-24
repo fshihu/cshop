@@ -36,20 +36,25 @@ use module\cart\index\server\OrderWaitStatusEnum;
                 </a>
                 <div class="t2">
                     <div class="t2_s t2_s1">
-                        <div class="t2_s_m_1">
-                            <?php echo $user['gold'] ?>
-                        </div>
-                        <div class="t2_s_m_2">
-                            我的积分
-                        </div>
+                        <a href="<?php echo $this->genurl('gold/index') ?>">
+                            <div class="t2_s_m_1">
+                                <?php echo $user['gold'] ?>
+                            </div>
+                            <div class="t2_s_m_2">
+                                我的积分
+                            </div>
+                        </a>
                     </div>
                     <div class="t2_s t2_s2">
-                        <div class="t2_s_m_1">
-                            <?php echo \module\member\index\UserServer::getLevelName($user) ?>
-                        </div>
-                        <div class="t2_s_m_2">
-                            我的等级
-                        </div>
+                        <a href="<?php echo $this->genurl('level/index') ?>">
+                            <div class="t2_s_m_1">
+                                <?php echo \module\member\index\UserServer::getLevelName($user) ?>
+                            </div>
+                            <div class="t2_s_m_2">
+                                我的等级
+                            </div>
+                        </a>
+
                     </div>
                     <div class="t2_s t2_s3">
                         <div class="t2_s_m_1">
