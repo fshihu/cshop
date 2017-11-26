@@ -36,6 +36,12 @@ class OrderHanderServer
         }
 
         OrderStatusServer::instance($order['order_id'])->changeStatus(OrderStatusServer::TO_PAYED);
+        UpdateModel::make('order')->addColumnsCondition(array(
+            'order_id' => $order['order_id'],
+        ))->addData(array(
+            'wx_order_sn' => $this->data['transaction_id'],
+        ))->execute();
+
         if($order['order_prom_type'] == PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY || $order['order_prom_type'] == PromTypeEnum::USER_LEVEL_RENEW_TRUN_MONEY){
             UserLevelOrderServer::handle($order);
         }
