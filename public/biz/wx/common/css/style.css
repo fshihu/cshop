@@ -260,7 +260,7 @@ background-size: 16px;}
 .buy_price .buy_btn_w .price_red { color: red;}
 .buy_price .buy_btn_w .buy_btn_red {  border-radius: 0px;float:right; height:50px; line-height:50px; font-size: 15px;}
 
-.buy_confirm{ position: fixed;bottom: 0; z-index:502; width:100%;background: #ffffff;}
+.buy_confirm{ position: fixed;bottom: 0; z-index:512; width:100%;background: #ffffff;}
 .buy_confirm .bc_hd{border-top: 1px solid #DBDBDB;border-bottom: 1px solid #DBDBDB;position: relative;min-height: 80px;}
 .buy_confirm .bc_hd .bc_img{ width:85px;height:85px;position: absolute;top:-20px; left:20px;border: 1px solid #dbdbdb;}
 .buy_confirm .bc_hd .bc_info{ padding-left:120px; padding-right:30px; padding-top:10px;}

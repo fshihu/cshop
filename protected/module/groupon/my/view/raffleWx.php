@@ -1,7 +1,7 @@
 <?php echo \CC\util\common\server\AssetManager::instance()->getCssJs([
         '/public/biz/turntable/js/jQueryRotate.js',
-        '/public/biz/turntable/js/index.js',
-        '/public/biz/turntable/css/index.css',
+        '/public/biz/turntable/js/index.js?4',
+        '/public/biz/turntable/css/index.css?3',
 ]) ?>
 <!--搜索栏-s-->
 <div class="page   " style="height: 100%; ">
@@ -23,6 +23,7 @@
            <div class="wheel">
                <canvas class="item" id="wheelCanvas" width="422px" height="422px"></canvas>
                <div class="pointer">
+                   <div class="pointer_jiantou"></div>
                    <div class="pointer_inner">点击抽取</div>
                </div>
            </div>
@@ -32,19 +33,12 @@
        </div>
     <div class="avatar_label">
         <?php foreach($group_one_members as $group_one_member):?>
-        <span class="avatar_label_item" style="width:auto;">
+        <span class="avatar_label_item"  >
             <img src="<?php echo $group_one_member['head_pic'] ?>" alt="" class="avatar">
              <?php if($group_one_member['is_leader']):?>
             <span class="weui-badge" style="margin-left: 5px;">团长</span>
              <?php endif;?>
-            <?php
-            foreach ($order_list as $order) {
-                if($group_one_member['uid'] == $order['user_id']){
-                    echo '手机号：'.$order['mobile'];
-                }
-                }
 
-            ?>
         </span>
         <?php endforeach?>
 

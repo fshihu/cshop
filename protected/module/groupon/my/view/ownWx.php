@@ -21,9 +21,19 @@
 
        echo $is_end ==0?'weui-bar__item_on':'' ?>">
            待成团
+           <?php if($group_own[0] > 0):?>
+                                        <span class="weui-badge" style="position: absolute;top: -.4em;right:-3px;z-index: 1    ; ">
+                                            <?php echo (int)$group_own[0]  ?>
+                                        </span>
+                   <?php endif;?>
        </a>
        <a href="<?php echo $this->genurl('',['is_end'=>1]) ?>" class="weui-navbar__item   <?php echo $is_end ==1?'weui-bar__item_on':'' ?>">
            待抽取
+           <?php if($group_own[1] > 0):?>
+                                        <span class="weui-badge" style="position: absolute;top: -.4em;right:-3px;z-index: 1    ; ">
+                                            <?php echo (int)$group_own[1]  ?>
+                                        </span>
+                   <?php endif;?>
        </a>
        <a href="<?php echo $this->genurl('',['is_end'=>2]) ?>" class="weui-navbar__item   <?php echo $is_end ==2?'weui-bar__item_on':'' ?>">
            已完成

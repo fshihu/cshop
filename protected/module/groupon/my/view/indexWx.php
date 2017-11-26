@@ -21,6 +21,12 @@
 
        echo $this->genurl(''); ?>" class="weui-navbar__item <?php echo $is_end?'':'weui-bar__item_on' ?>">
            待成团
+            <?php if($user['group_my_num'] > 0):?>
+                                 <span class="weui-badge" style="position: absolute;top: -.4em;right:-3px;z-index: 1    ; ">
+                                     <?php echo (int)$user['group_my_num']  ?>
+                                 </span>
+            <?php endif;?>
+
        </a>
        <a href="<?php echo $this->genurl('',['is_end' =>1]) ?>" class="weui-navbar__item  <?php echo !$is_end?'':'weui-bar__item_on' ?> ">
            已过期
