@@ -43,7 +43,7 @@
          .m_title_1 .line{display: inline-block; width:25px; height:1px;background: #000000;position: relative;top:-6px;}
      </style>
 <div class="m_title_1" >
-    <span class="line"></span> 正在进行的团购商品 <span class="line"></span>
+    <span class="line"></span> 正在进行的幸运轮商品 <span class="line"></span>
 </div>
      <div class="h_item_1_w">
               <?php foreach($group_buys as $i => $group_buy):?>

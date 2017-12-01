@@ -57,7 +57,7 @@
          </div>
      </div>
  <div class="m_title_1" >
-    <span class="line"></span> 正在进行的团购 <span class="line"></span>
+    <span class="line"></span> 正在进行的幸运轮 <span class="line"></span>
 </div>
 
     <div class="list3_w">
@@ -67,12 +67,12 @@
                 <img class="avatar" src="<?php echo $other_group_buy['head_pic'] ?>" alt="">
                 <span class="t1">
                     <span class="t1_s"><?php echo $other_group_buy['nickname'] ?></span>
-                    <span class="t1_m">正在开团中</span>
+                    <span class="t1_m">正在进行幸运轮</span>
                 </span>
             </span>
             <span class="fr">
-                <span class="t2">还差<?php echo $other_group_buy['remain_num'] ?>人成团</span>
-                <a href="<?php echo $this->genurl('groupon/one/index',['group_one_id'=>$other_group_buy['id']]); ?>" class="btn_r">去参团</a>
+                <span class="t2">还差<?php echo $other_group_buy['remain_num'] ?>人</span>
+                <a href="<?php echo $this->genurl('groupon/one/index',['group_one_id'=>$other_group_buy['id']]); ?>" class="btn_r">参加</a>
             </span>
         </div>
         <?php endforeach?>

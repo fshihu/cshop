@@ -32,6 +32,13 @@ class PayIndexIndexWxAction  extends \CAction
         $order_info = ItemModel::make('order')->addColumnsCondition(array(
             'order_id' => $request->getParams('order_id'),
         ))->execute();
+        if($order_info['order_prom_type'] == PromTypeEnum::GROUP_JOIN || $order_info['order_prom_type'] == PromTypeEnum::GROUP_OWN_JOIN){
+            $group_one = ItemModel::make('group_one')->addColumnsCondition(array('id' =>$order_info['order_prom_id']))->execute();
+            if($group_one['is_finish']){
+                throw new \CErrorException('团购已完成，无法再参加');
+            }
+        }
+
         $orderSn = OrderServer::getOrderSn();
         UpdateModel::make('order')->addData(array(
             'order_sn' => $orderSn,
