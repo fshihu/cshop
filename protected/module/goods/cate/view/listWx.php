@@ -22,6 +22,7 @@
             .cate_goods_list_2 .goods_item a .price{ color: #5C9242;}
             .cate_goods_list_3 .gl_nav a.ac{ color: #375767;border-bottom-color: #375767;}
             .cate_goods_list_3 .goods_item a .price{ color: #375767;}
+
         </style>
         <div class="  weui-panel_access  " style="">
  <div class="goods_list cate_goods_list_<?php echo $cate_i ?>">
@@ -55,6 +56,9 @@
          <div class="goods_item">
              <a href="<?php echo $this->genurl('goods/det/index',['id'=>$item['goods_id']]) ?>">
                  <img src="<?php echo GoodsServer::getImg($item['original_img']) ?>" alt="" width="100%" height="155">
+                  <?php if($item['is_create_group']):?>
+                 <img class="sanjiao" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/xingyun1.png" alt="">
+                  <?php endif;?>
                  <div class="txt"><?php echo $item['goods_name'] ?></div>
                  <div class="price">￥<?php echo $item['shop_price'] ?></div>
              </a>

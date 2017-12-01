@@ -22,9 +22,13 @@
 
      <div class="goods_item_w server_itme_w">
          <?php foreach($list as $item):?>
-         <div class="goods_item">
+         <div class="goods_item goods_item_s">
              <a href="<?php echo $this->genurl('goods/det/index',array('id' => $item['goods_id'])) ?>">
+
                  <img src="<?php echo GoodsServer::getImg($item['original_img']) ?>" alt="" width="100%" height="155">
+                 <?php if($item['is_create_group']):?>
+                   <img class="sanjiao" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/xingyun1.png" alt="">
+                    <?php endif;?>
                  <div class="txt"><?php echo $item['goods_name'] ?></div>
                  <div class="price">￥<?php echo $item['shop_price'] ?></div>
              </a>
