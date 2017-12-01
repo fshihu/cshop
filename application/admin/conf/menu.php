@@ -78,7 +78,7 @@ return	array(
 					array('name' => '订单列表', 'act'=>'index', 'op'=>'Order'),
 //					array('name' => '发货单', 'act'=>'delivery_list', 'op'=>'Order'),
 //					array('name' => '退款单', 'act'=>'refund_order_list', 'op'=>'Order'),
-//					array('name' => '退换货', 'act'=>'return_list', 'op'=>'Order'),
+					array('name' => '退换货', 'act'=>'return_list', 'op'=>'Order'),
 //					array('name' => '添加订单', 'act'=>'add_order', 'op'=>'Order'),
 //			        array('name' => '订单日志','act'=>'order_log','op'=>'Order'),
 			)),

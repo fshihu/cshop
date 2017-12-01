@@ -16,9 +16,11 @@
     <div class="mDiv">
       <div class="ftitle">
         <h3>退货退款管理</h3>
-        <h5>(共{$page->totalRows}条记录)</h5>
+        <h5>(共{$page->totalRows}条记录)
+            </h5>
       </div>
-      <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i></div>
+      <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i> </div>
+        <a href="?<?php echo http_build_query($_GET).'&export=1'; ?>">导出</a>
 	  <form class="navbar-form form-inline"  method="post" name="search-form2" id="search-form2">  
 	  		<input type="hidden" name="order_by" value="order_id">
             <input type="hidden" name="sort" value="desc">

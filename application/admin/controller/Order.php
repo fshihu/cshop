@@ -634,6 +634,60 @@ class Order extends Base {
     public function delivery_list(){
         return $this->fetch();
     }
+    public function exprotReturn()
+    {
+        // 搜索条件
+         $order_sn =  trim(I('order_sn'));
+         $order_by = I('order_by') ? I('order_by') : 'id';
+         $sort_order = I('sort_order') ? I('sort_order') : 'desc';
+         $status =  I('status');
+         $is_admin = $this->isAdmin();
+         $where = " 1 = 1 ";
+         if(!$is_admin){
+             $where .= ' and admin_uid = '.session('admin_id');
+         }
+         $order_sn && $where.= " and order_sn like '%$order_sn%' ";
+         empty($order_sn)&& !empty($status) && $where.= " and status = '$status' ";
+         $count = M('return_goods')->where($where)->count();
+         $Page  = new AjaxPage($count,13);
+         $show = $Page->show();
+         $list = M('return_goods')->where($where)->order("$order_by $sort_order")->limit("{$Page->firstRow},{$Page->listRows}")->select();
+        $goods_id_arr = get_arr_column($list, 'order_id');
+        $order_list = [];
+
+        if(!empty($goods_id_arr)){
+            $order_list = M('order')->where("order_id in (".implode(',', $goods_id_arr).")")->field('order_sn,order_amount,wx_order_sn')->select();
+        }
+         $this->exportCSV( $order_list);
+    }
+    function exportCSV(  $rows=[], $filename=false)
+        {
+            # Ensure that we have data to be able to export the CSV
+
+                # modify the name somewhat
+                $name = ($filename !== false) ? $filename . ".csv" : "export.csv";
+
+                # Set the headers we need for this to work
+                header('Content-Type: text/csv; charset=utf-8');
+                header('Content-Disposition: attachment; filename=' . $name);
+
+                # Start the ouput
+                $output = fopen('php://output', 'w');
+
+
+
+                # Then loop through the rows
+                foreach($rows as $row)
+                {
+                    # Add the rows to the body
+                    fputcsv($output, $row);
+                }
+
+                # Exit to close the stream off
+                exit();
+
+
+        }
 
     /*
      * ajax 退货订单列表
@@ -1029,11 +1083,14 @@ class Order extends Base {
     	downloadExcel($strTable,'order');
     	exit();
     }
-    
+
     /**
      * 退货单列表
      */
     public function return_list(){
+        if($_GET['export']){
+            $this->exprotReturn();
+        }
         return $this->fetch();
     }
     
