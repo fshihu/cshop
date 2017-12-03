@@ -99,8 +99,8 @@ return	array(
 //					array('name' => '分成日志', 'act'=>'rebate_log', 'op'=>'Distribut'),
 //			)),
 
-            array('name' => '服务','child' => array(
-                array('name' => '服务列表', 'act'=>'index', 'op'=>'Service'),
+            array('name' => '活动','child' => array(
+                array('name' => '服务活动', 'act'=>'index', 'op'=>'Service'),
                 array('name' => '预约列表', 'act'=>'reserve', 'op'=>'Service'),
                 array('name' => '评论列表', 'act'=>'index', 'op'=>'Servicecomment'),
 

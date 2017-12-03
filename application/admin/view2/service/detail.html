@@ -93,9 +93,9 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
 
                 </dl>
                 <dl>
-                    <dt>服务名称：</dt>
+                    <dt>活动名称：</dt>
                     <dd>{$service.service_name}</dd>
-                    <dt>部位：</dt>
+                    <dt>活动地址：</dt>
                     <dd>{$service.part}</dd>
 
                 </dl>
@@ -221,12 +221,12 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                  <?php endif;?>
                 <?php if($service['status'] == 1):?>
                 <a class="ncap-btn-big ncap-btn-green" href="{:U('Admin/Service/confirm',array('id'=>$service['id'],'p'=>3))}">
-                               		服务完成</a>
+                               		活动完成</a>
                 <?php endif;?>
                 <?php if($service['status'] == 4):?>
                 <div>
                    <!-- 管理员后台设置市场部人员佣金比例为10%，市场部人员a，
-                    推荐金卡用户b，有足够的积分用于抵扣（抵扣10%），预约服务g，成功到医院消费2000，
+                    推荐金卡用户b，有足够的积分用于抵扣（抵扣10%），预约活动g，成功到医院消费2000，
                     医院补贴公司1000，用户补贴比例20%，市场部人员返现比例10%，
 -->
                     <div>医院消费：<input id="yiyuan_xiaofei" type="text"/>元 </div>
