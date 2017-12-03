@@ -53,10 +53,10 @@ class ServiceReserveIndexWxAction extends SaveAction implements IFormViewBuilder
             new YearInput('briday','出生日期',['must']),
             (new TextInput('occupation','职业',['must']))->setPlaceHolder('请输入职业'),
             (new AddrInput('name','出生地'))->setIsShowDistirct(false),
-            new RadioButtonListInput('marriage','婚姻状况',MarriageEnum::getValues()),
+//            new RadioButtonListInput('marriage','婚姻状况',MarriageEnum::getValues()),
             (new SelectInput('hobby','月收入',['5000以内'=>'5000以内','5000~15000'=>'5000~15000','15000~30000'=>'15000~30000','30000以上'=>'30000以上'])),
-            new CheckBoxListInput('reserve_reason','预约理由',ReserveReasonEnum::getValues(),['must']),
-            (new TextInput('reserve_reason_other','其他理由'))->setPlaceHolder('请输入其他理由'),
+//            new CheckBoxListInput('reserve_reason','预约理由',ReserveReasonEnum::getValues(),['must']),
+//            (new TextInput('reserve_reason_other','其他理由'))->setPlaceHolder('请输入其他理由'),
             (new TextInput('date','预约日期',['must'])),
             new SubmitInput(),
         ];
