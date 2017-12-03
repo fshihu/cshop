@@ -4,7 +4,7 @@
 
             <div class="weui-cell weui-cell_access" href="javascript:;">
                  <div class="weui-cell__bd">
-                    <p class="title">美丽服务商城</p>
+                    <p class="title">有机商城</p>
                 </div>
                 <div class="weui-cell__ft weui-title-menu">
                 </div>
