@@ -301,6 +301,15 @@
                     <span class="err" id="err_cost_price" style="color:#F00; display:none;"></span>
                 </dd>
             </dl>
+            <dl class="row"  >
+                <dt class="tit">
+                    <label for=" ">运费</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" value="{$goodsInfo.freight_price}" name="freight_price" class="t_mane" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" />
+                    <span class="err" id="err_cost_ssprice" style="color:#F00; display:none;"></span>
+                </dd>
+            </dl>
             <dl class="row" style="display: none;">
                 <dt class="tit">
                     <label for="record_no">佣金</label>

@@ -5,6 +5,8 @@
  * Date: 2017/9/20
  * Time: 15:32
  */
+use module\service\index\enum\ServiceStatusEnum;
+
 ?>
 
 <!--搜索栏-s-->
@@ -63,7 +65,7 @@
         ajax_request('', $('form').serialize(), function () {
             Tip('提交成功');
             setTimeout(function () {
-                location.href = '<?php echo $this->genurl('member/index/index');?>';
+                location.href = '<?php echo $this->genurl('member/my/index',['status' => ServiceStatusEnum::STATUS_WAIT_SUBSIDY]);?>';
             }, 200);
         });
         return false;
