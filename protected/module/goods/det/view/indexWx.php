@@ -1,4 +1,5 @@
     <!--搜索栏-s-->
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <div class="page  weui-tab__panel  " style="height: 100%;">
     <div class="page__bd"  style="min-height: 100%;">
         <div class="weui-cells weui-title-title">
@@ -132,14 +133,51 @@
 
 
  </div>
+
+            <div class="weui-navbar navbar-sm  ">
+                     <a href="javascript:;" class="weui-navbar__item ">
+                         商品推荐
+                     </a>
+                   </div>
+            <div class="goods_list">
+
+                <div class="goods_item_w server_itme_w">
+                    <?php foreach($recomm_list as $item):?>
+                    <div class="goods_item">
+                        <a href="<?php echo $this->genurl('goods/det/index',array('id' => $item['goods_id'])) ?>">
+                            <img src="<?php echo GoodsServer::getImg($item['original_img']) ?>" alt="" width="100%" height="155">
+                            <div class="txt"><?php echo $item['goods_name'] ?></div>
+                            <div class="price">￥<?php echo $item['shop_price'] ?></div>
+                        </a>
+                    </div>
+                    <?php endforeach?>
+                 </div>
+
+            </div>
+
                     </div>
 
      </div>
 
 </div>
-    <a class="cart_btn cart_btn1 " style="" href="<?php echo $this->genurl('cart/index/index') ?>">
-        <img src="/public/biz/wx/common/images/my/shopping_cart_2.png" alt="" class="icon">
+    <div class="js_dialog" id="iosDialog2" style="display: none;">
+                <div class="weui-mask"></div>
+                <div class="weui-dialog">
+                    <div class="weui-dialog__bd">
+                        <span class="t1_s">客服微信号： <span class="t1_s_"><?php echo $merchant['wx_account'] ?></span></span>
+                    </div>
+                    <div class="weui-dialog__ft">
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary js_dialog_proy_2">确定</a>
+                    </div>
+                </div>
+            </div>
+
+    <a class="cart_btn  cart_btn1" style="" href="<?php echo $this->genurl('cart/index/index') ?>">
+        <img src="/public/biz/wx/common/images/my/Shoppingcart_icon.png" alt="" class="icon">
     </a>
+    <a class="cart_btn cart_btn_sr " style="" href="javascript:;">
+            <img src="/public/biz/wx/common/images/kfu_s.png" alt="" class="icon">
+        </a>
     <div class="buy_btn">
        <a href="<?php echo $this->genurl('cart/index/index') ?>" class="bt_a bt_a1">
           <div class="t3">加入购物车</div>
@@ -188,6 +226,42 @@
         </div>
 
     <script type="text/javascript">
+        $('.cart_btn_sr').click(function () {
+            $('#iosDialog2').fadeIn(200);
+        });
+        $('.js_dialog_proy_2').click(function () {
+            $('#iosDialog2').fadeOut(200);
+        });
+
+        <?php $signPackage = \biz\wx\WxJs::getSignPackage(); ?>
+        wx.config({
+
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+
+            appId: '<?php echo $signPackage['appId'] ?>', // 必填，公众号的唯一标识
+
+            timestamp: <?php echo $signPackage['timestamp'] ?>, // 必填，生成签名的时间戳
+
+            nonceStr: '<?php echo $signPackage['nonceStr'] ?>', // 必填，生成签名的随机串
+
+            signature: '<?php echo $signPackage['signature'] ?>',// 必填，签名，见附录1
+
+            jsApiList: ['previewImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+
+        });
+        $('.gooods_content img').click(function () {
+            var urls = [];
+            $('.gooods_content img').each(function () {
+                urls.push(location.origin+$(this).attr('src'));
+            });
+            wx.previewImage({
+
+                current: $(this).attr('src'), // 当前显示图片的http链接
+
+                urls: urls // 需要预览的图片http链接列表
+
+            });
+        });
         $('.buy_confirm').show().css({bottom:-$('.buy_confirm').height()-20});
         var click_type = 1;
         $('.buy_btn .bt_a1,.buy_btn .bt_a2').click(function () {

@@ -486,6 +486,13 @@ background-size: 100%;border: none;}
 .cart_btn img{ width:20px;}
 .cart_btn_no_bottom{bottom: 20px;}
 
+#slideTpshop_noauto{ height:240px;}
+#slideTpshop_noauto li img{ height:240px;}
+
+
+.cart_btn_sr{left: 10px;
+    right: auto;
+    text-align: center;}
 .cart_btn1{padding: 0px; width:auto;height: auto;background: none;}
 .cart_btn1 img{ width:50px;  }
 

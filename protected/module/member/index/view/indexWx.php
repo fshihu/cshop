@@ -56,13 +56,23 @@ use module\cart\index\server\OrderWaitStatusEnum;
                         </a>
 
                     </div>
-                    <div class="t2_s t2_s3">
+                    <!--<div class="t2_s t2_s3">
                         <div class="t2_s_m_1">
                             <?php echo \module\member\index\UserServer::getRecommUser() ?>
                         </div>
                         <div class="t2_s_m_2">
                             推荐人
                         </div>
+                    </div>-->
+					<div class="t2_s t2_s3">
+						<a href="<?php echo $this->genurl('recomm/index') ?>">
+                        <div class="t2_s_m_1">
+                            <?php echo $user['recomm_count'] ?>
+                        </div>
+                        <div class="t2_s_m_2">
+                            推荐会员
+                        </div>
+						</a>
                     </div>
                 </div>
             </div>

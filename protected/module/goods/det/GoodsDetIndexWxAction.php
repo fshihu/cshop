@@ -55,6 +55,11 @@ class GoodsDetIndexWxAction  extends \CAction
         ))->select('t.*,u.nickname,u.head_pic')->leftJoin('users','u','t.uid = u.user_id')->execute();
         $user = ItemModel::make('users')->addColumnsCondition(array('admin_uid' =>$data['admin_uid']))->execute();
         $merchant = ItemModel::make('merchant')->addColumnsCondition(array('uid' => $user['user_id']))->execute();
+        $recomm_list = ListModel::make('goods')->addColumnsCondition(array(
+            'cat_id' => $data['cat_id'],
+            'goods_id' =>[ '!=' , $data['goods_id']],
+        ))->limit(4)->order('rand()')->execute();
+
         return new \CRenderData(array(
             'data' => $data,
             'goods_images' => $goods_images,
@@ -64,6 +69,7 @@ class GoodsDetIndexWxAction  extends \CAction
             'spec_items' => $spec_items,
             'other_group_buys' => $other_group_buys,
             'merchant' => $merchant,
+            'recomm_list' =>$recomm_list,
         ));
     }
 }

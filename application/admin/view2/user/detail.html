@@ -102,6 +102,26 @@
             </dl>
             <dl class="row">
                 <dt class="tit">
+                    <label>推荐人ID</label>
+                </dt>
+                <dd class="opt">
+                    <input type="text" name="first_leader" value="<?php echo $user['first_leader'] ?>"/>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
+                    <label>会员等级</label>
+                </dt>
+                <dd class="opt">
+                    <select name="level">
+                        <?php foreach([1=>'普通会员','金卡会员','黑卡会员','黑卡附属卡会员'  ] as $i => $name):?>
+                        <option value="<?php echo $i ?>" <?php echo $i ==$user['level']?'selected':'' ?>><?php echo $name ?></option>
+                        <?php endforeach?>
+                    </select>
+                </dd>
+            </dl>
+            <dl class="row">
+                <dt class="tit">
                     <label>是否商家</label>
                 </dt>
                 <dd class="opt">
@@ -113,6 +133,8 @@
                     
                 </dd>
             </dl>
+
+
             <dl class="row">
                 <dt class="tit">
                     <label>商家佣金比例</label>
