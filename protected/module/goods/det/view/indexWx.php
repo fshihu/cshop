@@ -105,6 +105,9 @@
                         <span class="t1_s"><?php echo $comment_item['uname'] ?></span>
                     </div>
                     <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
+                     <?php if($comment_item['comment_reply']):?>
+                    <div class="t2" style="padding-top: 0;padding-left:10px;">商家回复：<?php echo $comment_item['comment_reply'] ?></div>
+                     <?php endif;?>
                     <div class="t3">
                         <?php for($i =0; $i< $comment_item['rating'];$i++):?>
                         <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);

@@ -44,7 +44,7 @@ class GoodsDetIndexWxAction  extends \CAction
         $comment_list = ListModel::make('comment')->addColumnsCondition(array(
             'goods_id' => $id,
         ))->leftJoin('users','u','t.user_id = u.user_id')->order('t.comment_id desc')
-            ->select('t.content comment_content,t.rating,t.add_time comment_time,u.nickname uname,u.head_pic ')->execute();
+            ->select('t.comment_reply,t.content comment_content,t.rating,t.add_time comment_time,u.nickname uname,u.head_pic ')->execute();
 
         $other_group_buys = ListModel::make('group_one')->addColumnsCondition(array(
             'is_finish' => 0,
