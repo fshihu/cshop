@@ -799,19 +799,18 @@ class User extends Base {
 
     public function merchantconfirm()
     {
-        $User = M("merchant"); // 实例化User对象
         // 要修改的数据对象属性赋值
         $s = M("merchant")->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
         if($_GET['p'] == 1){
             $data['status'] = 1;
-            $this->sendMsg($s['contact'],'您的商家申请已通过审核。');
-
+//            $this->sendMsg($s['contact'],'您的商家申请已通过审核。');
+            self::updateLevel($s['uid'],3);
         }else if($_GET['p'] == 2){
             $data['status'] = 2;
             $this->sendMsg($s['contact'],'您的商家申请未通过审核。');
         }
         if($_GET['p'] == 1){
-            $merchant = $User->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
+            $merchant = M("merchant")->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
             $admin_data = array(
                 'user_name' => $merchant['account'],
                 'password' => $merchant['pwd'],
@@ -835,9 +834,57 @@ class User extends Base {
             ));
         }
         M("merchant")->where(array('id' => $_GET['id']))->save($data); // 根据条件更新记录
-        $this->success('操作成功!',U('index'));
+        $this->success('操作成功!',U('merchantlist'));
 
     }
+
+    public static function updateLevel($uid,$level)
+    {
+        M('users')->where(array(
+            'user_id' => $uid,
+        ))->save(array(
+            'level' => $level,
+            'level_start_time' => time(),
+            'level_end_time' => strtotime('+1 year'),
+            'recomm_golden_num' => 0
+        ));
+
+         if($level == 3){
+             M('black_card_give')->add(array(
+                 'name' => '黑卡附属卡一',
+                 'uid' => $uid,
+                 'status' => 0,
+                 'give_uid' => 0,
+             ));
+             M('black_card_give')->add(array(
+                 'name' => '黑卡附属卡二',
+                 'uid' => $uid,
+                 'status' => 0,
+                 'give_uid' => 0,
+             ));
+             M('black_card_give')->add(array(
+                 'name' => '黑卡附属卡三',
+                 'uid' => $uid,
+                 'status' => 0,
+                 'give_uid' => 0,
+             ));
+             M('black_card_give')->add(array(
+                 'name' => '黑卡附属卡四',
+                 'uid' => $uid,
+                 'status' => 0,
+                 'give_uid' => 0,
+             ));
+             M('black_card_give')->add(array(
+                 'name' => '黑卡附属卡五',
+                 'uid' => $uid,
+                 'status' => 0,
+                 'give_uid' => 0,
+             ));
+
+        }
+
+    }
+
     public function transfer($atype,$data){
         if($atype == 'weixin'){
             include_once  PLUGIN_PATH."payment/weixin/weixin.class.php";
