@@ -175,7 +175,7 @@
                 </div>
             </div>
 
-    <a class="cart_btn  cart_btn1" style="" href="<?php echo $this->genurl('cart/index/index') ?>">
+    <a class="cart_btn   " style="" href="<?php echo $this->genurl('cart/index/index') ?>">
         <img src="/public/biz/wx/common/images/my/Shoppingcart_icon.png" alt="" class="icon">
     </a>
     <a class="cart_btn cart_btn_sr " style="" href="javascript:;">
