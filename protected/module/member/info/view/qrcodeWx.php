@@ -23,22 +23,9 @@
                 </div>
 
             </div>
-    <div class="  weui-panel_access  " >
-         <div class="mem_info_qrcode">
-            <div class="qrcode_w">
-                <img src="<?php echo $user['qr_code_url'] ?>" alt="" class="qrcode">
-            </div>
-             <div class="weui-cell info">
-                             <div class="weui-cell__hd"><img class="ims" src="<?php echo $baseUrl ?>/public/biz/wx/common/images/recolog.png" alt=""  ></div>
-                             <div class="weui-cell__bd">
-                                 <div class="t1">高端总汇<?php /*echo $user['nickname'] */?></div>
-                                 <div class="t2">推广链接</div>
-                                 <div class="t2"><?php echo $user['recomm_url'] ?></div>
-                                 <div class="t3">请扫描二维码或长按链接复制给用户</div>
-                             </div>
-                         </div>
-         </div>
-                 </div>
+    <div class="  weui-panel_access  " style="padding: 10px;">
+        <img src="<?php echo $user['qr_code_url'] ?>" style="width: 100%;" alt="" class="qrcode">
+    </div>
 
  </div>
 
