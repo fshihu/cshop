@@ -61,6 +61,7 @@ class GrouponMyRaffleWxAction extends \CAction
                     $order = $item;
                 }
                 try{
+                    $goods['goods_name'] = $goods['goods_name'].',序号：'.mt_rand(10,99).' ';
                     if($item['user_id'] == $win_item['uid']){
                         PhoneServer::sendMsg($item['mobile'],'恭喜你参与的团购产品'.$goods['goods_name'].'成功获得产品');
                     }else{
