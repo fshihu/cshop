@@ -1,6 +1,6 @@
 
     <!--搜索栏-s-->
-<div class="page   weui-tab__panel  " style="padding-bottom:92px;height: 100%;background: #f3f7f8;">
+<div class="page   weui-tab__panel  " style="padding-bottom:120px;height: 100%;background: #f3f7f8;">
     <div class="page__bd"  style="min-height: 100%;">
         <div class="weui-cells weui-title-title">
 
@@ -9,6 +9,7 @@
                          use module\cart\index\server\PromTypeEnum;
                          use module\goods\server\GoodsServer;
                          use module\member\gold\server\GoldServer;
+                         use module\member\index\server\UserLevelServer;
 
                          echo $this->genurl('member/index/index'); ?>">
                              <div class="weui-cell__ft">
@@ -62,7 +63,7 @@
               <?php endif;?>
 
             <div class="weui-panel__bd list4 list4_s"  >
-                <?php $total_price = 0;$ids = ''; ?>
+                <?php $total_price = 0;$ids = '';$total_freight_price = 0 ;$gold_card_discount_price = 0;$black_card_discount_price = 0;?>
                 <?php foreach($list as $item):?>
                 <div class="list_4s_item" style="position: relative;">
                      <?php if($has_del):?>
@@ -91,7 +92,10 @@
                     </div>
 
                 </div>
-                    <?php $total_price += $item['shop_price']*$item['goods_num'];
+                    <?php $total_price += $item['shop_price']*$item['goods_num'] + $item['freight_price'];
+                    $total_freight_price += $item['freight_price'];
+                    $gold_card_discount_price += $item['gold_card_discount_price'];
+                    $black_card_discount_price += $item['black_card_discount_price'];
                     $ids .= ','.$item['id'];?>
                 <?php endforeach?>
 
@@ -132,7 +136,52 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
 
 </div>
     <?php if(!empty($list)):?>
-    <div class="buy_price">
+    <div class="buy_price" style="z-index:999;">
+    	<div class="buy_orderDetail">
+        	<div class="buy_orderDetailMt">
+            	<span>账单详情</span>
+                <img src="/public/biz/wx/common/images/clickImg1.png"  />
+            </div>
+            <div class="buy_orderDetailPull">
+            	<div class="listDetail">
+                    <p>
+                        <span class="ltName">应付金额：</span>
+                        <span class="rtPrice">￥<?php echo $total_price - $total_freight_price ?></span>
+                    </p>
+                    <p>
+                        <span class="ltName">抵扣积分：</span>
+                        <span class="rtPrice">8</span>
+                    </p>
+                    <p>
+                        <span class="ltName">运费：</span>
+                        <span class="rtPrice">￥<?php echo $total_freight_price ?></span>
+                    </p>
+                    <p>
+                        <span class="ltName">实付：</span>
+                        <span class="rtPrice">￥<?php echo $total_price  ?></span>
+                    </p>
+                </div>
+                <div class="listDetail">
+                	<p>
+                        <span class="ltName">会员返现：</span>
+                        <?php $user = \module\member\index\UserServer::getUser();
+                            $fan_price = 0;
+                            if( $user['level']== UserLevelServer::LEVEL_GOLDED_CARD){
+                                $fan_price = $gold_card_discount_price;
+                            }
+                            if( $user['level']== UserLevelServer::LEVEL_BLACK_CARD){
+                                $fan_price = $black_card_discount_price;
+                            }
+                        ?>
+                        <span class="rtPrice">￥ <?php echo $fan_price ?></span>
+                    </p>
+                    <p>
+                        <span class="ltName">到手价：</span>
+                        <span class="rtPrice">￥<?php echo $total_price - $fan_price ?></span>
+                    </p>
+                </div>
+            </div>
+        </div>
          <?php if($prom_type == PromTypeEnum::NORMAL):?>
         <div class="buy_jifen">
             <span class="checkbox jifen_check" style="vertical-align: middle;"></span>
@@ -154,6 +203,17 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
      <?php endif;?>
 
     <script type="text/javascript">
+		//账单详情
+		$(function(){
+			$(".buy_orderDetailMt").click(function(){
+				$(this).siblings(".buy_orderDetailPull").toggle();
+				if($(this).siblings(".buy_orderDetailPull").is(":visible")){
+					$(this).find("img").attr("src","/public/biz/wx/common/images/clickImg2.png");
+				}else{
+					$(this).find("img").attr("src","/public/biz/wx/common/images/clickImg1.png");
+				}
+			});
+		});
         $('.close_xs').click(function () {
             ajax_request('<?php echo $this->genurl('del') ?>',{id:$(this).data('id')},function () {
                 location.href = '';

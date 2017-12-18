@@ -17,6 +17,7 @@ class OrderWaitStatusEnum extends Enum
     const WAIT_RECIVE = 2;
     const WAIT_COMMENT = 3;
     const FINISH = 4;
+    const RAFFLE = 5;
     protected function initAddDatas()
     {
         $this->add(self::WAIT_PAY,'待支付');
@@ -24,5 +25,6 @@ class OrderWaitStatusEnum extends Enum
         $this->add(self::WAIT_RECIVE,'待收货');
         $this->add(self::WAIT_COMMENT,'待评论');
         $this->add(self::FINISH,'已完成');
+        $this->add(self::RAFFLE,'待抽奖');
     }
 }
