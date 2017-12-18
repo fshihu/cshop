@@ -105,8 +105,14 @@ class OrderServer
         $car_price['order_prom_id'] = $this->prom_id;
         $car_price['order_prom_type'] = $this->prom_type;
         $car_price['order_prom_amount'] = 0;
+        $car_price['freight_price'] = 0;
+        $car_price['gold_card_discount_price'] = 0;
+        $car_price['black_card_discount_price'] = 0;
         foreach ($this->cart_list as $cart) {
             $car_price['goodsFee'] += $cart['shop_price'];
+            $car_price['freight_price'] += $cart['freight_price'];
+            $car_price['gold_card_discount_price'] += $cart['gold_card_discount_price'];
+            $car_price['black_card_discount_price'] += $cart['black_card_discount_price'];
         }
         if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
             $car_price['goodsFee'] =  NumberUtil::formatFloat(($car_price['goodsFee'] / $this->total_person_num));
@@ -118,7 +124,7 @@ class OrderServer
             $car_price['integral'] = $use_gold_num;
             $car_price['pointsFee'] = $use_gold_num;
         }
-        $car_price['payables'] = $car_price['goodsFee'] - $car_price['pointsFee'];
+        $car_price['payables'] = $car_price['goodsFee'] - $car_price['pointsFee'] + $car_price['goodsFee'];
         return $car_price;
     }
 
@@ -176,6 +182,9 @@ class OrderServer
             'integral_money'   =>$car_price['pointsFee'],//'使用积分抵多少钱',
             'total_amount'     =>($car_price['goodsFee'] + $car_price['postFee']),// 订单总额
             'order_amount'     =>$car_price['payables'],//'应付款金额',
+            'freight_price'     =>$car_price['freight_price'],//'应付款金额',
+            'gold_card_discount_price'     =>$car_price['gold_card_discount_price'],//'应付款金额',
+            'gold_card_discount_price'     =>$car_price['gold_card_discount_price'],//'应付款金额',
             'add_time'         =>time(), // 下单时间
             'order_prom_type'    =>$this->prom_type,//'订单优惠活动id',
             'order_prom_id'    =>$this->prom_id,//'订单优惠活动id',
@@ -209,6 +218,9 @@ class OrderServer
             $data2['spec_key_name']      = $val['spec_key_name']; // 商品规格名称
             $data2['member_goods_price'] = $val['member_goods_price']; // 会员折扣价
             $data2['cost_price']         = $val['cost_price']; // 成本价
+            $data2['freight_price']         = $val['freight_price']; //
+            $data2['gold_card_discount_price']         = $val['gold_card_discount_price']; //
+            $data2['black_card_discount_price']         = $val['black_card_discount_price']; //
             $data2['give_integral']      = $val['give_integral']; // 购买商品赠送积分
             $data2['prom_type']          = $this->prom_type; // 0 普通订单,1 限时抢购, 2 团购 , 3 促销优惠
             $data2['prom_id']            = $this->prom_id; // 活动id
