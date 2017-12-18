@@ -13,6 +13,8 @@ use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
 use CC\db\base\update\UpdateModel;
 use module\cart\index\server\PromTypeEnum;
+use module\member\index\server\UserLevelServer;
+use module\member\index\UserServer;
 
 class MoneyServer
 {
@@ -62,13 +64,22 @@ class MoneyServer
              合伙人获得佣金：40*10%=4
              */
             $good_count = count($list);
+            $user = UserServer::getUser($order['user_id']);
+
             foreach ($list as $item) {
                 //cost_price
                 if($item['admin_uid']){
+                    $card_discount_price = 0;
+                    if(UserLevelServer::isGoldedCrad($user)){
+                        $card_discount_price = $item['gold_card_discount_price'];
+                    }
+                    if(UserLevelServer::isBlackCrad($user)){
+                        $card_discount_price = $item['black_card_discount_price'];
+                    }
                     //goods_price
                     $gold_price = (int)($order['integral_money'] / $good_count);
                     $profit_price = $item['goods_price'] - $gold_price - $item['cost_price'];
-                    $profit_price = $profit_price *  $item['merchant_ratio'] / 100 + $item['cost_price'];
+                    $profit_price = $profit_price *  $item['merchant_ratio'] / 100 + $item['cost_price'] - $card_discount_price;
                     if($profit_price > 0){
                         MoneyServer::addRecord($item['admin_to_uid'],MoneyServer::PROFIT_PRICE,$profit_price,'合伙人佣金',$item['rec_id']);
                     }
