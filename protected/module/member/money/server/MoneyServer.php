@@ -23,8 +23,7 @@ class MoneyServer
     const SERVICE_SUBSIDY =3;//服务补贴
     const MARKET_SERVICE_COMMISSION = 4;//服务预约佣金
     const RETURN_MONEY = 5;//退款金额
-    const ORDER_GOLD_CART_DISCOUNT_PRICE  = 6;//金卡返现
-    const ORDER_BLACK_CART_DISCOUNT_PRICE  = 6;//黑卡返现
+    const ORDER_CART_DISCOUNT_PRICE  = 6;//金卡返现
     public static function addRecord($uid, $type, $money, $content, $data_id)
     {
         $user =    ItemModel::make('users')->addColumnsCondition(array(
