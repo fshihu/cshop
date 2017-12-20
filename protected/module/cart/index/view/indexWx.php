@@ -91,7 +91,7 @@
                         </div>
 
                     </div>
-                    <div class="buy_num_w" data-price="<?php echo $item['shop_price'] ?>" data-discount="<?php echo $discount ?>" 
+                    <div class="buy_num_w" data-id="<?php echo $item['id'] ?>" data-price="<?php echo $item['shop_price'] ?>" data-discount="<?php echo $discount ?>"
                          style="<?php echo in_array($prom_type,[PromTypeEnum::GROUP_OWN_JOIN,PromTypeEnum::GROUP_OWN_OPEN])?'display:none;':'' ?>">
                         <span class="fl">数量</span>
                         <span class="fr">
@@ -238,6 +238,11 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
         var goldRatio = <?php echo (float)$goldRatio ?>;
         $('.buy_btn_red ').click(function () {
             var s = <?php echo (int)$addr['address_id'] ?>;
+            var nums = [];
+            $('.list_4s_item .buy_num_w ').each(function () {
+                nums.push({id:$(this).data('id'),num:$(this).find('.text').val()});
+            });
+            url += '&nums='+JSON.stringify(nums);
             $(this).attr('href',url);
            if(!s){
                alert('请填写收货地址');
