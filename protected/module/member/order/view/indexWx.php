@@ -39,7 +39,7 @@
              </a>
          <?php endforeach?>
          <div class="t3">
-             实支付： <span class="t3_s">￥ <?php echo $item['total_amount']+$item['freight_price']-$item['integral_money']; ?></span><?php if($item['freight_price']==''||$item['freight_price']=='0'){ ?>（免运费）<?php }else{ ?>（运费 ￥<?php echo $item['freight_price'];?> 元）<?php }?>
+             实支付： <span class="t3_s">￥ <?php echo $item['order_amount']; ?></span><?php if($item['freight_price']==''||$item['freight_price']=='0'){ ?>（免运费）<?php }else{ ?>（运费 ￥<?php echo $item['freight_price'];?> 元）<?php }?>
          </div>
           <?php if($wait_status == OrderWaitStatusEnum::WAIT_PAY):?>
           <div class="t4">

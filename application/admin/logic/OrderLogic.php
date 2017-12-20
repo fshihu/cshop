@@ -149,13 +149,13 @@ class OrderLogic extends Model
         	}elseif($ss == 1 && $os == 1 && $ps == 0){
         		$btn['pay'] = '付款';
         	}elseif($ps == 1 && $ss == 1 && $os == 1){
-        		$btn['pay_cancel'] = '设为未付款';
+//        		$btn['pay_cancel'] = '设为未付款';
         	}
         }else{
         	if($ps == 0 && $os == 0 || $ps == 2){
         		$btn['pay'] = '付款';
         	}elseif($os == 0 && $ps == 1){
-        		$btn['pay_cancel'] = '设为未付款';
+//        		$btn['pay_cancel'] = '设为未付款';
         		$btn['confirm'] = '确认';
         	}elseif($os == 1 && $ps == 1 && ($ss == 0 || $ss == 2)){
         		$btn['cancel'] = '取消确认';
@@ -172,7 +172,7 @@ class OrderLogic extends Model
         	$btn['remove'] = '移除';
         }
         if($os != 5){
-        	$btn['invalid'] = '无效';
+//        	$btn['invalid'] = '无效';
         }
         return $btn;
     }
