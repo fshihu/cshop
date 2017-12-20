@@ -78,10 +78,20 @@
                                 <?php echo $item['goods_name'] ?>
                             </p>
                             <p class="t1">价格：¥<?php echo $item['shop_price'] ?></span></p>
+							<?php $user = \module\member\index\UserServer::getUser();
+                            $discount = 0;
+                            if( $user['level']== UserLevelServer::LEVEL_GOLDED_CARD){
+                                $discount = $item['gold_card_discount_price'];
+                            }
+                            if( $user['level']== UserLevelServer::LEVEL_BLACK_CARD){
+                                $discount = $item['black_card_discount_price'];
+                            }
+                        ?>
+							<span class="dicount" style='display:none'><?php echo $discount; ?></span>
                         </div>
 
                     </div>
-                    <div class="buy_num_w" data-price="<?php echo $item['shop_price'] ?>"
+                    <div class="buy_num_w" data-price="<?php echo $item['shop_price'] ?>" data-discount="<?php echo $discount ?>" 
                          style="<?php echo in_array($prom_type,[PromTypeEnum::GROUP_OWN_JOIN,PromTypeEnum::GROUP_OWN_OPEN])?'display:none;':'' ?>">
                         <span class="fl">数量</span>
                         <span class="fr">
@@ -146,19 +156,20 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
             	<div class="listDetail">
                     <p>
                         <span class="ltName">应付金额：</span>
-                        <span class="rtPrice">￥<?php echo $total_price - $total_freight_price ?></span>
+                        <span  style='float: right;margin-right: 10px;'>￥<span class="rtPrice1"><?php echo $total_price - $total_freight_price ?></span></span>
                     </p>
                     <p>
                         <span class="ltName">抵扣积分：</span>
-                        <span class="rtPrice">8</span>
+                        <span class="rtPrice2" style='float: right;margin-right: 10px;'>0</span>
                     </p>
                     <p>
                         <span class="ltName">运费：</span>
-                        <span class="rtPrice">￥<?php echo $total_freight_price ?></span>
+                        <span class="rtPrice3" style='float: right;margin-right: 10px;'>￥<?php echo $total_freight_price ?></span>
+						<span class="freight_price" style='display:none'><?php echo $total_freight_price; ?></span>
                     </p>
                     <p>
                         <span class="ltName">实付：</span>
-                        <span class="rtPrice">￥<?php echo $total_price  ?></span>
+                        <span style='float: right;margin-right: 10px;'>￥<span class="rtPrice4"><?php echo $total_price  ?></span></span>
                     </p>
                 </div>
                 <div class="listDetail">
@@ -173,11 +184,11 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
                                 $fan_price = $black_card_discount_price;
                             }
                         ?>
-                        <span class="rtPrice">￥ <?php echo $fan_price ?></span>
+                        <span style='float: right;margin-right: 10px;'>￥ <span class="rtPrice6"><?php echo $fan_price ?></span></span>
                     </p>
                     <p>
                         <span class="ltName">到手价：</span>
-                        <span class="rtPrice">￥<?php echo $total_price - $fan_price ?></span>
+                        <span style='float: right;margin-right: 10px;'>￥<span class="rtPrice5"><?php echo $total_price - $fan_price ?></span></span>
                     </p>
                 </div>
             </div>
@@ -195,9 +206,8 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
          <?php endif;?>
 
         <div class="buy_btn_w">
-            <span class="price">应支付： <span class="price_red">￥<span class="price_renjun"><?php echo $total_price?></span> （免运费）</span></span>
-
-            <a href="#" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red ">立即支付</a>
+			<a href="#" class="weui-btn weui-btn_mini weui-btn_warn buy_btn_red ">立即支付</a>
+            <span class="price" style="padding-left:0px; float:right;">应支付： <span class="price_red">￥<span class="price_renjun"><?php echo $total_price?></span><?php  if($total_freight_price==''||$total_freight_price=='0'){ echo '（免运费）';}else{ echo "（运费 ￥$total_freight_price 元）";} ?> </span></span>
         </div>
     </div>
      <?php endif;?>
@@ -209,8 +219,10 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
 				$(this).siblings(".buy_orderDetailPull").toggle();
 				if($(this).siblings(".buy_orderDetailPull").is(":visible")){
 					$(this).find("img").attr("src","/public/biz/wx/common/images/clickImg2.png");
+					$(".weui-tab__panel").css("padding-bottom",$(".buy_orderDetailPull").height()+120);
 				}else{
 					$(this).find("img").attr("src","/public/biz/wx/common/images/clickImg1.png");
+					$(".weui-tab__panel").css("padding-bottom","120px");
 				}
 			});
 		});
@@ -244,17 +256,24 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
         $('.jia,.jian').click(function () {
             setTimeout(function () {
                 var total_price = 0;
+				var discount=0;
                 $('.list4_s').find('.buy_num_w .text').each(function () {
                     total_price += $(this).val()*$(this).closest('.buy_num_w').data('price');
+					discount += $(this).val()*$(this).closest('.buy_num_w').data('discount');
                 });
+				$('.rtPrice6').text(discount);
                 var gold = Math.min(total_gold,parseInt(total_price * goldRatio,10));
                 $('.total_gold').text(gold);
                 $('.gold_price').text(gold);
                 if($('.buy_jifen .checkbox').hasClass('checkboxed')){
                     total_price -= $('.gold_price').text()*1;
                 }
-
+				$('.rtPrice1').text(total_price);
+				//添加运费-柯岳
+				total_price += $('.freight_price').text()*1;
                 $('.price_renjun').text(total_price);
+				$('.rtPrice4').text(total_price);
+				$('.rtPrice5').text(total_price*1-discount*1);
             },20);
 
         });
@@ -265,10 +284,19 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
                 url = tpl_url +'&use_gold=0';
                 $(this).removeClass('checkboxed');
                 $('.price_renjun').text($('.price_renjun').text()*1+$('.gold_price').text()*1);
+				$('.rtPrice2').text($('.rtPrice2').text()*1-$('.gold_price').text()*1);
+				$('.rtPrice1').text($('.rtPrice1').text()*1+$('.gold_price').text()*1);
+				$('.rtPrice4').text($('.rtPrice4').text()*1+$('.gold_price').text()*1);
+				$('.rtPrice5').text($('.rtPrice5').text()*1+$('.gold_price').text()*1);
             }else{
                 url = tpl_url +'&use_gold=1';
                 $('.price_renjun').text($('.price_renjun').text()*1-$('.gold_price').text()*1);
                 $(this).addClass('checkboxed');
+				$('.rtPrice2').text($('.gold_price').text()*1);
+				$('.rtPrice1').text($('.rtPrice1').text()*1-$('.gold_price').text()*1);
+				$('.rtPrice4').text($('.rtPrice4').text()*1-$('.gold_price').text()*1);
+				$('.rtPrice5').text($('.rtPrice5').text()*1-$('.gold_price').text()*1);
             }
+			
         });
     </script>
