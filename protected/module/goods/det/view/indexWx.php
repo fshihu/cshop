@@ -31,7 +31,7 @@
 
                 foreach($goods_images as $goods_image):?>
                      <li>
-                             <img src="<?php echo $goods_image['image_url'] ?>" title="{$v[title]}" style="{$v[style]}" alt="">
+                             <img src="<?php echo $goods_image['image_url'] ?>" title="{$v[title]}" style="{$v[style]}" alt=""  onclick="changeImg(this)" />
                      </li>
                      <?php endforeach?>
              </ul>
@@ -39,9 +39,15 @@
      </div>
      <div class="good_info">
          <div class="good_title"><?php echo $data['goods_name'] ?></div>
-         <div class="t1">
+         <div class="t1" style='padding-top:5px;padding-bottom:5px'>
              <span class="t1_s">价格： <span class="t1_s_m">￥<?php echo $data['shop_price'] ?>元</span></span>
              <span class="t1_k">市场价：¥<?php echo $data['market_price'] ?>元 </span>
+         </div>
+		 <div class="t1" style='padding-top:5px;'>
+             <span class="t1_s">金卡会员购买返现： <span style='color:red'>￥<?php echo $data['gold_card_discount_price'] ?>元</span></span>
+         </div>
+		 <div class="t1" style='padding-bottom:10px'>
+             <span class="t1_s">黑卡会员购买返现： <span style='color:red'>￥<?php echo $data['black_card_discount_price'] ?>元</span></span>
          </div>
           <?php if($merchant['wx_account']):?>
          <div class="t1">
@@ -85,7 +91,7 @@
          </div>
      <?php endif;?>
 
-      <div class="weui-navbar navbar-sm nav_click">
+      <div class="weui-navbar navbar-sm nav_click detailClick">
          <a href="javascript:;" class="weui-navbar__item weui-bar__item_on">
              商品详情
          </a>
@@ -94,22 +100,126 @@
          </a>
       </div>
      <div class="nav_click_cont">
-         <div class="nav_click_cont_item gooods_content">
+     	<div class="specifTab">
+            <table>
+                <tbody>
+					<?php if($data['g1']!=''){ ?>
+                    <tr>
+                        <td>商品品牌</td>
+                        <td><?php echo $data['g1'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g2']!=''){ ?>
+                    <tr>
+                        <td>商品产地</td>
+                        <td><?php echo $data['g2'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g3']!=''){ ?>
+                    <tr>
+                        <td>单品分类</td>
+                        <td><?php echo $data['g3'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g4']!=''){ ?>
+                    <tr>
+                        <td>批准文号</td>
+                        <td><?php echo $data['g4'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g5']!=''){ ?>
+                    <tr>
+                        <td>产品功效</td>
+                        <td><?php echo $data['g5'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g6']!=''){ ?>
+                    <tr>
+                        <td>保质期限</td>
+                        <td><?php echo $data['g6'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g7']!=''){ ?>
+                    <tr>
+                        <td>上市时间</td>
+                        <td><?php echo $data['g7'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g8']!=''){ ?>
+                    <tr>
+                        <td>产品型号</td>
+                        <td><?php echo $data['g8'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g9']!=''){ ?>
+                    <tr>
+                        <td>产品规格</td>
+                        <td><?php echo $data['g9'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g10']!=''){ ?>
+                    <tr>
+                        <td>包装含量</td>
+                        <td><?php echo $data['g10'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g11']!=''){ ?>
+                    <tr>
+                        <td>材质成分</td>
+                        <td><?php echo $data['g11'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g12']!=''){ ?>
+                    <tr>
+                        <td>适应类别</td>
+                        <td><?php echo $data['g12'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g13']!=''){ ?>
+                    <tr>
+                        <td>操作方式</td>
+                        <td><?php echo $data['g13'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g14']!=''){ ?>
+                    <tr>
+                        <td>颜色分类</td>
+                        <td><?php echo $data['g14'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g15']!=''){ ?>
+                    <tr>
+                        <td>售后服务</td>
+                        <td><?php echo $data['g15'];?></td>
+                    </tr>
+					<?php }?>
+					<?php if($data['g16']!=''){ ?>
+                    <tr>
+                        <td>同城服务</td>
+                        <td><?php echo $data['g16'];?></td>
+                    </tr>
+					<?php }?>
+
+                    
+                </tbody>
+            </table>
+        </div>
+         <div class="nav_click_cont_item gooods_content detailImg">
 <?php echo html_entity_decode($data['goods_content']) ?>
          </div>
             <div class="nav_click_cont_item commont_list" style="display: none;">
                 <?php foreach($comment_list as $comment_item):?>
-                <div class="comm_item">
+                <div class="comm_item" style="padding:20px 10px;">
                     <div class="t1">
                         <img class="img" src="<?php echo UserServer::getAvatar($comment_item) ?>" alt="">
-                        <span class="t1_s"><?php echo $comment_item['uname'] ?></span>
+                        <span class="t1_s" style="margin-left:5px; font-size:14px; color:#2CC7C5; font-size:14px;"><?php echo $comment_item['uname'] ?></span>
                     </div>
-                    <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
+                    <div class="t2" style="margin-left:40px; padding:0 0 10px 0;"><?php echo $comment_item['comment_content'] ?></div>
                      <?php if($comment_item['comment_reply']):?>
-                    <div class="t2" style="padding-top: 0;padding-left:10px;">商家回复：<?php echo $comment_item['comment_reply'] ?></div>
+                    <div class="t2" style="margin-left:40px; font-size:12px; background:#F8F8F8; padding:10px 0 10px 5px; margin-bottom:10px;">商家回复：<?php echo $comment_item['comment_reply'] ?></div>
                      <?php endif;?>
-                    <div class="t3">
-                        <?php for($i =0; $i< $comment_item['rating'];$i++):?>
+                    <div class="t3" style="margin-left:40px;">
+						<?php for($i =0; $i< $comment_item['rating'];$i++):?>
                         <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
                                 width: 10px;
                                 height: 10px;
@@ -175,13 +285,14 @@
                 </div>
             </div>
 
-    <a class="cart_btn   " style="" href="<?php echo $this->genurl('cart/index/index') ?>">
-        <img src="/public/biz/wx/common/images/my/Shoppingcart_icon.png" alt="" class="icon">
+    <a class="cart_btn cart_btn1 " style="" href="<?php echo $this->genurl('cart/index/index') ?>">
+        <img src="/public/biz/wx/common/images/my/shopping_cart_2.png" alt="" class="icon">
     </a>
-    <a class="cart_btn cart_btn_sr " style="" href="javascript:;">
-            <img src="/public/biz/wx/common/images/kfu_s.png" alt="" class="icon">
-        </a>
     <div class="buy_btn">
+    	<a class="bt_aKf cart_btn_sr" style="" href="javascript:;">
+            <img src="/public/biz/wx/common/images/kfu_s1.png" alt="" class="icon">
+            <p>客服</p>
+        </a>
        <a href="<?php echo $this->genurl('cart/index/index') ?>" class="bt_a bt_a1">
           <div class="t3">加入购物车</div>
        </a>
@@ -227,15 +338,62 @@
                 <p class="weui-toast__content">已完成</p>
             </div>
         </div>
+ 
 
+<!--图片放大-->
+<div id="bigImg">
+	<img src="images/a.jpg" />
+</div>
+<!--图片放大-->
     <script type="text/javascript">
-        $('.cart_btn_sr').click(function () {
+	function changeImg(obj){
+		$("#bigImg").find("img").css({
+			"height":"",
+			"margin-top":""
+		});
+		var imgSrc=$(obj).attr("src");
+		$("#bigImg").find("img").attr("src",imgSrc);
+		setTimeout(function(){
+			$("#bigImg").find("img").css({
+				"height":$("#bigImg").find("img").height(),
+				"margin-top":($(document).height()-$("#bigImg").find("img").height())/2
+			});
+		});
+		$("#bigImg").show();
+	}
+	$(function(){
+		/*$(".detailImg").find("img").bind("click",function(){
+	   		$("#bigImg").find("img").css({
+				"height":"",
+				"margin-top":""
+			});
+			var imgSrc=$(this).attr("src");
+			$("#bigImg").find("img").attr("src",imgSrc);
+			setTimeout(function(){
+				$("#bigImg").find("img").css({
+					"height":$("#bigImg").find("img").height(),
+					"margin-top":($(document).height()-$("#bigImg").find("img").height())/2
+				});
+			});
+			$("#bigImg").show();
+		});*/
+		$("#bigImg").click(function(){
+			$("#bigImg").hide();
+		});
+		 $('.cart_btn_sr').click(function () {
             $('#iosDialog2').fadeIn(200);
         });
         $('.js_dialog_proy_2').click(function () {
             $('#iosDialog2').fadeOut(200);
         });
-
+		$(".detailClick").find("a").eq(0).click(function(){
+			$(".specifTab").show();
+		});
+		$(".detailClick").find("a").eq(1).click(function(){
+			$(".specifTab").hide();
+		});
+	});
+       
         <?php $signPackage = \biz\wx\WxJs::getSignPackage(); ?>
         wx.config({
 
