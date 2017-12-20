@@ -65,7 +65,7 @@ use module\service\index\enum\ServiceStatusEnum;
         ajax_request('', $('form').serialize(), function () {
             Tip('提交成功');
             setTimeout(function () {
-                location.href = '<?php echo $this->genurl('member/my/index',['status' => ServiceStatusEnum::STATUS_WAIT_SUBSIDY]);?>';
+                location.href = '<?php echo $this->genurl('service/my/index',['status' => ServiceStatusEnum::STATUS_WAIT_SUBSIDY]);?>';
             }, 200);
         });
         return false;

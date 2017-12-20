@@ -19,7 +19,9 @@ use module\cart\index\server\OrderStatusServer;
 use module\cart\index\server\PromTypeEnum;
 use module\member\gold\server\GoldServer;
 use module\member\gold\server\UserGoldRecordServer;
+use module\member\index\server\UserLevelServer;
 use module\member\index\UserServer;
+use module\member\money\server\MoneyServer;
 
 class MemberOrderCommentWxAction extends \CAction
 {
@@ -48,6 +50,16 @@ class MemberOrderCommentWxAction extends \CAction
                     'rating' => $request->getParams('rating'),
                     'add_time' => time(),
                 ))->execute();
+                if($item['card_discount_price'] > 0 ){
+                    $type_name = '';
+                    if($item['card_type'] == UserLevelServer::LEVEL_GOLDED_CARD){
+                        $type_name = '金卡';
+                    }
+                    if($item['card_type'] == UserLevelServer::LEVEL_BLACK_CARD){
+                        $type_name = '黑卡';
+                    }
+                    MoneyServer::addRecord($user['user_id'],MoneyServer::ORDER_GOLD_CART_DISCOUNT_PRICE,$item['card_discount_price'],'订单'.$type_name.'返现',$item['rec_id']);
+                }
             }
             if($order['order_prom_type'] == PromTypeEnum::NORMAL) {
                 $get_gold = (int)($order['order_amount'] * GoldServer::getGoldRatio());

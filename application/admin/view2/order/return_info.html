@@ -115,6 +115,7 @@ html, body {
                     <dd class="opt">
                         小计： {$order.goods_price} <br>
                         积分 ：-{$order.integral_money} <br>
+                        会员卡折扣金额 ：{$order.card_discount_price} <br>
                         实际付款：{$order.order_amount} <br>
                         已获得积分：{$order.get_gold} <br>
                         用户当前积分：{$user.gold} <br>
@@ -138,7 +139,7 @@ html, body {
                     </dt>
                     <dd class="opt">
                          <?php if($return_goods['type'] == 1):?>
-                        退款金额：<input type="text" name="price" value="<?php echo $order['order_amount']+$order['integral_money']
+                        退款金额：<input type="text" name="price" value="<?php echo $order['order_amount']+$order['integral_money']-$order['card_discount_price']
                         -($order['get_gold']>$user['gold']?$order['get_gold']>$user['gold']:0) ?>"/>
                         扣除积分：<input type="text" name="gold" value="<?php echo min($user['gold'],$order['get_gold']) ?>"/>
                         <br>

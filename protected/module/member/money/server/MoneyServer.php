@@ -13,6 +13,8 @@ use CC\db\base\select\ItemModel;
 use CC\db\base\select\ListModel;
 use CC\db\base\update\UpdateModel;
 use module\cart\index\server\PromTypeEnum;
+use module\member\index\server\UserLevelServer;
+use module\member\index\UserServer;
 
 class MoneyServer
 {
@@ -21,6 +23,8 @@ class MoneyServer
     const SERVICE_SUBSIDY =3;//服务补贴
     const MARKET_SERVICE_COMMISSION = 4;//服务预约佣金
     const RETURN_MONEY = 5;//退款金额
+    const ORDER_GOLD_CART_DISCOUNT_PRICE  = 6;//金卡返现
+    const ORDER_BLACK_CART_DISCOUNT_PRICE  = 6;//黑卡返现
     public static function addRecord($uid, $type, $money, $content, $data_id)
     {
         $user =    ItemModel::make('users')->addColumnsCondition(array(
@@ -60,13 +64,16 @@ class MoneyServer
              合伙人获得佣金：40*10%=4
              */
             $good_count = count($list);
+            $user = UserServer::getUser($order['user_id']);
+
             foreach ($list as $item) {
                 //cost_price
                 if($item['admin_uid']){
+
                     //goods_price
                     $gold_price = (int)($order['integral_money'] / $good_count);
                     $profit_price = $item['goods_price'] - $gold_price - $item['cost_price'];
-                    $profit_price = $profit_price *  $item['merchant_ratio'] / 100 + $item['cost_price'];
+                    $profit_price = $profit_price *  $item['merchant_ratio'] / 100 + $item['cost_price'] - $item['card_discount_price'];
                     if($profit_price > 0){
                         MoneyServer::addRecord($item['admin_to_uid'],MoneyServer::PROFIT_PRICE,$profit_price,'合伙人佣金',$item['rec_id']);
                     }
