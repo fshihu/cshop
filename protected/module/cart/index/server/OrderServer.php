@@ -113,13 +113,14 @@ class OrderServer
         foreach ($this->cart_list as $i => $cart) {
             $car_price['goodsFee'] += $cart['shop_price'] * $cart['goods_num'];
             $car_price['freight_price'] += $cart['freight_price'];
+            $card_discount_price = 0;
             if(UserLevelServer::isGoldedCrad($user)){
-                $car_price['card_discount_price'] += $cart['gold_card_discount_price'];
+                 $card_discount_price = $cart['gold_card_discount_price'];
             }else if(UserLevelServer::isBlackCrad($user)){
-                $car_price['card_discount_price'] += $cart['black_card_discount_price'];
+                $card_discount_price = $cart['black_card_discount_price'];
             }
-            $this->cart_list[$i]['card_discount_price'] = $car_price['card_discount_price'];
-
+            $car_price['card_discount_price'] = $card_discount_price * $cart['goods_num'];
+            $this->cart_list[$i]['card_discount_price'] = $card_discount_price;
         }
         if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
             $car_price['goodsFee'] =  NumberUtil::formatFloat(($car_price['goodsFee'] / $this->total_person_num));

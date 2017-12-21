@@ -50,7 +50,7 @@ class MemberOrderCommentWxAction extends \CAction
                     'rating' => $request->getParams('rating'),
                     'add_time' => time(),
                 ))->execute();
-                if($item['card_discount_price'] > 0 ){
+                if($item['card_discount_price'] > 0 && $order['order_prom_type'] == PromTypeEnum::NORMAL){
                     $type_name = '';
                     if(UserLevelServer::isGoldedCrad($user)){
                         $type_name = '金卡';
