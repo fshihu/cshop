@@ -34,7 +34,9 @@
                </div>
 
              <div class="weui-cells money_list">
+			 <?php $money=0;?>
                  <?php foreach($list as $item):?>
+				 <?php $money=$money+$item['money'];if($item['content']=='退货退款'||$item['content']=='提现成功'){?>
                          <div class="weui-cell">
                              <div class="weui-cell__bd">
                                  <div class="t1"><?php echo $item['content'] ?></div>
@@ -42,6 +44,7 @@
                              </div>
                              <div class="weui-cell__ft"><?php echo $item['money']>0?'+':'' ?><?php echo $item['money'] ?></div>
                          </div>
+				<?php }?>
                  <?php endforeach?>
                        </div>
                     </div>

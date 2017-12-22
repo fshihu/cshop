@@ -110,14 +110,17 @@ class OrderServer
         $car_price['freight_price'] = 0;
         $car_price['card_discount_price'] = 0;
         $user = UserServer::getUser();
-        foreach ($this->cart_list as $cart) {
-            $car_price['goodsFee'] += $cart['shop_price'];
+        foreach ($this->cart_list as $i => $cart) {
+            $car_price['goodsFee'] += $cart['shop_price'] * $cart['goods_num'];
             $car_price['freight_price'] += $cart['freight_price'];
+            $card_discount_price = 0;
             if(UserLevelServer::isGoldedCrad($user)){
-                $car_price['card_discount_price'] += $cart['gold_card_discount_price'];
+                 $card_discount_price = $cart['gold_card_discount_price'];
             }else if(UserLevelServer::isBlackCrad($user)){
-                $car_price['card_discount_price'] += $cart['black_card_discount_price'];
+                $card_discount_price = $cart['black_card_discount_price'];
             }
+            $car_price['card_discount_price'] = $card_discount_price * $cart['goods_num'];
+            $this->cart_list[$i]['card_discount_price'] = $card_discount_price;
         }
         if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
             $car_price['goodsFee'] =  NumberUtil::formatFloat(($car_price['goodsFee'] / $this->total_person_num));
@@ -129,7 +132,7 @@ class OrderServer
             $car_price['integral'] = $use_gold_num;
             $car_price['pointsFee'] = $use_gold_num;
         }
-        $car_price['payables'] = $car_price['goodsFee'] - $car_price['pointsFee'] + $car_price['goodsFee'];
+        $car_price['payables'] = $car_price['goodsFee'] - $car_price['pointsFee'] + $car_price['freight_price'];
         return $car_price;
     }
 
@@ -185,7 +188,7 @@ class OrderServer
             'coupon_price'     =>$car_price['couponFee'],//'使用优惠券',
             'integral'         =>$car_price['integral'], //'使用积分',
             'integral_money'   =>$car_price['pointsFee'],//'使用积分抵多少钱',
-            'total_amount'     =>($car_price['goodsFee'] + $car_price['postFee']),// 订单总额
+            'total_amount'     =>($car_price['goodsFee'] + $car_price['freight_price']),// 订单总额
             'order_amount'     =>$car_price['payables'],//'应付款金额',
             'freight_price'     =>$car_price['freight_price'],//'应付款金额',
             'card_discount_price'     =>$car_price['card_discount_price'],//'抵扣',

@@ -50,15 +50,15 @@ class MemberOrderCommentWxAction extends \CAction
                     'rating' => $request->getParams('rating'),
                     'add_time' => time(),
                 ))->execute();
-                if($item['card_discount_price'] > 0 ){
+                if($item['card_discount_price'] > 0 && $order['order_prom_type'] == PromTypeEnum::NORMAL){
                     $type_name = '';
-                    if($item['card_type'] == UserLevelServer::LEVEL_GOLDED_CARD){
+                    if(UserLevelServer::isGoldedCrad($user)){
                         $type_name = '金卡';
                     }
-                    if($item['card_type'] == UserLevelServer::LEVEL_BLACK_CARD){
+                    if(UserLevelServer::isBlackCrad($user)){
                         $type_name = '黑卡';
                     }
-                    MoneyServer::addRecord($user['user_id'],MoneyServer::ORDER_GOLD_CART_DISCOUNT_PRICE,$item['card_discount_price'],'订单'.$type_name.'返现',$item['rec_id']);
+                    MoneyServer::addRecord($user['user_id'],MoneyServer::ORDER_CART_DISCOUNT_PRICE,$item['card_discount_price'],'订单'.$type_name.'返现',$item['rec_id']);
                 }
             }
             if($order['order_prom_type'] == PromTypeEnum::NORMAL) {
