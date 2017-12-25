@@ -111,8 +111,7 @@ class OrderServer
         $car_price['card_discount_price'] = 0;
         $user = UserServer::getUser();
         foreach ($this->cart_list as $i => $cart) {
-            $car_price['goodsFee'] += $cart['shop_price'] * $cart['goods_num'];
-            $car_price['freight_price'] += $cart['freight_price'];
+            $car_price['goodsFee'] += $cart['shop_price'] * $cart['goods_num'] + $cart['freight_price'];
             $card_discount_price = 0;
             if(UserLevelServer::isGoldedCrad($user)){
                  $card_discount_price = $cart['gold_card_discount_price'];
@@ -132,7 +131,7 @@ class OrderServer
             $car_price['integral'] = $use_gold_num;
             $car_price['pointsFee'] = $use_gold_num;
         }
-        $car_price['payables'] = $car_price['goodsFee'] - $car_price['pointsFee'] + $car_price['freight_price'];
+        $car_price['payables'] = $car_price['goodsFee'] - $car_price['pointsFee'];
         return $car_price;
     }
 

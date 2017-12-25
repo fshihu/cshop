@@ -75,6 +75,21 @@ class MemberIndexIndexWxAction extends \CAction
             'status' => ['!=',ServiceStatusEnum::STATUS_FINISH],
         ))->select('count(*) count_num')->execute();
         $user['service_reserve_num'] = $service_reserve['count_num'];
+		//添加区分财富和佣金-柯岳
+		$mdata=ListModel::make('user_money_record')->addColumnsCondition(array(
+            'uid' => Session::getUserID(),
+        ))->execute();
+		$butie=0;
+		$caifu=0;
+		foreach($mdata as $item){
+			if($item['content']=='退货退款'||$item['content']=='提现成功'||$item['content']=='订单返现'||$item['content']=='拼团失败，退回支付款'){
+				$caifu=$caifu+$item['money'];
+			}else{
+				$butie=$butie+$item['money'];
+			}
+		}
+		$user['butie']=sprintf('%.2f',$butie);
+		$user['caifu']=sprintf('%.2f',$caifu);
         return new \CRenderData(array(
             'user' => $user,
         ));
