@@ -82,7 +82,7 @@ class MemberIndexIndexWxAction extends \CAction
 		$butie=0;
 		$caifu=0;
 		foreach($mdata as $item){
-			if($item['content']=='退货退款'||$item['content']=='提现成功'||$item['content']=='订单返现'||$item['content']=='拼团失败，退回支付款'){
+			if($item['content']=='退货退款'||$item['content']=='我的财富提现成功'||$item['content']=='订单返现'||$item['content']=='拼团失败，退回支付款'){
 				$caifu=$caifu+$item['money'];
 			}else{
 				$butie=$butie+$item['money'];

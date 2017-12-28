@@ -8,7 +8,7 @@
 
 namespace module\member\info;
 
-
+use CC\db\base\select\ListModel;
 use CC\util\external\grafika\GrafikaMaster;
 use CC\util\external\phpqrcode\QrCodeMaster;
 use CRequest;
@@ -19,7 +19,14 @@ class MemberInfoQrcodeWxAction extends \CAction
 {
     public function execute(CRequest $request)
     {
-        $user = UserServer::getUser();
+		if($_GET['user_id']){
+			
+			$info = ListModel::make('users')->addColumnsCondition(array('user_id' => $_GET['user_id']))->execute(); 
+			$user=$info[0];
+		}else{
+			$user = UserServer::getUser();
+		}
+        
         $dir = \CC::app()->getBasePath() . '/../files/qr_code/';
         if(!is_dir($dir)){
             mkdir($dir);
@@ -44,6 +51,7 @@ class MemberInfoQrcodeWxAction extends \CAction
 
     protected function createImage($qr_code_path,$qr_png,$recomm_url)
     {
+		$recomm_url='http://haowei.onlygays.cn/wx/home/index/index';
         $blank_image = GrafikaMaster::createBlankImage(500 , 750);
 
         $fonts_dir = GrafikaMaster::fontsDir();
@@ -64,7 +72,7 @@ class MemberInfoQrcodeWxAction extends \CAction
         $editor->text($blank_image,'推广链接',16,130,590, new Color("#000000"),$normal_fonts);
         $editor->text($blank_image,substr($recomm_url,0,29),16,130,620, new Color("#000000"),$normal_fonts);
         $editor->text($blank_image,substr($recomm_url,29),16,130,650, new Color("#000000"),$normal_fonts);
-        $editor->text($blank_image,'请扫描二维码或长按链接复制给用户',16,130,680, new Color("#000000"),$normal_fonts);
+        $editor->text($blank_image,'请扫描二维码或长按保存图片',16,130,680, new Color("#000000"),$normal_fonts);
 
         $logo_png = \CC::app()->basePath.'/../public/biz/wx/common/images/recolog.png';
 

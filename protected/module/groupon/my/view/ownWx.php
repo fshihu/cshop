@@ -58,13 +58,13 @@
              </a>
          <?php endforeach?>
          <div class="t3">
-             实支付： <span class="t3_s">￥ <?php echo $item['order_amount'] ?></span>（免运费）
+             实支付： <span class="t3_s">￥ <?php echo $item['order_amount'] ?></span>
          </div>
               <?php if($is_end == 0):?>
 
          <div class="t5">
-
-            <span class="t5_2">还差<?php echo $item['remain_num'] ?>人</span>
+			<a href="<?php echo $this->genurl('groupon/one/index',['group_one_id'=> $item['order_prom_id']]) ?>" style="float:left;background:#2CC7C5; color:#fff; padding:0 5px; border-radius:5px; font-size:12px; height:22px; line-height:22px;">分享给好友</a>
+            <span class="t5_2" style="height:22px; line-height:22px;">还差<?php echo $item['remain_num'] ?>人</span>
          </div>
               <?php endif;?>
               <?php if($is_end == 1):?>

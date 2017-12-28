@@ -44,7 +44,7 @@ class MemberLevelGiveWxAction extends \CAction implements IFormViewBuilder
                 throw new CErrorException('不能转增给自己');
             }
             if(!$item){
-                throw new CErrorException('转增账号不存在');
+                throw new CErrorException('转增手机号不存在');
             }
             UpdateModel::make('black_card_give')->addId($id)->addData(array(
                 'status' => UserLevelServer::BLACK_STATSU_WAIT_GIVE,
@@ -64,7 +64,7 @@ class MemberLevelGiveWxAction extends \CAction implements IFormViewBuilder
     public function createFormInputs()
     {
         return array(
-            (new TextInput('account','转赠好友账号'))->setPlaceHolder('请输入转赠好友账号'),
+            (new TextInput('account','转赠好友账号'))->setPlaceHolder('请输入转赠好友手机号'),
             (new CaptchaInput('code','验证码'))->setPhoneId('own_phone'),
         );
     }

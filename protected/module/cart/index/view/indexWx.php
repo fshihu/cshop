@@ -148,7 +148,7 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
     <?php if(!empty($list)):?>
     <div class="buy_price" style="z-index:999;">
     	<div class="buy_orderDetail">
-        	<div class="buy_orderDetailMt" <?php if($_GET['prom_type']=='5'){?>style='display:none'<?php }?>>
+        	<div class="buy_orderDetailMt" <?php if($_GET['prom_type']=='5'||$_GET['prom_type']=='6'){?>style='display:none'<?php }?>>
             	<span>账单详情</span>
                 <img src="/public/biz/wx/common/images/clickImg1.png"  />
             </div>

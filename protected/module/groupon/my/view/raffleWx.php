@@ -37,14 +37,15 @@
             <img src="<?php echo $group_one_member['head_pic'] ?>" alt="" class="avatar">
              <?php if($group_one_member['is_leader']):?>
             <span class="weui-badge" style="margin-left: 5px;">团长</span>
-             <?php endif;?>
-
+             <?php endif;?>		
+			 <span><?php echo $group_one_member['nickname'] ?></span>
         </span>
+
         <?php endforeach?>
 
 
                     </div>
-      <div class="tip_txt" style="margin: 10px 60px;">
+      <div class="tip_txt" style="margin: 30px 60px;">
           成团后团长随机抽取获得产品人员，并短信通知各位团员
       </div>
     </div>
@@ -75,7 +76,7 @@
 
         turnWheel.rewardNames = [
             <?php foreach($group_one_members as $group_one_member):?>
-            "<?php echo $group_one_member['nickname'] ?>",
+            "<span><?php echo $group_one_member['nickname'] ?></span>",
             <?php endforeach; ?> ];
         turnWheel.colors = [
             <?php foreach($group_one_members as $i => $group_one_member):?>
