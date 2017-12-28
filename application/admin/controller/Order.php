@@ -637,27 +637,81 @@ class Order extends Base {
     public function exprotReturn()
     {
         // 搜索条件
-         $order_sn =  trim(I('order_sn'));
-         $order_by = I('order_by') ? I('order_by') : 'id';
-         $sort_order = I('sort_order') ? I('sort_order') : 'desc';
-         $status =  I('status');
-         $is_admin = $this->isAdmin();
-         $where = " 1 = 1 ";
-         if(!$is_admin){
-             $where .= ' and admin_uid = '.session('admin_id');
-         }
-         $order_sn && $where.= " and order_sn like '%$order_sn%' ";
-         empty($order_sn)&& !empty($status) && $where.= " and status = '$status' ";
-         $count = M('return_goods')->where($where)->count();
-         $Page  = new AjaxPage($count,13);
-         $show = $Page->show();
-         $list = M('return_goods')->where($where)->order("$order_by $sort_order")->limit("{$Page->firstRow},{$Page->listRows}")->select();
-        $goods_id_arr = get_arr_column($list, 'order_id');
-        $order_list = [];
+		if($_GET['export']=='1'){
+			 $order_sn =  trim(I('order_sn'));
+			 $order_by = I('order_by') ? I('order_by') : 'id';
+			 $sort_order = I('sort_order') ? I('sort_order') : 'desc';
+			 $status =  2;
+			 $is_admin = $this->isAdmin();
+			 $where = " 1 = 1 ";
+			 if(!$is_admin){
+				 $where .= ' and admin_uid = '.session('admin_id');
+			 }
+			 //$order_sn && $where.= " and order_sn like '%$order_sn%' ";
+			 //empty($order_sn)&& !empty($status) && $where.= " and status = '$status' ";
+			 $where.= " and status = '$status' ";
+			 $count = M('return_goods')->where($where)->count();
+			 $Page  = new AjaxPage($count,13);
+			 $show = $Page->show();
+			 $list = M('return_goods')->where($where)->order("$order_by $sort_order")->limit("{$Page->firstRow},{$Page->listRows}")->select();
+			$goods_id_arr = get_arr_column($list, 'order_id');
+			$order_list = [];
 
-        if(!empty($goods_id_arr)){
-            $order_list = M('order')->where("order_id in (".implode(',', $goods_id_arr).")")->field('order_sn,order_amount,wx_order_sn')->select();
-        }
+			if(!empty($goods_id_arr)){
+				$order_list = M('order')->where("order_id in (".implode(',', $goods_id_arr).")")->field('order_sn,order_amount,wx_order_sn')->select();
+			}
+		}else if($_GET['export']=='2'){
+			 $order_sn =  trim(I('order_sn'));
+			 $order_by = I('order_by') ? I('order_by') : 'id';
+			 $sort_order = I('sort_order') ? I('sort_order') : 'desc';
+			 $status =  0;
+			 $is_admin = $this->isAdmin();
+			 $where = " 1 = 1 ";
+			 if(!$is_admin){
+				 $where .= ' and admin_uid = '.session('admin_id');
+			 }
+			 //$order_sn && $where.= " and order_sn like '%$order_sn%' ";
+			 //empty($order_sn)&& !empty($status) && $where.= " and status = '$status' ";
+			$where.= " and status = '$status' ";
+	
+			 $count = M('return_goods')->where($where)->count();
+			 $Page  = new AjaxPage($count,13);
+			 $show = $Page->show();
+			 $list = M('return_goods')->where($where)->order("$order_by $sort_order")->limit("{$Page->firstRow},{$Page->listRows}")->select();
+
+			$goods_id_arr = get_arr_column($list, 'order_id');
+			$order_list = [];
+
+			if(!empty($goods_id_arr)){
+				$order_list = M('order')->where("order_id in (".implode(',', $goods_id_arr).")")->field('order_sn,order_amount,wx_order_sn')->select();
+			}
+		}else if($_GET['export']=='3'){
+			$order_sn =  trim(I('order_sn'));
+			 $order_by = I('order_by') ? I('order_by') : 'id';
+			 $sort_order = I('sort_order') ? I('sort_order') : 'desc';
+			 //$status =  0;
+			 $is_admin = $this->isAdmin();
+			 $where = " 1 = 1 ";
+			 if(!$is_admin){
+				 $where .= ' and admin_uid = '.session('admin_id');
+			 }
+			 $order_sn && $where.= " and order_sn like '%$order_sn%' ";
+			 empty($order_sn)&& !empty($status) && $where.= " and status = '$status' ";
+			//$where.= " and status = '$status' ";
+	
+			 $count = M('return_goods')->where($where)->count();
+			 $Page  = new AjaxPage($count,13);
+			 $show = $Page->show();
+			 $list = M('return_goods')->where($where)->order("$order_by $sort_order")->limit("{$Page->firstRow},{$Page->listRows}")->select();
+
+			$goods_id_arr = get_arr_column($list, 'order_id');
+			$order_list = [];
+
+			if(!empty($goods_id_arr)){
+				$order_list = M('order')->where("order_id in (".implode(',', $goods_id_arr).")")->field('order_sn,order_amount,wx_order_sn')->select();
+			}
+		}
+		//print_r($order_list);exit;
          $this->exportCSV( $order_list);
     }
     function exportCSV(  $rows=[], $filename=false)

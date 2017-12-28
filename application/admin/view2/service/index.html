@@ -104,12 +104,12 @@
               }, function () {
                 // 确定
                 $.ajax({
-                  url: "/index.php?m=Admin&c=goods&a=delBrand&id=" + id,
+                  url: "/index.php?m=Admin&c=Service&a=delService&id=" + id,
                   success: function (v) {
                     layer.closeAll();
                     var v = eval('(' + v + ')');
                     if (v.hasOwnProperty('status') && (v.status == 1))
-                      location.href = "{:U('Admin/goods/brandList')}";
+                      location.href = "{:U('Admin/Service/index')}";
                     else
                       layer.msg(v.msg, {icon: 2, time: 1000}); //alert(v.msg);
                   }

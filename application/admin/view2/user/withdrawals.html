@@ -49,6 +49,9 @@
                         <th align="center" abbr="article_time" axis="col6" class="">
                             <div style="text-align: center; width: 120px;" class="">状态</div>
                         </th>
+						<th align="center" abbr="article_time" axis="col6" class="">
+                            <div style="text-align: center; width: 120px;" class="">提现来源</div>
+                        </th>
                         <th align="center" axis="col1" class="handle">
                             <div style="text-align: center; width: 150px;">操作</div>
                         </th>
@@ -105,6 +108,11 @@
                                     <if condition="$v[status] eq 0">申请中</if>
                                     <if condition="$v[status] eq 1">申请成功</if>
                                     <if condition="$v[status] eq 2">申请失败</if>
+                                </div>
+                            </td>
+							<td align="center" class="">
+                                <div style="text-align: center; width: 100px;">
+                                    {$v.lx}
                                 </div>
                             </td>
                             <td align="center" class="handle">
