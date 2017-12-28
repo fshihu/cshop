@@ -48,6 +48,9 @@ class MemberGoldGiveWxAction extends \CAction implements IFormViewBuilder
 
             UserGoldRecordServer::addGold($user['user_id'],UserGoldRecordServer::TYPE_GIVE,-$gold,'转增积分',$item['user_id']);;
             UserGoldRecordServer::addGold($item['user_id'],UserGoldRecordServer::TYPE_REVICE_GIVE,$gold,'收到转增积分',$user['user_id']);;
+            //give
+            PhoneServer::sendMsg($account,'您的好友'.$user['nickname'].'转赠成功您'.$gold.'积分，转赠时间'.date('Y-m-d H:i:s').'。');
+            PhoneServer::sendMsg($user['mobile'],'您成功转赠好友'.$item['nickname'].'积分'.$gold.'，转赠时间'.date('Y-m-d H:i:s').'。');
             return new \CJsonData();
         }
         return new \CRenderData(array(

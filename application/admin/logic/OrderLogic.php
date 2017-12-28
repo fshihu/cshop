@@ -301,9 +301,12 @@ class OrderLogic extends Model
 		
 		//商家发货, 发送短信给客户
 		$res = checkEnableSendSms("5");
+        $user_id = $data['user_id'];
+        $users = M('users')->where('user_id', $user_id)->getField('user_id , nickname , mobile' , true);
+
+		Phone::sendMsg($order['mobile'],'您所购买的商品'.$v['goods_name'].'已经发货，快递公司'.$data['shipping_name'].'，单号'.$data['invoice_no'].'。');
 		if($res && $res['status'] ==1){
 		    $user_id = $data['user_id'];
-		    $users = M('users')->where('user_id', $user_id)->getField('user_id , nickname , mobile' , true);
 		    if($users){
 		        $nickname = $users[$user_id]['nickname'];
 		        $sender = $users[$user_id]['mobile'];

@@ -50,6 +50,9 @@ class MemberLevelGiveWxAction extends \CAction implements IFormViewBuilder
                 'status' => UserLevelServer::BLACK_STATSU_WAIT_GIVE,
                 'give_uid' => $item['user_id'],
             ))->execute();
+            PhoneServer::sendMsg($account,'您的好友'.$user['nickname'].'转赠您一张黑卡附属卡，请及时查收，转赠时间'.date('Y-m-d H:i:s').'。');
+            PhoneServer::sendMsg($user['mobile'],'您成功转赠好友'.$item['nickname'].'一张黑卡附属卡，转赠时间'.date('Y-m-d H:i:s').'。');
+
             return new \CJsonData();
         }
         return new \CRenderData(array(

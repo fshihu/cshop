@@ -13,7 +13,7 @@ use CErrorException;
 
 class PhoneServer
 {
-    public static function sendMsg($mobile,$text)
+    public static function sendMsg($mobile,$text,$is_show_err = true)
     {
         $url = 'https://sms.yunpian.com/v2/sms/single_send.json';
         $apikey = 'c55b480e75f882cccabb385dc6fc8998';
@@ -28,7 +28,10 @@ class PhoneServer
 
         if($r['code']!= 0){
             \CC::log(['url' => $url,'params' => $params,'rs' => $rs],'phone_err');
-            throw new CErrorException('短信发送失败：'.$r['msg']);
+            if($is_show_err){
+                throw new CErrorException('短信发送失败：'.$r['msg']);
+            }
+            return false;
         }
         return true;
     }
