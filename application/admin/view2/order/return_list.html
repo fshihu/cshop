@@ -20,7 +20,9 @@
             </h5>
       </div>
       <div title="刷新数据" class="pReload"><i class="fa fa-refresh"></i> </div>
-        <a href="?<?php echo http_build_query($_GET).'&export=1'; ?>">导出</a>
+        <a href="?<?php echo http_build_query($_GET).'&export=1'; ?>">导出已处理订单</a>
+		<a href="?<?php echo http_build_query($_GET).'&export=2'; ?>">导出处理中订单</a>
+		<a href="?<?php echo http_build_query($_GET).'&export=3'; ?>">导出所有订单</a>
 	  <form class="navbar-form form-inline"  method="post" name="search-form2" id="search-form2">  
 	  		<input type="hidden" name="order_by" value="order_id">
             <input type="hidden" name="sort" value="desc">

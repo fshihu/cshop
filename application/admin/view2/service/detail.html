@@ -200,6 +200,8 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                 <dl>
                     <dt>状态：</dt>
                     <dd>{$service.status_desc}</dd>
+					<dt>会员等级：</dt>
+                    <dd>{$service.dj}</dd>
                 </dl>
              </div>
 
@@ -229,12 +231,12 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                     推荐金卡用户b，有足够的积分用于抵扣（抵扣10%），预约服务g，成功到医院消费2000，
                     医院补贴公司1000，用户补贴比例20%，市场部人员返现比例10%，
 -->
-                    <div>医院消费：<input id="yiyuan_xiaofei" type="text"/>元 </div>
+                    <div>医院消费：<input id="yiyuan_xiaofei" type="text" value="{$service.money}"/>元 </div>
                     <div style="padding:10px 0;">
-                        医院补贴公司：<input id="yiyuan_butie" type="text"/>元
+                        医院补贴公司：<input id="yiyuan_butie" type="text" value="{$service.hbutie}"/>元
                     </div>
                    <div style="padding-bottom:10px;">
-                       用户补贴比例：<input id="user_bili" type="text"/>%
+                       用户补贴比例：<input id="user_bili" type="text" value="{$service.bili}"/>%
                    </div>
                 </div>
                 <a class="ncap-btn-big ncap-btn-green pass_btn" href="{:U('Admin/Service/confirm',array('id'=>$service['id'],'p'=>4))}" >

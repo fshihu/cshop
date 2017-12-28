@@ -313,7 +313,7 @@ class Goods extends Base {
             $return_url = $is_distribut > 0 ? U('admin/Distribut/goods_list') : U('admin/Goods/goodsList');
             $data = input('post.');
             $validate = \think\Loader::validate('Goods');
-            if (!$validate->batch()->check($data)) {
+            /*if (!$validate->batch()->check($data)) {
                 $error = $validate->getError();
                 $error_msg = array_values($error);
                 $return_arr = array(
@@ -322,7 +322,7 @@ class Goods extends Base {
                     'data' => $error,
                 );
                 $this->ajaxReturn($return_arr);
-            }
+            }*/
             if($goods_id <= 0){
                 $data['admin_uid'] = session('admin_id');
             }

@@ -100,7 +100,29 @@ class Service  extends Base
         $service['date'] = date('Y-m-d',$service['date']);
         $service['cost_date'] = $service['cost_date']?date('Y-m-d',$service['cost_date']):'';
         $service['status_desc'] = $s[$service['status']];
+		
+		//获取服务补贴比例-柯岳
+		$fw =    M('service')->where(array(
+                        'id' => $service['service_id'],
+                    ))->find();
+		//获取用户等级-柯岳
+		$user =    M('users')->where(array(
+                        'user_id' => $service['user_id'],
+                    ))->find();
+		if($user['level']=='1'){
+			$service['bili']='0';
+			$service['dj']='普通会员';
+		}else if($user['level']=='2'){
+			$service['bili']=$fw['gsubsidy'];
+			$service['dj']='金卡会员';
+		}else if($user['level']=='2'){
+			$service['bili']=$fw['bsubsidy'];
+			$service['dj']='黑卡会员';
+		}
+		$service['hbutie']=$service['money']*$fw['hsubsidy']/100;
+		
                 $this->assign('service',$service);
+			
                 return $this->fetch();
     }
     public function changetime()
@@ -338,10 +360,10 @@ class Service  extends Base
       public function delService()
       {
           // 判断此品牌是否有商品在使用
-          $goods_count = M('Goods')->where("brand_id = {$_GET['id']}")->count('1');
+          $goods_count = M('Service_reserve')->where("service_id = {$_GET['id']}")->count('1');
           if($goods_count)
           {
-              $return_arr = array('status' => -1,'msg' => '此品牌有商品在用不得删除!','data'  =>'',);   //$return_arr = array('status' => -1,'msg' => '删除失败','data'  =>'',);
+              $return_arr = array('status' => -1,'msg' => '此服务有订单存在用不得删除!','data'  =>'',);   //$return_arr = array('status' => -1,'msg' => '删除失败','data'  =>'',);
               $this->ajaxReturn($return_arr);
           }
 
