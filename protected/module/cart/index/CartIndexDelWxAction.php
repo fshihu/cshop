@@ -8,15 +8,13 @@
 namespace module\cart\index;
 
 
+use CC\action\DeleteAction;
 use CRequest;
 
-class CartIndexDelWxAction extends \CAction
+class CartIndexDelWxAction extends DeleteAction
 {
-    public function execute(CRequest $request)
+    protected function getTable()
     {
-        $id = $request->getParams('id');
-
-        return new \CJsonData();
+        return 'cart';
     }
-
 }

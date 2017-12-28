@@ -19,15 +19,15 @@
          <div class="news_det">
             <div class="new_tit">
                 <div class="t1"><?php echo $data['title'] ?></div>
-                <div class="t2">admin  <?php echo date('m-d H:i',$data['publish_time']) ?></div>
+                <div class="t2">灏维美丽服务平台  <?php echo date('m-d H:i',$data['publish_time']) ?></div>
             </div>
             <div class="new_cont gooods_content">
            <?php echo html_entity_decode($data['content']) ?>
 
             </div>
-            <div class="coloct_btn">
-                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default collect_btn" style="<?php echo $old?'display: none;':'' ?>">收藏</a>
-                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default cancel_collect_btn" style="<?php echo $old?'':'display: none;' ?>">取消收藏</a>
+            <div class="coloct_btn" style='padding-bottom:25px'>
+                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default collect_btn" style="<?php echo $old?'display: none;':'' ?>">添加书签</a>
+                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default cancel_collect_btn" style="<?php echo $old?'':'display: none;' ?>">取消书签</a>
 
             </div>
         </div>

@@ -1,7 +1,7 @@
 <?php echo \CC\util\common\server\AssetManager::instance()->getCssJs([
         '/public/biz/turntable/js/jQueryRotate.js',
-        '/public/biz/turntable/js/index.js',
-        '/public/biz/turntable/css/index.css',
+        '/public/biz/turntable/js/index.js?4',
+        '/public/biz/turntable/css/index.css?3',
 ]) ?>
 <!--搜索栏-s-->
 <div class="page   " style="height: 100%; ">
@@ -23,6 +23,7 @@
            <div class="wheel">
                <canvas class="item" id="wheelCanvas" width="422px" height="422px"></canvas>
                <div class="pointer">
+                   <div class="pointer_jiantou"></div>
                    <div class="pointer_inner">点击抽取</div>
                </div>
            </div>
@@ -32,17 +33,19 @@
        </div>
     <div class="avatar_label">
         <?php foreach($group_one_members as $group_one_member):?>
-        <span class="avatar_label_item">
+        <span class="avatar_label_item"  >
             <img src="<?php echo $group_one_member['head_pic'] ?>" alt="" class="avatar">
              <?php if($group_one_member['is_leader']):?>
             <span class="weui-badge" style="margin-left: 5px;">团长</span>
-             <?php endif;?>
+             <?php endif;?>		
+			 <span><?php echo $group_one_member['nickname'] ?></span>
         </span>
+
         <?php endforeach?>
 
 
                     </div>
-      <div class="tip_txt" style="margin: 10px 60px;">
+      <div class="tip_txt" style="margin: 30px 60px;">
           成团后团长随机抽取获得产品人员，并短信通知各位团员
       </div>
     </div>
@@ -73,7 +76,7 @@
 
         turnWheel.rewardNames = [
             <?php foreach($group_one_members as $group_one_member):?>
-            "<?php echo $group_one_member['nickname'] ?>",
+            "<span><?php echo $group_one_member['nickname'] ?></span>",
             <?php endforeach; ?> ];
         turnWheel.colors = [
             <?php foreach($group_one_members as $i => $group_one_member):?>
@@ -95,7 +98,7 @@
             $('#wheelCanvas').rotate({
                 angle:0,
                 animateTo:angles + 360 * 5, // 这里多旋转了5圈，圈数越多，转的越快
-                duration:8000,
+                duration:5000,
                 callback:function (){ // 回调方法
                     $("#tip").text(tip);
                     turnWheel.bRotate = !turnWheel.bRotate;

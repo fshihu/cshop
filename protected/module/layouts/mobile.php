@@ -17,11 +17,13 @@
                 '/public/biz/wx/common/css/wx.css',
                 '/public/biz/wx/common/js/wx.js',
 
+                '/public/biz/starability/css/starability.css?1',
+
                 '/public/biz/swiper/css/swiper.min.css',
             '/public/biz/swiper/js/swiper.min.js',
                 '/public/biz/swipeSlide/js/swipeSlide.min.js',
-                '/public/biz/wx/common/css/style.css?13',
-                '/public/biz/wx/common/js/script.js?9',
+                '/public/biz/wx/common/css/style.css?35',
+                '/public/biz/wx/common/js/script.js?10',
 
             ]
         ]

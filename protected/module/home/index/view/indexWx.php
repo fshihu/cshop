@@ -82,6 +82,9 @@
     </div>
 
 </div>
+<a class="cart_btn" style="" href="<?php echo $this->genurl('cart/index/index') ?>">
+    <img src="/public/biz/wx/common/images/my/Shoppingcart_icon.png" alt="" class="icon">
+</a>
 <?php include \biz\Util::getFooterNav(); ?>
 <script type="text/javascript">
     $('.weui-title-menu').click(function () {

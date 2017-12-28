@@ -33,9 +33,13 @@ class MemberOrderIndexWxAction  extends ListAction
 
     protected function getSearchCondition()
     {
+        if($this->wait_status != '_all'){
+            $this->dbCondition->addColumnsCondition(array(
+                'wait_status' => $this->wait_status,
+            ));
+        }
         $this->dbCondition->addColumnsCondition(array(
             'user_id' => Session::getUserID(),
-            'wait_status' => $this->wait_status,
             'deleted' => YesNoEnum::NO,
             'is_show' => 1,
         ))->order('order_id desc');

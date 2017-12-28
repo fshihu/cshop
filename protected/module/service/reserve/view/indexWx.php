@@ -39,6 +39,7 @@
                     </div>
                 </div>
             </div>
+
     <script type="text/javascript">
         function alerts(id) {
                $('#iosDialog2').fadeIn(200);
@@ -72,5 +73,29 @@
         	};
 
         	$("#form_date").mobiscroll($.extend(opt['date'], opt['default']));
+
+         	var opt={};
+        	opt.date = {preset : 'date'};
+        	opt.datetime = {preset : 'datetime'};
+        	opt.time = {preset : 'time'};
+        	opt.default = {
+        		theme: 'android-ics light', //皮肤样式
+        		display: 'modal', //显示方式
+        		mode: 'scroller', //日期选择模式
+        		dateFormat: 'yyyy',
+        		lang: 'zh',
+        		showNow: false,
+        		nowText: "今天",
+
+                dateOrder: 'yy',
+                headerText: function (year,month) { //自定义弹出框头部格式
+                    console.log(year,month);
+                    return year + "年" ;
+                } ,
+        		startYear: currYear-90 , //开始年份
+        		endYear: currYear  //结束年份
+        	};
+
+        	$("#form_briday").mobiscroll($.extend(opt['date'], opt['default']));
 
      </script>

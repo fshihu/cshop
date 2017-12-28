@@ -36,6 +36,6 @@ class MemberRecommIndexWxAction  extends ListAction
         $this->dbCondition->addColumnsCondition(array(
             'level' => $this->request->getParams('level',1),
             'first_leader' => Session::getUserID(),
-        ));
+        ))->order('reg_time desc');
     }
 }

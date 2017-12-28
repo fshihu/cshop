@@ -8,6 +8,8 @@
 namespace app\admin\controller;
 
 
+use app\admin\logic\Phone;
+use Exception;
 use think\Loader;
 use think\Page;
 
@@ -70,7 +72,7 @@ class Service  extends Base
         $model ->join('t_region d','t.district = d.id','left');
         $model->field('t.*,s.name service_name,p.name p_name,c.name c_name,d.name d_name');
                 $service = $model->where($where)->order("t.`id` asc")->limit($Page->firstRow.','.$Page->listRows)->find();
-        $service['birthday'] =date('Y年m月d日',$service['birthday']);
+        $service['birthday'] =date('Y年',$service['birthday']);
         $service['sex'] =  $service['sex'] == 1?'男':'女';
         $service['addrs'] =  $service['p_name']. $service['c_name']. $service['d_name'];
         $m = array(
@@ -96,19 +98,44 @@ class Service  extends Base
         $service['reserve_reason'] = $r[$service['reserve_reason']].$service['reserve_reason_other'];
         $service['marriage'] = $m[$service['marriage']];
         $service['date'] = date('Y-m-d',$service['date']);
+        $service['cost_date'] = $service['cost_date']?date('Y-m-d',$service['cost_date']):'';
         $service['status_desc'] = $s[$service['status']];
                 $this->assign('service',$service);
                 return $this->fetch();
+    }
+    public function changetime()
+    {
+        $time = strtotime($_POST['date']);
+        if(!$time){
+            echo 'err';exit;
+        }
+        M("ServiceReserve")->where(array('id' => $_POST['id']))->save(array(
+            'date' => $time
+        )); // 根据条件更新记录
+        echo 'ok';
+    }
+
+    public function sendMsg($mobile, $text)
+    {
+        $rs = Phone::sendMsg($mobile, $text);
+        if (!$rs) {
+            $this->error('短信发送失败!');
+            exit;
+        }
+        return true;
     }
 
     public function confirm()
     {
         $User = M("ServiceReserve"); // 实例化User对象
         // 要修改的数据对象属性赋值
+        $s = M("ServiceReserve")->where(array('id' => $_GET['id']))->find(); // 根据条件更新记录
         if($_GET['p'] == 1){
             $data['status'] = 1;
+            $this->sendMsg($s['mobile'],'您预约的服务已通过。');
         }else if($_GET['p'] == 2){
             $data['status'] = 2;
+            $this->sendMsg($s['mobile'],'您预约的服务未通过。');
         }else if($_GET['p'] == 3){
             $data['status'] = 3;
         }else if($_GET['p'] == 4){
@@ -122,35 +149,56 @@ class Service  extends Base
             $data['yiyuan_butie'] = $yiyuan_butie;
             $data['user_bili'] = $user_bili;
             /**
-             * 例子：管理员后台设置市场部人员佣金比例为10%，市场部人员a，推荐金卡用户b，
-             * 有足够的积分用于抵扣（抵扣10%），预约服务g，成功到医院消费2000，
-             * 医院补贴公司1000，用户补贴比例20%，市场部人员返现比例10%，则：
-             * 用户抵扣金额：2000*10%=200
-             市场部人员获得佣金：（1000-200）*10%=80
-             用户返补贴金额：（1000-200）*20+200=360
+             * 例子：
+             * 例子：销售人员a，推荐金卡用户b，有足够的积分用于抵扣（抵扣10%），预约服务g，
+             * 成功到医院消费2000，
+             * 医院补贴公司1000，
+             * 用户补贴比例20%，
+             * 销售人员返现比例30%，则：
+             用户抵扣金额：（2000-2000*20%）*10=160
+             返还用户补贴金额：2000*20%+160=560
+             销售人员获得佣金：（1000-2000*20%）*30%=180
+            返积分：（医院消费-用户返还金额）*1%
+
              */
             $service_reserve = M('service_reserve')->where(array('id' => $_GET['id']))->find();
             $max_ratio = self::getUseGoldMaxRatio($service_reserve['user_id']);
             $user =    M('users')->where(array(
                         'user_id' => $service_reserve['user_id'],
                     ))->find();
-            $user_gold = min($user['gold'],$max_ratio * $yiyuan_xiaofei);
-            if($user['first_leader'] && $user['is_sale']){
+            $user_bili = $user_bili / 100;
+
+
+            if($user['first_leader']){
                 $first_leader = M('users')->where(array(
                                         'user_id' => $user['first_leader'],
                                     ))->find();
-                $shic_price = ($yiyuan_butie -  $user_gold ) *  $first_leader['sale_ratio']/100;
-                if($shic_price > 0){
-                    self::addRecord($first_leader['user_id'],4,$shic_price,'服务预约佣金',$service_reserve['id']);
+                if($first_leader['is_sale']){
+                    $first_leader['sale_ratio'] =  $first_leader['sale_ratio']/100;
+
+                    $xiaoshou_price = ($yiyuan_butie -  $yiyuan_xiaofei*$user_bili ) *  $first_leader['sale_ratio'];
+                    if($xiaoshou_price > 0){
+                        self::addRecord($first_leader['user_id'],4,$xiaoshou_price,'服务预约佣金',$service_reserve['id']);
+                    }
                 }
+
             }
+
+            $user_gold = min($user['gold'],(int)(($yiyuan_xiaofei - $user_bili * $yiyuan_xiaofei)*$max_ratio));
             if($user_gold > 0){
                 self::addGold($user['user_id'],6,-$user_gold,'服务补贴扣除',$service_reserve['id']);
             }
-            $butie_price = ($yiyuan_butie - $user_gold) * $user_bili / 100 + $user_gold;
+
+            $butie_price = $yiyuan_xiaofei * $user_bili  + $user_gold;
             if($butie_price > 0){
                 self::addRecord($user['user_id'],3,$butie_price,'服务补贴',$service_reserve['id']);
             }
+
+            $new_user_gold = (int)(($yiyuan_xiaofei -  $butie_price) * 0.01);
+            if($new_user_gold > 0){
+                self::addGold($user['user_id'],7,$new_user_gold,'服务补贴返还积分',$service_reserve['id']);
+            }
+
             $data['status'] = 6;
         }else if($_GET['p'] == 5){
             $data['status'] = 5;

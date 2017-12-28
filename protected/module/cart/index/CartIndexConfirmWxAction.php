@@ -8,6 +8,7 @@
 namespace module\cart\index;
 
 
+use CC\db\base\update\UpdateModel;
 use CC\util\arr\ArrayUtil;
 use CRequest;
 use module\cart\index\server\CartServer;
@@ -26,7 +27,16 @@ class CartIndexConfirmWxAction extends \CAction
         $cart_ids = $request->getParams('cart_ids');
         $address_id = $request->getParams('address_id');
         $total_person_num = $request->getParams('total_person_num',1);
-        $use_gold = $request->getParams('use_gold',1);
+        $use_gold = $request->getParams('use_gold',0);
+        $nums = $request->getParams('nums');
+        $nums = json_decode($nums,true);
+        if(is_array($nums)){
+            foreach ($nums as $item) {
+                UpdateModel::make('cart')->addId($item['id'])->addData(array(
+                    'goods_num' => $item['num'],
+                ))->execute();
+            }
+        }
         $cart_ids = ArrayUtil::explodeStr($cart_ids);
         if(empty($cart_ids)){
             return new \CRenderData();

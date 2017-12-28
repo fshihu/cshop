@@ -35,11 +35,15 @@
              <input type="hidden" id="own_phone" value="<?php echo \module\member\index\UserServer::getPhone() ?>"/>
         </div>
         <?php echo \CC\util\common\widget\widget\WidgetBuilder::build(new \CC\util\common\widget\widget\FormWidget($this,$data), \CC\util\common\widget\panel\FormPanel::instance()) ?>
+		<?php if($user['mobile']==''){ ?>
+			<div style='color:red;padding-left:20px;padding-right:20px'>
+           *您还未在个人信息中设置手机号，不能接收验证码。 
+            </div>
+		<?php }?>
         <div class="addr_eidt_btn_w">
             <a  class="weui-btn weui-btn_primary addr_eidt_btn">确认转赠</a>
-
         </div>
-
+		
                  </div>
 
  </div>

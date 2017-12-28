@@ -14,6 +14,18 @@ $(function(){
             me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
         }
     });
+    $('#slideTpshop_noauto').swipeSlide({
+        continuousScroll:true,
+        speed : 3000,
+        autoSwipe:false,
+        transitionType : 'cubic-bezier(0.22, 0.69, 0.72, 0.88)',
+        firstCallback : function(i,sum,me){
+            me.find('.dot').children().first().addClass('cur');
+        },
+        callback : function(i,sum,me){
+            me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
+        }
+    });
     //圆点
     var ed = $('.mslide ul li').length - 2;
 	$('.mslide').append("<div class=" + "dot" + "></div>");
@@ -67,6 +79,9 @@ $(function(){
         });
     });
 
+    $('.year_input').click(function () {
+
+    });
 
 });
 function leftTimer(year,month,day,hour,minute,second,sel,style){

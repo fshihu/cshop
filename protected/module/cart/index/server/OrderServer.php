@@ -16,6 +16,8 @@ use CC\util\number\NumberUtil;
 use module\groupon\index\enum\GroupTypeEnum;
 use module\member\gold\server\GoldServer;
 use module\member\gold\server\UserGoldRecordServer;
+use module\member\index\server\UserLevelServer;
+use module\member\index\UserServer;
 
 class OrderServer
 {
@@ -105,8 +107,19 @@ class OrderServer
         $car_price['order_prom_id'] = $this->prom_id;
         $car_price['order_prom_type'] = $this->prom_type;
         $car_price['order_prom_amount'] = 0;
-        foreach ($this->cart_list as $cart) {
-            $car_price['goodsFee'] += $cart['shop_price'];
+        $car_price['freight_price'] = 0;
+        $car_price['card_discount_price'] = 0;
+        $user = UserServer::getUser();
+        foreach ($this->cart_list as $i => $cart) {
+            $car_price['goodsFee'] += $cart['shop_price'] * $cart['goods_num'] + $cart['freight_price'];
+            $card_discount_price = 0;
+            if(UserLevelServer::isGoldedCrad($user)){
+                 $card_discount_price = $cart['gold_card_discount_price'];
+            }else if(UserLevelServer::isBlackCrad($user)){
+                $card_discount_price = $cart['black_card_discount_price'];
+            }
+            $car_price['card_discount_price'] = $card_discount_price * $cart['goods_num'];
+            $this->cart_list[$i]['card_discount_price'] = $card_discount_price;
         }
         if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
             $car_price['goodsFee'] =  NumberUtil::formatFloat(($car_price['goodsFee'] / $this->total_person_num));
@@ -140,6 +153,11 @@ class OrderServer
         );
         return InsertModel::make('order')->addData($data)->execute();
     }
+
+    protected function getAdminUid()
+    {
+        return (int)$this->cart_list[0]['admin_uid'];
+    }
     private  function addOrderInfo($car_price)
     {
         $user_id = Session::getUserID();
@@ -147,6 +165,7 @@ class OrderServer
         $shipping_code = 0;
         $user_note = '';
         $pay_name = '微信支付';
+        $admin_uid = $this->getAdminUid();
         $data = array(
             'order_sn'         => self::getOrderSn(), // 订单编号
             'user_id'          =>$user_id, // 用户id
@@ -168,8 +187,10 @@ class OrderServer
             'coupon_price'     =>$car_price['couponFee'],//'使用优惠券',
             'integral'         =>$car_price['integral'], //'使用积分',
             'integral_money'   =>$car_price['pointsFee'],//'使用积分抵多少钱',
-            'total_amount'     =>($car_price['goodsFee'] + $car_price['postFee']),// 订单总额
+            'total_amount'     =>($car_price['goodsFee'] + $car_price['freight_price']),// 订单总额
             'order_amount'     =>$car_price['payables'],//'应付款金额',
+            'freight_price'     =>$car_price['freight_price'],//'应付款金额',
+            'card_discount_price'     =>$car_price['card_discount_price'],//'抵扣',
             'add_time'         =>time(), // 下单时间
             'order_prom_type'    =>$this->prom_type,//'订单优惠活动id',
             'order_prom_id'    =>$this->prom_id,//'订单优惠活动id',
@@ -178,6 +199,7 @@ class OrderServer
             'total_person_num' => $this->total_person_num,
             'user_note'        =>$user_note, // 用户下单备注
             'pay_name'         =>$pay_name,//支付方式，可能是余额支付或积分兑换，后面其他支付方式会替换
+            'admin_uid' => $admin_uid,
         );
         $id = InsertModel::make('order')->addData($data)->execute();
         if($data['integral_money'] > 0){
@@ -202,6 +224,8 @@ class OrderServer
             $data2['spec_key_name']      = $val['spec_key_name']; // 商品规格名称
             $data2['member_goods_price'] = $val['member_goods_price']; // 会员折扣价
             $data2['cost_price']         = $val['cost_price']; // 成本价
+            $data2['freight_price']         = $val['freight_price']; //
+            $data2['card_discount_price']         = $val['card_discount_price']; //
             $data2['give_integral']      = $val['give_integral']; // 购买商品赠送积分
             $data2['prom_type']          = $this->prom_type; // 0 普通订单,1 限时抢购, 2 团购 , 3 促销优惠
             $data2['prom_id']            = $this->prom_id; // 活动id

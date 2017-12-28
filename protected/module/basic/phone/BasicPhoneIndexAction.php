@@ -24,7 +24,8 @@ class BasicPhoneIndexAction extends \CAction
             'code' => $code,
             'c_time' => time(),
         ))->execute();
-        PhoneServer::sendMsg($this->phone,$code);
+        $text = "您的验证码是".$code."。如非本人操作，请忽略本短信";
+        PhoneServer::sendMsg($this->phone,$text);
         return new \CJsonData();
     }
     protected function getIsOpenTransaction()

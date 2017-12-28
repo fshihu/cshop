@@ -14,7 +14,7 @@ use CC\util\common\widget\form\BaseInput;
 class AddrInput extends BaseInput
 {
     protected $input_style;
-
+    protected $is_show_distirct = true;
     /**
      * @param mixed $input_style
      * @return AddrInput
@@ -22,6 +22,16 @@ class AddrInput extends BaseInput
     public function setInputStyle($input_style)
     {
         $this->input_style = $input_style;
+        return $this;
+    }
+
+    /**
+     * @param bool $is_show_distirct
+     * @return AddrInput
+     */
+    public function setIsShowDistirct($is_show_distirct)
+    {
+        $this->is_show_distirct = $is_show_distirct;
         return $this;
     }
 
@@ -45,6 +55,9 @@ class AddrInput extends BaseInput
             $shi = '<select id="city" name="city" style="margin-top:10px;width:70px;;;" onChange="get_area(this)" class="addr_input_city"><option>-市-</option></select>';
             $shi .= '<div><label style="   margin-left: -110px;   margin-top: 10px;             " class="data-label"><span>所在区：</span></label></div>';
             $qu = '<select id="district" style="width:70px;" name="district" class="addr_input_district"><option>-区-</option></select>';
+        }
+        if(!$this->is_show_distirct){
+            $qu = '';
         }
         return '<div class="addr_input">'.$sheng.$shi.$qu.'</div>'.$str;
     }

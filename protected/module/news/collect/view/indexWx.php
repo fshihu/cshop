@@ -10,7 +10,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">收藏和足记</p>
+                            <p class="title">书签和资讯足记</p>
                         </div>
                     </div>
 
@@ -19,7 +19,7 @@
   <div class="goods_list">
       <div class="weui-navbar navbar-sm">
           <a href="<?php echo $this->genurl(''); ?>" class="weui-navbar__item <?php echo $type ==0?'weui-bar__item_on':'' ?>">
-               我的收藏
+               我的书签
           </a>
           <a href="<?php echo $this->genurl('',['type'=>1]); ?>" class="weui-navbar__item <?php echo $type ==1?'weui-bar__item_on':'' ?>  ">
               浏览记录
@@ -36,7 +36,7 @@
                              </a>
                               <?php if($type == 0):?>
                              <div style="margin-top:10px;">
-                                 <a style="color: #2CC7C5;" href="<?php echo $this->genurl('add',['id'=>$item['article_id'],'cancel'=>1]); ?>" class="collcet_cancel weui-btn weui-btn_mini weui-btn_default">取消收藏</a>
+                                 <a style="color: #2CC7C5;" href="<?php echo $this->genurl('add',['id'=>$item['article_id'],'cancel'=>1]); ?>" class="collcet_cancel weui-btn weui-btn_mini weui-btn_default">取消书签</a>
                              </div>
                               <?php endif;?>
 
@@ -56,7 +56,7 @@
         $('body').on('click','.collcet_cancel',function () {
             var $this = $(this);
             ajax_request($(this).attr('href'),{},function () {
-               Tip('取消收藏成功');
+               Tip('取消书签成功');
                $this.closest('.list2').remove();
             });
             return false;

@@ -27,6 +27,10 @@ class MemberMsgIndexWxAction extends ListAction
         ))->execute();
         return parent::onExecute();
     }
+    protected function getSearchCondition()
+    {
+        $this->dbCondition->order('id desc');
+    }
 
     protected function getTable()
     {

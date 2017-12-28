@@ -21,9 +21,19 @@
 
        echo $is_end ==0?'weui-bar__item_on':'' ?>">
            待成团
+           <?php if($group_own[0] > 0):?>
+                                        <span class="weui-badge" style="position: absolute;top: -.4em;right:-3px;z-index: 1    ; ">
+                                            <?php echo (int)$group_own[0]  ?>
+                                        </span>
+                   <?php endif;?>
        </a>
        <a href="<?php echo $this->genurl('',['is_end'=>1]) ?>" class="weui-navbar__item   <?php echo $is_end ==1?'weui-bar__item_on':'' ?>">
            待抽取
+           <?php if($group_own[1] > 0):?>
+                                        <span class="weui-badge" style="position: absolute;top: -.4em;right:-3px;z-index: 1    ; ">
+                                            <?php echo (int)$group_own[1]  ?>
+                                        </span>
+                   <?php endif;?>
        </a>
        <a href="<?php echo $this->genurl('',['is_end'=>2]) ?>" class="weui-navbar__item   <?php echo $is_end ==2?'weui-bar__item_on':'' ?>">
            已完成
@@ -48,13 +58,13 @@
              </a>
          <?php endforeach?>
          <div class="t3">
-             实支付： <span class="t3_s">￥ <?php echo $item['order_amount'] ?></span>（免运费）
+             实支付： <span class="t3_s">￥ <?php echo $item['order_amount'] ?></span>
          </div>
               <?php if($is_end == 0):?>
 
          <div class="t5">
-
-            <span class="t5_2">还差<?php echo $item['remain_num'] ?>人</span>
+			<a href="<?php echo $this->genurl('groupon/one/index',['group_one_id'=> $item['order_prom_id']]) ?>" style="float:left;background:#2CC7C5; color:#fff; padding:0 5px; border-radius:5px; font-size:12px; height:22px; line-height:22px;">分享给好友</a>
+            <span class="t5_2" style="height:22px; line-height:22px;">还差<?php echo $item['remain_num'] ?>人</span>
          </div>
               <?php endif;?>
               <?php if($is_end == 1):?>
@@ -63,7 +73,7 @@
          <div class="t5">
 
             <span class="t5_2">
-                 <?php if($item['user_id'] == \biz\Session::getUserID()):?>
+                 <?php if($item['group_one_uid'] == \biz\Session::getUserID()):?>
                      <a href="<?php echo $this->genurl('raffle',['order_id' => $item['order_id']]); ?>" class="weui-btn weui-btn_mini weui-btn_default  ">去抽奖</a>
                   <?php else:?>
                      等待团长抽奖

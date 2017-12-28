@@ -10,9 +10,9 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title"><?php use module\member\index\UserServer;
+                             <p class="title"><?php use module\member\index\UserServer;
+                            echo \biz\Util::subString($data['goods_name'],6) ?></p>
 
-                                echo $data['goods_name'] ?></p>
                         </div>
                     </div>
 
@@ -20,7 +20,7 @@
         <div class="  weui-panel_access  " style="height: 100%;background: #f3f7f8">
  <div class="goods_list">
       <div class="banner ban1">
-         <div class="mslide" id="slideTpshop">
+         <div class="mslide" id="slideTpshop_noauto">
              <ul>
                 <?php foreach($goods_images as $goods_image):?>
                      <li>
@@ -57,7 +57,7 @@
          </div>
      </div>
  <div class="m_title_1" >
-    <span class="line"></span> 别人开的团 <span class="line"></span>
+    <span class="line"></span> 正在进行的幸运轮 <span class="line"></span>
 </div>
 
     <div class="list3_w">
@@ -66,13 +66,13 @@
             <span class="fl">
                 <img class="avatar" src="<?php echo $other_group_buy['head_pic'] ?>" alt="">
                 <span class="t1">
-                    <span class="t1_s"><?php echo $other_group_buy['nikname'] ?></span>
-                    <span class="t1_m">正在开团中</span>
+                    <span class="t1_s"><?php echo $other_group_buy['nickname'] ?></span>
+                    <span class="t1_m">正在进行幸运轮</span>
                 </span>
             </span>
             <span class="fr">
-                <span class="t2">还差<?php echo $other_group_buy['remain_num'] ?>人成团</span>
-                <a href="<?php echo $this->genurl('groupon/one/index',['group_one_id'=>$other_group_buy['id']]); ?>" class="btn_r">去参团</a>
+                <span class="t2">还差<?php echo $other_group_buy['remain_num'] ?>人</span>
+                <a href="<?php echo $this->genurl('groupon/one/index',['group_one_id'=>$other_group_buy['id']]); ?>" class="btn_r">参加</a>
             </span>
         </div>
         <?php endforeach?>
@@ -101,8 +101,28 @@
                        <span class="t1_s"><?php echo $comment_item['uname'] ?></span>
                    </div>
                    <div class="t2"><?php echo $comment_item['comment_content'] ?></div>
+                   <?php if($comment_item['comment_reply']):?>
+                  <div class="t2" style="padding-top: 0;padding-left:10px;">商家回复：<?php echo $comment_item['comment_reply'] ?></div>
+                   <?php endif;?>
                    <div class="t3">
-                       <?php echo $comment_item['comment_time'] ?>
+                       <?php for($i =0; $i< $comment_item['rating'];$i++):?>
+                       <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
+                               width: 10px;
+                               height: 10px;
+                               display: inline-block;
+                               background-size: 10px;
+                               background-position: 0px -10px;"></span>
+                       <?php endfor;?>
+                       <?php for($i =0; $i< 5-$comment_item['rating'];$i++):?>
+                       <span style="background: url(<?php echo $baseUrl ?>/public/biz/starability/starability-images/icons-checkmark@2x.png);
+                               width: 10px;
+                               height: 10px;
+                               display: inline-block;
+                               background-size: 10px;
+                               background-position: 0px 0;"></span>
+                       <?php endfor;?>
+
+                       <?php echo date('Y-m-d h:i:s',$comment_item['comment_time']) ?>
                    </div>
                </div>
                <?php endforeach?>
@@ -110,22 +130,23 @@
             </div>
     </div>
 
-     <div class="buy_btn">
-         <a href="<?php echo $this->genurl('goods/det/index',['id'=>$data['goods_id']]) ?>" class="bt_a bt_a1">
-             <div class="t1">￥<?php echo $data['shop_price'] ?></div>
-            <div class="t2">单独购买</div>
-         </a>
-         <a href="javascript:;" class="bt_a bt_a2">
-             <div class="t1">￥<?php echo $group_buy['price'] ?></div>
-             <div class="t2">一键开团</div>
-         </a>
-     </div>
  </div>
                     </div>
 
      </div>
 
 </div>
+    <div class="buy_btn">
+        <a href="<?php echo $this->genurl('goods/det/index',['id'=>$data['goods_id']]) ?>" class="bt_a bt_a1">
+            <div class="t1">￥<?php echo $data['shop_price'] ?></div>
+           <div class="t2">单独购买</div>
+        </a>
+        <a href="javascript:;" class="bt_a bt_a2">
+            <div class="t1">￥<?php echo $group_buy['price'] ?></div>
+            <div class="t2">一键开团</div>
+        </a>
+    </div>
+
     <script type="text/javascript">
         $('.buy_btn .bt_a .t2').click(function () {
             ajax_request('<?php echo $this->genurl('cart/index/add');?>',{

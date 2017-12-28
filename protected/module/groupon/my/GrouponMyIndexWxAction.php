@@ -11,6 +11,7 @@ namespace module\groupon\my;
 
 use biz\action\ListAction;
 use biz\Session;
+use CC\db\base\select\ItemModel;
 use CC\util\db\YesNoEnum;
 use module\cart\index\server\OrderHanderServer;
 use module\cart\index\server\OrderPayStatusEnum;
@@ -26,7 +27,7 @@ class GrouponMyIndexWxAction extends ListAction
             't.pay_status' => OrderPayStatusEnum::PAYED,
             'deleted' => YesNoEnum::NO,
             'order_prom_type' => ['in',[PromTypeEnum::GROUP_JOIN,PromTypeEnum::GROUP_OPNE]],
-            'go.is_finish' => 0,
+            'go.is_finish' => $this->is_end?2:0,
             'gb.end_time' => [$this->is_end?'<':'>',time()],
         ))->leftJoin('group_one','go','t.order_prom_id = go.id')
             ->leftJoin('group_buy','gb','go.group_buy_id = gb.id')
@@ -41,10 +42,23 @@ class GrouponMyIndexWxAction extends ListAction
 
     protected function onExecute()
     {
+        $group_my =  ItemModel::make('order')->addColumnsCondition(array(
+                    't.user_id' => Session::getUserID(),
+                    't.pay_status' => OrderPayStatusEnum::PAYED,
+                    'deleted' => YesNoEnum::NO,
+                    'order_prom_type' => ['in',[PromTypeEnum::GROUP_JOIN,PromTypeEnum::GROUP_OPNE]],
+                    'go.is_finish' => 0,
+                    'gb.end_time' => ['>',time()],
+                ))->leftJoin('group_one','go','t.order_prom_id = go.id')
+                    ->leftJoin('group_buy','gb','go.group_buy_id = gb.id')
+                    ->leftJoin('users','u','go.win_uid = u.user_id')
+                    ->select('t.*,go.remain_num,gb.end_time,u.nickname,go.group_buy_id ')
+                    ->order('order_id desc')->select('count(*) count_num')->execute();
+        $user['group_my_num'] = (int)$group_my['count_num'];
         return [
             'end_desc' => $this->is_end?'已过期':'待成团',
             'is_end' => $this->is_end,
-
+            'user' => $user
         ];
     }
 }

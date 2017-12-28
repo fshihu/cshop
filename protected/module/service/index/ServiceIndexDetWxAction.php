@@ -23,7 +23,7 @@ class ServiceIndexDetWxAction extends \CAction
         $comment_list = ListModel::make('service_comment')->addColumnsCondition(array(
             'service_id' => $this->id,
         ))->leftJoin('users','u','t.user_id = u.user_id')
-            ->select('t.content comment_content,t.add_time comment_time,u.nickname uname,u.head_pic ')->execute();
+            ->select('t.comment_reply,t.content comment_content,t.rating,t.add_time comment_time,u.nickname uname,u.head_pic ')->order('t.comment_id desc')->execute();
         return new \CRenderData(array(
             'data' => $data,
             'service_images' => $service_images,

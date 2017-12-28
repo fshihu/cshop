@@ -10,13 +10,20 @@ namespace module\member\info;
 
 
 use CRequest;
+use CC\db\base\select\ListModel;
 use module\member\index\UserServer;
 
 class MemberInfoCardWxAction extends \CAction
 {
     public function execute(CRequest $request)
     {
-        $user = UserServer::getUser();
+        if($_GET['user_id']){
+			
+			$info = ListModel::make('users')->addColumnsCondition(array('user_id' => $_GET['user_id']))->execute(); 
+			$user=$info[0];
+		}else{
+			$user = UserServer::getUser();
+		}
 
         return new \CRenderData(array(
             'user' => $user,
