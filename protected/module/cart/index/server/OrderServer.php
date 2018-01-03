@@ -112,6 +112,7 @@ class OrderServer
         $user = UserServer::getUser();
         foreach ($this->cart_list as $i => $cart) {
             $car_price['goodsFee'] += $cart['shop_price'] * $cart['goods_num'] + $cart['freight_price'];
+            $car_price['freight_price'] += $cart['freight_price'];
             $card_discount_price = 0;
             if(UserLevelServer::isGoldedCrad($user)){
                  $card_discount_price = $cart['gold_card_discount_price'];
@@ -187,7 +188,7 @@ class OrderServer
             'coupon_price'     =>$car_price['couponFee'],//'使用优惠券',
             'integral'         =>$car_price['integral'], //'使用积分',
             'integral_money'   =>$car_price['pointsFee'],//'使用积分抵多少钱',
-            'total_amount'     =>($car_price['goodsFee'] + $car_price['freight_price']),// 订单总额
+            'total_amount'     =>$car_price['goodsFee'],// 订单总额
             'order_amount'     =>$car_price['payables'],//'应付款金额',
             'freight_price'     =>$car_price['freight_price'],//'应付款金额',
             'card_discount_price'     =>$car_price['card_discount_price'],//'抵扣',
