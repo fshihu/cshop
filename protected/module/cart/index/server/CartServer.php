@@ -51,6 +51,7 @@ class CartServer
         if ($prom_type == PromTypeEnum::GROUP_OWN_JOIN) {
             foreach ($list as $i => $item) {
                 $list[$i]['shop_price'] = $item['goods_price'];
+                $list[$i]['freight_price'] = 0;
             }
         }
         return $list;
