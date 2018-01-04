@@ -115,9 +115,9 @@ class OrderServer
             $car_price['freight_price'] += $cart['freight_price'];
             $card_discount_price = 0;
             if(UserLevelServer::isGoldedCrad($user)){
-                 $card_discount_price = $cart['gold_card_discount_price'];
+                 $card_discount_price += $cart['gold_card_discount_price'] * $cart['goods_num'];
             }else if(UserLevelServer::isBlackCrad($user)){
-                $card_discount_price = $cart['black_card_discount_price'];
+                $card_discount_price += $cart['black_card_discount_price'] * $cart['goods_num'];
             }
             $car_price['card_discount_price'] = $card_discount_price * $cart['goods_num'];
             $this->cart_list[$i]['card_discount_price'] = $card_discount_price;
