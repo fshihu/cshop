@@ -133,7 +133,6 @@ class OrderServer
             $car_price['pointsFee'] = $use_gold_num;
         }
         $car_price['payables'] = $car_price['goodsFee'] - $car_price['pointsFee'];
-        var_dump($car_price);exit;
         return $car_price;
     }
 
