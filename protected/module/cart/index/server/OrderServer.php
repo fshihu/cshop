@@ -120,7 +120,7 @@ class OrderServer
                 $card_discount_price += $cart['black_card_discount_price'] ;
             }
             $car_price['card_discount_price'] += $card_discount_price * $cart['goods_num'];
-            $this->cart_list[$i]['card_discount_price'] = $card_discount_price;
+            $this->cart_list[$i]['card_discount_price'] = $car_price['card_discount_price'];
         }
         if($this->prom_type == PromTypeEnum::GROUP_OWN_OPEN){
             $car_price['goodsFee'] =  NumberUtil::formatFloat(($car_price['goodsFee'] / $this->total_person_num));
