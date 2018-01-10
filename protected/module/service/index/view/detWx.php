@@ -100,7 +100,7 @@
 </div>
 
     <a class="buy_btn_now"  href="<?php echo $this->genurl('reserve/index',['service_id'=>$data['id']]) ?>">
-        立即预约
+        立即报名
     </a>
 
     <script type="text/javascript">

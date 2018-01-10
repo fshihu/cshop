@@ -101,7 +101,7 @@ return	array(
 
             array('name' => '活动','child' => array(
                 array('name' => '服务活动', 'act'=>'index', 'op'=>'Service'),
-                array('name' => '预约列表', 'act'=>'reserve', 'op'=>'Service'),
+                array('name' => '报名列表', 'act'=>'reserve', 'op'=>'Service'),
                 array('name' => '评论列表', 'act'=>'index', 'op'=>'Servicecomment'),
 
 //                array('name' => '微信菜单管理', 'act'=>'menu', 'op'=>'Wechat'),

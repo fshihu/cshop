@@ -67,7 +67,7 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
   <div class="fixed-bar">
     <div class="item-title"><a class="back" href="javascript:history.go(-1)" title="返回列表"><i class="fa fa-arrow-circle-o-left"></i></a>
       <div class="subject">
-        <h3>预约信息</h3>
+        <h3>报名信息</h3>
        </div>
      </div>
 
@@ -100,33 +100,26 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
 
                 </dl>
                 <dl>
-                    <dt>预约人姓名：</dt>
+                    <dt>报名人姓名：</dt>
                     <dd>{$service.consignee}</dd>
-                    <dt>预约手机号：</dt>
+                    <dt>报名手机号：</dt>
                     <dd>{$service.mobile}</dd>
                 </dl>
                 <dl>
                     <dt>性别：</dt>
                     <dd>{$service.sex}</dd>
-                    <dt>出生日期：</dt>
-                    <dd>{$service.birthday}</dd>
                 </dl>
                 <dl>
-                    <dt>职业：</dt>
-                    <dd>{$service.occupation}</dd>
                     <dt>出生地：</dt>
                     <dd>{$service.addrs}</dd>
                 </dl>
                 <dl>
-                    <dt>婚姻状况：</dt>
-                    <dd>{$service.marriage}</dd>
                     <dt>月收入：</dt>
                     <dd>{$service.hobby}</dd>
                 </dl>
                 <dl>
-                    <dt>预约理由：</dt>
-                    <dd>{$service.reserve_reason}</dd>
-                    <dt>预约日期：</dt>
+
+                    <dt>报名日期：</dt>
                     <dd><input type="text" value="{$service.date}" id="date_val_ipt" />
                         <button class="xiugaishijain">修改</button>
                         <script type="text/javascript">
@@ -226,7 +219,7 @@ a.green:hover { color: #FFF; background-color: #1BBC9D; border-color: #16A086; }
                 <?php if($service['status'] == 4):?>
                 <div>
                    <!-- 管理员后台设置市场部人员佣金比例为10%，市场部人员a，
-                    推荐金卡用户b，有足够的积分用于抵扣（抵扣10%），预约活动g，成功到医院消费2000，
+                    推荐金卡用户b，有足够的积分用于抵扣（抵扣10%），报名活动g，成功到医院消费2000，
                     医院补贴公司1000，用户补贴比例20%，市场部人员返现比例10%，
 -->
                     <div>医院消费：<input id="yiyuan_xiaofei" type="text"/>元 </div>
