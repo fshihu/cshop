@@ -25,6 +25,7 @@
 
         </style>
         <div class="  weui-panel_access  " style="">
+
  <div class="goods_list cate_goods_list_<?php echo $cate_i ?>">
      <div class="gl_nav" style="position: relative;">
          <a href="<?php echo $this->genurl('',['id' =>$id]); ?>" class="<?php echo $cate_id?'':'ac' ?>">全部</a>
@@ -36,6 +37,21 @@
              top: 15px;">
              <img style="position: relative;top:-3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pull-down_icon<?php echo $cate_i ?>.png" width="10" alt=""></a>
      </div>
+     <div class="weui-search-bar" id="searchBar">
+                 <form class="weui-search-bar__form" action="<?php echo $this->genurl('search/index/index'); ?>">
+                     <div class="weui-search-bar__box">
+                         <i class="weui-icon-search"></i>
+                         <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+                         <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                     </div>
+                     <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
+                         <i class="weui-icon-search"></i>
+                         <span>搜索</span>
+                     </label>
+                 </form>
+                 <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+             </div>
+
      <div class="banner ban1">
          <div class="mslide" id="slideTpshop">
              <ul>
@@ -77,6 +93,50 @@
     <img src="/public/biz/wx/common/images/my/Shoppingcart_icon.png" alt="" class="icon">
 </a>
 <script type="text/javascript">
+    $(function(){
+        var $searchBar = $('#searchBar'),
+            $searchResult = $('#searchResult'),
+            $searchText = $('#searchText'),
+            $searchInput = $('#searchInput'),
+            $searchClear = $('#searchClear'),
+            $searchCancel = $('#searchCancel');
+
+        function hideSearchResult(){
+            $searchResult.hide();
+            $searchInput.val('');
+        }
+        function cancelSearch(){
+            hideSearchResult();
+            $searchBar.removeClass('weui-search-bar_focusing');
+            $searchText.show();
+        }
+
+        $searchText.on('click', function(){
+            $searchBar.addClass('weui-search-bar_focusing');
+            $searchInput.focus();
+        });
+        $searchInput
+            .on('blur', function () {
+                if(!this.value.length) cancelSearch();
+            })
+            .on('input', function(){
+                if(this.value.length) {
+                    $searchResult.show();
+                } else {
+                    $searchResult.hide();
+                }
+            })
+        ;
+        $searchClear.on('click', function(){
+            hideSearchResult();
+            $searchInput.focus();
+        });
+        $searchCancel.on('click', function(){
+            cancelSearch();
+            $searchInput.blur();
+        });
+    });
+
     var is_click = false;
     $('.right_xialat').click(function () {
         if(!is_click){

@@ -22,6 +22,17 @@
         <li  >
             <div class="txt"><?php echo $item['name'] ?></div>
             <div class="c_s" style="display: none;">
+               <div style="padding: 15px 50px 0 50px;">
+                   <div class="weui-navbar navbar-sm nav_click  " style="    border: 1px solid #ccc;
+                       border-bottom: none;">
+                                           <a href="javascript:;" class="weui-navbar__item weui-bar__item_on">
+                                               商品
+                                           </a>
+                                           <a href="javascript:;" class="weui-navbar__item">
+                                               服务
+                                           </a>
+                                        </div>
+               </div>
                 <?php foreach($list as $c_item):?>
                     <?php if($item['id'] != $c_item['parent_id']){continue;}?>
                 <div class="cs_item">
