@@ -12,6 +12,7 @@ use CC\db\base\select\ItemModel;
 use CC\db\base\update\UpdateModel;
 use CC\util\db\YesNoEnum;
 use CErrorException;
+use module\basic\phone\server\PhoneServer;
 use module\member\gold\server\UserGoldRecordServer;
 
 class OrderStatusServer
@@ -51,6 +52,7 @@ class OrderStatusServer
             ))->addColumnsCondition(array(
                 'order_id' => $this->order_id,
             ))->execute();
+            $this->sendWiatMsg();
 
         }elseif ($to_status == self::TO_CONFIRM){
             UpdateModel::make('order')->addData(array(
@@ -68,5 +70,14 @@ class OrderStatusServer
                 'order_id' => $this->order_id,
             ))->execute();
         }
+    }
+
+    protected function sendWiatMsg()
+    {
+        //尊敬的商户，你在商城上有新的订单请求，下单时间为2017-12-25 12:23:32，请及时受理，如已处理，可忽略此提醒。
+        $order = ItemModel::make('order')->addColumnsCondition(['order_id' => $this->order_id])->execute();
+        $user = ItemModel::make('users')->addColumnsCondition(array('admin_uid' =>$order['admin_uid']))->execute();
+        $merchant = ItemModel::make('merchant')->addColumnsCondition(array('uid' => $user['user_id']))->execute();
+        PhoneServer::sendMsg($merchant['contact'],'尊敬的商户，你在商城上有新的订单请求，下单时间为'.date('Y-m-d H:i:s',$order['add_time']).'，请及时受理，如已处理，可忽略此提醒。',false);
     }
 }

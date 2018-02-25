@@ -630,6 +630,11 @@ class User extends Base {
         $names = array_column(M('bank')->select(),'name','id');
         foreach ($list as $i => $item) {
             $list[$i]['bank_name'] = $names[$item['bank_name']];
+			if($item['type']=='1'){
+				$list[$i]['lx']='佣金补贴';
+			}else{
+				$list[$i]['lx']='我的财富';
+			}
         }
 
         $this->assign('create_time',$create_time);
@@ -637,6 +642,7 @@ class User extends Base {
         $this->assign('show',$show);
         $this->assign('pager',$Page);
         $this->assign('list',$list);
+		//print_r($list);
         C('TOKEN_ON',false);
         return $this->fetch();
     }
@@ -658,6 +664,7 @@ class User extends Base {
     {
         $id = I('id');
         $withdrawals = DB::name('extract_apply')->where('id',$id)->find();
+		//print_r($withdrawals);exit;
         $user = M('users')->where("user_id = {$withdrawals[uid]}")->find();
             $data = I('post.');
             // 如果是已经给用户转账 则生成转账流水记录
@@ -672,15 +679,29 @@ class User extends Base {
                 'user_money' => $money,
                 'extract_money' => $user['extract_money'] + $withdrawals['money'],
             ));
-            M('user_money_record')->add(array(
-                'uid' => $user['user_id'],
-                'money' => -$withdrawals['money'],
-                'cur_money' => $money,
-                'content' => '提现成功',
-                'data_id' => $id,
-                'type' => 1,
-                'crate_time' => time(),
-            ));
+			//是否是补贴
+			if($withdrawals['type']=='1'){
+				M('user_money_record')->add(array(
+					'uid' => $user['user_id'],
+					'money' => -$withdrawals['money'],
+					'cur_money' => $money,
+					'content' => '佣金补贴提现成功',
+					'data_id' => $id,
+					'isbutie'=>1,
+					'type' => 1,
+					'crate_time' => time(),
+				));
+			}else{
+				M('user_money_record')->add(array(
+					'uid' => $user['user_id'],
+					'money' => -$withdrawals['money'],
+					'cur_money' => $money,
+					'content' => '我的财富提现成功',
+					'data_id' => $id,
+					'type' => 1,
+					'crate_time' => time(),
+				));
+			}
         }else{
             $data = ['status' => 2];
         }

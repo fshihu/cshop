@@ -91,7 +91,7 @@
                         </div>
 
                     </div>
-                    <div class="buy_num_w" data-id="<?php echo $item['id'] ?>" data-price="<?php echo $item['shop_price'] ?>" data-discount="<?php echo $discount ?>"
+                    <div class="buy_num_w" data-freight_price="<?php echo $item['freight_price'] ?>" data-id="<?php echo $item['id'] ?>" data-price="<?php echo $item['shop_price'] ?>" data-discount="<?php echo $discount ?>"
                          style="<?php echo in_array($prom_type,[PromTypeEnum::GROUP_OWN_JOIN,PromTypeEnum::GROUP_OWN_OPEN])?'display:none;':'' ?>">
                         <span class="fl">数量</span>
                         <span class="fr">
@@ -148,7 +148,7 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
     <?php if(!empty($list)):?>
     <div class="buy_price" style="z-index:999;">
     	<div class="buy_orderDetail">
-        	<div class="buy_orderDetailMt">
+        	<div class="buy_orderDetailMt" <?php if($_GET['prom_type']=='5'||$_GET['prom_type']=='6'){?>style='display:none'<?php }?>>
             	<span>账单详情</span>
                 <img src="/public/biz/wx/common/images/clickImg1.png"  />
             </div>
@@ -264,6 +264,7 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
 				var discount=0;
                 $('.list4_s').find('.buy_num_w .text').each(function () {
                     total_price += $(this).val()*$(this).closest('.buy_num_w').data('price');
+                    total_price += $(this).closest('.buy_num_w').data('freight_price')*1;
 					discount += $(this).val()*$(this).closest('.buy_num_w').data('discount');
                 });
 				$('.rtPrice6').text(discount);
@@ -275,6 +276,7 @@ border-top: 1px solid #dbdbdb;"><label class="data-label">
                 }
 				$('.rtPrice1').text(total_price);
 				//添加运费-柯岳
+				$('.rtPrice2').text($('.gold_price').text()*1);
 				total_price += $('.freight_price').text()*1;
                 $('.price_renjun').text(total_price);
 				$('.rtPrice4').text(total_price);

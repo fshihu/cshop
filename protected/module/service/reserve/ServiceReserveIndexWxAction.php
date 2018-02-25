@@ -93,6 +93,13 @@ class ServiceReserveIndexWxAction extends SaveAction implements IFormViewBuilder
         }
         unset($data['code']);
 
+        $reserve_reasons = [];
+        foreach (explode(',', $data['reserve_reason']) as $value) {
+            if($value){
+                $reserve_reasons[] = ReserveReasonEnum::getValueByIndex($value);
+            }
+        }
+        $data['reserve_reason'] = implode(',',$reserve_reasons);
         $data['user_id'] = Session::getUserID();
         $data['date'] = strtotime($data['date']);
     }

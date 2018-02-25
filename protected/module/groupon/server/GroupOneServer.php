@@ -46,7 +46,7 @@ class GroupOneServer
                 $group_user = ItemModel::make('users')->addColumnsCondition(array('user_id' => $group_one['uid']))->execute();
                 try{
                     $group_buy = ItemModel::make('group_buy')->addColumnsCondition(array('id' => $group_one['group_buy_id']))->execute();
-                    PhoneServer::sendMsg($group_user['mobile'],'【灏维网络】你的团购产品'.$group_buy['title'].'参与已完成，等待你开团。');
+                    PhoneServer::sendMsg($group_user['mobile'],'你的团购产品'.$group_buy['title'].'参与已完成，等待你开团。');
                 }catch (\Exception $exception){
                     \CC::log(['tuanzhang','user' => $group_user,'order' => $order],'phone_err');
                 }

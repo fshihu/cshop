@@ -24,13 +24,11 @@
                             <div class="weui-cell__bd">
                                <div class="t1">可提现金额</div>
                             </div>
-                <div class="weui-cell__ft">￥<span class="total_money"><?php echo $user['user_money'] ?></span></div>
+                <div class="weui-cell__ft">￥<span class="total_money"><?php echo $user['caifu'] ?></span></div>
 
                         </div>
                <?php if(empty($bank_list)):?>
-              <div class="weui-cell weui-cell_access">
-                  <a href="<?php echo $this->genurl('member/bank/index') ?>">添加银行卡</a>
-              </div>
+                  <a href="<?php echo $this->genurl('member/bank/index') ?>" class="weui-cell weui-cell_access"><div >添加银行卡</div></a>              
                 <?php else:?>
               <a class="weui-cell weui-cell_access" href="javascript:sel_bank();">
                    <?php $bank = $bank_list[0] ?>
@@ -78,7 +76,11 @@
     $('.addr_eidt_btn').click(function () {
         ajax_request('',$('form').serialize(),function () {
             Tip('申请成功');
-           location.href='<?php echo $this->genurl('index');?>';
+			<?php if($_GET['butie']==1){?>
+           location.href="<?php echo $this->genurl('index',['butie'=>'1']);?>";
+			<?php }else{ ?>
+				location.href='<?php echo $this->genurl('index');?>';
+			<?php }?>
         });
         return false;
     });

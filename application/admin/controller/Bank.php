@@ -66,7 +66,7 @@ class Bank  extends Base
                     '补贴申请未通过',
                     '已完成',
                 );
-        $service['reserve_reason'] = $r[$service['reserve_reason']].$service['reserve_reason_other'];
+        $service['reserve_reason'] = $service['reserve_reason'].' '.$service['reserve_reason_other'];
         $service['marriage'] = $m[$service['marriage']];
         $service['date'] = date('Y-m-d',$service['date']);
         $service['status_desc'] = $s[$service['status']];

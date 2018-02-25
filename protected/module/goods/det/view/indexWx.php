@@ -13,8 +13,9 @@
                             <p class="title"><?php echo \biz\Util::subString($data['goods_name'],6) ?></p>
                         </div>
                           <?php if($data['is_create_group']):?>
-                         <a href="javascript:;" class="own_create_btn">
-                             幸运轮
+                         <a href="javascript:;" class="own_create_btn" style="position:absolute; right:10px; top:0px;">
+                         	 <img src="/public/biz/wx/common/images/my/xyl_Img.jpg" style="width:30px; border-radius:30px; margin-top:7px;" />
+                             <!--幸运轮-->
                          </a>
                           <?php endif;?>
                     </div>
@@ -277,7 +278,7 @@
                 <div class="weui-mask"></div>
                 <div class="weui-dialog">
                     <div class="weui-dialog__bd">
-                        <span class="t1_s">客服微信号： <span class="t1_s_"><?php echo $merchant['wx_account'] ?></span></span>
+                        <span class="t1_s">客服微信号：<span class="t1_s_" id="weixinNumber"><?php echo $merchant['wx_account'] ?></span></span>
                     </div>
                     <div class="weui-dialog__ft">
                         <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary js_dialog_proy_2">确定</a>
@@ -289,12 +290,13 @@
         <img src="/public/biz/wx/common/images/my/shopping_cart_2.png" alt="" class="icon">
     </a>
     <div class="buy_btn">
-    	<a class="bt_aKf cart_btn_sr" style="" href="javascript:;">
+    	<a class="bt_aKf cart_btn_sr" style="position:relative;" href="javascript:;">
+        	<textarea id="biao1"  onClick="copyUrl2()" readonly style="position:absolute; left:0px; top:0px; width:100%; height:100%; opacity:0; z-index:9; padding:0px;"></textarea>
             <img src="/public/biz/wx/common/images/kfu_s1.png" alt="" class="icon">
             <p>客服</p>
         </a>
        <a href="<?php echo $this->genurl('cart/index/index') ?>" class="bt_a bt_a1">
-          <div class="t3">加入购物车</div>
+          <div class="t3" style='padding-left:12px'>加入购物车</div>
        </a>
        <a href="" class="bt_a bt_a2">
            <div class="t3">立即购买</div>
@@ -346,6 +348,13 @@
 </div>
 <!--图片放大-->
     <script type="text/javascript">
+	function copyUrl2(){
+		$("#biao1").val($("#weixinNumber").text());
+		var Url2=document.getElementById("biao1");
+		Url2.select(); // 选择对象
+		document.execCommand("Copy"); // 执行浏览器复制命令
+		//alert("已复制好，可贴粘。");
+	}
 	function changeImg(obj){
 		$("#bigImg").find("img").css({
 			"height":"",

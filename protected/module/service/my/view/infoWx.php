@@ -67,7 +67,7 @@ use module\service\reserve\enum\ReserveReasonEnum;
                 </div>
                 <div class="card_list">
                     <span class="t1">预约理由：</span>
-                    <span class="t2"><?php echo ReserveReasonEnum::getValueByIndex($service_reserve['reserve_reason']).$service_reserve['reserve_reason_other'] ?></span>
+                    <span class="t2"><?php echo $service_reserve['reserve_reason'].' '.$service_reserve['reserve_reason_other'] ?></span>
                 </div>
                 <div class="card_list">
                     <span class="t1">预约日期：</span>

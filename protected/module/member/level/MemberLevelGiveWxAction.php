@@ -44,12 +44,15 @@ class MemberLevelGiveWxAction extends \CAction implements IFormViewBuilder
                 throw new CErrorException('不能转增给自己');
             }
             if(!$item){
-                throw new CErrorException('转增账号不存在');
+                throw new CErrorException('转增手机号不存在');
             }
             UpdateModel::make('black_card_give')->addId($id)->addData(array(
                 'status' => UserLevelServer::BLACK_STATSU_WAIT_GIVE,
                 'give_uid' => $item['user_id'],
             ))->execute();
+            PhoneServer::sendMsg($account,'您的好友'.$user['nickname'].'转赠您一张黑卡附属卡，请及时查收，转赠时间'.date('Y-m-d H:i:s').'。');
+            PhoneServer::sendMsg($user['mobile'],'您成功转赠好友'.$item['nickname'].'一张黑卡附属卡，转赠时间'.date('Y-m-d H:i:s').'。');
+
             return new \CJsonData();
         }
         return new \CRenderData(array(
@@ -64,7 +67,7 @@ class MemberLevelGiveWxAction extends \CAction implements IFormViewBuilder
     public function createFormInputs()
     {
         return array(
-            (new TextInput('account','转赠好友账号'))->setPlaceHolder('请输入转赠好友账号'),
+            (new TextInput('account','转赠好友账号'))->setPlaceHolder('请输入转赠好友手机号'),
             (new CaptchaInput('code','验证码'))->setPhoneId('own_phone'),
         );
     }

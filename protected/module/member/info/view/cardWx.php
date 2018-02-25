@@ -26,7 +26,7 @@
     <div class="  weui-panel_access  " >
          <div class="mem_info_card">
             <div class="avatar_w">
-                <img src="<?php echo \module\member\index\UserServer::getAvatar() ?>" alt="" class="avatar">
+                <img src="<?php echo $user['head_pic'] ?>" alt="" class="avatar">
             </div>
             <div class="card_list_w">
                 <div class="card_list">
