@@ -27,7 +27,7 @@ class GoodsCateListWxAction extends ListAction
     protected function onExecute()
     {
         $condition = array(
-//            'end_time' => ['>', time()]
+            'end_time' => ['>', time()]
         );
         if($this->cate_id){
             $condition['g.cat_id'] = $this->cate_id;

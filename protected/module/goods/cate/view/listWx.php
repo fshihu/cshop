@@ -71,6 +71,9 @@
          </div>
      </div>
      <div class="h_item_1_w" style="margin-top:10px;">
+         <?php $group_buys = array(
+                 array('image' => '/public/upload/category/2017/09-28/c3dd6d0f590d127fa2d8c98579e3f390.png')
+         ) ?>
               <?php foreach($group_buys as $i => $group_buy):?>
 
            <div class="h_item_1">
@@ -89,7 +92,7 @@
 
 
      </div>
-     <div style="padding: 15px 50px 0 50px;">
+     <div style="padding: 0px 50px 0 50px;">
          <div class="weui-navbar navbar-sm nav_click  " style="    border: 1px solid #ccc;
              border-bottom: none;">
                                  <a href="javascript:;" class="weui-navbar__item weui-bar__item_on">
