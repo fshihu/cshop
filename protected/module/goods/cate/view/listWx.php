@@ -27,6 +27,19 @@
                 left: 6px;
                 top: 6px;
                 width: 40px;}
+           .notice_active {
+               margin-top:10px;
+               padding:0 10px;
+                          height: 50px;
+                          overflow: hidden;
+                          position: relative;
+                  }
+                 .notice_active li{list-style-type:none; overflow: hidden;}
+                  /*.huadong .notice_active li.notice_active_ch {}*/
+                 .notice_active li.notice_active_ch span {color:#656972; display: block;overflow: hidden; width:80%;float: left;
+                  overflow: hidden; height:50px; }
+                  .notice_active li.notice_active_ch img {text-align:right;float:right;color:#888; font-style:normal; width:50px; height:50px;  }
+            
         </style>
         <div class="  weui-panel_access  " style="">
 
@@ -69,6 +82,32 @@
                  <?php endforeach?>
               </ul>
          </div>
+     </div>
+     <div style="padding: 10px 0;background: #fff;">
+         <div class="notice_active">
+                         <ul  >
+
+
+
+
+                         <li class="notice_active_ch">
+                                 <span>滑动轮播2滑动轮播3</span>
+
+                             <img src="" alt="">
+                             </li><li class="notice_active_ch">
+                                 <span>滑动轮播3滑动轮播3</span>
+
+                                 <img src="" alt="">
+                             </li>
+                             <li class="notice_active_ch">
+                                 <span>滑动轮播1a去哦我我iwoi我i滑动轮播3滑</span>
+
+                                 <img src="" alt="">
+                             </li>
+                         </ul>
+
+                     </div>
+
      </div>
      <div class="h_item_1_w" style="margin-top:10px;">
          <?php $group_buys = array(
@@ -182,5 +221,28 @@
             is_click = false;
             $('.gl_nav').css({'height':'20px'});
         }
-    })
+    });
+
+    function timer(opj){
+               $(opj).find('ul').animate({
+                   marginTop : "-50px"
+                   },500,function(){
+                   $(this).css({marginTop : "0"}).find("li:first").appendTo(this);
+               })
+           }
+           $(function() {
+               var num = $('.notice_active').find('li').length;
+               if (num > 1) {
+                   var time = setInterval('timer(".notice_active")', 3500);
+                   $('.gg_more a').mousemove(function () {
+                       clearInterval(time);
+                   }).mouseout(function () {
+                       time = setInterval('timer(".notice_active")', 3500);
+                   });
+               }
+
+               $(".news_ck").click(function () {
+                   location.href = $(".notice_active .notice_active_ch").children(":input").val();
+               })
+           });
 </script>
