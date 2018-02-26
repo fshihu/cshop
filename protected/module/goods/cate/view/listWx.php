@@ -22,7 +22,11 @@
             .cate_goods_list_2 .goods_item a .price{ color: #5C9242;}
             .cate_goods_list_3 .gl_nav a.ac{ color: #375767;border-bottom-color: #375767;}
             .cate_goods_list_3 .goods_item a .price{ color: #375767;}
-
+            .h_item_1_s{ padding:10px;}
+            .sanjiao{position: absolute;
+                left: 6px;
+                top: 6px;
+                width: 40px;}
         </style>
         <div class="  weui-panel_access  " style="">
 
@@ -66,7 +70,36 @@
               </ul>
          </div>
      </div>
+     <div class="h_item_1_w" style="margin-top:10px;">
+              <?php foreach($group_buys as $i => $group_buy):?>
 
+           <div class="h_item_1">
+
+               <a href="<?php echo $this->genurl('/groupon/index/det',['id'=>$group_buy['id']]) ?>">
+
+             <div class="h_item_1_s">
+
+                 <img class="img" src="<?php echo $group_buy['image'] ?>"alt="">
+                 <img class="sanjiao" src="/public/biz/wx/common/images/my/xingyun1.png" alt="">
+              </div>
+               </a>
+
+        </div>
+         <?php endforeach?>
+
+
+     </div>
+     <div style="padding: 15px 50px 0 50px;">
+         <div class="weui-navbar navbar-sm nav_click  " style="    border: 1px solid #ccc;
+             border-bottom: none;">
+                                 <a href="javascript:;" class="weui-navbar__item weui-bar__item_on">
+                                     商品
+                                 </a>
+                                 <a href="javascript:;" class="weui-navbar__item">
+                                     服务
+                                 </a>
+                              </div>
+     </div>
      <div class="goods_item_w ">
          <?php foreach($list as $item):?>
          <div class="goods_item">

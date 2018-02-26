@@ -26,7 +26,13 @@ class GoodsCateListWxAction extends ListAction
     public $cate_i = 0;
     protected function onExecute()
     {
-
+        $condition = array(
+//            'end_time' => ['>', time()]
+        );
+        if($this->cate_id){
+            $condition['g.cat_id'] = $this->cate_id;
+        }
+        $group_buys =  ListModel::make('group_buy')->addColumnsCondition($condition)->select('t.*,g.cat_id')->leftJoin('goods','g','t.goods_id = g.goods_id')->order('id desc')->limit(5)->execute();
         return  (array(
             'cate_item' => $this->cate_item,
             'cate_list' => $this->cate_list,
@@ -34,6 +40,7 @@ class GoodsCateListWxAction extends ListAction
             'cate_id' => $this->cate_id,
             'cate_i' => $this->cate_i,
             'ad_list' => AdServer::getList(AdPosition::CATE_LIST),
+            'group_buys' => $group_buys,
 
         ));
     }
