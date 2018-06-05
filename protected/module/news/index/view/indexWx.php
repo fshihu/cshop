@@ -17,13 +17,15 @@
                 </div>
         <div class="  weui-panel_access  "  >
  <div class="goods_list">
-     <div class="gl_nav">
+     <div class="gl_nav" style="position: relative;">
          <a href="<?php echo $this->genurl(''); ?>" class="<?php echo $cate_id?'':'ac' ?>">全部</a>
          <?php foreach($cate_list as $item):?>
          <a class="<?php echo $item['cat_id']== $cate_id?'ac':'' ?>" href="<?php echo $this->genurl('',['cate_id'=>$item['cat_id']]); ?>"><?php echo $item['cat_name'] ?></a>
          <?php endforeach?>
-         <a href="" style="display: none;">
-             <img style="position: relative;top:-3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pull-down_icon.png" width="10" alt=""></a>
+         <a  class="right_xialat" style=" position: absolute;
+             right: 10px;
+             top: 15px;">
+             <img style="position: relative;top:-3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pull-down_icon<?php echo $cate_i ?>.png" width="10" alt=""></a>
      </div>
      <div class="banner ban1">
          <div class="mslide" id="slideTpshop">
@@ -62,3 +64,15 @@
 
 </div>
     <?php include \biz\Util::getFooterNav(); ?>
+    <script type="text/javascript">
+        var is_click = false;
+        $('.right_xialat').click(function () {
+            if(!is_click){
+                is_click = true;
+                $('.gl_nav').css({'height':'auto'});
+            }else {
+                is_click = false;
+                $('.gl_nav').css({'height':'20px'});
+            }
+        })
+    </script>
