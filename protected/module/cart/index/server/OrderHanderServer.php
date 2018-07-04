@@ -9,6 +9,7 @@ namespace module\cart\index\server;
 
 
 use CC\db\base\select\ItemModel;
+use CC\db\base\select\ListModel;
 use CC\db\base\update\IncrementModel;
 use CC\db\base\update\UpdateModel;
 use module\groupon\server\GroupOneServer;
@@ -47,6 +48,25 @@ class OrderHanderServer
         }
         if($order['order_prom_type'] == PromTypeEnum::CHOGN_ZHIG){
             MoneyServer::addRecord($order['user_id'],MoneyServer::CHONG_ZHI,$order['order_amount'],'充值',null);
+            $list = ListModel::make('sys_conf')->execute();
+            $sys_conf = [];
+            foreach ($list as $item) {
+                $sys_conf[$item['name']] = $item['val'];
+            }
+            if($sys_conf['fanxian_open']){
+                if($sys_conf['zuidi_fanxian'] < $order['order_amount']){
+                    if($sys_conf['fanxian_bili'] > 0 && $sys_conf['fanxian_bili'] < 100){
+                        $fanxian = $order['order_amount'] * $sys_conf['fanxian_bili'] / 100 ;
+                        if($sys_conf['fanxian_yueshu'] > 0){
+                            $fanxian = $fanxian / $sys_conf['fanxian_yueshu'];
+                        }
+                        $fanxian = (int)$fanxian;
+                        if($fanxian >0){
+                            MoneyServer::addRecord($order['user_id'],MoneyServer::CHONG_ZHI_FANXIAN,$order['order_amount'],'充值返现',null);
+                        }
+                    }
+                }
+            }
         }
         if($order['order_prom_type'] == PromTypeEnum::NORMAL){
 

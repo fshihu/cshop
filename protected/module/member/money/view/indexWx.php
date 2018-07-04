@@ -22,7 +22,7 @@
 	<?php $caifu=0;$butie=0;?>
 	<?php foreach($list as $item):?><?php  
 		
-		if($item['content']=='退货退款'||$item['content']=='充值'||$item['content']=='我的财富提现成功'||$item['content']=='订单返现'||$item['content']=='拼团失败，退回支付款'||$item['content']=='订单金卡返现'||$item['content']=='订单黑卡返现'){
+		if($item['content']=='退货退款'||$item['content']=='充值'||$item['content']=='充值返现'||$item['content']=='我的财富提现成功'||$item['content']=='订单返现'||$item['content']=='拼团失败，退回支付款'||$item['content']=='订单金卡返现'||$item['content']=='订单黑卡返现'){
 			$caifu=$caifu+$item['money'];
 		}else{
 			$butie=$butie+$item['money'];
@@ -58,7 +58,7 @@
 			 <?php $money=0;?>
                  <?php foreach($list as $item):?>
 				 <?php if($_GET['butie']!='1'){?>
-				 <?php if($item['content']=='退货退款'||$item['content']=='充值'||$item['content']=='我的财富提现成功'||$item['content']=='订单返现'||$item['content']=='拼团失败，退回支付款'||$item['content']=='订单金卡返现'||$item['content']=='订单黑卡返现'){?>
+				 <?php if($item['content']=='退货退款'||$item['content']=='充值'||$item['content']=='充值返现'||$item['content']=='我的财富提现成功'||$item['content']=='订单返现'||$item['content']=='拼团失败，退回支付款'||$item['content']=='订单金卡返现'||$item['content']=='订单黑卡返现'){?>
                          <div class="weui-cell">
                              <div class="weui-cell__bd">
                                  <div class="t1"><?php echo $item['content'] ?></div>
