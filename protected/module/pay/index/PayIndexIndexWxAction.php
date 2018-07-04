@@ -48,7 +48,8 @@ class PayIndexIndexWxAction  extends \CAction
         $order_info['attach'] = 'wzx';
         $order_info['goods_tag'] = '微整形';
         $order_info['notify_url'] = CC::app()->request->getHostInfo(true).'/wxInterface/pay/index/notify';
-//        $order_info['order_amount'] = 1;//$order_info['order_amount'];
+//        var_dump($order_info['order_amount'])
+        $order_info['order_amount'] = $order_info['order_amount'] * 100;
         $ok_url = $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_SEND]);
         $err_url = $this->genurl('member/index/index');
         if($order_info['order_prom_type'] == PromTypeEnum::GROUP_OPNE||$order_info['order_prom_type'] == PromTypeEnum::GROUP_JOIN){
