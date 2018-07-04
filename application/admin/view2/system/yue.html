@@ -1,0 +1,88 @@
+<include file="public/layout" />
+ 
+<style type="text/css">
+html, body {
+	overflow: visible;
+}
+</style>  
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title">
+      <div class="subject">
+        <h3>充值设置</h3>
+       </div>
+    </div>
+  </div>
+  <form class="form-horizontal" method="post" id="handlepost" action="">    
+    <div class="ncap-form-default">
+        <dl class="row">
+          <dt class="tit">
+            <label>返现开关</label>
+          </dt>
+          <dd class="opt">
+            <input type="radio" name="fanxian_open" value="0" <if condition="$sys_conf['fanxian_open'] eq 0">checked="checked"</if>/> 关闭
+            <input type="radio" name="fanxian_open" value="1" <if condition="$sys_conf['fanxian_open'] eq 1">checked="checked"</if>/> 开启
+          </dd>
+        </dl>
+       <dl class="row">
+        <dt class="tit">
+          <label> 最低返现金额</label>
+        </dt>
+        <dd class="opt">
+          <input type="text" name="zuidi_fanxian" id="zuidi_fanxian" value="{$sys_conf.zuidi_fanxian}" class="input-txt">
+          <span class="err"></span>
+          <p class="notic"> </p>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">
+          <label>返现比例</label>
+        </dt>
+        <dd class="opt">
+         <input type="text" name="fanxian_bili" value="{$sys_conf.fanxian_bili}" class="input-txt">%
+          <span class="err"></span>
+        </dd>
+      </dl>    
+	  <dl class="row">
+        <dt class="tit">
+          <label>返现月数</label>
+        </dt>
+        <dd class="opt">
+          <input type="text" class="input-txt" name="wxid" value="{$sys_conf.wxid}" />
+        </dd>
+      </dl>        
+       <div class="bot"><a href="JavaScript:void(0);" onClick="formSubmit()" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a></div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+  
+$(document).ready(function(){
+	
+
+	 
+});
+
+function formSubmit(){
+	$("#handlepost").submit();
+}
+
+function img_call_back(fileurl_tmp)
+{
+  $("#headerpic").val(fileurl_tmp);
+  $("#img_a").attr('href', fileurl_tmp);
+  $("#img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+}
+function img_call_back2(fileurl_tmp)
+{
+  $("#qr").val(fileurl_tmp);
+  $("#img_a2").attr('href', fileurl_tmp);
+  $("#img_i2").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+}
+</script>
+</body>
+</html>
