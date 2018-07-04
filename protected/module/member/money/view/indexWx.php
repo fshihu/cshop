@@ -12,6 +12,7 @@
                         <div class="weui-cell__bd">
                             <p class="title"><?php if($_GET['butie']=='1'){echo '佣金补贴';}else{echo '我的财富';}?></p>
                         </div>
+                         <a href="<?php echo $this->genurl('chong'); ?>" class="ft">充值</a>
                     </div>
 
                 </div>
@@ -21,7 +22,7 @@
 	<?php $caifu=0;$butie=0;?>
 	<?php foreach($list as $item):?><?php  
 		
-		if($item['content']=='退货退款'||$item['content']=='我的财富提现成功'||$item['content']=='订单返现'||$item['content']=='拼团失败，退回支付款'||$item['content']=='订单金卡返现'||$item['content']=='订单黑卡返现'){
+		if($item['content']=='退货退款'||$item['content']=='充值'||$item['content']=='我的财富提现成功'||$item['content']=='订单返现'||$item['content']=='拼团失败，退回支付款'||$item['content']=='订单金卡返现'||$item['content']=='订单黑卡返现'){
 			$caifu=$caifu+$item['money'];
 		}else{
 			$butie=$butie+$item['money'];

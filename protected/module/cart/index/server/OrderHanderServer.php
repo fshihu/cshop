@@ -45,6 +45,9 @@ class OrderHanderServer
         if($order['order_prom_type'] == PromTypeEnum::USER_LEVEL_UPGRADE_TRUN_MONEY || $order['order_prom_type'] == PromTypeEnum::USER_LEVEL_RENEW_TRUN_MONEY){
             UserLevelOrderServer::handle($order);
         }
+        if($order['order_prom_type'] == PromTypeEnum::CHOGN_ZHIG){
+            MoneyServer::addRecord($order['user_id'],MoneyServer::CHONG_ZHI,$order['order_amount'],'充值',null);
+        }
         if($order['order_prom_type'] == PromTypeEnum::NORMAL){
 
             IncrementModel::make('users')->addColumnsCondition(array(
