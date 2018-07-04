@@ -62,7 +62,7 @@ class OrderHanderServer
                         }
                         $fanxian = (int)$fanxian;
                         if($fanxian >0){
-                            MoneyServer::addRecord($order['user_id'],MoneyServer::CHONG_ZHI_FANXIAN,$order['order_amount'],'充值返现',null);
+                            MoneyServer::addRecord($order['user_id'],MoneyServer::CHONG_ZHI_FANXIAN,$fanxian,'充值返现',null);
                         }
                     }
                 }
