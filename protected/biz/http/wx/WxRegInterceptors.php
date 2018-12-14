@@ -36,7 +36,7 @@ class WxRegInterceptors implements CInterceptors
             echo '<h1>已清理</h1>';
             exit;
         }
-                OrderHanderServer::instance(array('out_trade_no' => '201807042347065945'))->handle();
+                OrderHanderServer::instance(array('out_trade_no' => '201812051525198457'))->handle();
         if($request->getParams('from_admin') == 'xixk'){
             Session::login();
             Session::setUserID(2);

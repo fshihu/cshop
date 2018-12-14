@@ -138,6 +138,7 @@ class Goods extends Base {
                     }
                     else
                     {
+                        $GoodsCategory->is_show =1;
                         $GoodsCategory->save(); // 写入数据到数据库
                         $insert_id = $GoodsCategory->getLastInsID();
                         $GoodsLogic->refresh_cat($insert_id);
