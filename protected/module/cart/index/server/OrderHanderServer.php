@@ -54,7 +54,7 @@ class OrderHanderServer
                 $sys_conf[$item['name']] = $item['val'];
             }
             if($sys_conf['fanxian_open']){
-                if($sys_conf['zuidi_fanxian'] < $order['order_amount']){
+                if($sys_conf['zuidi_fanxian'] <= $order['order_amount']){
                     if($sys_conf['fanxian_bili'] > 0 && $sys_conf['fanxian_bili'] <= 100){
                         $fanxian = $order['order_amount'] * $sys_conf['fanxian_bili'] / 100 ;
                         if($sys_conf['fanxian_yueshu'] > 0){
