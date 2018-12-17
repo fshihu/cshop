@@ -51,7 +51,7 @@ class MemberInfoQrcodeWxAction extends \CAction
 
     protected function createImage($qr_code_path,$qr_png,$recomm_url)
     {
-		$recomm_url='http://haowei.onlygays.cn/wx/home/index/index';
+		$recomm_url='http://youji.kkyiliao.com/wx/home/index/index';
         $blank_image = GrafikaMaster::createBlankImage(500 , 750);
 
         $fonts_dir = GrafikaMaster::fontsDir();
@@ -68,7 +68,7 @@ class MemberInfoQrcodeWxAction extends \CAction
         $scale = 1;
 //        $($blank_image, $data);
 //        $addLine($blank_image);
-        $editor->text($blank_image,'高端总汇',24,130,550, new Color("#000000"),$normal_fonts);
+        $editor->text($blank_image,'有机商城',24,130,550, new Color("#000000"),$normal_fonts);
         $editor->text($blank_image,'推广链接',16,130,590, new Color("#000000"),$normal_fonts);
         $editor->text($blank_image,substr($recomm_url,0,29),16,130,620, new Color("#000000"),$normal_fonts);
         $editor->text($blank_image,substr($recomm_url,29),16,130,650, new Color("#000000"),$normal_fonts);
