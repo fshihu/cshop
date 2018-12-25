@@ -187,7 +187,7 @@ use module\cart\index\server\OrderWaitStatusEnum;
                         <p>书签和足迹</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access li_borde" href="<?php echo $this->genurl('/member/merchant/enter') ?>">
+                <a class="weui-cell weui-cell_access li_borde" style="display: none;" href="<?php echo $this->genurl('/member/merchant/enter') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/icon_Businessoccupancy.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>商家入驻</p>
@@ -197,14 +197,14 @@ use module\cart\index\server\OrderWaitStatusEnum;
             </div>
             <div class="weui-cells menu_s">
 
-                <a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('money/index') ?>">
+                <a class="weui-cell weui-cell_access" style="display: none;" href="<?php echo $this->genurl('money/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/wealth_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>我的财富</p>
                     </div>
                     <div class="weui-cell__ft">￥<?php echo $user['caifu'] ?></div>
                 </a>
-				<a class="weui-cell weui-cell_access" href="<?php echo $this->genurl('money/index',['butie'=> '1']) ?>">
+				<a class="weui-cell weui-cell_access" style="display: none;" href="<?php echo $this->genurl('money/index',['butie'=> '1']) ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/wealth_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>佣金补贴</p>
@@ -255,7 +255,7 @@ use module\cart\index\server\OrderWaitStatusEnum;
                         <p>地址管理</p>
                     </div>
                 </a>
-                <a class="weui-cell weui-cell_access " href="<?php echo $this->genurl('bank/index') ?>">
+                <a class="weui-cell weui-cell_access " style="display: none;" href="<?php echo $this->genurl('bank/index') ?>">
                     <div class="weui-cell__hd"><img src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/Bankcard_icon.png" alt="" class="icon"></div>
                     <div class="weui-cell__bd">
                         <p>银行卡管理</p>

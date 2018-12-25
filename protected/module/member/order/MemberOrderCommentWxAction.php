@@ -58,7 +58,7 @@ class MemberOrderCommentWxAction extends \CAction
                     if(UserLevelServer::isBlackCrad($user)){
                         $type_name = '黑卡';
                     }
-                    MoneyServer::addRecord($user['user_id'],MoneyServer::ORDER_CART_DISCOUNT_PRICE,$item['card_discount_price'],'订单'.$type_name.'返现',$item['rec_id']);
+                    UserGoldRecordServer::addGold($user['user_id'],UserGoldRecordServer::TYPE_ORDER_CART_DISCOUNT_PRICE,$item['card_discount_price'],'订单'.$type_name.'返现',$item['rec_id']);
                 }
             }
             if($order['order_prom_type'] == PromTypeEnum::NORMAL) {

@@ -52,7 +52,7 @@ class PayIndexIndexWxAction  extends \CAction
         $order_info['order_amount'] = $order_info['order_amount'] * 100;
         $ok_url = $this->genurl('member/order/index',['wait_status' => OrderWaitStatusEnum::WAIT_SEND]);
         $err_url = $this->genurl('member/index/index');
-        if($order_info['order_prom_type'] == PromTypeEnum::GROUP_OPNE||$order_info['order_prom_type'] == PromTypeEnum::GROUP_JOIN){
+        if($order_info['order_prom_type'] == PromTypeEnum::GROUP_OPNE||$order_info['order_prom_type'] == PromTypeEnum::GROUP_JOIN||$order_info['order_prom_type'] == PromTypeEnum::CHOGN_ZHIG){
             $ok_url = $this->genurl('member/index/index');
             $err_url = $ok_url;
         }

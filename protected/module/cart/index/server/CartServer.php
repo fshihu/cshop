@@ -32,6 +32,7 @@ class CartServer
             ->select('
             t.id,t.goods_id,t.goods_num,t.spec_key,t.prom_type,t.prom_id,
             g.goods_name,g.shop_price,g.original_img,g.cost_price,g.admin_uid,g.freight_price,g.gold_card_discount_price,g.black_card_discount_price,
+            sgp.price sgp_price,
             sgp.key_name spec_key_name')
             ->leftJoin('goods', 'g', 't.goods_id = g.goods_id')
             ->leftJoin('spec_goods_price', 'sgp', 't.goods_id = sgp.goods_id and t.spec_key = sgp.key');
@@ -43,6 +44,9 @@ class CartServer
             $list_mode->leftJoin('group_one','go','t.prom_id = go.id')->addSelect('go.goods_price,go.total_num');
         }
         $list = $list_mode->execute();
+        foreach ($list as $i => $item) {
+            $list[$i]['shop_price'] = $item['sgp_price']?$item['sgp_price']:$item['shop_price'];
+        }
         if ($prom_type == PromTypeEnum::GROUP_OPNE || $prom_type == PromTypeEnum::GROUP_JOIN) {
             foreach ($list as $i => $item) {
                 $list[$i]['shop_price'] = $item['group_price'];

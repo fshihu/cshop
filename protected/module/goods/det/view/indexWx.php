@@ -14,7 +14,7 @@
                         </div>
                           <?php if($data['is_create_group']):?>
                          <a href="javascript:;" class="own_create_btn" style="position:absolute; right:10px; top:0px;">
-                         	 <img src="/public/biz/wx/common/images/my/xyl_Img.jpg" style="width:30px; border-radius:30px; margin-top:7px;" />
+                         	 <img src="/public/biz/wx/common/images/my/xyl_Img.png" style="width:22px; border-radius:30px; margin-top:11px;" />
                              <!--幸运轮-->
                          </a>
                           <?php endif;?>

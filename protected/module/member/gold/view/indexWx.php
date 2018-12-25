@@ -11,7 +11,9 @@
                      </a>
                     <div class="weui-cell__bd">
                         <p class="title">我的积分</p>
+
                     </div>
+                     <a href="<?php echo $this->genurl('money/chong'); ?>" class="ft">充值</a>
                 </div>
 
             </div>
@@ -27,9 +29,6 @@
           <div class="weui-navbar navbar-sm">
              <a href="" class="weui-navbar__item weui-bar__item_on">
                  积分明细
-             </a>
-             <a href="<?php echo $this->genurl('give') ?>" class="weui-navbar__item  ">
-                 转增积分
              </a>
            </div>
 

@@ -25,6 +25,8 @@ class UserGoldRecordServer
     const TYPE_RETURN = 8;//订单退款
     const TYPE_RETURN_DEDUCT = 9;//订单退款扣除
     const TYPE_CHOGNZHI_FANXIAN = 10;//充值返现
+    const TYPE_CHOGNZHI= 11;//充值返现
+    const TYPE_ORDER_CART_DISCOUNT_PRICE= 12;//金卡返现
     public static function addGold($uid,$type,$gold,$content,$data_id)
     {
         $user =    ItemModel::make('users')->addColumnsCondition(array(

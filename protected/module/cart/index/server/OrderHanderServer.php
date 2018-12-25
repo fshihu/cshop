@@ -47,7 +47,7 @@ class OrderHanderServer
             UserLevelOrderServer::handle($order);
         }
         if($order['order_prom_type'] == PromTypeEnum::CHOGN_ZHIG){
-            MoneyServer::addRecord($order['user_id'],MoneyServer::CHONG_ZHI,$order['order_amount'],'充值',null);
+            UserGoldRecordServer::addGold($order['user_id'],UserGoldRecordServer::TYPE_CHOGNZHI,$order['order_amount'],'充值',null);
             $list = ListModel::make('sys_conf')->execute();
             $sys_conf = [];
             foreach ($list as $item) {

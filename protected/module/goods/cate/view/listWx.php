@@ -36,6 +36,7 @@
              top: 15px;">
              <img style="position: relative;top:-3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/pull-down_icon<?php echo $cate_i ?>.png" width="10" alt=""></a>
      </div>
+      <?php if(!empty($ad_list)):?>
      <div class="banner ban1">
          <div class="mslide" id="slideTpshop">
              <ul>
@@ -50,12 +51,15 @@
               </ul>
          </div>
      </div>
+      <?php endif;?>
 
      <div class="goods_item_w ">
          <?php foreach($list as $item):?>
          <div class="goods_item">
              <a href="<?php echo $this->genurl('goods/det/index',['id'=>$item['goods_id']]) ?>">
-                 <img src="<?php echo GoodsServer::getImg($item['original_img']) ?>" alt="" width="100%" height="155">
+                 <div style="height: 155px;">
+                     <img src="<?php echo GoodsServer::getImg($item['original_img']) ?>" alt="" width="100%" height="155">
+                 </div>
                   <?php if($item['is_create_group']):?>
                  <img class="sanjiao" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/my/xingyun1.png" alt="">
                   <?php endif;?>
