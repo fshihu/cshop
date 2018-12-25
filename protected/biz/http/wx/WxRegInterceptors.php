@@ -39,7 +39,7 @@ class WxRegInterceptors implements CInterceptors
                 OrderHanderServer::instance(array('out_trade_no' => '201812051525198457'))->handle();
         if($request->getParams('from_admin') == 'xixk'){
             Session::login();
-            Session::setUserID(2);
+            Session::setUserID(3);
         }else{
         }
        if(!Session::isLogin() || !Session::getUserID()){

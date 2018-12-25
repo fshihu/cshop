@@ -11,7 +11,7 @@
         </span>
         <p class="weui-tabbar__label weui-tabbar__label<?php echo \biz\Util::isPageCate() ?>">分类</p>
     </a>
-    <a href="<?php echo $this->genurl('/service/index/index') ?>" class="weui-tabbar__item">
+    <a href="<?php echo $this->genurl('/service/index/index') ?>" class="weui-tabbar__item" style="display: none;">
         <span style="display: inline-block;position: relative;">
             <img style="width:22px;height:20px;margin-top:3px;" src="<?php echo $baseUrl; ?>/public/biz/wx/common/images/service_icon<?php echo \biz\Util::isPageServer() ?>.png" alt="" class="weui-tabbar__icon">
         </span>

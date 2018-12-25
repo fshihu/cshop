@@ -10,7 +10,7 @@
                              </div>
                          </a>
                         <div class="weui-cell__bd">
-                            <p class="title">美丽资讯</p>
+                            <p class="title">有机资讯</p>
                         </div>
                     </div>
 
