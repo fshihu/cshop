@@ -65,8 +65,9 @@ class PayIndexIndexWxAction  extends \CAction
             $err_url = $ok_url;
         }
         return new \CRenderData(array(
-            'jsApiParameters' =>  WxPay::instance()->getJsApiParameters($order_info),
+            'jsApiParameters' =>  $order_info['order_amount']>0?WxPay::instance()->getJsApiParameters($order_info):'[]',
             'order_sn' => $orderSn,
+            'ok' => $order_info['order_amount']==0?1:0,
             'ok_url' => $ok_url,
             'err_url' => $err_url,
         ));

@@ -70,7 +70,7 @@ class CartIndexIndexWxAction extends \CAction
                 'goods_id' => $this->goods_id,
                 'user_id' => Session::getUserID(),
                 'prom_type' => $prom_type,
-            ))->execute();
+            ))->order('id desc')->execute();
             $ids = [$cart['id']];
         }
         return new \CRenderData(array(

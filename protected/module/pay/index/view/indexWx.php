@@ -59,11 +59,13 @@ use module\cart\index\server\OrderWaitStatusEnum;
 
 	function callpay()
 	{
+	    <?php if($ok or true ): ?>
 	    $.post('<?php echo $this->genurl('ok');?>',{order_sn:'<?php echo $order_sn ?>'},function () {
             alert('支付成功');
             location.href = '<?php echo $ok_url;?>';
         });
-	    return;
+        return;
+	    <?php endif; ?>
 		if (typeof WeixinJSBridge == "undefined"){
 		    if( document.addEventListener ){
 		        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
