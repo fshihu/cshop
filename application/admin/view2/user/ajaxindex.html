@@ -20,7 +20,7 @@
                 <td align="left" class="">
                     <div style="text-align: center; width: 50px;">{$level[$list[level]]}</div>
                 </td>
-                <td align="left" class="">
+                <td align="left" class="" style="display: none;">
                     <div style="text-align: center; width: 50px;">{$list.total_amount}</div>
                 </td>
                 <td align="left" class="">
@@ -34,12 +34,12 @@
                     <div style="text-align: center; width: 60px;">{$list.user_money}</div>
                 </td>
                 <td align="left" class="">
-                    <div style="text-align: center; width: 60px;">{$list.pay_points}</div>
+                    <div style="text-align: center; width: 60px;">{$list.gold}</div>
                 </td>
                 <td align="left" class="">
                     <div style="text-align: center; width: 120px;">{$list.reg_time|date='Y-m-d H:i',###}</div>
                 </td>
-                <td align="left" class="">
+                <td align="left" class="" style="display: none;">
                     <div style="text-align: center; width: 80px;">
                         <a target="_blank" href="{:U('Admin/user/detail',array('id'=>$list['first_leader']))}">
                             {$goods_list[$list.first_leader]}
