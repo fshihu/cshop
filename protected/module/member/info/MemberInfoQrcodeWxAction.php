@@ -51,7 +51,7 @@ class MemberInfoQrcodeWxAction extends \CAction
 
     protected function createImage($qr_code_path,$qr_png,$recomm_url)
     {
-		$recomm_url='http://youji.kkyiliao.com/wx/home/index/index';
+		$recomm_url='http://lianpoju.com/wx/home/index/index';
         $blank_image = GrafikaMaster::createBlankImage(500 , 750);
 
         $fonts_dir = GrafikaMaster::fontsDir();
