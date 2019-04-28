@@ -1,0 +1,62 @@
+<include file="public/layout" />
+ 
+<style type="text/css">
+html, body {
+	overflow: visible;
+}
+</style>  
+<body style="background-color: #FFF; overflow: auto;">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title">
+      <div class="subject">
+        <h3>客服微信设置</h3>
+       </div>
+    </div>
+  </div>
+  <form class="form-horizontal" method="post" id="handlepost" action="">    
+    <div class="ncap-form-default">
+        <dl class="row">
+        <dt class="tit">
+          <label> 客服微信号</label>
+        </dt>
+        <dd class="opt">
+          <input type="text" name="weixinNumber" id="weixinNumber" value="{$sys_conf.weixinNumber}" class="input-txt">
+          <span class="err"></span>
+          <p class="notic"> </p>
+        </dd>
+      </dl>
+        <div class="bot"><a href="JavaScript:void(0);" onClick="formSubmit()" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a></div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+  
+$(document).ready(function(){
+	
+
+	 
+});
+
+function formSubmit(){
+	$("#handlepost").submit();
+}
+
+function img_call_back(fileurl_tmp)
+{
+  $("#headerpic").val(fileurl_tmp);
+  $("#img_a").attr('href', fileurl_tmp);
+  $("#img_i").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+}
+function img_call_back2(fileurl_tmp)
+{
+  $("#qr").val(fileurl_tmp);
+  $("#img_a2").attr('href', fileurl_tmp);
+  $("#img_i2").attr('onmouseover', "layer.tips('<img src="+fileurl_tmp+">',this,{tips: [1, '#fff']});");
+}
+</script>
+</body>
+</html>

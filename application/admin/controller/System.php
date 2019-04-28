@@ -96,6 +96,36 @@ class System extends Base
 
         return $this->fetch();
     }
+    public function kf()
+    {
+        $id = I('get.id');
+        $sys_conf_ms = M('sys_conf')->select();
+        $sys_conf = [];
+        foreach ($sys_conf_ms as $item) {
+            $sys_conf[$item['name']] = $item['val'];
+        }
+
+        if(IS_POST){
+            $post_data = input('post.');
+            foreach ($_POST as $name => $value) {
+                $old = M('sys_conf')->where(['name' => $name])->find();
+                if(!$old){
+                    M('sys_conf')->insert(array(
+                        'name' => $name,
+                        'val' => $value
+                    ));
+                }else{
+                    M('sys_conf')->where(array('name'=>$name))->update(['val' => $value]);
+                }
+            }
+            exit($this->success("修改成功"));
+
+        }
+
+        $this->assign('sys_conf',$sys_conf);
+
+        return $this->fetch();
+    }
 
        /**
         * 自定义导航

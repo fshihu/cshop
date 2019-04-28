@@ -59,7 +59,11 @@ class GoodsDetIndexWxAction  extends \CAction
             'cat_id' => $data['cat_id'],
             'goods_id' =>[ '!=' , $data['goods_id']],
         ))->limit(4)->order('rand()')->execute();
-
+        $list = ListModel::make('sys_conf')->execute();
+        $sys_conf = [];
+        foreach ($list as $item) {
+            $sys_conf[$item['name']] = $item['val'];
+        }
         return new \CRenderData(array(
             'data' => $data,
             'goods_images' => $goods_images,
@@ -70,6 +74,7 @@ class GoodsDetIndexWxAction  extends \CAction
             'other_group_buys' => $other_group_buys,
             'merchant' => $merchant,
             'recomm_list' =>$recomm_list,
+            'sys_conf' =>$sys_conf,
         ));
     }
 }

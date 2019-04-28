@@ -52,7 +52,7 @@
          </div>
           <?php if($merchant['wx_account']):?>
          <div class="t1">
-             <span class="t1_s">客服微信号： <span class="t1_s_"><?php echo $merchant['wx_account'] ?></span></span>
+             <span class="t1_s">客服微信号： <span class="t1_s_"><?php echo $sys_conf['wx_account'] ?></span></span>
          </div>
           <?php endif;?>
           <div class="buy_num_w">
@@ -278,7 +278,7 @@
                 <div class="weui-mask"></div>
                 <div class="weui-dialog">
                     <div class="weui-dialog__bd">
-                        <span class="t1_s">客服微信号：<span class="t1_s_" id="weixinNumber"><?php echo $merchant['wx_account'] ?></span></span>
+                        <span class="t1_s">客服微信号：<span class="t1_s_" id="weixinNumber"><?php echo $sys_conf['wx_account'] ?></span></span>
                     </div>
                     <div class="weui-dialog__ft">
                         <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary js_dialog_proy_2">确定</a>
